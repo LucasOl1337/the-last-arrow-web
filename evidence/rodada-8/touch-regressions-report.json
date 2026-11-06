@@ -1,0 +1,273 @@
+{
+  "owner": "tla-rodada-8-touch-regressions",
+  "pid": 929574,
+  "errors": [],
+  "pagesAtEnd": 0,
+  "viewports": {},
+  "moveAndShoot": {
+    "x": 6.011874999999989,
+    "y": 15.450000000000003,
+    "vx": 7.8,
+    "vy": 0,
+    "charging": true,
+    "ammo": 3,
+    "aimX": 1,
+    "aimY": 0
+  },
+  "afterRelease": {
+    "p1": {
+      "x": 6.596874999999969,
+      "y": 15.450000000000003,
+      "vx": 7.8,
+      "vy": 0,
+      "charging": false,
+      "ammo": 2,
+      "aimX": 1,
+      "aimY": 0
+    },
+    "state": {
+      "tick": 51,
+      "phase": "playing",
+      "countdown": 0,
+      "round": 1,
+      "roundTime": 0.4250000000000005,
+      "winner": null,
+      "mode": "versus",
+      "matchTime": 0.4250000000000005,
+      "chests": [],
+      "chestTimer": 11.575000000000024,
+      "map": "moss",
+      "seed": 3,
+      "fighters": [
+        {
+          "id": 0,
+          "name": "Mizu",
+          "human": true,
+          "x": 6.596874999999969,
+          "y": 15.450000000000003,
+          "vx": 7.8,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 2,
+          "score": 0,
+          "kills": 0,
+          "grounded": true,
+          "invulnerable": 0.5750000000000015,
+          "inventory": [
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 1,
+          "name": "Stormdragon",
+          "human": false,
+          "x": 24.05416666666673,
+          "y": 15.450000000000003,
+          "vx": -7.8,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": true,
+          "invulnerable": 0.5750000000000015,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Kaze",
+          "human": false,
+          "x": 14.934999999999938,
+          "y": 7.579555555555558,
+          "vx": 6.933333333333333,
+          "vy": 3.2533333333333334,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 0.5750000000000015,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Akane",
+          "human": false,
+          "x": 17.06500000000007,
+          "y": 7.579555555555558,
+          "vx": -6.933333333333333,
+          "vy": 3.2533333333333334,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 0.5750000000000015,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        }
+      ],
+      "arrows": [
+        {
+          "id": 1,
+          "owner": 0,
+          "x": 7.641874999999956,
+          "y": 15.456562500000004,
+          "vx": 23,
+          "vy": 0.225,
+          "angle": 0.009782296650201396,
+          "stuck": false,
+          "age": 0.049999999999999996,
+          "kind": "normal"
+        }
+      ],
+      "events": [],
+      "paused": false,
+      "timeScale": 1
+    },
+    "events": [
+      {
+        "type": "shoot",
+        "x": 6.27187499999998,
+        "y": 15.450000000000003,
+        "actor": 0,
+        "kind": "normal",
+        "tick": 46,
+        "at": 955.0999999996275
+      }
+    ],
+    "trace": [
+      {
+        "type": "pointerdown",
+        "id": 3,
+        "target": "stick-knob"
+      },
+      {
+        "type": "pointerdown",
+        "id": 4,
+        "target": "touch-btn shoot"
+      },
+      {
+        "type": "pointerup",
+        "id": 4,
+        "target": "touch-btn shoot on"
+      },
+      {
+        "type": "lostpointercapture",
+        "id": 4,
+        "target": "touch-btn shoot"
+      }
+    ]
+  },
+  "pauseReset": {
+    "x": 5,
+    "y": 15.450000000000003,
+    "vx": 0,
+    "vy": 0,
+    "charging": false,
+    "ammo": 3,
+    "aimX": 1,
+    "aimY": 0
+  },
+  "cancelReset": {
+    "x": 5,
+    "y": 15.450000000000003,
+    "vx": 0,
+    "vy": 0,
+    "charging": false,
+    "ammo": 3,
+    "aimX": 1,
+    "aimY": 0
+  },
+  "rotationReset": {
+    "x": 5.7150000000000105,
+    "y": 15.450000000000003,
+    "vx": 0.6749999999999993,
+    "vy": 0,
+    "charging": false,
+    "ammo": 3,
+    "aimX": 1,
+    "aimY": 0
+  },
+  "rotationStopped": {
+    "x": 5.7150000000000105,
+    "y": 15.450000000000003,
+    "vx": 0,
+    "vy": 0,
+    "charging": false,
+    "ammo": 3,
+    "aimX": 1,
+    "aimY": 0
+  },
+  "jump": {
+    "x": 5,
+    "y": 14.312499999999993,
+    "vx": 0,
+    "vy": -14.099999999999994,
+    "charging": false,
+    "ammo": 3,
+    "aimX": 1,
+    "aimY": 0
+  },
+  "jumpDashEvents": [
+    {
+      "type": "jump",
+      "x": 5,
+      "y": 16.000000000000004,
+      "actor": 0,
+      "tick": 12,
+      "at": 2921.5999999996275
+    },
+    {
+      "type": "dash",
+      "x": 5,
+      "y": 13.55,
+      "actor": 0,
+      "tick": 30,
+      "at": 3071.699999999255
+    }
+  ],
+  "releasedCapture": 15,
+  "lostCapture": {
+    "x": 6.104999999999997,
+    "y": 15.450000000000003,
+    "vx": 0.6749999999999993,
+    "vy": 0,
+    "charging": false,
+    "ammo": 3,
+    "aimX": 1,
+    "aimY": 0
+  },
+  "blurReset": {
+    "x": 5,
+    "y": 15.450000000000003,
+    "vx": 0,
+    "vy": 0,
+    "charging": false,
+    "ammo": 3,
+    "aimX": 1,
+    "aimY": 0
+  },
+  "afterPinch": {
+    "scale": 1,
+    "scrollX": 0,
+    "scrollY": 0
+  },
+  "errorsFromAudio": []
+}

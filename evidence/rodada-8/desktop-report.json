@@ -1,0 +1,210 @@
+{
+  "owner": "tla-rodada-8-desktop",
+  "pid": 912936,
+  "errors": [],
+  "pagesAtEnd": 0,
+  "hint": "WASD mover / mirar · Segure e solte J para atirar · K pula · L esquiva",
+  "cold": {
+    "clicksToStart": 1,
+    "gesturesToShot": 2,
+    "firstShotMs": 1801.4000000003725,
+    "cacheDisabled": true,
+    "network": "local preview, no network throttling"
+  },
+  "maps": {
+    "moss": {
+      "fps": 60.001662095902944,
+      "maxGap": 16.80000000000109,
+      "diagnostics": {
+        "frames": 492,
+        "fps": 59.39876856211494,
+        "averageFrameWorkMs": 1.037195121971663,
+        "maxFrameWorkMs": 7.899999998509884,
+        "quality": {
+          "level": "normal",
+          "detectedFps": 60.00000000000007,
+          "sampleSeconds": 1.9999999999999976,
+          "sampleFrames": 120,
+          "decided": true,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 56,
+        "triangles": 201945,
+        "geometries": 50,
+        "textures": 47,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    "totem": {
+      "fps": 60.00166209590295,
+      "maxGap": 16.80000000000291,
+      "diagnostics": {
+        "frames": 491,
+        "fps": 59.1594775651836,
+        "averageFrameWorkMs": 0.7077393074977057,
+        "maxFrameWorkMs": 4,
+        "quality": {
+          "level": "normal",
+          "detectedFps": 59.99999999999991,
+          "sampleSeconds": 2.000000000000003,
+          "sampleFrames": 120,
+          "decided": true,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 83,
+        "triangles": 373627,
+        "geometries": 55,
+        "textures": 57,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    "canopy": {
+      "fps": 60.00166209590294,
+      "maxGap": 16.80000000000291,
+      "diagnostics": {
+        "frames": 492,
+        "fps": 59.27925105726687,
+        "averageFrameWorkMs": 0.7384146341478558,
+        "maxFrameWorkMs": 2,
+        "quality": {
+          "level": "normal",
+          "detectedFps": 60.0019835366458,
+          "sampleSeconds": 2.0166000000000013,
+          "sampleFrames": 121,
+          "decided": true,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 88,
+        "triangles": 189434,
+        "geometries": 64,
+        "textures": 63,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    "falls": {
+      "fps": 60.001662095902894,
+      "maxGap": 16.80000000000291,
+      "diagnostics": {
+        "frames": 491,
+        "fps": 59.397077325074676,
+        "averageFrameWorkMs": 0.7865580447898256,
+        "maxFrameWorkMs": 4.599999999627471,
+        "quality": {
+          "level": "normal",
+          "detectedFps": 59.99999999999995,
+          "sampleSeconds": 2.0000000000000018,
+          "sampleFrames": 120,
+          "decided": true,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 80,
+        "triangles": 278495,
+        "geometries": 55,
+        "textures": 70,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    "roots": {
+      "fps": 60.00166209590294,
+      "maxGap": 16.80000000000291,
+      "diagnostics": {
+        "frames": 490,
+        "fps": 59.39609925209372,
+        "averageFrameWorkMs": 0.9679591836749899,
+        "maxFrameWorkMs": 3.5,
+        "quality": {
+          "level": "normal",
+          "detectedFps": 60.004959087527915,
+          "sampleSeconds": 2.0164999999999993,
+          "sampleFrames": 121,
+          "decided": true,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 61,
+        "triangles": 284993,
+        "geometries": 50,
+        "textures": 74,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  },
+  "screens": {
+    "1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 247,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  },
+  "renderer": "ANGLE (NVIDIA, Vulkan 1.4.351 (NVIDIA NVIDIA GeForce RTX 4070 Ti SUPER (0x00002705)), NVIDIA)"
+}

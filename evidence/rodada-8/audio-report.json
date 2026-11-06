@@ -1,0 +1,179 @@
+{
+  "owner": "tla-rodada-8-audio",
+  "pid": 915097,
+  "errors": [],
+  "pagesAtEnd": 0,
+  "signals": {
+    "corda": {
+      "seconds": 3,
+      "peak": 0.033295273780822754,
+      "peakDb": -29.552348192685546,
+      "rms": 0.002015334761527046,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "soltura": {
+      "seconds": 3,
+      "peak": 0.23400013148784637,
+      "peakDb": -12.615677971076625,
+      "rms": 0.015893194495302375,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "soltura-storm": {
+      "seconds": 3,
+      "peak": 0.23399940133094788,
+      "peakDb": -12.61570507393376,
+      "rms": 0.022617862964358533,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "pedra": {
+      "seconds": 3,
+      "peak": 0.1611221581697464,
+      "peakDb": -15.856894590856987,
+      "rms": 0.002821545849609562,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "madeira": {
+      "seconds": 3,
+      "peak": 0.11578050255775452,
+      "peakDb": -18.727291393262014,
+      "rms": 0.006053434932000255,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "catch": {
+      "seconds": 3,
+      "peak": 0.23806093633174896,
+      "peakDb": -12.466237251700942,
+      "rms": 0.0040227391951342065,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "bau": {
+      "seconds": 3,
+      "peak": 0.06119827926158905,
+      "peakDb": -24.26521577856026,
+      "rms": 0.006182034518546129,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "bomba": {
+      "seconds": 3,
+      "peak": 0.5112597942352295,
+      "peakDb": -5.827167181977755,
+      "rms": 0.02828797665543681,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "raio": {
+      "seconds": 3,
+      "peak": 0.22749868035316467,
+      "peakDb": -12.86042236404954,
+      "rms": 0.016649381480965123,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "abate": {
+      "seconds": 3,
+      "peak": 0.0947955772280693,
+      "peakDb": -20.464238491688356,
+      "rms": 0.0040313014232811716,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "vitoria": {
+      "seconds": 3,
+      "peak": 0.08686836063861847,
+      "peakDb": -21.222767486470975,
+      "rms": 0.008323198353233571,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "vitoria-storm": {
+      "seconds": 5,
+      "peak": 0.09750001132488251,
+      "peakDb": -20.2199066771403,
+      "rms": 0.009844440997319025,
+      "clipped": 0,
+      "samples": 480000,
+      "failures": []
+    },
+    "musica": {
+      "seconds": 126,
+      "peak": 0.08544749021530151,
+      "peakDb": -21.366013779204927,
+      "rms": 0.0211550299312355,
+      "clipped": 0,
+      "samples": 12096000,
+      "failures": []
+    },
+    "dash": {
+      "seconds": 3,
+      "peak": 0.15600010752677917,
+      "peakDb": -16.137502045952978,
+      "rms": 0.018225618306612824,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "dash-storm": {
+      "seconds": 3,
+      "peak": 0.15600013732910156,
+      "peakDb": -16.13750038659734,
+      "rms": 0.011324624711940961,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "pulo": {
+      "seconds": 3,
+      "peak": 0.030356526374816895,
+      "peakDb": -30.35495850438314,
+      "rms": 0.001288598281802039,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "pickup": {
+      "seconds": 3,
+      "peak": 0.07877541333436966,
+      "peakDb": -22.07218618812147,
+      "rms": 0.003584916842767537,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "bau-aparece": {
+      "seconds": 3,
+      "peak": 0.028509052470326424,
+      "peakDb": -30.900344334096342,
+      "rms": 0.002098923720483326,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    },
+    "mix-4-jogadores": {
+      "seconds": 3,
+      "peak": 0.8739465475082397,
+      "peakDb": -1.170302579168103,
+      "rms": 0.11659259267201975,
+      "clipped": 0,
+      "samples": 288000,
+      "failures": []
+    }
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "owner": "tla-rodada-8-story",
+  "pid": 926286,
+  "errors": [],
+  "pagesAtEnd": 0,
+  "screens": {
+    "arena-menu-real--configuracao-1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 28,
+        "principal_fracao": 0.818,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-menu-real--configuracao-900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 123,
+        "principal_fracao": 0.586,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-menu-real--configuracao-844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 42,
+        "principal_fracao": 0.755,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-menu-real--configuracao-932x430": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 62,
+        "principal_fracao": 0.687,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 430,
+        "largura": 932,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-menu-real--configuracao-390x844": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 24,
+        "principal_fracao": 0.772,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 844,
+        "largura": 390,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-toque-real--countdown-1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 44,
+        "principal_fracao": 0.785,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-toque-real--countdown-900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 247,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-toque-real--countdown-844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 2,
+        "principal_fracao": 0.809,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-toque-real--countdown-932x430": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.82,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 430,
+        "largura": 932,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-toque-real--countdown-390x844": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 312,
+        "principal_fracao": 0.26,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 844,
+        "largura": 390,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [
+        "b. objeto principal ocupa 26% da janela (mínimo 40%)"
+      ],
+      "passou": false
+    }
+  },
+  "twoFingersSameButton": "passed"
+}

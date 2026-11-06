@@ -1,0 +1,59 @@
+{
+  "owner": "tla-rodada-8-mobile",
+  "pid": 873124,
+  "errors": [],
+  "pagesAtEnd": 0,
+  "coarse": true,
+  "multitouch": {
+    "moveX": 0,
+    "moveY": 0,
+    "jump": false,
+    "jumpHeld": false,
+    "shoot": false,
+    "shootHeld": false,
+    "dash": false,
+    "charging": true
+  },
+  "resumedWithOldTouches": {
+    "moveX": 0,
+    "moveY": 0,
+    "jump": false,
+    "jumpHeld": false,
+    "shoot": false,
+    "shootHeld": false,
+    "dash": false,
+    "charging": true
+  },
+  "portrait": {
+    "warning": null,
+    "width": 390,
+    "scrollWidth": 390,
+    "hud": "8px"
+  },
+  "events": [
+    {
+      "type": "jump",
+      "x": 22.94916666666677,
+      "y": 16.000000000000004,
+      "actor": 1,
+      "tick": 213,
+      "at": 2238.4000000003725
+    },
+    {
+      "type": "jump",
+      "x": 15.69694444444439,
+      "y": 14,
+      "actor": 2,
+      "tick": 244,
+      "at": 2488.300000000745
+    },
+    {
+      "type": "jump",
+      "x": 16.303055555555602,
+      "y": 14,
+      "actor": 3,
+      "tick": 244,
+      "at": 2488.300000000745
+    }
+  ]
+}
