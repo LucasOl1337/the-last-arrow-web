@@ -86,6 +86,13 @@ export class Hud {
     const box = document.createElement('div'); box.className = `count-pop${text === 'LUTEM!' ? ' fight' : ''}`;
     box.innerHTML = `<img class="count-logo" src="${asset('ui/logo.png')}" alt=""><span class="count-text"></span><small class="count-round">ROUND ${w.round}</small>`;
     box.querySelector('.count-text')!.textContent = text;
+    if (w.round === 1 && w.options.humans > 0) {
+      const hint = document.createElement('div'); hint.className = 'controls-hint';
+      hint.textContent = matchMedia('(pointer: coarse)').matches
+        ? 'Stick: mover / mirar · Segure e solte Atirar · Pular · Dash pega flechas'
+        : 'WASD mover / mirar · Segure e solte J para atirar · K pula · L esquiva';
+      box.append(hint);
+    }
     this.countdown.replaceChildren(box);
   }
   private renderRoundCard(w: World) {
@@ -123,7 +130,7 @@ export class Hud {
         this.cards[n].querySelector('.points')!.textContent = String(f.score);
         this.cards[n].querySelector('.ammo')!.textContent = '➶'.repeat(f.ammo) || 'sem flechas';
       });
-      this.footer.textContent = `${w.level.name}   /   ${matchStatus(w)}   /   Esc pausa   /   M som`;
+      this.footer.textContent = `${w.level.name}   /   ${matchStatus(w)}${matchMedia('(pointer: coarse)').matches ? '' : '   /   Esc pausa   /   M som'}`;
     }
     this.renderCountdown(w, now);
     this.renderRoundCard(w);
