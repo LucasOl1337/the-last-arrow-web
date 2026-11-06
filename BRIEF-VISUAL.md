@@ -49,3 +49,10 @@ Pulo/aterrissagem: poeira. Dash: rastro fantasma (afterimage) do personagem.
 O jogo vai para GitHub Pages em `/the-last-arrow-web/`. Todo caminho de asset em TS deve sair de
 `import.meta.env.BASE_URL + 'assets/...'` (nada de `'/assets/...'` absoluto); no CSS use `url('./assets/...')` relativo
 ou injete pelo TS. Corrija também os que já existem (scene.ts, style.css, audio.ts, menu).
+
+## Coordenação
+Outro agente edita `src/sim/` e `tests/` ao mesmo tempo (rodada de gameplay: countdown de início de round, baú, flechas `kind` bolt/bomb, evento de explosão). Não toque nesses arquivos; faça `git add` só dos seus. Ao final, se `world` tiver `countdown`, mostre "3·2·1" no HUD; se flechas tiverem `kind`, pinte bolt ciano com raio e bomb com pavio vermelho; explosões em `world.events` viram partículas + shake.
+
+## Atualização (07:57): Kaze e Akane têm modelo próprio
+`public/assets/models/kaze.glb` + `kaze_anims.glb` e `akane.glb` + `akane_anims.glb` (mesmo formato da Storm: malha rig Mixamo meshopt + clipes run, idle, jump, shoot, fall). Use-os em vez de tingir mizu/storm.
+Retratos para o menu/HUD/vitória: `public/assets/ui/portrait_{mizu,storm,kaze,akane}.jpg`; logo com fundo transparente `public/assets/ui/logo.png` (use no menu no lugar do título em texto e na tela de vitória).
