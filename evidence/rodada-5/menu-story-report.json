@@ -1,0 +1,63 @@
+{
+  "owner": "tla-rodada-5-menu-story",
+  "pid": 147628,
+  "errors": [],
+  "pagesAtStart": 0,
+  "pagesAtEnd": 0,
+  "screens": {
+    "844": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 28,
+        "principal_fracao": 0.77,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "900": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 131,
+        "principal_fracao": 0.573,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "1366": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 28,
+        "principal_fracao": 0.817,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  }
+}

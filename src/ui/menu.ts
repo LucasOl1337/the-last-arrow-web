@@ -19,7 +19,7 @@ export class Menu {
   constructor(private actions: MenuActions) {
     this.element.className = 'menu-layer';
     // Injected from TS so the URL follows BASE_URL (GitHub Pages subpath) instead of a root-absolute CSS url.
-    document.documentElement.style.setProperty('--key-art', `url('${asset('bg/key.jpg')}')`);
+    document.documentElement.style.setProperty('--key-art', `url('${new URL(asset('bg/key.jpg'), document.baseURI).href}')`);
     this.element.addEventListener('keydown', event => {
       if (event.key !== 'Tab') return;
       const items = this.element.querySelectorAll<HTMLElement>('button:not([tabindex="-1"]), select');
