@@ -10,17 +10,17 @@ export interface Brain {
   hold: number; jumpHold: number; stuck: number; lastX: number; lastY: number;
   navigation: number; waypointX: number; waypointY: number; escape: number;
   planTime: number; patrol: number; travelled: number; shots: number; ready: boolean;
-  threatId: number; threatTime: number;
+  threatId: number; threatTime: number; drawX: number; drawY: number;
 }
 export function createBrain(): Brain {
   return { intent: emptyIntent(), reaction: 0, target: -1, aimError: 0, shootTimer: 0.3,
     hold: 0, jumpHold: 0, stuck: 0, lastX: 0, lastY: 0, navigation: 0, waypointX: 0, waypointY: 0, escape: 0,
-    planTime: 0, patrol: -1, travelled: 0, shots: 0, ready: false, threatId: -1, threatTime: 0 };
+    planTime: 0, patrol: -1, travelled: 0, shots: 0, ready: false, threatId: -1, threatTime: 0, drawX: 1, drawY: 0 };
 }
 const tuning = {
-  easy: { reaction: 0.36, error: 0.25, delay: 1.9, dodge: 2.2, opening: 3.2, range: 8 },
-  normal: { reaction: 0.24, error: 0.13, delay: 1.45, dodge: 3.2, opening: 2.6, range: 10 },
-  hard: { reaction: 0.08, error: 0.035, delay: 0.85, dodge: 4.5, opening: 1.5, range: 15 },
+  easy: { reaction: 0.36, error: 0.25, delay: 1.9, dodge: 2.2, opening: 3.2, range: 8, draw: 0.44 },
+  normal: { reaction: 0.24, error: 0.13, delay: 1.45, dodge: 3.2, opening: 2.6, range: 10, draw: 0.28 },
+  hard: { reaction: 0.08, error: 0.035, delay: 0.85, dodge: 4.5, opening: 1.5, range: 15, draw: 0.12 },
 };
 function clearShot(w: World, f: Fighter, dx: number, dy: number, time: number): boolean {
   if (f.inventory?.[0] === 'bolt') return true;
@@ -201,8 +201,10 @@ export function think(w: World, f: Fighter): Intent {
   const angle = Math.round((Math.atan2(leadY, leadX) + b.aimError) / (Math.PI / 4)) * Math.PI / 4;
   const hard = w.options.difficulty === 'hard';
   const prediction = hard && !i.dash && f.ammo > 0 && (f.charging || (b.shootTimer <= 0 && b.travelled >= 2.5)) ? predictShot(w, f, target) : null;
-  const aimX = prediction?.aimX ?? Math.round(Math.cos(angle) * 1000) / 1000;
-  const aimY = prediction?.aimY ?? Math.round(Math.sin(angle) * 1000) / 1000;
+  // Easy/normal commit to the visible draw, rather than tracking a dodge at 120 Hz.
+  const committed = !hard && f.charging;
+  const aimX = committed ? b.drawX : prediction?.aimX ?? Math.round(Math.cos(angle) * 1000) / 1000;
+  const aimY = committed ? b.drawY : prediction?.aimY ?? Math.round(Math.sin(angle) * 1000) / 1000;
   if (f.inventory?.[0] === 'bomb' && !safeBombShot(w, f, aimX, aimY)) {
     // Cancel, don't release: updateBow interprets a released hold as a real shot.
     b.hold = 0; f.charging = false; b.shootTimer = Math.max(b.shootTimer, 0.3);
@@ -213,7 +215,7 @@ export function think(w: World, f: Fighter): Intent {
   const canHit = hard ? prediction !== null : miss < 0.85 && clearShot(w, f, aimX, aimY, flight);
   if (!i.dash && !f.charging && f.ammo > 0 && b.shootTimer <= 0 && b.travelled >= 2.5 &&
       target.invulnerable <= 0 && Math.hypot(tx, ty) < range && canHit) {
-    b.hold = 0.10 + settings.reaction * 0.25;
+    b.hold = settings.draw; b.drawX = aimX; b.drawY = aimY;
     b.shootTimer = settings.delay + random(w) * 0.8;
     b.travelled = 0; b.shots++;
     i.shoot = true;
