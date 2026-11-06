@@ -75,16 +75,28 @@ export function buildTerrain(level: Level, theme: Theme, stone: THREE.Texture): 
   const blocks = new THREE.InstancedMesh(blockGeometry, blockMaterial, tiles.length);
   blocks.castShadow = blocks.receiveShadow = true;
   tiles.forEach((t, i) => {
-    // Wood: platforms are thick plank decks, slightly inset so seams read; stone keeps full tiles.
-    pos.set(t.x + 0.5, sceneY(t.y) - 0.5, FRONT - DEPTH / 2);
-    scl.set(1.002, 1, 1);
+    // Wood: a plank deck on the top 40% of the tile (the frame beam below fills the rest); stone keeps full tiles.
+    if (wooden && t.top) { pos.set(t.x + 0.5, sceneY(t.y) - 0.2, FRONT - DEPTH / 2 + 0.06); scl.set(1.002, 0.4, 1.08); }
+    else { pos.set(t.x + 0.5, sceneY(t.y) - 0.5, FRONT - DEPTH / 2); scl.set(1.002, 1, 1); }
     matrix.compose(pos, quat.identity(), scl); blocks.setMatrixAt(i, matrix);
   });
   group.add(blocks);
+  if (wooden) {
+    // Recessed log beam under each deck: darker, round, reads as structure instead of a crate.
+    const logMaterial = own(new THREE.MeshStandardMaterial({ map: wood(), color: 0x6e4a30, roughness: 0.9 }));
+    const logGeometry = own(new THREE.CylinderGeometry(0.3, 0.3, 1.0, 8)); logGeometry.rotateZ(Math.PI / 2);
+    const logs = new THREE.InstancedMesh(logGeometry, logMaterial, tops.length * 2);
+    logs.castShadow = true;
+    let l = 0;
+    for (const t of tops) for (const z of [FRONT - 0.3, FRONT - DEPTH + 0.3]) {
+      pos.set(t.x + 0.5, sceneY(t.y) - 0.7, z); matrix.compose(pos, quat.identity(), scl.set(1.002, 1, 1)); logs.setMatrixAt(l++, matrix);
+    }
+    group.add(logs);
+  }
 
   // Wooden decks: support brackets under platform ends and rope rails.
   if (wooden) {
-    const beamMaterial = own(new THREE.MeshStandardMaterial({ map: wood(), color: 0x8a5a34, roughness: 0.85 }));
+    const beamMaterial = own(new THREE.MeshStandardMaterial({ map: wood(), color: 0xb08860, roughness: 0.85 }));
     const beamGeometry = own(new THREE.BoxGeometry(0.16, 1.5, 0.16));
     const ends = bottoms.filter(t => t.left || t.right);
     const beams = new THREE.InstancedMesh(beamGeometry, beamMaterial, ends.length * 2);
@@ -208,7 +220,7 @@ export function buildTerrain(level: Level, theme: Theme, stone: THREE.Texture): 
   if (theme.props.runes) {
     const runeTex = runes();
     const runeMat = own(new THREE.MeshBasicMaterial({ map: runeTex, color: 0x3ff5dc, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
-    const faces = tiles.filter(t => !t.top && r() < 0.5).concat(tiles.filter(t => t.top && r() < 0.18));
+    const faces = tiles.filter(t => !t.top && r() < 0.45).concat(tiles.filter(t => t.top && r() < 0.1));
     for (let g = 0; g < 4; g++) {
       const list = faces.filter((_, i) => i % 4 === g);
       if (!list.length) continue;

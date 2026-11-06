@@ -85,7 +85,7 @@ export const wood = () => make('wood', 256, 128, (g, w, h) => {
   const planks = 4;
   for (let p = 0; p < planks; p++) {
     const y0 = p * h / planks, ph = h / planks;
-    g.fillStyle = `hsl(${24 + r() * 8},${42 + r() * 12}%,${30 + r() * 10}%)`; g.fillRect(0, y0, w, ph);
+    g.fillStyle = `hsl(${28 + r() * 8},${34 + r() * 10}%,${36 + r() * 10}%)`; g.fillRect(0, y0, w, ph);
     for (let n = 0; n < 26; n++) {
       const yy = y0 + r() * ph; g.strokeStyle = `rgba(${40 + r() * 30},${22 + r() * 15},10,${0.25 + r() * 0.35})`; g.lineWidth = 0.6 + r() * 1.2;
       g.beginPath(); g.moveTo(0, yy);
@@ -105,7 +105,7 @@ export const runes = () => make('runes', 256, 64, (g) => {
   g.strokeStyle = '#fff'; g.lineWidth = 4; g.lineCap = 'round'; g.shadowColor = '#fff'; g.shadowBlur = 6;
   const glyphs: ((x: number) => void)[] = [
     x => { g.beginPath(); g.arc(x + 32, 32, 16, 0, Math.PI * 2); g.moveTo(x + 32, 10); g.lineTo(x + 32, 54); g.stroke(); },
-    x => { g.beginPath(); g.moveTo(x + 14, 50); g.lineTo(x + 32, 12); g.lineTo(x + 50, 50); g.moveTo(x + 20, 36); g.lineTo(x + 44, 36); g.stroke(); },
+    x => { g.beginPath(); g.ellipse(x + 32, 32, 20, 11, 0, 0, Math.PI * 2); g.moveTo(x + 36, 32); g.arc(x + 32, 32, 4, 0, Math.PI * 2); g.moveTo(x + 12, 14); g.lineTo(x + 52, 14); g.stroke(); },
     x => { g.beginPath(); g.moveTo(x + 32, 10); g.lineTo(x + 52, 32); g.lineTo(x + 32, 54); g.lineTo(x + 12, 32); g.closePath(); g.moveTo(x + 32, 24); g.lineTo(x + 32, 40); g.stroke(); },
     x => { g.beginPath(); for (let t = 0; t < 12; t += 0.2) { const rr = 2 + t * 1.6; g.lineTo(x + 32 + Math.cos(t) * rr, 32 + Math.sin(t) * rr); } g.stroke(); },
   ];
