@@ -18,8 +18,8 @@ function arena(): World {
   return w;
 }
 function floor(w: World) { const rows = [...w.level.rows]; rows[10] = '#'.repeat(32); w.level = { ...w.level, rows }; }
-test('three 32x18 maps have safe distinct spawns and connected platform paths', () => {
-  assert.equal(LEVELS.length, 3);
+test('five 32x18 maps have safe distinct spawns and connected platform paths', () => {
+  assert.equal(LEVELS.length, 5);
   for (const level of LEVELS) {
     assert.equal(level.rows.length, HEIGHT); assert.ok(level.rows.every(row => row.length === WIDTH));
     assert.equal(new Set(level.spawns.map(p => `${p.x},${p.y}`)).size, 4);
@@ -92,7 +92,8 @@ test('last survivor scores once, five wins ends match, zero survivors draw', () 
   assert.equal(draw.phase, 'roundover'); assert.equal(draw.winner, null); assert.deepEqual(draw.fighters.map(f => f.score), [0, 0]);
 });
 test('bot seeks recoverable ammo and unsticks using jump/dash', () => {
-  const w = createWorld({ humans: 0, bots: 4 }); const f = w.fighters[0]; f.ammo = 0;
+  const w = createWorld({ humans: 0, bots: 4 }); w.phase = 'playing';
+  const f = w.fighters[0]; f.ammo = 0;
   w.arrows.push({ id: 1, owner: 1, x: f.x + 2, y: f.y, vx: 0, vy: 0, age: 1, stuck: true, angle: 0 });
   assert.equal(think(w, f).moveX, 1);
   f.brain.stuck = 0.9; f.brain.reaction = 1;

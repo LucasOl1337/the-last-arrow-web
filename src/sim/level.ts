@@ -1,7 +1,8 @@
 export const WIDTH = 32;
 export const HEIGHT = 18;
 export interface Platform { id: number; left: number; right: number; y: number; links: number[] }
-export interface Level { id: string; name: string; rows: readonly string[]; platforms: Platform[]; spawns: { x: number; y: number }[] }
+export type LevelTheme = 'moss' | 'totem' | 'canopy';
+export interface Level { id: string; theme?: LevelTheme; name: string; rows: readonly string[]; platforms: Platform[]; spawns: { x: number; y: number }[] }
 
 const maps = [
   {
@@ -70,7 +71,55 @@ const maps = [
       '................................',
     ],
   },
+  {
+    id: 'falls', theme: 'totem' as const, name: 'Cachoeira Sagrada', rows: [
+      '................................',
+      '................................',
+      '................................',
+      '..####....................####..',
+      '................................',
+      '................................',
+      '......####............####......',
+      '................................',
+      '................................',
+      '..........####....####..........',
+      '##............................##',
+      '................................',
+      '......####............####......',
+      '................................',
+      '..............####..............',
+      '..####....................####..',
+      '................................',
+      '................................',
+    ],
+  },
+  {
+    id: 'roots', theme: 'moss' as const, name: 'Raízes Antigas', rows: [
+      '................................',
+      '................................',
+      '................................',
+      '............########............',
+      '................................',
+      '................................',
+      '..####....................####..',
+      '................................',
+      '..........###......###..........',
+      '.....#....................#.....',
+      '.....#....................#.....',
+      '..####....###......###....####..',
+      '................................',
+      '................................',
+      '......####....####....####......',
+      '......#..................#......',
+      '..####....................####..',
+      '................................',
+    ],
+  },
 ];
+export function themeOf(levelId: string): LevelTheme {
+  const map = maps.find(map => map.id === levelId);
+  return map?.theme ?? (map?.id === 'totem' || map?.id === 'canopy' ? map.id : 'moss');
+}
 export function wrap(v: number, size: number): number { return ((v % size) + size) % size; }
 export function delta(a: number, b: number, size: number): number { return wrap(b - a + size / 2, size) - size / 2; }
 export function solid(level: Level, x: number, y: number): boolean {

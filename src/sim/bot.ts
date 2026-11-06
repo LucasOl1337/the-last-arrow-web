@@ -4,6 +4,7 @@ import { emptyIntent, clearIntent } from './input.ts';
 import type { Intent } from './input.ts';
 import { delta, wrap, solid, platformAt, nextPlatform, WIDTH, HEIGHT } from './level.ts';
 import { ARROW_GRAVITY, ARROW_SPEED, BOLT_GRAVITY } from './arrows.ts';
+import { moveFighter } from './physics.ts';
 export interface Brain {
   intent: Intent; reaction: number; target: number; aimError: number; shootTimer: number;
   hold: number; jumpHold: number; stuck: number; lastX: number; lastY: number;
@@ -27,21 +28,54 @@ function clearShot(w: World, f: Fighter, dx: number, dy: number, time: number): 
   }
   return true;
 }
+/** Predict only observed motion, with the same gravity, wall collision and wrap as gameplay. */
+export function predictShot(w: World, f: Fighter, target: Fighter): { aimX: number; aimY: number; time: number } | null {
+  const ghost = { ...target }, sandbox = { ...w, events: [] };
+  const motion = { ...emptyIntent(), moveX: Math.abs(target.vx) < 0.01 ? 0 : Math.sign(target.vx), jumpHeld: target.vy < 0 };
+  const kind = f.inventory?.[0] ?? 'normal', gravity = kind === 'bolt' ? BOLT_GRAVITY : ARROW_GRAVITY;
+  const rays = Array.from({ length: 8 }, (_, index) => {
+    const angle = index * Math.PI / 4, aimX = Math.cos(angle), aimY = Math.sin(angle);
+    return { aimX, aimY, x: f.x + aimX * 0.22, y: f.y + aimY * 0.22, vx: aimX * ARROW_SPEED, vy: aimY * ARROW_SPEED, blocked: false };
+  });
+  for (let tick = 1; tick <= Math.ceil(tuning.hard.range / ARROW_SPEED / DT); tick++) {
+    moveFighter(sandbox, ghost, motion);
+    for (const ray of rays) {
+      if (ray.blocked) continue;
+      ray.vy += gravity * DT;
+      const samples = Math.max(1, Math.ceil(Math.hypot(ray.vx, ray.vy) * DT / 0.12));
+      for (let n = 0; n < samples; n++) {
+        ray.x = wrap(ray.x + ray.vx * DT / samples, WIDTH); ray.y = wrap(ray.y + ray.vy * DT / samples, HEIGHT);
+        if (kind !== 'bolt' && solid(w.level, ray.x, ray.y)) { ray.blocked = true; break; }
+        if (Math.abs(delta(ray.x, ghost.x, WIDTH)) <= 0.39 && Math.abs(delta(ray.y, ghost.y, HEIGHT)) <= 0.58)
+          return { aimX: ray.aimX, aimY: ray.aimY, time: tick * DT };
+      }
+    }
+    if (rays.every(ray => ray.blocked)) break;
+  }
+  return null;
+}
 export function think(w: World, f: Fighter): Intent {
   const b = f.brain, i = b.intent, settings = tuning[w.options.difficulty];
   clearIntent(i);
+  if (w.phase !== 'playing' || !f.alive) { b.target = -1; b.hold = 0; f.charging = false; return i; }
+  const targetable = (target?: Fighter): target is Fighter => !!target && target !== f && target.alive && target.invulnerable <= 0;
+  // Cancel a pending release as soon as its target dies or enters spawn/dash protection.
+  if (!targetable(w.fighters[b.target])) {
+    if (b.target >= 0) b.reaction = 0;
+    b.target = -1; b.hold = 0; f.charging = false;
+  }
   if (!b.ready) {
     b.ready = true; b.lastX = f.x; b.lastY = f.y;
     b.shootTimer = settings.opening + random(w) * 1.2;
   }
   b.reaction -= DT; b.navigation -= DT; b.shootTimer -= DT; b.planTime -= DT;
   b.jumpHold = Math.max(0, b.jumpHold - DT); b.escape = Math.max(0, b.escape - DT);
-  if (b.reaction <= 0 || b.target < 0 || !w.fighters[b.target]?.alive) {
+  if (b.reaction <= 0) {
     b.reaction = settings.reaction;
     b.aimError = (random(w) - 0.5) * settings.error;
     let nearest = Infinity;
     for (const target of w.fighters) {
-      if (!target.alive || target === f) continue;
+      if (!targetable(target)) continue;
       const d = Math.hypot(delta(f.x, target.x, WIDTH), delta(f.y, target.y, HEIGHT));
       if (d < nearest) { nearest = d; b.target = target.id; }
     }
@@ -51,7 +85,6 @@ export function think(w: World, f: Fighter): Intent {
     b.lastX = f.x; b.lastY = f.y;
   }
   const target = w.fighters[b.target];
-  if (!target?.alive) return i;
   // Commit to another platform while reloading/repositioning, rather than camping a firing lane.
   if (b.planTime <= 0 || b.patrol < 0) {
     const from = platformAt(w.level, f.x, f.y);
@@ -60,7 +93,7 @@ export function think(w: World, f: Fighter): Intent {
     b.planTime = 1.4 + random(w) * 1.1; b.navigation = 0;
   }
   const patrol = w.level.platforms[b.patrol];
-  let goalX = target.x, goalY = target.y;
+  let goalX = target?.x ?? (patrol.left + patrol.right) / 2, goalY = target?.y ?? patrol.y - 0.55;
   if (f.ammo > 0 && (b.shootTimer > 0.45 || b.travelled < 2.5)) {
     goalX = (patrol.left + patrol.right) / 2; goalY = patrol.y - 0.55;
   }
@@ -120,18 +153,33 @@ export function think(w: World, f: Fighter): Intent {
     }
   }
 
-  // Ballistic lead constrained to the same eight directions available to humans.
+  if (!target) return i;
+  // Hard bots take a clear drop onto a target rather than stopping to draw their bow.
   const tx = delta(f.x, target.x, WIDTH), ty = delta(f.y, target.y, HEIGHT);
+  if (w.options.difficulty === 'hard' && !i.dash && !f.grounded && f.vy >= 0 && ty > 0.6 && ty < 3.5 && Math.abs(tx) < 1.1) {
+    let clearDrop = true;
+    for (let y = 0.55; y < ty; y += 0.25) if (solid(w.level, f.x, f.y + y)) clearDrop = false;
+    if (clearDrop) {
+      i.moveX = Math.abs(tx) > 0.15 ? Math.sign(tx) : 0; i.moveY = 1;
+      i.jump = i.jumpHeld = false; b.hold = 0; f.charging = false;
+      return i;
+    }
+  }
+  // Ballistic lead constrained to the same eight directions available to humans.
   const flight = Math.hypot(tx, ty) / ARROW_SPEED;
   const leadX = tx + target.vx * flight * 0.65;
   const gravity = f.inventory?.[0] === 'bolt' ? BOLT_GRAVITY : ARROW_GRAVITY;
   const leadY = ty + target.vy * flight * 0.55 - gravity * flight * flight / 2;
   const angle = Math.round((Math.atan2(leadY, leadX) + b.aimError) / (Math.PI / 4)) * Math.PI / 4;
-  const aimX = Math.round(Math.cos(angle) * 1000) / 1000, aimY = Math.round(Math.sin(angle) * 1000) / 1000;
+  const hard = w.options.difficulty === 'hard';
+  const prediction = hard && !i.dash && f.ammo > 0 && (f.charging || (b.shootTimer <= 0 && b.travelled >= 2.5)) ? predictShot(w, f, target) : null;
+  const aimX = prediction?.aimX ?? Math.round(Math.cos(angle) * 1000) / 1000;
+  const aimY = prediction?.aimY ?? Math.round(Math.sin(angle) * 1000) / 1000;
   const miss = Math.abs(leadX * aimY - leadY * aimX);
-  const range = b.shots === 0 && w.options.difficulty !== 'hard' ? 6.5 : settings.range;
+  const range = b.shots === 0 && !hard ? 6.5 : settings.range;
+  const canHit = hard ? prediction !== null : miss < 0.85 && clearShot(w, f, aimX, aimY, flight);
   if (!i.dash && !f.charging && f.ammo > 0 && b.shootTimer <= 0 && b.travelled >= 2.5 &&
-      target.invulnerable <= 0 && Math.hypot(tx, ty) < range && miss < 0.85 && clearShot(w, f, aimX, aimY, flight)) {
+      target.invulnerable <= 0 && Math.hypot(tx, ty) < range && canHit) {
     b.hold = 0.10 + settings.reaction * 0.25;
     b.shootTimer = settings.delay + random(w) * 0.8;
     b.travelled = 0; b.shots++;

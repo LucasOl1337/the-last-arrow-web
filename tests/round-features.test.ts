@@ -186,7 +186,7 @@ test('normal bot repositions before its opening shot and prefers a nearby chest 
 });
 
 test('bot wall-jumps and approaches a chest across the horizontal wrap', () => {
-  const w = createWorld({ humans: 0, bots: 4 });
+  const w = createWorld({ humans: 0, bots: 4 }); w.phase = 'playing';
   const f = w.fighters[0];
   Object.assign(f, { x: 0.1, y: 9.45, grounded: false, coyote: 0, wall: -1 });
   w.chests = [{ id: 1, x: 31.5, y: 9.5, reward: ['bomb'] }];

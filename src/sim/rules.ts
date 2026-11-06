@@ -1,11 +1,15 @@
-import { DT, COUNTDOWN_SECONDS, resetRound } from './world.ts';
+import { DT, COUNTDOWN_SECONDS, HEADHUNTER_SECONDS, RESPAWN_SECONDS, resetRound, respawnFighter } from './world.ts';
 import type { World, Fighter } from './world.ts';
 import { delta, WIDTH, HEIGHT } from './level.ts';
 import { quiver } from './inventory.ts';
 export function kill(w: World, victim: Fighter, killer: number): void {
   if (!victim.alive || victim.invulnerable > 0) return;
   victim.alive = false; victim.charging = false;
-  if (killer !== victim.id && w.fighters[killer]) w.fighters[killer].kills++;
+  victim.respawnAt = w.options.mode === 'headhunter' ? w.matchTime + RESPAWN_SECONDS : null;
+  if (killer !== victim.id && w.fighters[killer]) {
+    w.fighters[killer].kills++;
+    if (w.options.mode === 'headhunter') w.fighters[killer].score++;
+  }
   w.events.push({ type: 'kill', x: victim.x, y: victim.y, actor: killer, target: victim.id });
   // Dead fighters drop their quiver; zero-ammo survivors can still finish a round.
   const inventory = quiver(victim);
@@ -33,6 +37,21 @@ export function stepRules(w: World): void {
   if (w.phase === 'roundover') {
     w.phaseTime -= DT;
     if (w.phaseTime <= 0) resetRound(w);
+    return;
+  }
+  if (w.options.mode === 'headhunter') {
+    if (w.matchTime >= HEADHUNTER_SECONDS - 1e-9) {
+      w.matchTime = HEADHUNTER_SECONDS;
+      const highScore = Math.max(...w.fighters.map(f => f.score));
+      const leaders = w.fighters.filter(f => f.score === highScore);
+      w.winner = leaders.length === 1 ? leaders[0].id : null;
+      w.phase = 'matchover'; w.phaseTime = 0;
+      w.events.push({ type: 'victory', x: 16, y: 9, actor: w.winner ?? -1 });
+    } else {
+      for (const f of w.fighters) {
+        if (!f.alive && f.respawnAt !== null && w.matchTime >= f.respawnAt - 1e-9) respawnFighter(w, f);
+      }
+    }
     return;
   }
   let alive = 0, winner = -1;
