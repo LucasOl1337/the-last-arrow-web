@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import type { Level } from '../sim/level.ts';
+import { asset } from '../paths.ts';
 
 /** Art boundary: the renderer only reads the simulation. Coordinates: sim y-down -> scene y-up. */
 export class ArenaScene {
@@ -25,10 +26,10 @@ export class ArenaScene {
     const sun = new THREE.DirectionalLight(0xffdfab, 3.1); sun.position.set(-8, 22, 20); this.scene.add(sun);
     const rim = new THREE.DirectionalLight(0x6dd4e0, 1.5); rim.position.set(30, 8, -2); this.scene.add(rim);
     this.scene.add(this.arena); this.arena.add(this.terrain);
-    this.stone = this.loader.load('/assets/tex/stone.jpg'); this.stone.colorSpace = THREE.SRGBColorSpace;
+    this.stone = this.loader.load(asset('tex/stone.jpg')); this.stone.colorSpace = THREE.SRGBColorSpace;
     this.stone.wrapS = this.stone.wrapT = THREE.RepeatWrapping;
-    this.addBackground('/assets/bg/canopy.jpg', -12, 58, 0.6);
-    this.addBackground('/assets/bg/ruins.jpg', -7, 48, 0.45);
+    this.addBackground(asset('bg/canopy.jpg'), -12, 58, 0.6);
+    this.addBackground(asset('bg/ruins.jpg'), -7, 48, 0.45);
     const veil = new THREE.Mesh(new THREE.PlaneGeometry(60, 36), new THREE.MeshBasicMaterial({ color: 0x061a20, transparent: true, opacity: 0.35, depthWrite: false }));
     veil.position.set(16, 9, -5); this.scene.add(veil);
   }

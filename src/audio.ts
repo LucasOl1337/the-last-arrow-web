@@ -1,3 +1,4 @@
+import { asset } from './paths.ts';
 import type { SimEvent, World } from './sim/world.ts';
 const files = {
   music: 'music.mp3', mizuShoot: 'mizu_shoot.wav', mizuDash: 'mizu_dash.ogg',
@@ -21,7 +22,7 @@ export class AudioEngine {
     this.loading = true;
     await Promise.all(Object.entries(files).map(async ([key, file]) => {
       try {
-        const response = await fetch(`/assets/audio/${file}`); if (!response.ok) throw new Error(String(response.status));
+        const response = await fetch(asset(`audio/${file}`)); if (!response.ok) throw new Error(String(response.status));
         this.buffers.set(key as Sound, await this.context!.decodeAudioData(await response.arrayBuffer()));
       } catch { this.failures.push(file); }
     }));

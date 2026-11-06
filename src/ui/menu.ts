@@ -1,6 +1,7 @@
 import { CHARACTERS } from '../sim/world.ts';
 import type { MatchOptions } from '../sim/world.ts';
 import { LEVELS } from '../sim/level.ts';
+import { asset } from '../paths.ts';
 export interface MenuActions { start: (opts: MatchOptions) => void; resume: () => void; rematch: () => void; home: () => void; mute: () => boolean }
 export type Screen = 'menu' | 'controls' | 'pause' | 'victory' | 'error';
 export class Menu {
@@ -12,6 +13,8 @@ export class Menu {
   private muted = false;
   constructor(private actions: MenuActions) {
     this.element.className = 'menu-layer';
+    // Injected from TS so the URL follows BASE_URL (GitHub Pages subpath) instead of a root-absolute CSS url.
+    document.documentElement.style.setProperty('--key-art', `url('${asset('bg/key.jpg')}')`);
     this.element.addEventListener('keydown', event => {
       if (event.key !== 'Tab') return;
       const items = this.element.querySelectorAll<HTMLElement>('button, select');

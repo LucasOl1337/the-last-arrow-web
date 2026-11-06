@@ -17,7 +17,7 @@ const server = stories
 let browser;
 const report = { owner: 'tla-core', route: 'isolated headless chromium / agent-bench tla', errors: [], checks: [], pagesAtEnd: null };
 try {
-  const url = `http://127.0.0.1:${port}`;
+  const url = stories ? `http://127.0.0.1:${port}` : `http://127.0.0.1:${port}/the-last-arrow-web`;
   for (let n = 0; n < 100; n++) { try { if ((await fetch(url)).ok) break; } catch {} await delay(50); }
   browser = await chromium.launch({ executablePath: `${process.env.HOME}/.cache/ms-playwright/chromium-1248/chrome-linux64/chrome`, headless: true,
     args: ['--headless=new', '--autoplay-policy=no-user-gesture-required'] });
