@@ -27,7 +27,7 @@ export class Hud {
     });
   }
   update(w: World, paused: boolean, camera: THREE.Camera) {
-    const signature = `${w.phase}:${Math.ceil(w.phaseTime)}:${w.round}:${w.winner}:${Math.floor(w.roundTime)}:${w.fighters.map(f => `${f.ammo},${f.score},${f.alive}`).join(':')}`;
+    const signature = `${w.phase}:${w.countdown ?? Math.ceil(w.phaseTime)}:${w.round}:${w.winner}:${Math.floor(w.roundTime)}:${w.fighters.map(f => `${f.ammo},${f.score},${f.alive}`).join(':')}`;
     if (signature !== this.signature) {
       this.signature = signature;
       w.fighters.forEach((f, n) => {
@@ -35,13 +35,13 @@ export class Hud {
         this.cards[n].querySelector('.points')!.textContent = String(f.score);
         this.cards[n].querySelector('.ammo')!.textContent = '➶'.repeat(f.ammo) || 'sem flechas';
       });
-      this.banner.textContent = w.phase === 'countdown' ? `ROUND ${w.round} · ${Math.ceil(w.phaseTime)}` : w.phase === 'roundover' ? (w.winner === null ? 'EMPATE' : `${CHARACTERS[w.fighters[w.winner].character].name.toUpperCase()} +1`) : '';
+      this.banner.textContent = w.phase === 'countdown' ? `ROUND ${w.round} · ${w.countdown ?? Math.ceil(w.phaseTime)}` : w.phase === 'roundover' ? (w.winner === null ? 'EMPATE' : `${CHARACTERS[w.fighters[w.winner].character].name.toUpperCase()} +1`) : '';
       this.footer.textContent = `${w.level.name}   /   Primeiro a 5   /   ${Math.max(0, 90 - Math.floor(w.roundTime))}s   /   Esc pausa`;
     }
     this.banner.hidden = paused;
     w.fighters.forEach((f, n) => {
       const l = this.labels[n]; l.hidden = !f.alive;
-      this.projected.set(f.x, 18 - f.y + 0.93, 0.6).project(camera);
+      this.projected.set(f.x, 18 - f.y + 1.15, 0.6).project(camera);
       l.style.left = `${(this.projected.x + 1) * 50}%`; l.style.top = `${(1 - this.projected.y) * 50}%`;
     });
   }
