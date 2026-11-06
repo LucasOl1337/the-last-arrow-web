@@ -1,0 +1,21 @@
+[Unit]
+Description=The Last Arrow authoritative online duels
+After=network.target
+[Service]
+User=the-last-arrow
+Group=the-last-arrow
+WorkingDirectory=/opt/the-last-arrow/current
+Environment=NODE_ENV=production
+Environment=PORT=8890
+Environment=PUBLIC_ORIGIN=https://arrow.symbiose.si
+ExecStart=/usr/local/bin/node server/index.ts
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+MemoryMax=384M
+CPUQuota=100%
+[Install]
+WantedBy=multi-user.target

@@ -84,6 +84,9 @@ img.fighter-icon{width:34px;height:34px;object-fit:cover;border-radius:50%;borde
 .match-config select{font-size:12px;padding:0 5px}
 .quality-notice{position:absolute;left:1%;bottom:4.5%;max-width:70%;padding:4px 7px;border-radius:3px;background:#081a20d9;color:#c5d3ca;font-size:11px;line-height:1.25}
 @media(max-height:600px){.quality-notice{font-size:10px;padding:3px 6px}.victory-panel{padding:18px 24px}.victory-logo{width:150px;margin:0 0 4px}.victory-portrait{width:100px;height:100px}.victory-panel h2{font-size:30px;margin-bottom:8px}.victory-panel .eyebrow{margin-bottom:6px}.victory-panel .stat{padding:5px 8px}.victory-panel p{margin:6px 0}.victory-panel>button{min-height:38px;padding:8px 12px}}
+/* Online invites stay selectable when clipboard permission is unavailable. */
+.online-panel input{font:inherit;width:100%;min-height:42px;background:#071419;color:#fff4dd;border:1px solid #7c9179;padding:8px;margin:4px 0 8px}.online-panel label{margin-top:14px}.online-panel [role=status]{color:var(--gold)}
+.camera-toggle{position:absolute;left:1%;bottom:1%;pointer-events:auto;min-height:28px;padding:4px 8px;font-size:11px;background:#081a20e8;color:#fff4dd;border:1px solid #7c91795c;z-index:3}
 /* Recoverable failures remain readable without hiding the battlefield. */
 .resource-notice{position:absolute;left:1%;bottom:8%;max-width:80%;padding:5px 8px;background:#081a20ed;border-left:2px solid var(--gold);color:#fff4dd;font-size:12px;line-height:1.4;pointer-events:none;z-index:3}
 @media(max-height:600px){.resource-notice{font-size:10px;max-width:85%;padding:3px 6px}}

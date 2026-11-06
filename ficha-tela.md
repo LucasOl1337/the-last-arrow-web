@@ -1,5 +1,16 @@
 # Ficha da tela — The Last Arrow
 
+## Retomada 06/11 15:42 — câmera e sala online
+
+1. **Quem usa:** Lucas no monitor; amigo em outro computador/celular, teclado/controle/toque.
+2. **Tarefas:** jogar pelo link público; criar/entrar numa sala de dois; enxergar seu arqueiro maior.
+3. **Objeto:** arena e arqueiro próprio, preservando modelos/animações aprovados.
+4. **Simultâneo:** plataformas próximas, nome/munição e placar; alternar visão ampla quando precisar ver todas as bordas.
+5. **Medido:** versão rodada10, cinco mapas, arena32×18; câmera fixa cobre33,8×19,4; zero transporte de rede existente. Print inicial salvo na retomada.
+6. **Estado:** câmera próxima padrão só para um jogador/online, ampla para dois locais; sala por link, servidor decide simulação, desconexão explícita sem fingir partida online.
+
+Galeria consultada: preservar formato conhecido. Stories reais de câmera e sala antes de conectar ao jogo; estados conectando/aguardando/ativo/erro. Provar1366×768,900×1000,844×390. O combate mantém proporção16:9; área menor em janela vertical é deliberada para não cortar a arena inteira na visão ampla.
+
 ## Rodada 10 — catch e wrap (antes do código visual)
 
 1. **Quem usa:** P1 teclado contra3 bots, desktop1600×900/notebook1366×768/celular horizontal844×390.

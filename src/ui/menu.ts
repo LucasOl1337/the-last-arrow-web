@@ -3,7 +3,7 @@ import type { MatchOptions } from '../sim/world.ts';
 import { LEVELS, themeOf } from '../sim/level.ts';
 import { asset, portrait } from '../paths.ts';
 import { victorySummary } from './match-copy.ts';
-export interface MenuActions { start: (opts: MatchOptions) => void; resume: () => void; rematch: () => void; home: () => void; mute: () => boolean }
+export interface MenuActions { start: (opts: MatchOptions) => void; resume: () => void; rematch: () => void; home: () => void; mute: () => boolean; online?: () => void }
 export type Screen = 'menu' | 'controls' | 'pause' | 'victory' | 'error' | 'recovering';
 export interface VictoryStats { kills: number; catches: number; stomps: number; score: number; mode?: MatchOptions['mode'] }
 /** Menu thumbnails reuse the arena backgrounds. */
@@ -109,6 +109,7 @@ export class Menu {
     const start = this.button('Começar partida  →', () => {}, true); start.type = 'submit'; actions.append(start);
     actions.append(this.button('Controles', () => { this.returnScreen = 'menu'; this.show('controls'); }));
     actions.append(this.soundButton());
+    if (this.actions.online) { const online = this.button('Jogar online', this.actions.online); online.style.gridColumn = '1 / -1'; actions.append(online); }
     this.element.querySelector('form')!.onsubmit = e => { e.preventDefault(); this.actions.start({ ...this.options, characters: [...this.options.characters!] }); };
     this.updateRuleCopy();
   }

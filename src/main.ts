@@ -14,6 +14,10 @@ import { AudioEngine } from './audio.ts';
 import { AutoQuality } from './render/quality.ts';
 import { ResourceNotice } from './ui/resource-notice.ts';
 import { LEVELS } from './sim/level.ts';
+import { OnlineClient } from './net/client.ts';
+import { OnlinePanel } from './ui/online.ts';
+import { emptyIntent } from './sim/input.ts';
+import type { ServerMessage } from './net/protocol.ts';
 
 const params = new URLSearchParams(location.search);
 const seed = Number(params.get('seed') ?? '1');
@@ -35,14 +39,37 @@ let frames = 0, measuredSeconds = 0, frameMsTotal = 0, maxFrameMs = 0;
 const quality = new AutoQuality();
 let sampledFrame = false, contextLost = false;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let online: OnlineClient | null = null;
+let pendingState: Extract<ServerMessage, {type:'state'}> | null = null;
+let onlineEvents: (typeof world.events) = [];
+let onlineReady = false, onlineStartedAt = 0, networkStateAt = 0;
+let cameraClose = true;
+const cameraButton = document.createElement('button');cameraButton.className='camera-toggle';game.append(cameraButton);
+const updateCameraButton = () => {cameraButton.textContent = cameraClose ? 'Câmera: próxima · C' : 'Câmera: ampla · C';cameraButton.setAttribute('aria-pressed',String(cameraClose));};
+cameraButton.onclick = () => {cameraClose=!cameraClose;updateCameraButton();};updateCameraButton();
+function home() { online?.close();online=null;pendingState=null;onlineEvents=[];onlinePanel.hide();running=false;paused=false;controls.active=false;controls.reset();audio.setPaused(true);game.hidden=true;menu.show('menu'); }
 const menu = new Menu({
-  start: opts => startMatch(opts), resume: () => setPaused(false), rematch: () => startMatch(world.options),
-  home: () => { running = false; paused = false; controls.active = false; controls.reset(); audio.setPaused(true); game.hidden = true; menu.show('menu'); },
-  mute: toggleMute,
+  start: opts => startMatch(opts), resume: () => setPaused(false), rematch: () => { if(online) {online.rematch();onlinePanel.show('Esperando o outro jogador pedir revanche.');menu.hide();} else startMatch(world.options); },
+  home, mute: toggleMute,
+  online: () => {menu.hide();onlinePanel.reset();onlinePanel.show();},
 });
-app.append(menu.element);
+const onlinePanel = new OnlinePanel({create:()=>connectOnline(''),join:connectOnline,back:home},params.get('room')??'');
+app.append(menu.element,onlinePanel.element);
+function connectOnline(room: string) {
+  if(room && !/^[A-F0-9]{8}$/.test(room)) {onlinePanel.show('Digite os oito caracteres do convite.');return;}
+  online?.close();pendingState=null;onlineEvents=[];running=false;game.hidden=true;controls.active=false;
+  onlinePanel.reset();onlinePanel.show('Conectando…');
+  online = new OnlineClient(room,m=>{
+    if(m.type==='waiting') onlinePanel.waiting(online!.room);
+    if(m.type==='start') {pendingState=null;onlineEvents=[];onlineReady=false;onlineStartedAt=performance.now();startMatch(m.options);onlinePanel.hide();}
+    if(m.type==='state') {pendingState=m;onlineEvents.push(...m.events);}
+    if(m.type==='error'||m.type==='left') {running=false;controls.active=false;controls.reset();audio.setPaused(true);menu.hide();onlinePanel.show(m.type==='left'?'O outro jogador saiu. Crie uma nova sala para jogar de novo.':m.message);}
+  });
+}
+if(params.has('room')) {menu.hide();onlinePanel.show('Convite recebido. Toque em Entrar na sala.');} 
 const controls = new Controls(() => { if (running && world.phase !== 'matchover') setPaused(!paused); }, () => { if (running && world.phase !== 'matchover') setPaused(true); });
 window.addEventListener('keydown', event => {
+  if (event.code === 'KeyC' && !event.repeat && !game.hidden && !(event.target as HTMLElement)?.closest('input,textarea,select')) cameraButton.click();
   if (event.code !== 'KeyM' || event.repeat || event.ctrlKey || event.metaKey || event.altKey) return;
   if ((event.target as HTMLElement | null)?.closest?.('input, select, textarea')) return;
   if (!game.hidden) toggleMute();
@@ -61,6 +88,7 @@ portraitTouch.addEventListener('change', () => {
 });
 function setPaused(value: boolean) {
   if (!running || contextLost) return;
+  if (online) { controls.reset();online.send(emptyIntent(),performance.now()+100);return; } // a remote duel never pauses the other player
   paused = value; accumulator = 0; controls.reset(); controls.active = !paused && !portraitTouch.matches; audio.setPaused(paused || portraitTouch.matches);
   // Resetting input is not releasing the bow. Cancel human draws on pause/blur
   // so resuming cannot spend a flecha without a fresh shooting gesture.
@@ -92,6 +120,7 @@ function startMatch(opts: MatchOptions = {}) {
     if (contextLost) { menu.show('recovering'); return; }
     if (opts.map && !LEVELS.some(level => level.id === opts.map)) notice.set('map', 'Arena inválida: jogando em Musgo');
     world = createWorld({ ...opts, seed: opts.seed ?? seed });
+    cameraClose=!!online || world.options.humans===1;updateCameraButton();
     arena.setLevel(world.level); fighters.reset(world); hud.reset(world); fx.reset(); chests.reset();
     stats = world.fighters.map(() => ({ kills: 0, catches: 0, stomps: 0 })); wasCharging = world.fighters.map(() => false);
     seenRound = world.round; shownVictory = false; paused = false; running = true; timeScale = 1; accumulator = 0;
@@ -128,7 +157,20 @@ function frame(now: number) {
     const start = performance.now();
     const intents = controls.sample();
     if (frozen) controls.consumeEdges();
-    if (!frozen && world.phase !== 'matchover') {
+    if (online && pendingState) {
+      const state=pendingState;pendingState=null;
+      const previous=world;world=state.world;networkStateAt=now;
+      // Interpolate render positions over the next network interval; simulation remains server-owned.
+      for(const f of world.fighters) {const old=previous.fighters[f.id];f.prevX=old?.x??f.x;f.prevY=old?.y??f.y;}
+      if(world.round!==seenRound){seenRound=world.round;fx.reset();}
+      for(const event of onlineEvents){fx.event(event,world);hud.event(event);audio.event(event,world);fighters.event(event.type,event.actor);record(event);}
+      onlineEvents=[];
+    }
+    if (online) {
+      if(!onlineReady && (fighters.usingModels || fighters.loadError || now-onlineStartedAt>10000)) {online.ready();onlineReady=true;}
+      if(online.send(frozen?emptyIntent():intents[0],now))controls.consumeEdges();
+    }
+    if (!online && !frozen && world.phase !== 'matchover') {
       // Kill: 80 ms + 0.3 s slow-motion; catch: 45 ms only. Reduced motion skips both.
       const speed = timeScale * (reducedMotion ? 1 : fx.hitstop > 0 ? 0 : fx.slow > 0 ? 0.3 : 1);
       accumulator += elapsed * speed;
@@ -144,9 +186,12 @@ function frame(now: number) {
     }
     // Test hook timeScale 0 freezes the sim only; poses keep animating so frozen states can be inspected.
     const animDt = frozen ? 0 : elapsed * (timeScale || 1) * (!reducedMotion && fx.slow > 0 ? 0.3 : 1) * (!reducedMotion && fx.hitstop > 0 ? 0 : 1);
-    fighters.update(world, frozen || world.phase !== 'playing' ? 1 : accumulator / DT, now / 1000, animDt);
+    fighters.update(world, online ? Math.min(1,(now-networkStateAt)/(1000/30)) : frozen || world.phase !== 'playing' ? 1 : accumulator / DT, now / 1000, animDt);
     arrows.update(world, now / 1000); chests.update(world, now / 1000); fx.update(frozen ? 0 : elapsed, frozen ? 0 : elapsed * timeScale, world);
     flash.style.opacity = reducedMotion ? '0' : String(fx.flash * 0.7);
+    arena.closeCamera=cameraClose;
+    const followed=world.fighters[online?.player??0];
+    arena.cameraTarget=followed?.alive?{x:followed.x,y:18-followed.y}:undefined;
     arena.draw(now / 1000, reducedMotion ? 0 : fx.shake, fx.focus, reducedMotion ? 0 : fx.zoom); hud.update(world, frozen, arena.camera, now / 1000);
     if (world.phase === 'matchover' && !shownVictory) {
       shownVictory = true; controls.active = false;
@@ -165,7 +210,7 @@ window.__tla = {
   get world() { return world; },
   setTimeScale(value: number) { if (!Number.isFinite(value) || value < 0 || value > 24) throw new RangeError('Escala deve estar entre 0 e 24'); timeScale = value; accumulator = 0; },
   startMatch,
-  state: () => ({ ...snapshot(world), paused, timeScale }),
+  state: () => ({ ...snapshot(world), paused, timeScale, online: online ? {room:online.room,player:online.player} : null, cameraClose }),
   visuals: () => fighters?.inspect() ?? [],
   diagnostics: () => ({ frames, fps: measuredSeconds ? frames / measuredSeconds : 0, averageFrameWorkMs: frames ? frameMsTotal / frames : 0, maxFrameWorkMs: maxFrameMs,
     quality: { ...quality.inspect(), bloom: arena?.bloomEnabled ?? true, pixelRatio: arena?.renderer.getPixelRatio() ?? 1, particles: fx?.particleBudget },
@@ -181,7 +226,7 @@ declare global {
     __tla: {
       readonly world: ReturnType<typeof createWorld>;
       setTimeScale: (value: number) => void; startMatch: (opts?: MatchOptions) => void;
-      state: () => ReturnType<typeof snapshot> & { paused: boolean; timeScale: number };
+      state: () => ReturnType<typeof snapshot> & { paused: boolean; timeScale: number; online: {room:string;player:number}|null; cameraClose:boolean };
       visuals: () => ReturnType<FightersView['inspect']>;
       diagnostics: () => { frames: number; fps: number; averageFrameWorkMs: number; maxFrameWorkMs: number; quality: ReturnType<AutoQuality['inspect']> & { bloom: boolean; pixelRatio: number; particles?: Effects['particleBudget'] }; drawCalls: number; triangles: number; geometries: number; textures: number; programs: number; models: boolean; modelError: string | null; audioFailures: string[]; renderer: unknown };
     };
