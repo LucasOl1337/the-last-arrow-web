@@ -13,3 +13,61 @@ img.fighter-icon{width:34px;height:34px;object-fit:cover;border-radius:50%;borde
 .victory-panel{text-align:left}.victory-logo{display:block;width:220px;max-width:60%;margin:-12px 0 10px}
 .victory-row{display:flex;gap:22px;align-items:center}.victory-portrait{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--fighter);box-shadow:0 0 30px var(--fighter);flex:none}
 @media(max-width:600px){.logo{width:88%}.victory-row{gap:12px}.victory-portrait{width:72px;height:72px}img.fighter-icon{display:none}}
+
+/* Rodada 2: HUD legível */
+.fighter-label{position:static;transform:none;font-size:8px;font-weight:700;letter-spacing:.04em;opacity:.85;color:var(--fighter)}
+.overhead{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none}
+.quiver-pips{display:flex;gap:2px;height:9px;opacity:0;transform:translateY(3px);transition:opacity .25s,transform .25s}
+.quiver-pips.shown{opacity:1;transform:none}
+.pip{width:3px;height:9px;border-radius:1px;background:linear-gradient(#fff 0 22%,var(--fighter) 22%);box-shadow:0 0 3px #000c}
+.pip.bolt{background:linear-gradient(#fff 0 22%,#6ff3ff 22%);box-shadow:0 0 4px #6ff3ff}
+.pip.bomb{width:5px;border-radius:50% 50% 1px 1px;background:#ff5a3c;box-shadow:0 0 4px #ff5a3c}
+.pip-empty{font-size:8px;color:#ff8f86;text-shadow:0 1px 2px #000}
+.countdown{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.count-pop{display:flex;flex-direction:column;align-items:center;animation:count-pop .4s cubic-bezier(.2,1.6,.4,1) both}
+.count-logo{width:clamp(90px,11vw,170px);height:auto;filter:drop-shadow(0 3px 10px #000a);margin-bottom:-.6vw}
+.count-text{font-family:Georgia,serif;font-weight:700;font-size:clamp(70px,13vw,190px);line-height:1;color:#fff4dd;text-shadow:0 0 28px #e7c88799,0 6px 20px #000}
+.count-pop.fight .count-text{font-size:clamp(48px,8vw,120px);color:var(--gold);letter-spacing:.06em}
+.count-round{font-size:clamp(10px,1vw,14px);letter-spacing:.3em;color:#d6e1d2;text-shadow:0 2px 4px #000}
+@keyframes count-pop{from{transform:scale(1.9);opacity:0}to{transform:scale(1);opacity:1}}
+.round-card{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);display:grid;grid-template-columns:auto auto;align-items:center;gap:6px 20px;padding:18px 26px;background:#081a20e6;border:1px solid #c0cb9c40;border-top:3px solid var(--fighter);box-shadow:0 14px 50px #000a;animation:card-in .3s ease-out both}
+.round-portrait{grid-row:span 2;width:clamp(64px,7vw,110px);aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid var(--fighter);box-shadow:0 0 24px var(--fighter)}
+.round-title{font-family:Georgia,serif;font-size:clamp(20px,2.4vw,34px);color:#fff4dd;white-space:nowrap}
+.round-dots{display:grid;gap:4px}.dot-row{display:flex;align-items:center;gap:6px}.dot-row span{width:84px;font-size:11px;color:var(--fighter);font-weight:700}
+.dot-row i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--fighter);opacity:.6}
+.dot-row i.lit{background:var(--fighter);opacity:1;box-shadow:0 0 8px var(--fighter);animation:dot-on .3s ease-out both}
+.dot-row i.fresh{animation:dot-fresh .55s cubic-bezier(.2,1.8,.4,1) both}
+@keyframes card-in{from{opacity:0;transform:translate(-50%,-44%)}}
+@keyframes dot-on{from{background:transparent;box-shadow:none}}
+@keyframes dot-fresh{0%{transform:scale(0);background:transparent}70%{transform:scale(1.6)}100%{transform:scale(1)}}
+.mute-toggle{position:absolute;right:1%;bottom:1%;pointer-events:auto;min-height:0;padding:3px 8px;font-size:11px;background:#081a20b0;color:#d8e2d6;border:1px solid #7c91795c}
+@media(prefers-reduced-motion:reduce){.count-pop,.round-card,.dot-row i{animation:none!important}}
+@media(max-width:600px){.round-card{padding:10px 12px;gap:4px 10px}.dot-row span{width:56px;font-size:9px}.dot-row i{width:8px;height:8px}}
+
+/* Rodada 2: menu com retratos, miniaturas e botões */
+.picker-label{font-size:12px;letter-spacing:.03em;color:#c9d6ca;display:block;margin-bottom:6px}
+.picker{display:flex;gap:6px}
+.pick{min-height:0;padding:0;background:#0a2029e8;border:1px solid #b2c6b03d;color:#e8eadf;display:flex;flex-direction:column;align-items:center;overflow:hidden;flex:1;position:relative}
+.pick[aria-checked=true]{border-color:var(--fighter,var(--gold));box-shadow:0 0 0 2px var(--fighter,var(--gold)) inset,0 0 14px color-mix(in srgb,var(--fighter,var(--gold)) 50%,transparent)}
+.pick:not([aria-checked=true]) img{filter:saturate(.45) brightness(.7)}
+.pick:hover img{filter:none}
+.pick img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;object-position:center 20%}
+.pick span{font-size:10px;padding:3px 0 4px;letter-spacing:.02em}
+.map .pick img{aspect-ratio:16/9}
+.difficulty .pick{padding:7px 4px;justify-content:center}.difficulty .pick b{font-size:13px}.difficulty .pick small{font-size:10px;color:#a9bcae}
+.difficulty .pick[aria-checked=true]{background:#21362f}
+.touch-note{grid-column:1/-1;margin:0;font-size:11px;color:#e7c887}
+.victory-stats{display:flex;gap:10px;margin-top:6px}
+.stat{min-width:78px;padding:8px 10px;background:#06151bcc;border-bottom:2px solid var(--fighter,var(--gold));text-align:center}
+.stat strong{display:block;font-size:26px;color:var(--fighter,var(--gold));font-variant-numeric:tabular-nums}.stat span{font-size:10px;letter-spacing:.06em;color:#bfcdc0}
+.victory-portrait{width:150px;height:150px}
+@media(max-width:600px){.pick span{font-size:8px}.difficulty .pick small{display:none}.victory-stats{flex-wrap:wrap}.stat{min-width:60px}.victory-portrait{width:80px;height:80px}}
+/* Toque básico */
+.touch-layer{position:absolute;inset:0;pointer-events:none;touch-action:none;user-select:none;-webkit-user-select:none}
+.touch-stick{position:absolute;left:0;top:25%;bottom:0;width:45%;pointer-events:auto;touch-action:none}
+.stick-base{position:absolute;left:18%;top:62%;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;border:2px solid #ffffff40;background:#0006;opacity:.55}
+.stick-base.on{opacity:.9}.stick-knob{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:#e7c887cc}
+.touch-buttons{position:absolute;right:3%;bottom:6%;display:grid;grid-template-columns:repeat(2,64px);gap:10px;pointer-events:auto;touch-action:none}
+.touch-btn{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;background:#0b2028b0;border:2px solid #ffffff50}
+.touch-btn.shoot{grid-row:span 2;align-self:center;background:#7a2a20b0}.touch-btn.jump{background:#1f4a30b0}.touch-btn.on{transform:scale(.92);border-color:var(--gold)}
+#game.touch .mute-toggle{top:9%;bottom:auto}

@@ -11,6 +11,9 @@ import { buildTerrain } from './terrain.ts';
 import type { TerrainBuild } from './terrain.ts';
 import { blurredBackground, mist, ray } from './textures.ts';
 
+/** Peak camera push-in during the kill slow-motion. */
+const ZOOM = 0.05;
+
 /** Art boundary: the renderer only reads the simulation. Coordinates: sim y-down -> scene y-up. */
 export class ArenaScene {
   readonly renderer: THREE.WebGLRenderer;
@@ -124,9 +127,15 @@ export class ArenaScene {
     // Bloom at half resolution is visually identical here and much cheaper.
     this.bloom.resolution.set(width / 2, height / 2);
   }
-  draw(time: number, shake: number) {
+  /**
+   * `focus`/`zoom`: push in up to ZOOM (5%) about a scene point, keeping that point fixed on screen;
+   * the framing shift is clamped so the arena never slides more than the zoom margin.
+   */
+  draw(time: number, shake: number, focus?: { x: number; y: number }, zoom = 0) {
     const sx = Math.sin(time * 91) * shake, sy = Math.cos(time * 77) * shake * 0.6;
-    this.camera.position.x = 16 + sx; this.camera.position.y = 9 + sy;
+    const k = ZOOM * zoom;
+    const fx = focus ? THREE.MathUtils.clamp(focus.x - 16, -16, 16) * k : 0, fy = focus ? THREE.MathUtils.clamp(focus.y - 9, -9, 9) * k : 0;
+    this.camera.position.set(16 + sx + fx, 9 + sy + fy, this.baseZ * (1 - k));
     // Parallax: far layers move less than the camera sway (+ a slow idle drift).
     for (const l of this.layers) {
       l.mesh.position.x = l.baseX + Math.sin(time * 0.11) * l.parallax * 3 + sx * (1 - l.parallax);

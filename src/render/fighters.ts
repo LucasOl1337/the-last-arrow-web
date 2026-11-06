@@ -8,9 +8,10 @@ import { patchCharacterMaterial, addOutline } from './characterMaterial.ts';
 import type { CharacterUniforms } from './characterMaterial.ts';
 import { ProceduralPuppet } from './puppet.ts';
 import { blob, softDot } from './textures.ts';
+import { ARROW_SPEED, ARROW_GRAVITY, BOLT_GRAVITY } from '../sim/arrows.ts';
 
-/** Visual height of a fighter in tiles (hitbox is 0.64×1.10; the model is drawn taller on purpose). */
-const VISUAL_HEIGHT = 1.7;
+/** Visual height of a fighter in tiles (hitbox is 0.64×1.10; feet stay on the hitbox base, the body grows up). */
+export const VISUAL_HEIGHT = 1.8;
 const HALF_H = 0.55;
 const RUN_SPEED = 7.8;
 /** Model-space speed of the run clip at timeScale 1 (root travel / duration ≈ 1.95 units/s). */
@@ -18,12 +19,17 @@ const RUN_CLIP_SPEED = 1.95;
 const FADE = 0.12;
 const GHOSTS = 3;
 /** Each character has its own GLB; tint only applies when falling back to a sibling model. */
+/** Rim light is the character's identity colour (Mizu blue, Storm cyan, Kaze green, Akane red). */
 const LOOKS: { kit: keyof CharacterKits; fallback: keyof CharacterKits; tint: number; rim: number }[] = [
-  { kit: 'mizu', fallback: 'kaze', tint: 0x3a5f9c, rim: 0x8fb8ff },
-  { kit: 'storm', fallback: 'akane', tint: 0x9ed8ec, rim: 0x8ff4ff },
-  { kit: 'kaze', fallback: 'mizu', tint: 0x4f9a52, rim: 0xb6f0a0 },
-  { kit: 'akane', fallback: 'storm', tint: 0xc4413f, rim: 0xffa29a },
+  { kit: 'mizu', fallback: 'kaze', tint: 0x3a5f9c, rim: 0x4f8dff },
+  { kit: 'storm', fallback: 'akane', tint: 0x9ed8ec, rim: 0x2ef2ff },
+  { kit: 'kaze', fallback: 'mizu', tint: 0x4f9a52, rim: 0x55ff6a },
+  { kit: 'akane', fallback: 'storm', tint: 0xc4413f, rim: 0xff3b30 },
 ];
+const RIM_STRENGTH = 1.15;
+/** Self-illumination per map: the Temple is the darkest arena. */
+const SELF_LIGHT: Record<string, number> = { moss: 0.22, totem: 0.34, canopy: 0.18 };
+const AIM_DOTS = 5;
 /** Clip windows (seconds). `hold` stops at `end`; `loop` wraps inside the window. */
 const WINDOWS: Record<ClipName | 'death', { clip: ClipName; start: number; end: number; mode: 'loop' | 'hold' }> = {
   idle: { clip: 'idle', start: 0, end: 15.3, mode: 'loop' },
@@ -48,11 +54,11 @@ interface View {
   root: THREE.Group; pivot: THREE.Group; character: number; rig: Rig | null; puppet: ProceduralPuppet | null;
   state: State; stateTime: number; yaw: number; aim: number; deathAt: number; ghostClock: number;
   wasGrounded: boolean; lastVy: number; releaseTime: number;
-  shadow: THREE.Mesh; halo: THREE.Mesh; aimLine: THREE.Mesh; nock: THREE.Group;
+  shadow: THREE.Mesh; halo: THREE.Mesh; aimDots: THREE.Mesh[]; aimFade: number; nock: THREE.Group;
 }
 
 const tmpV = new THREE.Vector3(), tmpQ = new THREE.Quaternion(), tmpQ2 = new THREE.Quaternion(), tmpQ3 = new THREE.Quaternion(), axis = new THREE.Vector3();
-const aimGeometry = new THREE.PlaneGeometry(1, 1); aimGeometry.translate(0.5, 0, 0);
+const dotGeometry = new THREE.PlaneGeometry(1, 1);
 const haloGeometry = new THREE.RingGeometry(0.62, 0.7, 32);
 const shadowGeometry = new THREE.PlaneGeometry(1, 1); shadowGeometry.rotateX(-Math.PI / 2);
 
@@ -74,18 +80,19 @@ export class FightersView {
   /** Optional listener (fx) for landing dust and dash afterimages. */
   onLand: ((x: number, y: number, strength: number) => void) | null = null;
   loadError: unknown = null;
+  private selfLight = SELF_LIGHT.moss;
   constructor(private scene: THREE.Group) {
     loadCharacterKits().then(kits => { this.kits = kits; if (this.world) this.reset(this.world); })
       .catch(error => { this.loadError = error; console.warn('Personagens 3D indisponíveis; usando bonecos procedurais.', error); });
   }
   get usingModels() { return this.views.length > 0 && this.views.every(v => v.rig !== null); }
   reset(w: World) {
-    this.world = w;
+    this.world = w; this.selfLight = SELF_LIGHT[w.level.id] ?? 0.22;
     for (const v of this.views) this.dispose(v);
     this.views = w.fighters.map(f => this.build(f));
   }
   private dispose(v: View) {
-    this.scene.remove(v.root, v.shadow, v.aimLine, v.nock);
+    this.scene.remove(v.root, v.shadow, v.nock, ...v.aimDots);
     v.puppet?.dispose();
     if (v.rig) {
       v.rig.mixer.stopAllAction(); v.rig.mixer.uncacheRoot(v.rig.model);
@@ -93,7 +100,7 @@ export class FightersView {
       v.rig.model.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) (m.material as THREE.Material).dispose(); });
       for (const g of v.rig.ghosts) { this.scene.remove(g.model); g.material.dispose(); }
     }
-    for (const mesh of [v.shadow, v.halo, v.aimLine]) (mesh.material as THREE.Material).dispose();
+    for (const mesh of [v.shadow, v.halo, ...v.aimDots]) (mesh.material as THREE.Material).dispose();
     v.nock.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) { m.geometry.dispose(); (m.material as THREE.Material).dispose(); } });
   }
   private buildRig(kit: ModelKit, character: number, pivot: THREE.Group, tinted: boolean): Rig {
@@ -102,9 +109,13 @@ export class FightersView {
     const scale = VISUAL_HEIGHT / kit.height; model.scale.setScalar(scale);
     const uniforms: CharacterUniforms[] = [];
     const skinned: THREE.SkinnedMesh[] = [];
-    model.traverse(o => { const m = o as THREE.SkinnedMesh; if (m.isMesh) { uniforms.push(patchCharacterMaterial(m.material as THREE.MeshStandardMaterial, look.rim, tinted ? look.tint : undefined)); if (m.isSkinnedMesh) skinned.push(m); } });
-    const outlineColor = new THREE.Color(CHARACTERS[character].color).multiplyScalar(0.08);
-    const outlines = skinned.map(m => addOutline(m, outlineColor, 0.008).material);
+    model.traverse(o => { const m = o as THREE.SkinnedMesh; if (m.isMesh) {
+      const u = patchCharacterMaterial(m.material as THREE.MeshStandardMaterial, look.rim, tinted ? look.tint : undefined);
+      u.uSelf.value = this.selfLight; uniforms.push(u); if (m.isSkinnedMesh) skinned.push(m);
+    } });
+    // Thin hull in the player's colour (model units: ~0.011 × 1.8 ≈ 0.02 tile ≈ 1 px at 1600×900).
+    const outlineColor = new THREE.Color(CHARACTERS[character].color).multiplyScalar(0.9);
+    const outlines = skinned.map(m => addOutline(m, outlineColor, 0.011).material);
     pivot.add(model);
     const mixer = new THREE.AnimationMixer(model);
     const actions = Object.fromEntries((Object.keys(kit.clips) as ClipName[]).map(name => [name, mixer.clipAction(kit.clips[name])])) as Record<ClipName, THREE.AnimationAction>;
@@ -134,11 +145,14 @@ export class FightersView {
     shadow.renderOrder = 1; this.scene.add(shadow);
     const halo = new THREE.Mesh(haloGeometry, new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.7, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }));
     halo.position.set(0, VISUAL_HEIGHT * 0.45, 0.5); root.add(halo);
-    const aimLine = new THREE.Mesh(aimGeometry, new THREE.MeshBasicMaterial({ color, map: softDot(), transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }));
-    aimLine.renderOrder = 3; this.scene.add(aimLine);
+    // Short dotted trajectory (same speed/gravity as the sim) shown only while charging.
+    const aimDots = Array.from({ length: AIM_DOTS }, () => {
+      const dot = new THREE.Mesh(dotGeometry, new THREE.MeshBasicMaterial({ color, map: softDot(), transparent: true, opacity: 0, depthWrite: false, toneMapped: false }));
+      dot.renderOrder = 3; dot.visible = false; this.scene.add(dot); return dot;
+    });
     const nock = nockedArrow(color); nock.visible = false; this.scene.add(nock);
     const view: View = { root, pivot, character: f.character, rig, puppet, state: 'idle', stateTime: 0, yaw: f.facing > 0 ? -0.35 : -Math.PI + 0.35,
-      aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, shadow, halo, aimLine, nock };
+      aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, shadow, halo, aimDots, aimFade: 0, nock };
     if (rig) this.play(view, 'idle', 0);
     return view;
   }
@@ -235,7 +249,7 @@ export class FightersView {
     v.root.rotation.z = f.alive ? 0 : -Math.min(dying * 2.2, 0.9) * (f.facing > 0 ? 1 : -1);
     const flash = f.alive ? 0 : Math.max(0, 1 - dying * 9);
     const protect = f.alive && f.invulnerable > 0 ? 0.35 + Math.sin(performance.now() * 0.02) * 0.25 : 0;
-    for (const u of rig.uniforms) { u.uDissolve.value = dissolve; u.uFlash.value = flash; u.uRimStrength.value = 0.32 + protect; }
+    for (const u of rig.uniforms) { u.uDissolve.value = dissolve; u.uFlash.value = flash; u.uRimStrength.value = RIM_STRENGTH + protect; }
     for (const m of rig.outlines) m.visible = f.alive;
     // Dash afterimages: snapshot the pose into a pooled ghost every 30 ms while dashing.
     v.ghostClock -= dt;
@@ -259,19 +273,27 @@ export class FightersView {
   private updateAim(v: View, f: Fighter, x: number, feet: number, time: number) {
     const charging = f.alive && f.charging;
     v.nock.visible = charging;
-    const line = v.aimLine.material as THREE.MeshBasicMaterial;
-    if (!charging) { line.opacity = Math.max(0, line.opacity - 0.15); v.aimLine.visible = line.opacity > 0.01; return; }
-    const angle = Math.atan2(-f.aimY, f.aimX);
-    // Bow hand if the rig has it; otherwise chest height.
-    if (v.rig?.bowHand) { v.rig.bowHand.getWorldPosition(tmpV); }
-    else tmpV.set(x + Math.sign(f.aimX || f.facing) * 0.35, feet + VISUAL_HEIGHT * 0.55, 0.6);
-    const pull = Math.min(1, f.charge / 0.35);
-    v.nock.position.set(tmpV.x - f.aimX * 0.12 * pull, tmpV.y + f.aimY * 0.12 * pull, 0.75);
+    v.aimFade = charging ? Math.min(1, v.aimFade + 0.25) : Math.max(0, v.aimFade - 0.2);
+    if (v.aimFade <= 0) { for (const d of v.aimDots) d.visible = false; return; }
+    if (!charging) { for (const d of v.aimDots) (d.material as THREE.MeshBasicMaterial).opacity *= 0.7; return; }
+    const angle = Math.atan2(-f.aimY, f.aimX), pull = Math.min(1, f.charge / 0.35);
+    // Nock on the bow hand; the arc starts at the arrow tip and follows the arrow's real speed and gravity.
+    if (v.rig?.bowHand) v.rig.bowHand.getWorldPosition(tmpV);
+    else tmpV.set(x + Math.sign(f.aimX || f.facing) * 0.35, feet + VISUAL_HEIGHT * 0.5, 0.6);
+    const dx = f.aimX, dy = -f.aimY;
+    v.nock.position.set(tmpV.x - dx * 0.14 * pull, tmpV.y - dy * 0.14 * pull, 0.78);
     v.nock.rotation.set(0, 0, angle);
-    const length = 1.2 + pull * 1.6;
-    v.aimLine.visible = true; v.aimLine.position.set(tmpV.x, tmpV.y, 0.74); v.aimLine.rotation.set(0, 0, angle);
-    v.aimLine.scale.set(length, 0.09 + Math.sin(time * 30) * 0.01, 1);
-    line.opacity = 0.35 + pull * 0.4;
+    const tipX = v.nock.position.x + dx * 0.5, tipY = v.nock.position.y + dy * 0.5;
+    const gravity = (f.inventory?.[0] === 'bolt' ? BOLT_GRAVITY : ARROW_GRAVITY);
+    const spacing = 0.026 + pull * 0.012; // seconds of flight between dots: the arc stretches as the string is drawn
+    v.aimDots.forEach((dot, k) => {
+      const t = spacing * (k + 1);
+      dot.visible = true;
+      dot.position.set(tipX + dx * ARROW_SPEED * t, tipY + dy * ARROW_SPEED * t - 0.5 * gravity * t * t, 0.8);
+      const size = (0.2 - k * 0.022) * (1 + Math.sin(time * 14 - k) * 0.08);
+      dot.scale.set(size, size, 1);
+      (dot.material as THREE.MeshBasicMaterial).opacity = (0.95 - k * 0.14) * (0.55 + pull * 0.45);
+    });
   }
   private updateShadow(v: View, w: World, x: number, y: number, strength: number) {
     // Project down to the first solid tile under the feet (wrap-aware, up to 8 tiles).

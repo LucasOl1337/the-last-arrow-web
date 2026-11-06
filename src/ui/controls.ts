@@ -1,5 +1,6 @@
 import { emptyIntent } from '../sim/input.ts';
 import type { Intent } from '../sim/input.ts';
+import type { TouchState } from './touch.ts';
 const bindings = [
   { left: ['KeyA'], right: ['KeyD'], up: ['KeyW'], down: ['KeyS'], jump: ['KeyK', 'Space'], shoot: ['KeyJ'], dash: ['KeyL'] },
   { left: ['ArrowLeft'], right: ['ArrowRight'], up: ['ArrowUp'], down: ['ArrowDown'], jump: ['Numpad2', 'Period'], shoot: ['Numpad1', 'Comma'], dash: ['Numpad3', 'Slash'] },
@@ -13,6 +14,9 @@ export class Controls {
   private padShoot = [false, false, false, false];
   private padDash = [false, false, false, false];
   private padPause = false;
+  private touchPrev = { jump: false, shoot: false, dash: false };
+  /** Optional virtual pad merged into player 1. */
+  touch: TouchState | null = null;
   active = false;
   constructor(private onPause: () => void, private onBlur: () => void) {
     window.addEventListener('keydown', e => {
@@ -48,6 +52,15 @@ export class Controls {
       i.shootHeld = (b ? held(b.shoot) : false) || shoot;
       i.dash ||= (b ? edge(b.dash) : false) || (dash && !this.padDash[id]);
       this.padJump[id] = jump; this.padShoot[id] = shoot; this.padDash[id] = dash; pause ||= button(9);
+    }
+    const t = this.touch;
+    if (t && this.active) {
+      const i = this.frames[0];
+      if (t.moveX) i.moveX = t.moveX; if (t.moveY) i.moveY = t.moveY;
+      i.jump ||= t.jump && !this.touchPrev.jump; i.jumpHeld ||= t.jump;
+      i.shoot ||= t.shoot && !this.touchPrev.shoot; i.shootHeld ||= t.shoot;
+      i.dash ||= t.dash && !this.touchPrev.dash;
+      this.touchPrev = { jump: t.jump, shoot: t.shoot, dash: t.dash };
     }
     if (pause && !this.padPause) this.onPause(); this.padPause = pause;
     return this.frames;

@@ -5,13 +5,15 @@ export interface CharacterUniforms {
   uRim: { value: THREE.Color }; uRimStrength: { value: number };
   uTint: { value: THREE.Color }; uTintAmount: { value: number };
   uFlash: { value: number }; uDissolve: { value: number }; uEdge: { value: THREE.Color };
+  /** Self-illumination as a fraction of the albedo, so dark cloth/faces never sink into a dim map. */
+  uSelf: { value: number };
 }
 
 export function patchCharacterMaterial(material: THREE.MeshStandardMaterial, rim: THREE.ColorRepresentation, tint?: THREE.ColorRepresentation): CharacterUniforms {
   const u: CharacterUniforms = {
     uRim: { value: new THREE.Color(rim) }, uRimStrength: { value: 0.55 },
     uTint: { value: new THREE.Color(tint ?? 0xffffff) }, uTintAmount: { value: tint === undefined ? 0 : 1 },
-    uFlash: { value: 0 }, uDissolve: { value: 0 }, uEdge: { value: new THREE.Color(rim) },
+    uFlash: { value: 0 }, uDissolve: { value: 0 }, uEdge: { value: new THREE.Color(rim) }, uSelf: { value: 0.22 },
   };
   material.userData.uniforms = u;
   material.customProgramCacheKey = () => 'tla-character';
@@ -20,7 +22,7 @@ export function patchCharacterMaterial(material: THREE.MeshStandardMaterial, rim
     shader.fragmentShader = shader.fragmentShader
       .replace('#include <common>', `#include <common>
 uniform vec3 uRim; uniform float uRimStrength; uniform vec3 uTint; uniform float uTintAmount;
-uniform float uFlash; uniform float uDissolve; uniform vec3 uEdge;
+uniform float uFlash; uniform float uDissolve; uniform vec3 uEdge; uniform float uSelf;
 float tlaHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float tlaNoise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
   return mix(mix(tlaHash(i), tlaHash(i + vec2(1, 0)), f.x), mix(tlaHash(i + vec2(0, 1)), tlaHash(i + vec2(1, 1)), f.x), f.y); }`)
@@ -37,7 +39,8 @@ float tlaNoise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0
   if (tlaN < uDissolve) discard;
 #endif`)
       .replace('#include <opaque_fragment>', `
-  float tlaFres = pow(1.0 - clamp(dot(normal, normalize(vViewPosition)), 0.0, 1.0), 3.0);
+  float tlaFres = pow(1.0 - clamp(dot(normal, normalize(vViewPosition)), 0.0, 1.0), 2.2);
+  outgoingLight += diffuseColor.rgb * uSelf;
   outgoingLight += uRim * tlaFres * uRimStrength;
   outgoingLight = mix(outgoingLight, vec3(1.0), uFlash);
 #ifdef USE_MAP
@@ -55,7 +58,7 @@ float tlaNoise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0
  */
 export function addOutline(mesh: THREE.SkinnedMesh, color: THREE.ColorRepresentation, thickness: number) {
   // Depth offset keeps the hull behind thin cloth layers (otherwise it speckles through capes/coats).
-  const material = new THREE.MeshBasicMaterial({ color, side: THREE.BackSide, polygonOffset: true, polygonOffsetFactor: 6, polygonOffsetUnits: 6 });
+  const material = new THREE.MeshBasicMaterial({ color, side: THREE.BackSide, polygonOffset: true, polygonOffsetFactor: 6, polygonOffsetUnits: 6, toneMapped: false });
   const uniforms = { uThickness: { value: thickness }, uOpacity: { value: 1 } };
   material.customProgramCacheKey = () => 'tla-outline';
   material.onBeforeCompile = shader => {

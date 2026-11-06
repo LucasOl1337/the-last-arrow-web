@@ -9,6 +9,7 @@ import { ChestsView } from './render/chests.ts';
 import { Hud } from './render/hud.ts';
 import { Menu } from './ui/menu.ts';
 import { Controls } from './ui/controls.ts';
+import { TouchControls } from './ui/touch.ts';
 import { AudioEngine } from './audio.ts';
 
 const params = new URLSearchParams(location.search);
@@ -18,6 +19,11 @@ const game = document.createElement('main'); game.id = 'game'; game.setAttribute
 const canvas = document.createElement('canvas'); canvas.setAttribute('aria-label', 'The Last Arrow — arena 3D'); game.append(canvas); app.append(game);
 const flash = document.createElement('div'); flash.className = 'flash'; game.append(flash);
 const audio = new AudioEngine(), hud = new Hud(); game.append(hud.element);
+/** Per-fighter match stats for the victory screen (catches and stomps come from sim events). */
+let stats: { kills: number; catches: number; stomps: number }[] = [];
+let wasCharging: boolean[] = [];
+function toggleMute() { audio.setMuted(!audio.muted); hud.setMuted(audio.muted); return audio.muted; }
+hud.onMute = toggleMute;
 let world = createWorld({ seed }), running = false, paused = false, timeScale = 1, accumulator = 0;
 let arena: ArenaScene | null = null, fighters: FightersView, arrows: ArrowsView, fx: Effects, chests: ChestsView;
 let lastTime = performance.now(), shownVictory = false, seenRound = 0;
@@ -26,10 +32,17 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const menu = new Menu({
   start: opts => startMatch(opts), resume: () => setPaused(false), rematch: () => startMatch(world.options),
   home: () => { running = false; paused = false; controls.active = false; controls.reset(); audio.setPaused(true); game.hidden = true; menu.show('menu'); },
-  mute: () => { audio.setMuted(!audio.muted); return audio.muted; },
+  mute: toggleMute,
 });
 app.append(menu.element);
 const controls = new Controls(() => { if (running && world.phase !== 'matchover') setPaused(!paused); }, () => { if (running && world.phase !== 'matchover') setPaused(true); });
+window.addEventListener('keydown', event => {
+  if (event.code !== 'KeyM' || event.repeat || event.ctrlKey || event.metaKey || event.altKey) return;
+  if ((event.target as HTMLElement | null)?.closest?.('input, select, textarea')) return;
+  if (!game.hidden) toggleMute();
+});
+// Touch layer only on coarse pointers (phones/tablets); keyboard and gamepad keep working alongside.
+if (matchMedia('(pointer: coarse)').matches) { const touch = new TouchControls(); controls.touch = touch.state; game.append(touch.element); game.classList.add('touch'); }
 function setPaused(value: boolean) {
   if (!running) return;
   paused = value; accumulator = 0; controls.reset(); controls.active = !paused; audio.setPaused(paused);
@@ -45,11 +58,23 @@ function startMatch(opts: MatchOptions = {}) {
     }
     world = createWorld({ ...opts, seed: opts.seed ?? seed });
     arena.setLevel(world.level); fighters.reset(world); hud.reset(world); fx.reset(); chests.reset();
+    stats = world.fighters.map(() => ({ kills: 0, catches: 0, stomps: 0 })); wasCharging = world.fighters.map(() => false);
     seenRound = world.round; shownVictory = false; paused = false; running = true; timeScale = 1; accumulator = 0;
     frames = measuredSeconds = frameMsTotal = maxFrameMs = 0;
     controls.reset(); controls.active = true; menu.hide(); game.hidden = false;
     arena.resize(game.clientWidth, game.clientHeight); audio.setPaused(false); void audio.unlock().catch(() => {});
   } catch (error) { console.error(error); running = false; menu.show('error'); }
+}
+/** Stomp kills reset the killer's vy to exactly −10 while standing just above the victim (rules.checkStomps). */
+function record(e: (typeof world.events)[number]) {
+  const s = stats[e.actor];
+  if (!s) return;
+  if (e.type === 'catch') s.catches++;
+  if (e.type === 'kill' && e.target !== undefined && e.target !== e.actor) {
+    s.kills++;
+    const killer = world.fighters[e.actor], victim = world.fighters[e.target];
+    if (killer.vy === -10 && victim.y - killer.y > 0.5 && victim.y - killer.y < 1.2) s.stomps++;
+  }
 }
 // Audio is unlocked by a real gesture; autoplay remains silent until the first interaction.
 window.addEventListener('pointerdown', () => { void audio.unlock().catch(() => {}); }, { once: true });
@@ -69,7 +94,8 @@ function frame(now: number) {
       while (accumulator >= DT && steps++ < 240) {
         step(world, intents); controls.consumeEdges(); accumulator -= DT;
         if (world.round !== seenRound) { seenRound = world.round; fx.reset(); }
-        for (const event of world.events) { fx.event(event, world); audio.event(event, world); fighters.event(event.type, event.actor); }
+        for (const event of world.events) { fx.event(event, world); audio.event(event, world); fighters.event(event.type, event.actor); record(event); }
+        world.fighters.forEach((f, id) => { if (f.charging && !wasCharging[id]) audio.draw(); wasCharging[id] = f.charging; });
         if (world.winner !== null && world.fighters[world.winner].score >= 5) { accumulator = 0; break; }
       }
     }
@@ -78,10 +104,11 @@ function frame(now: number) {
     fighters.update(world, paused || world.phase !== 'playing' ? 1 : accumulator / DT, now / 1000, animDt);
     arrows.update(world, now / 1000); chests.update(world, now / 1000); fx.update(paused ? 0 : elapsed, paused ? 0 : elapsed * timeScale, world);
     flash.style.opacity = reducedMotion ? '0' : String(fx.flash * 0.7);
-    arena.draw(now / 1000, reducedMotion ? 0 : fx.shake); hud.update(world, paused, arena.camera);
+    arena.draw(now / 1000, reducedMotion ? 0 : fx.shake, fx.focus, reducedMotion ? 0 : fx.zoom); hud.update(world, paused, arena.camera, now / 1000);
     if (world.phase === 'matchover' && !shownVictory) {
       shownVictory = true; controls.active = false;
-      menu.show('victory', CHARACTERS[world.fighters[world.winner!].character].name);
+      const winner = world.winner === null ? null : world.fighters[world.winner];
+      menu.show('victory', winner ? CHARACTERS[winner.character].name : undefined, winner ? { ...stats[winner.id], score: winner.score } : undefined);
     }
     if (!paused && timeScale === 1) {
       frames++; measuredSeconds += elapsed; const cost = performance.now() - start;

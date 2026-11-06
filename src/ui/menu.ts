@@ -4,12 +4,17 @@ import { LEVELS } from '../sim/level.ts';
 import { asset, portrait } from '../paths.ts';
 export interface MenuActions { start: (opts: MatchOptions) => void; resume: () => void; rematch: () => void; home: () => void; mute: () => boolean }
 export type Screen = 'menu' | 'controls' | 'pause' | 'victory' | 'error';
+export interface VictoryStats { kills: number; catches: number; stomps: number; score: number }
+/** Menu thumbnails reuse the arena backgrounds. */
+const MAP_THUMBS: Record<string, string> = { moss: 'bg/ruins.jpg', totem: 'bg/templo.jpg', canopy: 'bg/copas.jpg' };
+const DIFFICULTIES = [{ value: 'easy', label: 'Fácil', hint: 'aprendendo' }, { value: 'normal', label: 'Normal', hint: 'duelo justo' }, { value: 'hard', label: 'Difícil', hint: 'sem piedade' }] as const;
 export class Menu {
   readonly element = document.createElement('section');
   private screen: Screen = 'menu';
   private returnScreen: Screen = 'menu';
   private options: MatchOptions = { humans: 1, bots: 3, map: 'moss', difficulty: 'normal', characters: ['mizu', 'stormdragon', 'kaze', 'akane'] };
-  private winner = 'Mizu';
+  private winner: string | null = 'Mizu';
+  private stats: VictoryStats | null = null;
   private muted = false;
   constructor(private actions: MenuActions) {
     this.element.className = 'menu-layer';
@@ -17,15 +22,17 @@ export class Menu {
     document.documentElement.style.setProperty('--key-art', `url('${asset('bg/key.jpg')}')`);
     this.element.addEventListener('keydown', event => {
       if (event.key !== 'Tab') return;
-      const items = this.element.querySelectorAll<HTMLElement>('button, select');
+      const items = this.element.querySelectorAll<HTMLElement>('button:not([tabindex="-1"]), select');
       const first = items[0], last = items[items.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
     });
     this.show('menu');
   }
-  show(screen: Screen, winner?: string) {
-    this.screen = screen; if (winner) this.winner = winner;
+  show(screen: Screen, winner?: string, stats?: VictoryStats) {
+    this.screen = screen;
+    if (screen === 'victory') { this.winner = winner ?? null; this.stats = stats ?? null; }
+    else if (winner) this.winner = winner;
     this.element.hidden = false; this.element.classList.toggle('full-menu', screen === 'menu' || screen === 'controls');
     if (screen === 'menu') this.renderMenu(); else this.renderOverlay();
     this.element.querySelector<HTMLElement>('button, select')?.focus({ preventScroll: true });
@@ -53,11 +60,39 @@ export class Menu {
       const count = humans === 0 ? 4 : humans === 1 ? n + 1 : n;
       return { value: String(count), label: `${count} ${count === 1 ? 'bot' : 'bots'}` };
     }), String(this.options.bots), v => { this.options.bots = Number(v); });
-    const characters = CHARACTERS.map(c => ({ value: c.id, label: c.name }));
-    select('character1', humans ? 'Seu arqueiro · P1' : 'Arqueiro 1', characters, this.options.characters![0], v => { this.options.characters![0] = v; });
-    select('character2', humans === 2 ? 'Arqueiro · P2' : 'Arqueiro rival', characters, this.options.characters![1], v => { this.options.characters![1] = v; });
-    select('map', 'Arena', LEVELS.map(l => ({ value: l.id, label: l.name })), this.options.map!, v => { this.options.map = v; });
-    select('difficulty', 'Bots', [{ value: 'easy', label: 'Fácil · aprendendo' }, { value: 'normal', label: 'Normal · duelo justo' }, { value: 'hard', label: 'Difícil · sem piedade' }], this.options.difficulty!, v => { this.options.difficulty = v as MatchOptions['difficulty']; });
+    // Portrait pickers (radio groups of buttons): arrow keys move inside a group, Tab leaves it.
+    const group = (name: string, label: string, wide: boolean, items: { value: string; html: string; label: string; style?: string }[], value: string, change: (value: string) => void) => {
+      const field = document.createElement('div'); field.className = `picker-field${wide ? ' wide' : ''}`;
+      const title = document.createElement('span'); title.className = 'picker-label'; title.id = `${name}-label`; title.textContent = label;
+      const row = document.createElement('div'); row.className = `picker ${name}`; row.setAttribute('role', 'radiogroup'); row.setAttribute('aria-labelledby', title.id); row.id = name;
+      const buttons = items.map(item => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'pick'; b.dataset.value = item.value;
+        b.setAttribute('role', 'radio'); b.setAttribute('aria-label', item.label); b.innerHTML = item.html; if (item.style) b.setAttribute('style', item.style);
+        b.onclick = () => select(item.value, true); return b;
+      });
+      const select = (v: string, focus = false) => {
+        buttons.forEach(b => { const on = b.dataset.value === v; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); });
+        change(v);
+      };
+      row.addEventListener('keydown', event => {
+        const delta = event.key === 'ArrowRight' || event.key === 'ArrowDown' ? 1 : event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? -1 : 0;
+        if (!delta) return; event.preventDefault();
+        const index = buttons.findIndex(b => b.getAttribute('aria-checked') === 'true');
+        select(buttons[(index + delta + buttons.length) % buttons.length].dataset.value!, true);
+      });
+      row.append(...buttons); field.append(title, row); fields.append(field); select(value);
+    };
+    const portraits = CHARACTERS.map(c => ({ value: c.id, label: c.name, style: `--fighter:${c.color}`,
+      html: `<img src="${portrait(c.id)}" alt="" width="56" height="56"><span>${c.name === 'Stormdragon' ? 'Storm' : c.name}</span>` }));
+    group('character1', humans ? 'Seu arqueiro · P1' : 'Arqueiro 1', false, portraits, this.options.characters![0], v => { this.options.characters![0] = v; });
+    group('character2', humans === 2 ? 'Arqueiro · P2' : 'Arqueiro rival', false, portraits, this.options.characters![1], v => { this.options.characters![1] = v; });
+    group('map', 'Arena', false, LEVELS.map(l => ({ value: l.id, label: l.name,
+      html: `<img src="${asset(MAP_THUMBS[l.id] ?? 'bg/key.jpg')}" alt="" width="96" height="54" loading="lazy"><span>${l.name.replace(/^(Ruínas do|Templo do|Copas d[ao]s?) /, '')}</span>` })), this.options.map!, v => { this.options.map = v; });
+    group('difficulty', 'Bots', false, DIFFICULTIES.map(d => ({ value: d.value, label: `${d.label} · ${d.hint}`, html: `<b>${d.label}</b><small>${d.hint}</small>` })), this.options.difficulty!, v => { this.options.difficulty = v as MatchOptions['difficulty']; });
+    if (matchMedia('(pointer: coarse)').matches) {
+      const note = document.createElement('p'); note.className = 'touch-note'; note.textContent = 'Melhor com teclado ou controle. No toque: stick à esquerda, botões à direita.';
+      fields.append(note);
+    }
     const actions = this.element.querySelector('.menu-actions')!;
     const start = this.button('Começar partida  →', () => {}, true); start.type = 'submit'; actions.append(start);
     actions.append(this.button('Controles', () => { this.returnScreen = 'menu'; this.show('controls'); }));
@@ -77,8 +112,11 @@ export class Menu {
     } else if (this.screen === 'victory') {
       const winner = CHARACTERS.find(c => c.name === this.winner);
       panel.classList.add('victory-panel');
-      panel.innerHTML = `<img class="victory-logo" src="${asset('ui/logo.png')}" alt="" aria-hidden="true"><div class="victory-row">${winner ? `<img class="victory-portrait" src="${portrait(winner.id)}" alt="" style="--fighter:${winner.color}">` : ''}<div><p class="eyebrow">A ÚLTIMA FLECHA TEM DONO</p><h2 class="winner"></h2><p>Cinco vitórias. A arena é sua.</p></div></div>`;
-      panel.querySelector('.winner')!.textContent = `${this.winner} venceu`;
+      if (winner) panel.style.setProperty('--fighter', winner.color);
+      const s = this.stats;
+      const stat = (value: number, label: string) => `<div class="stat"><strong>${value}</strong><span>${label}</span></div>`;
+      panel.innerHTML = `<img class="victory-logo" src="${asset('ui/logo.png')}" alt="" aria-hidden="true"><div class="victory-row">${winner ? `<img class="victory-portrait" src="${portrait(winner.id)}" alt="">` : ''}<div><p class="eyebrow">A ÚLTIMA FLECHA TEM DONO</p><h2 class="winner"></h2><p>${winner ? 'Cinco vitórias. A arena é sua.' : 'Ninguém levou a arena desta vez.'}</p>${s ? `<div class="victory-stats">${stat(s.kills, s.kills === 1 ? 'abate' : 'abates')}${stat(s.catches, s.catches === 1 ? 'flecha pega' : 'flechas pegas')}${s.stomps ? stat(s.stomps, s.stomps === 1 ? 'pisão' : 'pisões') : ''}</div>` : ''}</div></div>`;
+      panel.querySelector('.winner')!.textContent = winner ? `${winner.name} venceu` : 'Empate';
       panel.append(this.button('Revanche  →', this.actions.rematch, true), this.button('Escolher outra arena', this.actions.home));
     } else {
       panel.innerHTML = '<h2>Não foi possível abrir a arena</h2><p>O jogo precisa de WebGL 2. Ative a aceleração gráfica ou tente um navegador atualizado.</p>';

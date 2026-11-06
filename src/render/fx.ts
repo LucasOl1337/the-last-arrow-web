@@ -22,6 +22,10 @@ export class Effects {
   private rings: { mesh: THREE.Mesh; life: number; max: number; size: number }[] = [];
   private color = new THREE.Color(); private dummy = new THREE.Object3D();
   shake = 0; slow = 0; flash = 0; hitstop = 0;
+  /** Camera push-in toward the last kill (scene coords); `zoom` eases 0→1→0 around the slow-motion. */
+  focus = new THREE.Vector2(16, 9); zoom = 0; private zoomHold = 0;
+  /** Screen shake grows with each hit and is capped, so double kills and bombs read stronger than a single arrow. */
+  private kick(amount: number) { this.shake = Math.min(0.55, Math.max(this.shake, amount) + amount * 0.35); }
   constructor(scene: THREE.Group) {
     this.dPos.fill(999);
     this.dGeo.setAttribute('position', new THREE.BufferAttribute(this.dPos, 3).setUsage(THREE.DynamicDrawUsage));
@@ -52,7 +56,7 @@ export class Effects {
     for (let i = 0; i < LEAVES; i++) this.leaves.setMatrixAt(i, this.dummy.matrix);
     this.leaves.instanceMatrix.needsUpdate = true;
     for (const r of this.rings) { r.life = 0; r.mesh.visible = false; }
-    this.shake = this.slow = this.flash = this.hitstop = 0;
+    this.shake = this.slow = this.flash = this.hitstop = 0; this.zoom = this.zoomHold = 0;
   }
   /** Scene-space emitter (y up). */
   private dot(x: number, y: number, color: THREE.ColorRepresentation, vx: number, vy: number, life: number, size: number, grav = -9, drag = 1.5, z = 1) {
@@ -92,7 +96,8 @@ export class Effects {
     switch (e.type) {
       case 'kill': {
         const color = CHARACTERS[w.fighters[e.target!].character].color;
-        this.hitstop = Math.max(this.hitstop, 0.08); this.slow = 0.3; this.shake = Math.max(this.shake, 0.22); this.flash = 0.14;
+        this.hitstop = Math.max(this.hitstop, 0.08); this.slow = 0.3; this.kick(0.2); this.flash = 0.14;
+        this.focus.set(x, y); this.zoomHold = 0.55;
         this.leafBurst(x, y, color, 34, 6.5);
         for (let k = 0; k < 40; k++) { const a = Math.random() * Math.PI * 2, s = 2 + Math.random() * 7; this.dot(x, y, k % 3 ? color : 0xffffff, Math.cos(a) * s, Math.sin(a) * s, 0.35 + Math.random() * 0.45, 0.06 + Math.random() * 0.07, -6, 2.2); }
         this.ring(x, y, color, 2.2, 0.35);
@@ -100,7 +105,7 @@ export class Effects {
       }
       case 'explosion': {
         const radius = e.radius ?? 1.6;
-        this.shake = Math.max(this.shake, 0.3); this.flash = Math.max(this.flash, 0.1);
+        this.kick(0.12 + radius * 0.12); this.flash = Math.max(this.flash, 0.1);
         for (let k = 0; k < 70; k++) { const a = Math.random() * Math.PI * 2, s = 2 + Math.random() * radius * 5; this.dot(x, y, k % 4 === 0 ? 0xfff2c0 : k % 2 ? 0xff7a2a : 0xff3a1a, Math.cos(a) * s, Math.sin(a) * s, 0.3 + Math.random() * 0.5, 0.08 + Math.random() * 0.1, -3, 3); }
         for (let k = 0; k < 18; k++) this.dot(x + (Math.random() - 0.5), y + (Math.random() - 0.5), 0x5a4a40, (Math.random() - 0.5) * 2, 1 + Math.random() * 2, 0.8 + Math.random() * 0.5, 0.18, 1.2, 1.2, 0.8);
         this.ring(x, y, 0xffa040, radius, 0.3); this.ring(x, y, 0xfff0c0, radius * 0.6, 0.18);
@@ -115,7 +120,7 @@ export class Effects {
       }
       case 'catch': this.ring(x, y, 0x8affdd, 0.9, 0.25); for (let k = 0; k < 14; k++) { const a = k / 14 * Math.PI * 2; this.dot(x, y, 0x8affdd, Math.cos(a) * 3, Math.sin(a) * 3, 0.3, 0.06, 0, 3); } break;
       case 'pickup': for (let k = 0; k < 6; k++) this.dot(x, y, 0xfff0b0, (Math.random() - 0.5) * 1.5, 1 + Math.random() * 1.5, 0.4, 0.05, 0, 2); break;
-      case 'shoot': if (e.kind === 'bolt') { this.shake = Math.max(this.shake, 0.06); for (let k = 0; k < 10; k++) this.dot(x, y, 0x7ff5ff, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, 0.25, 0.06, 0, 4); } break;
+      case 'shoot': if (e.kind === 'bolt') { this.kick(0.06); for (let k = 0; k < 10; k++) this.dot(x, y, 0x7ff5ff, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, 0.25, 0.06, 0, 4); } break;
       case 'chest-spawn': this.ring(x, y, 0xffe08a, 0.9, 0.4); for (let k = 0; k < 14; k++) this.dot(x + (Math.random() - 0.5) * 0.6, y - 0.3, 0xffe08a, (Math.random() - 0.5) * 1.2, 1 + Math.random() * 2.5, 0.6, 0.05, -1, 1); break;
       case 'chest-open': {
         const special = e.reward?.find(k => k !== 'normal');
@@ -129,6 +134,10 @@ export class Effects {
   update(realDt: number, gameDt: number, w: World) {
     this.shake = Math.max(0, this.shake - realDt * 0.9); this.slow = Math.max(0, this.slow - realDt);
     this.flash = Math.max(0, this.flash - realDt); this.hitstop = Math.max(0, this.hitstop - realDt);
+    // Ease in fast while the kill is fresh, ease out slowly after the slow-motion ends.
+    this.zoomHold = Math.max(0, this.zoomHold - realDt);
+    this.zoom += ((this.zoomHold > 0 ? 1 : 0) - this.zoom) * Math.min(1, realDt * (this.zoomHold > 0 ? 9 : 3));
+    if (this.zoom < 0.001) this.zoom = 0;
     const dt = gameDt > 0 ? Math.max(gameDt, realDt * 0.3) : 0;
     for (let n = 0; n < DOTS; n++) {
       if (this.dLife[n] <= 0) continue;
