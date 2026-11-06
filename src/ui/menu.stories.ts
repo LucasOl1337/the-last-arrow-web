@@ -1,0 +1,15 @@
+import type { Meta, StoryObj } from '@storybook/html-vite';
+import { Menu } from './menu.ts';
+import type { Screen } from './menu.ts';
+const meta = { title: 'Arena/Menu real', render: (args: { screen: Screen }) => {
+  let muted = false;
+  const menu = new Menu({ start: () => menu.show('pause'), resume: () => menu.show('menu'), rematch: () => menu.show('menu'), home: () => menu.show('menu'), mute: () => (muted = !muted) });
+  menu.show(args.screen, 'Stormdragon'); return menu.element;
+}, args: { screen: 'menu' as Screen } } satisfies Meta<{ screen: Screen }>;
+export default meta;
+type Story = StoryObj<{ screen: Screen }>;
+export const Configuracao: Story = { args: { screen: 'menu' } };
+export const Controles: Story = { args: { screen: 'controls' } };
+export const Pausa: Story = { args: { screen: 'pause' } };
+export const Vitoria: Story = { args: { screen: 'victory' } };
+export const ErroGrafico: Story = { args: { screen: 'error' } };
