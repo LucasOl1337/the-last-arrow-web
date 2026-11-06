@@ -3,7 +3,21 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "scripts": { "dev": "vite", "build": "tsc --noEmit && vite build", "preview": "vite preview" },
-  "dependencies": { "three": "^0.187.0" },
-  "devDependencies": { "@types/three": "^0.187.0", "typescript": "^7.0.2", "vite": "^8.3.6" }
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@storybook/html-vite": "^10.6.6",
+    "@types/node": "^26.6.6",
+    "@types/three": "^0.187.0",
+    "playwright-core": "^1.65.0",
+    "storybook": "^10.6.6",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.6"
+  }
 }
