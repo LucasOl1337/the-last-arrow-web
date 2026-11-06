@@ -17,19 +17,20 @@ const RUN_SPEED = 7.8;
 const RUN_CLIP_SPEED = 1.95;
 const FADE = 0.12;
 const GHOSTS = 3;
-/** Which GLB and which cloth tint each character uses. Kaze = Mizu in green, Akane = Storm in red. */
-const LOOKS: { kit: keyof CharacterKits; tint?: number; rim: number }[] = [
-  { kit: 'mizu', rim: 0x8fb8ff },
-  { kit: 'storm', rim: 0x8ff4ff },
-  { kit: 'mizu', tint: 0x4f9a52, rim: 0xb6f0a0 },
-  { kit: 'storm', tint: 0xc4413f, rim: 0xffa29a },
+/** Each character has its own GLB; tint only applies when falling back to a sibling model. */
+const LOOKS: { kit: keyof CharacterKits; fallback: keyof CharacterKits; tint: number; rim: number }[] = [
+  { kit: 'mizu', fallback: 'kaze', tint: 0x3a5f9c, rim: 0x8fb8ff },
+  { kit: 'storm', fallback: 'akane', tint: 0x9ed8ec, rim: 0x8ff4ff },
+  { kit: 'kaze', fallback: 'mizu', tint: 0x4f9a52, rim: 0xb6f0a0 },
+  { kit: 'akane', fallback: 'storm', tint: 0xc4413f, rim: 0xffa29a },
 ];
 /** Clip windows (seconds). `hold` stops at `end`; `loop` wraps inside the window. */
 const WINDOWS: Record<ClipName | 'death', { clip: ClipName; start: number; end: number; mode: 'loop' | 'hold' }> = {
   idle: { clip: 'idle', start: 0, end: 15.3, mode: 'loop' },
   run: { clip: 'run', start: 0, end: 1.25, mode: 'loop' },
   jump: { clip: 'jump', start: 0.12, end: 0.3, mode: 'hold' },
-  fall: { clip: 'fall', start: 0.1, end: 0.85, mode: 'hold' },
+  // The fall clip turns the body toward the camera; the descending half of a jump keeps the profile.
+  fall: { clip: 'jump', start: 0.3, end: 0.38, mode: 'hold' },
   // Shoot: crouch into the draw, then hold the drawn-string pose while charging.
   shoot: { clip: 'shoot', start: 1.05, end: 2.1, mode: 'hold' },
   victory: { clip: 'victory', start: 0, end: 5.6, mode: 'loop' },
@@ -95,15 +96,15 @@ export class FightersView {
     for (const mesh of [v.shadow, v.halo, v.aimLine]) (mesh.material as THREE.Material).dispose();
     v.nock.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) { m.geometry.dispose(); (m.material as THREE.Material).dispose(); } });
   }
-  private buildRig(kit: ModelKit, character: number, pivot: THREE.Group): Rig {
+  private buildRig(kit: ModelKit, character: number, pivot: THREE.Group, tinted: boolean): Rig {
     const look = LOOKS[character];
     const model = instantiate(kit);
     const scale = VISUAL_HEIGHT / kit.height; model.scale.setScalar(scale);
     const uniforms: CharacterUniforms[] = [];
     const skinned: THREE.SkinnedMesh[] = [];
-    model.traverse(o => { const m = o as THREE.SkinnedMesh; if (m.isMesh) { uniforms.push(patchCharacterMaterial(m.material as THREE.MeshStandardMaterial, look.rim, look.tint)); if (m.isSkinnedMesh) skinned.push(m); } });
-    const outlineColor = new THREE.Color(CHARACTERS[character].color).multiplyScalar(0.18);
-    const outlines = skinned.map(m => addOutline(m, outlineColor, 0.011).material);
+    model.traverse(o => { const m = o as THREE.SkinnedMesh; if (m.isMesh) { uniforms.push(patchCharacterMaterial(m.material as THREE.MeshStandardMaterial, look.rim, tinted ? look.tint : undefined)); if (m.isSkinnedMesh) skinned.push(m); } });
+    const outlineColor = new THREE.Color(CHARACTERS[character].color).multiplyScalar(0.08);
+    const outlines = skinned.map(m => addOutline(m, outlineColor, 0.008).material);
     pivot.add(model);
     const mixer = new THREE.AnimationMixer(model);
     const actions = Object.fromEntries((Object.keys(kit.clips) as ClipName[]).map(name => [name, mixer.clipAction(kit.clips[name])])) as Record<ClipName, THREE.AnimationAction>;
@@ -123,9 +124,9 @@ export class FightersView {
     const color = CHARACTERS[f.character].color;
     const root = new THREE.Group(), pivot = new THREE.Group(); root.add(pivot); this.scene.add(root);
     let rig: Rig | null = null, puppet: ProceduralPuppet | null = null;
-    const kit = this.kits?.[LOOKS[f.character].kit];
+    const look = LOOKS[f.character], own = this.kits?.[look.kit], kit = own ?? this.kits?.[look.fallback];
     if (kit) {
-      try { rig = this.buildRig(kit, f.character, pivot); rig.ghosts.forEach(g => this.scene.add(g.model)); }
+      try { rig = this.buildRig(kit, f.character, pivot, !own); rig.ghosts.forEach(g => this.scene.add(g.model)); }
       catch (error) { console.warn('Falha ao montar personagem 3D', error); rig = null; }
     }
     if (!rig) { puppet = new ProceduralPuppet(f.character); pivot.add(puppet.root); }
@@ -178,7 +179,7 @@ export class FightersView {
       // Facing: +X at yaw≈0, turning through the camera so the face shows during the turn.
       const face = f.charging && f.aimX !== 0 ? Math.sign(f.aimX) : f.facing;
       const targetYaw = face > 0 ? -0.35 : -Math.PI + 0.35;
-      v.yaw += (targetYaw - v.yaw) * Math.min(1, dt * 16);
+      v.yaw += (targetYaw - v.yaw) * Math.min(1, dt * 24);
       v.pivot.rotation.y = v.yaw;
       // Landing dust.
       if (f.alive && f.grounded && !v.wasGrounded && v.lastVy > 6) this.onLand?.(x, y + HALF_H, Math.min(1, v.lastVy / 19));
@@ -234,7 +235,7 @@ export class FightersView {
     v.root.rotation.z = f.alive ? 0 : -Math.min(dying * 2.2, 0.9) * (f.facing > 0 ? 1 : -1);
     const flash = f.alive ? 0 : Math.max(0, 1 - dying * 9);
     const protect = f.alive && f.invulnerable > 0 ? 0.35 + Math.sin(performance.now() * 0.02) * 0.25 : 0;
-    for (const u of rig.uniforms) { u.uDissolve.value = dissolve; u.uFlash.value = flash; u.uRimStrength.value = 0.7 + protect; }
+    for (const u of rig.uniforms) { u.uDissolve.value = dissolve; u.uFlash.value = flash; u.uRimStrength.value = 0.32 + protect; }
     for (const m of rig.outlines) m.visible = f.alive;
     // Dash afterimages: snapshot the pose into a pooled ghost every 30 ms while dashing.
     v.ghostClock -= dt;

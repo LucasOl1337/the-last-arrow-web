@@ -7,7 +7,8 @@ import { asset } from '../paths.ts';
 /** Clip names used by the renderer. Each model gets every one (Storm has no victory: idle stands in). */
 export type ClipName = 'idle' | 'run' | 'jump' | 'shoot' | 'fall' | 'victory';
 export interface ModelKit { template: THREE.Object3D; clips: Record<ClipName, THREE.AnimationClip>; height: number }
-export interface CharacterKits { mizu: ModelKit; storm: ModelKit }
+/** One kit per character id; null when that model failed (renderer picks a fallback). */
+export type CharacterKits = Record<'mizu' | 'storm' | 'kaze' | 'akane', ModelKit | null>;
 
 const HIPS = 'mixamorigHips';
 
@@ -36,34 +37,48 @@ function prepareTemplate(scene: THREE.Object3D) {
   });
 }
 
+const SOURCES: Record<keyof CharacterKits, { model: string; anims: string[] }> = {
+  mizu: { model: 'mizu.glb', anims: ['mizu_anims.glb', 'mizu_run.glb'] },
+  storm: { model: 'storm.glb', anims: ['storm_anims.glb'] },
+  kaze: { model: 'kaze.glb', anims: ['kaze_anims.glb'] },
+  akane: { model: 'akane.glb', anims: ['akane_anims.glb'] },
+};
+function buildKit(model: THREE.Object3D, sources: THREE.AnimationClip[]): ModelKit {
+  prepareTemplate(model);
+  const hips = model.getObjectByName(HIPS);
+  if (!hips) throw new Error('Esqueleto sem mixamorig:Hips');
+  const rest = hips.position.clone();
+  const find = (name: string) => sources.find(c => c.name === name);
+  const pick = (name: string, fallback?: string) => {
+    const clip = find(name) ?? (fallback ? find(fallback) : undefined);
+    if (!clip) throw new Error(`Clip ausente: ${name}`);
+    return pinRoot(clip, rest, name);
+  };
+  const box = new THREE.Box3().setFromObject(model);
+  return {
+    template: model, height: box.max.y - box.min.y,
+    clips: { idle: pick('idle'), run: pick('run'), jump: pick('jump'), shoot: pick('shoot'), fall: pick('fall'), victory: pick('victory_celebration', 'idle') },
+  };
+}
 let pending: Promise<CharacterKits> | null = null;
+/** Loads the four characters independently; a broken file only affects its own character. */
 export function loadCharacterKits(): Promise<CharacterKits> {
   pending ??= (async () => {
     const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
     const load = (file: string) => loader.loadAsync(asset(`models/${file}`));
-    const [mizu, mizuAnims, mizuRun, storm, stormAnims] = await Promise.all(
-      ['mizu.glb', 'mizu_anims.glb', 'mizu_run.glb', 'storm.glb', 'storm_anims.glb'].map(load));
-    const kit = (model: typeof mizu, sources: THREE.AnimationClip[]): ModelKit => {
-      const template = model.scene; prepareTemplate(template);
-      const hips = template.getObjectByName(HIPS);
-      if (!hips) throw new Error('Esqueleto sem mixamorig:Hips');
-      const rest = hips.position.clone();
-      const find = (name: string) => sources.find(c => c.name === name);
-      const pick = (name: string, fallback?: string) => {
-        const clip = find(name) ?? (fallback ? find(fallback) : undefined);
-        if (!clip) throw new Error(`Clip ausente: ${name}`);
-        return pinRoot(clip, rest, name);
-      };
-      const box = new THREE.Box3().setFromObject(template);
-      return {
-        template, height: box.max.y - box.min.y,
-        clips: { idle: pick('idle'), run: pick('run'), jump: pick('jump'), shoot: pick('shoot'), fall: pick('fall'), victory: pick('victory_celebration', 'idle') },
-      };
-    };
-    return {
-      mizu: kit(mizu, [...mizuAnims.animations, ...mizuRun.animations]),
-      storm: kit(storm, stormAnims.animations),
-    };
+    const names = Object.keys(SOURCES) as (keyof CharacterKits)[];
+    const results = await Promise.allSettled(names.map(async name => {
+      const src = SOURCES[name];
+      const [model, ...anims] = await Promise.all([src.model, ...src.anims].map(load));
+      return buildKit(model.scene, anims.flatMap(a => a.animations));
+    }));
+    const kits = {} as CharacterKits;
+    results.forEach((r, i) => {
+      kits[names[i]] = r.status === 'fulfilled' ? r.value : null;
+      if (r.status === 'rejected') console.warn(`Modelo ${names[i]} indisponível`, r.reason);
+    });
+    if (names.every(n => !kits[n])) throw new Error('Nenhum modelo 3D carregou');
+    return kits;
   })();
   return pending;
 }

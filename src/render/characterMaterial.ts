@@ -37,7 +37,7 @@ float tlaNoise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0
   if (tlaN < uDissolve) discard;
 #endif`)
       .replace('#include <opaque_fragment>', `
-  float tlaFres = pow(1.0 - clamp(dot(normal, normalize(vViewPosition)), 0.0, 1.0), 2.4);
+  float tlaFres = pow(1.0 - clamp(dot(normal, normalize(vViewPosition)), 0.0, 1.0), 3.0);
   outgoingLight += uRim * tlaFres * uRimStrength;
   outgoingLight = mix(outgoingLight, vec3(1.0), uFlash);
 #ifdef USE_MAP
@@ -54,7 +54,8 @@ float tlaNoise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0
  * One extra skinned draw per fighter; keeps silhouettes readable over busy painted backgrounds.
  */
 export function addOutline(mesh: THREE.SkinnedMesh, color: THREE.ColorRepresentation, thickness: number) {
-  const material = new THREE.MeshBasicMaterial({ color, side: THREE.BackSide });
+  // Depth offset keeps the hull behind thin cloth layers (otherwise it speckles through capes/coats).
+  const material = new THREE.MeshBasicMaterial({ color, side: THREE.BackSide, polygonOffset: true, polygonOffsetFactor: 6, polygonOffsetUnits: 6 });
   const uniforms = { uThickness: { value: thickness }, uOpacity: { value: 1 } };
   material.customProgramCacheKey = () => 'tla-outline';
   material.onBeforeCompile = shader => {
