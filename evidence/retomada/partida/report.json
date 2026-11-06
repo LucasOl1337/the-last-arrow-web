@@ -1,0 +1,808 @@
+{
+  "errors": [
+    {
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT",
+      "location": {
+        "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "blocked": [
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "error": "net::ERR_BLOCKED_BY_CLIENT"
+    }
+  ],
+  "http": [],
+  "rounds": [
+    {
+      "round": 1,
+      "elapsed": 0.002,
+      "score": [
+        0,
+        0
+      ]
+    },
+    {
+      "round": 2,
+      "elapsed": 4.954,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "round": 3,
+      "elapsed": 18.828,
+      "score": [
+        0,
+        2
+      ]
+    },
+    {
+      "round": 4,
+      "elapsed": 23.585,
+      "score": [
+        0,
+        3
+      ]
+    },
+    {
+      "round": 5,
+      "elapsed": 29.159,
+      "score": [
+        0,
+        4
+      ]
+    },
+    {
+      "round": 6,
+      "elapsed": 37.777,
+      "score": [
+        1,
+        4
+      ]
+    },
+    {
+      "round": 7,
+      "elapsed": 46.088,
+      "score": [
+        2,
+        4
+      ]
+    },
+    {
+      "round": 8,
+      "elapsed": 51.152,
+      "score": [
+        3,
+        4
+      ]
+    },
+    {
+      "round": 9,
+      "elapsed": 56.719,
+      "score": [
+        4,
+        4
+      ]
+    }
+  ],
+  "start": "2026-11-06T19:05:48.045Z",
+  "room": "155F852D",
+  "final": {
+    "tick": 7809,
+    "phase": "matchover",
+    "countdown": 0,
+    "round": 9,
+    "roundTime": 6.033333333333423,
+    "winner": 1,
+    "mode": "versus",
+    "matchTime": 39.80833333333172,
+    "chests": [],
+    "chestTimer": 5.966666666666793,
+    "map": "moss",
+    "seed": 2695137264,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": true,
+        "x": 30.149027777777846,
+        "y": 15.314722222222223,
+        "vx": 7.8,
+        "vy": -16.233333333333334,
+        "alive": false,
+        "respawnAt": null,
+        "ammo": 0,
+        "score": 4,
+        "kills": 4,
+        "grounded": false,
+        "invulnerable": 0,
+        "inventory": []
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": true,
+        "x": 3.0002083333331484,
+        "y": 15.314722222222223,
+        "vx": -7.8,
+        "vy": -16.233333333333334,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 1,
+        "score": 5,
+        "kills": 5,
+        "grounded": false,
+        "invulnerable": 0,
+        "inventory": [
+          "normal"
+        ]
+      }
+    ],
+    "arrows": [
+      {
+        "id": 55,
+        "owner": 0,
+        "x": 17.910833333332192,
+        "y": 8.328784722222203,
+        "vx": 0,
+        "vy": 0,
+        "angle": 0.4092128278739699,
+        "stuck": true,
+        "age": 2.941666666666659,
+        "kind": "normal"
+      },
+      {
+        "id": 56,
+        "owner": 1,
+        "x": 14.080902777778718,
+        "y": 8.2459722222222,
+        "vx": 0,
+        "vy": 0,
+        "angle": 2.7337529557654263,
+        "stuck": true,
+        "age": 2.941666666666659,
+        "kind": "normal"
+      },
+      {
+        "id": 60,
+        "owner": 0,
+        "x": 2.4404861111110705,
+        "y": 15.53625000000001,
+        "vx": 23,
+        "vy": 0.8624999999999997,
+        "angle": 0.03748243669166147,
+        "stuck": false,
+        "age": 0.19166666666666665,
+        "kind": "normal"
+      },
+      {
+        "id": 61,
+        "owner": 0,
+        "x": 29.929027777777847,
+        "y": 15.714722222222223,
+        "vx": 0,
+        "vy": 0,
+        "angle": 0.5,
+        "stuck": true,
+        "age": 0,
+        "kind": "normal"
+      }
+    ],
+    "events": [
+      {
+        "type": "jump",
+        "x": 30.084027777777848,
+        "y": 16.000000000000004,
+        "actor": 0
+      },
+      {
+        "type": "jump",
+        "x": 3.065208333333146,
+        "y": 16.000000000000004,
+        "actor": 1
+      },
+      {
+        "type": "kill",
+        "x": 30.149027777777846,
+        "y": 15.314722222222223,
+        "actor": 1,
+        "target": 0,
+        "cause": "arrow"
+      },
+      {
+        "type": "victory",
+        "x": 16,
+        "y": 9,
+        "actor": 1
+      }
+    ],
+    "paused": false,
+    "timeScale": 1,
+    "online": {
+      "room": "155F852D",
+      "player": 0
+    },
+    "cameraClose": true
+  },
+  "peerFinal": {
+    "level": {
+      "id": "moss",
+      "name": "Ruínas do Musgo",
+      "rows": [
+        "................................",
+        "................................",
+        "................................",
+        ".............######.............",
+        "................................",
+        "....#####..............#####....",
+        "................................",
+        "................................",
+        "..........####....####..........",
+        "................................",
+        "###..........................###",
+        "................................",
+        ".....######..........######.....",
+        "................................",
+        "..............####..............",
+        "................................",
+        "##########............##########",
+        "................................"
+      ],
+      "platforms": [
+        {
+          "id": 0,
+          "left": 13,
+          "right": 19,
+          "y": 3,
+          "links": [
+            1,
+            2,
+            3,
+            4,
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "id": 1,
+          "left": 4,
+          "right": 9,
+          "y": 5,
+          "links": [
+            0,
+            3,
+            5,
+            6,
+            7,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "id": 2,
+          "left": 23,
+          "right": 28,
+          "y": 5,
+          "links": [
+            0,
+            4,
+            5,
+            6,
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "id": 3,
+          "left": 10,
+          "right": 14,
+          "y": 8,
+          "links": [
+            1,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        {
+          "id": 4,
+          "left": 18,
+          "right": 22,
+          "y": 8,
+          "links": [
+            2,
+            3,
+            6,
+            7,
+            8,
+            9,
+            11
+          ]
+        },
+        {
+          "id": 5,
+          "left": 0,
+          "right": 3,
+          "y": 10,
+          "links": [
+            3,
+            6,
+            7,
+            8,
+            10,
+            11
+          ]
+        },
+        {
+          "id": 6,
+          "left": 29,
+          "right": 32,
+          "y": 10,
+          "links": [
+            4,
+            5,
+            7,
+            8,
+            10,
+            11
+          ]
+        },
+        {
+          "id": 7,
+          "left": 5,
+          "right": 11,
+          "y": 12,
+          "links": [
+            3,
+            4,
+            5,
+            6,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "id": 8,
+          "left": 21,
+          "right": 27,
+          "y": 12,
+          "links": [
+            3,
+            4,
+            5,
+            6,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "id": 9,
+          "left": 14,
+          "right": 18,
+          "y": 14,
+          "links": [
+            7,
+            8,
+            10,
+            11
+          ]
+        },
+        {
+          "id": 10,
+          "left": 0,
+          "right": 10,
+          "y": 16,
+          "links": [
+            0,
+            7,
+            8,
+            9,
+            11
+          ]
+        },
+        {
+          "id": 11,
+          "left": 22,
+          "right": 32,
+          "y": 16,
+          "links": [
+            0,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "spawns": [
+        {
+          "x": 5,
+          "y": 15.44
+        },
+        {
+          "x": 27,
+          "y": 15.44
+        },
+        {
+          "x": 12,
+          "y": 7.4399999999999995
+        },
+        {
+          "x": 20,
+          "y": 7.4399999999999995
+        }
+      ]
+    },
+    "options": {
+      "humans": 2,
+      "bots": 0,
+      "map": "moss",
+      "mode": "versus",
+      "difficulty": "normal",
+      "characters": [
+        "mizu",
+        "stormdragon",
+        "kaze",
+        "akane"
+      ],
+      "seed": 2695137264
+    },
+    "fighters": [
+      {
+        "id": 0,
+        "character": 0,
+        "human": true,
+        "x": 30.149027777777846,
+        "y": 15.314722222222223,
+        "prevX": 30.084027777777848,
+        "prevY": 15.450000000000003,
+        "vx": 7.8,
+        "vy": -16.233333333333334,
+        "facing": 1,
+        "aimX": 1,
+        "aimY": 0,
+        "alive": false,
+        "ammo": 0,
+        "grounded": false,
+        "wall": 0,
+        "coyote": 0,
+        "jumpBuffer": 0,
+        "dashTime": 0,
+        "dashCooldown": 0,
+        "invulnerable": 0,
+        "wallLock": 0,
+        "charging": false,
+        "charge": 0.3250000000000002,
+        "shotCooldown": 0.01666666666666672,
+        "score": 4,
+        "kills": 4,
+        "respawnAt": null,
+        "intent": {
+          "moveX": 0,
+          "moveY": 0,
+          "jump": false,
+          "jumpHeld": false,
+          "shoot": false,
+          "shootHeld": false,
+          "dash": false
+        },
+        "brain": {
+          "intent": {
+            "moveX": 0,
+            "moveY": 0,
+            "jump": false,
+            "jumpHeld": false,
+            "shoot": false,
+            "shootHeld": false,
+            "dash": false
+          },
+          "reaction": 0,
+          "target": -1,
+          "aimError": 0,
+          "shootTimer": 0.3,
+          "hold": 0,
+          "jumpHold": 0,
+          "stuck": 0,
+          "lastX": 0,
+          "lastY": 0,
+          "navigation": 0,
+          "waypointX": 0,
+          "waypointY": 0,
+          "escape": 0,
+          "planTime": 0,
+          "patrol": -1,
+          "travelled": 0,
+          "shots": 0,
+          "ready": false,
+          "threatId": -1,
+          "threatTime": 0,
+          "drawX": 1,
+          "drawY": 0
+        },
+        "inventory": []
+      },
+      {
+        "id": 1,
+        "character": 1,
+        "human": true,
+        "x": 3.0002083333331484,
+        "y": 15.314722222222223,
+        "prevX": 3.065208333333146,
+        "prevY": 15.450000000000003,
+        "vx": -7.8,
+        "vy": -16.233333333333334,
+        "facing": -1,
+        "aimX": -1,
+        "aimY": 0,
+        "alive": true,
+        "ammo": 1,
+        "grounded": false,
+        "wall": 0,
+        "coyote": 0,
+        "jumpBuffer": 0,
+        "dashTime": 0,
+        "dashCooldown": 0,
+        "invulnerable": 0,
+        "wallLock": 0,
+        "charging": false,
+        "charge": 0.30833333333333346,
+        "shotCooldown": 5.204170427930421e-17,
+        "score": 5,
+        "kills": 5,
+        "respawnAt": null,
+        "intent": {
+          "moveX": 0,
+          "moveY": 0,
+          "jump": false,
+          "jumpHeld": false,
+          "shoot": false,
+          "shootHeld": false,
+          "dash": false
+        },
+        "brain": {
+          "intent": {
+            "moveX": 0,
+            "moveY": 0,
+            "jump": false,
+            "jumpHeld": false,
+            "shoot": false,
+            "shootHeld": false,
+            "dash": false
+          },
+          "reaction": 0,
+          "target": -1,
+          "aimError": 0,
+          "shootTimer": 0.3,
+          "hold": 0,
+          "jumpHold": 0,
+          "stuck": 0,
+          "lastX": 0,
+          "lastY": 0,
+          "navigation": 0,
+          "waypointX": 0,
+          "waypointY": 0,
+          "escape": 0,
+          "planTime": 0,
+          "patrol": -1,
+          "travelled": 0,
+          "shots": 0,
+          "ready": false,
+          "threatId": -1,
+          "threatTime": 0,
+          "drawX": 1,
+          "drawY": 0
+        },
+        "inventory": [
+          "normal"
+        ]
+      }
+    ],
+    "arrows": [
+      {
+        "id": 55,
+        "owner": 0,
+        "x": 17.910833333332192,
+        "y": 8.328784722222203,
+        "vx": 0,
+        "vy": 0,
+        "angle": 0.4092128278739699,
+        "stuck": true,
+        "age": 2.941666666666659,
+        "kind": "normal"
+      },
+      {
+        "id": 56,
+        "owner": 1,
+        "x": 14.080902777778718,
+        "y": 8.2459722222222,
+        "vx": 0,
+        "vy": 0,
+        "angle": 2.7337529557654263,
+        "stuck": true,
+        "age": 2.941666666666659,
+        "kind": "normal"
+      },
+      {
+        "id": 60,
+        "owner": 0,
+        "x": 2.4404861111110705,
+        "y": 15.53625000000001,
+        "vx": 23,
+        "vy": 0.8624999999999997,
+        "angle": 0.03748243669166147,
+        "stuck": false,
+        "age": 0.19166666666666665,
+        "kind": "normal"
+      },
+      {
+        "id": 61,
+        "owner": 0,
+        "x": 29.929027777777847,
+        "y": 15.714722222222223,
+        "vx": 0,
+        "vy": 0,
+        "angle": 0.5,
+        "stuck": true,
+        "age": 0,
+        "kind": "normal"
+      }
+    ],
+    "events": [
+      {
+        "type": "jump",
+        "x": 30.084027777777848,
+        "y": 16.000000000000004,
+        "actor": 0
+      },
+      {
+        "type": "jump",
+        "x": 3.065208333333146,
+        "y": 16.000000000000004,
+        "actor": 1
+      },
+      {
+        "type": "kill",
+        "x": 30.149027777777846,
+        "y": 15.314722222222223,
+        "actor": 1,
+        "target": 0,
+        "cause": "arrow"
+      },
+      {
+        "type": "victory",
+        "x": 16,
+        "y": 9,
+        "actor": 1
+      }
+    ],
+    "phase": "matchover",
+    "phaseTime": 0,
+    "roundTime": 6.033333333333423,
+    "matchTime": 39.80833333333172,
+    "tick": 7809,
+    "round": 9,
+    "winner": 1,
+    "nextArrowId": 62,
+    "rng": 2695137264,
+    "nextChestId": 1,
+    "countdown": 0,
+    "chests": [],
+    "chestTimer": 5.966666666666793
+  },
+  "rematch": {
+    "tick": 146,
+    "phase": "playing",
+    "countdown": 0,
+    "round": 1,
+    "roundTime": 0.016666666666666666,
+    "winner": null,
+    "mode": "versus",
+    "matchTime": 0.016666666666666666,
+    "chests": [],
+    "chestTimer": 11.983333333333334,
+    "map": "moss",
+    "seed": 2307513531,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": true,
+        "x": 5,
+        "y": 15.446666666666665,
+        "vx": 0,
+        "vy": 0.5333333333333333,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": false,
+        "invulnerable": 0.9833333333333334,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": true,
+        "x": 27,
+        "y": 15.446666666666665,
+        "vx": 0,
+        "vy": 0.5333333333333333,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": false,
+        "invulnerable": 0.9833333333333334,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      }
+    ],
+    "arrows": [],
+    "events": [],
+    "paused": false,
+    "timeScale": 1,
+    "online": {
+      "room": "155F852D",
+      "player": 0
+    },
+    "cameraClose": true
+  },
+  "disconnect": "O outro jogador saiu. Crie uma nova sala para jogar de novo.",
+  "diagnostics": {
+    "frames": 93,
+    "fps": 49.276744555714465,
+    "averageFrameWorkMs": 0.5741935486114154,
+    "maxFrameWorkMs": 1.6000000014901161,
+    "quality": {
+      "level": "low",
+      "detectedFps": 46.019100400811546,
+      "sampleSeconds": 0,
+      "sampleFrames": 0,
+      "decided": true,
+      "bloom": false,
+      "pixelRatio": 0.7,
+      "particles": {
+        "dots": 150,
+        "leaves": 40
+      }
+    },
+    "drawCalls": 43,
+    "triangles": 203741,
+    "geometries": 36,
+    "textures": 20,
+    "programs": 47,
+    "models": true,
+    "modelError": null,
+    "audioFailures": [],
+    "renderer": "WebKit WebGL"
+  },
+  "end": "2026-11-06T19:06:58.299Z",
+  "ownPagesAtEnd": 0
+}

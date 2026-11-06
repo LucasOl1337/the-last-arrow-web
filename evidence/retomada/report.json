@@ -1,0 +1,296 @@
+{
+  "errors": [],
+  "screens": [
+    {
+      "width": 1366,
+      "height": 768,
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    {
+      "width": 900,
+      "height": 1000,
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 247,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.821,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  ],
+  "events": [],
+  "url": "http://127.0.0.1:4176/the-last-arrow-web/",
+  "cameraClose": true,
+  "room": "5CE81C32",
+  "playerTwoStart": {
+    "tick": 224,
+    "phase": "playing",
+    "countdown": 0,
+    "round": 1,
+    "roundTime": 0.6666666666666667,
+    "winner": null,
+    "mode": "versus",
+    "matchTime": 0.6666666666666667,
+    "chests": [],
+    "chestTimer": 11.333333333333371,
+    "map": "moss",
+    "seed": 257474596,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": true,
+        "x": 5,
+        "y": 15.450000000000003,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": true,
+        "invulnerable": 0.3333333333333346,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": true,
+        "x": 27,
+        "y": 15.450000000000003,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": true,
+        "invulnerable": 0.3333333333333346,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      }
+    ],
+    "arrows": [],
+    "events": [],
+    "paused": false,
+    "timeScale": 1,
+    "online": {
+      "room": "5CE81C32",
+      "player": 1
+    },
+    "cameraClose": true
+  },
+  "playerTwoAfter": {
+    "tick": 297,
+    "phase": "playing",
+    "countdown": 0,
+    "round": 1,
+    "roundTime": 1.274999999999998,
+    "winner": null,
+    "mode": "versus",
+    "matchTime": 1.274999999999998,
+    "chests": [],
+    "chestTimer": 10.725000000000072,
+    "map": "moss",
+    "seed": 257474596,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": true,
+        "x": 5,
+        "y": 15.450000000000003,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": true,
+        "invulnerable": 0,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": true,
+        "x": 24.186388888888942,
+        "y": 14.930000000000007,
+        "vx": 0,
+        "vy": 0.933333333333332,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 2,
+        "score": 0,
+        "kills": 0,
+        "grounded": false,
+        "invulnerable": 0,
+        "inventory": [
+          "normal",
+          "normal"
+        ]
+      }
+    ],
+    "arrows": [
+      {
+        "id": 1,
+        "owner": 1,
+        "x": 19.426388888889036,
+        "y": 15.511909722222228,
+        "vx": -23,
+        "vy": 0.9749999999999996,
+        "angle": 3.099226714610137,
+        "stuck": false,
+        "age": 0.21666666666666665,
+        "kind": "normal"
+      }
+    ],
+    "events": [],
+    "paused": false,
+    "timeScale": 1,
+    "online": {
+      "room": "5CE81C32",
+      "player": 1
+    },
+    "cameraClose": true
+  },
+  "playerOne": {
+    "tick": 509,
+    "phase": "playing",
+    "countdown": 0,
+    "round": 1,
+    "roundTime": 3.0416666666666585,
+    "winner": null,
+    "mode": "versus",
+    "matchTime": 3.0416666666666585,
+    "chests": [],
+    "chestTimer": 8.958333333333506,
+    "map": "moss",
+    "seed": 257474596,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": true,
+        "x": 11.367152777777605,
+        "y": 2.072222222222237,
+        "vx": 0,
+        "vy": 17.066666666666684,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": false,
+        "invulnerable": 0,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": true,
+        "x": 24.186388888888942,
+        "y": 15.450000000000003,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 2,
+        "score": 0,
+        "kills": 0,
+        "grounded": true,
+        "invulnerable": 0,
+        "inventory": [
+          "normal",
+          "normal"
+        ]
+      }
+    ],
+    "arrows": [
+      {
+        "id": 2,
+        "owner": 0,
+        "x": 21.96326388888849,
+        "y": 16.046562500000007,
+        "vx": 23,
+        "vy": 2.1375000000000024,
+        "angle": 0.0926686052868601,
+        "stuck": false,
+        "age": 0.47500000000000064,
+        "kind": "normal"
+      }
+    ],
+    "events": [],
+    "paused": false,
+    "timeScale": 1,
+    "online": {
+      "room": "5CE81C32",
+      "player": 0
+    },
+    "cameraClose": true
+  },
+  "failure": "locator.innerText: Error: strict mode violation: getByRole('status') resolved to 2 elements:\n    1) <div role=\"status\" class=\"quality-notice\">Modo leve · ajuste automático</div> aka getByText('Modo leve · ajuste automático')\n    2) <p role=\"status\">Conexão encerrada. Volte a criar ou entrar numa s…</p> aka getByText('Conexão encerrada. Volte a')\n\nCall log:\n\u001b[2m  - waiting for getByRole('status')\u001b[22m\n\n    at /home/lol/Projects/the-last-arrow-web-wt/rodada-astra/scripts/proof-retomada.mjs:42:137",
+  "ownPagesAtEnd": 0
+}

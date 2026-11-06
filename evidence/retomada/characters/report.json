@@ -1,0 +1,21 @@
+{
+  "options": {
+    "humans": 2,
+    "bots": 0,
+    "map": "moss",
+    "mode": "versus",
+    "difficulty": "normal",
+    "characters": [
+      "akane",
+      "kaze",
+      "kaze",
+      "akane"
+    ],
+    "seed": 2443599624
+  },
+  "revision": {
+    "revision": "f71fa194d30ac10468b28c93b271419f1865ce8f"
+  },
+  "pass": true,
+  "ownPagesAtEnd": 0
+}

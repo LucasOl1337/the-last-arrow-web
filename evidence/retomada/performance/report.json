@@ -1,0 +1,139 @@
+{
+  "samples": [
+    {
+      "close": false,
+      "fps": 47.85838723242356,
+      "frames": 240,
+      "diagnostics": {
+        "frames": 197,
+        "fps": 41.38568517468117,
+        "averageFrameWorkMs": 2.102538071270219,
+        "maxFrameWorkMs": 103.69999999925494,
+        "quality": {
+          "level": "low",
+          "detectedFps": 47.996041563582395,
+          "sampleSeconds": 2.0209999999999995,
+          "sampleFrames": 97,
+          "decided": true,
+          "bloom": false,
+          "pixelRatio": 0.7,
+          "particles": {
+            "dots": 150,
+            "leaves": 40
+          }
+        },
+        "drawCalls": 49,
+        "triangles": 372714,
+        "geometries": 36,
+        "textures": 24,
+        "programs": 52,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "close": false,
+      "fps": 46.65692144416188,
+      "frames": 234,
+      "diagnostics": {
+        "frames": 197,
+        "fps": 41.38568517468117,
+        "averageFrameWorkMs": 2.102538071270219,
+        "maxFrameWorkMs": 103.69999999925494,
+        "quality": {
+          "level": "low",
+          "detectedFps": 47.996041563582395,
+          "sampleSeconds": 2.0209999999999995,
+          "sampleFrames": 97,
+          "decided": true,
+          "bloom": false,
+          "pixelRatio": 0.7,
+          "particles": {
+            "dots": 150,
+            "leaves": 40
+          }
+        },
+        "drawCalls": 49,
+        "triangles": 372714,
+        "geometries": 36,
+        "textures": 24,
+        "programs": 52,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "close": true,
+      "fps": 49.69464734762303,
+      "frames": 250,
+      "diagnostics": {
+        "frames": 197,
+        "fps": 41.38568517468117,
+        "averageFrameWorkMs": 2.102538071270219,
+        "maxFrameWorkMs": 103.69999999925494,
+        "quality": {
+          "level": "low",
+          "detectedFps": 47.996041563582395,
+          "sampleSeconds": 2.0209999999999995,
+          "sampleFrames": 97,
+          "decided": true,
+          "bloom": false,
+          "pixelRatio": 0.7,
+          "particles": {
+            "dots": 150,
+            "leaves": 40
+          }
+        },
+        "drawCalls": 48,
+        "triangles": 372712,
+        "geometries": 36,
+        "textures": 24,
+        "programs": 52,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "close": true,
+      "fps": 49.9283895607893,
+      "frames": 252,
+      "diagnostics": {
+        "frames": 197,
+        "fps": 41.38568517468117,
+        "averageFrameWorkMs": 2.102538071270219,
+        "maxFrameWorkMs": 103.69999999925494,
+        "quality": {
+          "level": "low",
+          "detectedFps": 47.996041563582395,
+          "sampleSeconds": 2.0209999999999995,
+          "sampleFrames": 97,
+          "decided": true,
+          "bloom": false,
+          "pixelRatio": 0.7,
+          "particles": {
+            "dots": 150,
+            "leaves": 40
+          }
+        },
+        "drawCalls": 48,
+        "triangles": 372712,
+        "geometries": 36,
+        "textures": 24,
+        "programs": 52,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  ],
+  "conditions": "One headed bench tab; 1366x768; same frozen simulation, animations active; no hidden/headless renderer.",
+  "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+  "ownPagesAtEnd": 0
+}

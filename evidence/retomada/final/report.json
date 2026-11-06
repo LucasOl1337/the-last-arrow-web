@@ -1,0 +1,114 @@
+{
+  "errors": [],
+  "blocked": [
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "error": "net::ERR_BLOCKED_BY_CLIENT"
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "error": "net::ERR_BLOCKED_BY_CLIENT"
+    }
+  ],
+  "http": [],
+  "invite": "https://arrow.symbiose.si/?room=9959F2AA",
+  "options": {
+    "humans": 2,
+    "bots": 0,
+    "map": "falls",
+    "mode": "headhunter",
+    "difficulty": "normal",
+    "characters": [
+      "mizu",
+      "stormdragon",
+      "kaze",
+      "akane"
+    ],
+    "seed": 1921096776
+  },
+  "state": {
+    "tick": 365,
+    "phase": "playing",
+    "countdown": 0,
+    "round": 1,
+    "roundTime": 1.8416666666666626,
+    "winner": null,
+    "mode": "headhunter",
+    "matchTime": 1.8416666666666626,
+    "chests": [],
+    "chestTimer": 10.158333333333438,
+    "map": "falls",
+    "seed": 1921096776,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": true,
+        "x": 4,
+        "y": 2.4499999999999993,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": true,
+        "invulnerable": 0,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": true,
+        "x": 24.29062500000009,
+        "y": 5.449999999999999,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 2,
+        "score": 0,
+        "kills": 0,
+        "grounded": true,
+        "invulnerable": 0,
+        "inventory": [
+          "normal",
+          "normal"
+        ]
+      }
+    ],
+    "arrows": [
+      {
+        "id": 1,
+        "owner": 1,
+        "x": 11.1450694444448,
+        "y": 3.4598958333333343,
+        "vx": -23,
+        "vy": 2.6250000000000036,
+        "angle": 3.027953926641083,
+        "stuck": false,
+        "age": 0.5833333333333337,
+        "kind": "normal"
+      }
+    ],
+    "events": [],
+    "paused": false,
+    "timeScale": 1,
+    "online": {
+      "room": "9959F2AA",
+      "player": 1
+    },
+    "cameraClose": true
+  },
+  "fps": {
+    "fps": 26.543727298127973,
+    "frames": 134
+  },
+  "exit": "menu restored; remote player notified",
+  "ownPagesAtEnd": 0
+}

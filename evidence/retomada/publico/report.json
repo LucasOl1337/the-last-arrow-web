@@ -1,0 +1,308 @@
+{
+  "errors": [
+    "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT",
+    "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT",
+    "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT"
+  ],
+  "screens": [
+    {
+      "width": 1366,
+      "height": 768,
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    {
+      "width": 900,
+      "height": 1000,
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 247,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.821,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  ],
+  "events": [],
+  "url": "https://arrow.symbiose.si/",
+  "cameraClose": true,
+  "room": "D999F457",
+  "playerTwoStart": {
+    "tick": 145,
+    "phase": "playing",
+    "countdown": 0,
+    "round": 1,
+    "roundTime": 0.008333333333333333,
+    "winner": null,
+    "mode": "versus",
+    "matchTime": 0.008333333333333333,
+    "chests": [],
+    "chestTimer": 11.991666666666667,
+    "map": "moss",
+    "seed": 209577939,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": true,
+        "x": 5,
+        "y": 15.44222222222222,
+        "vx": 0,
+        "vy": 0.26666666666666666,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": false,
+        "invulnerable": 0.9916666666666667,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": true,
+        "x": 27,
+        "y": 15.44222222222222,
+        "vx": 0,
+        "vy": 0.26666666666666666,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": false,
+        "invulnerable": 0.9916666666666667,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      }
+    ],
+    "arrows": [],
+    "events": [],
+    "paused": false,
+    "timeScale": 1,
+    "online": {
+      "room": "D999F457",
+      "player": 1
+    },
+    "cameraClose": true
+  },
+  "playerTwoAfter": {
+    "tick": 229,
+    "phase": "playing",
+    "countdown": 0,
+    "round": 1,
+    "roundTime": 0.7083333333333333,
+    "winner": null,
+    "mode": "versus",
+    "matchTime": 0.7083333333333333,
+    "chests": [],
+    "chestTimer": 11.291666666666707,
+    "map": "moss",
+    "seed": 209577939,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": true,
+        "x": 5,
+        "y": 15.450000000000003,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": true,
+        "invulnerable": 0.2916666666666678,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": true,
+        "x": 23.524722222222316,
+        "y": 15.402222222222221,
+        "vx": -7.008333333333333,
+        "vy": -5.733333333333333,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 2,
+        "score": 0,
+        "kills": 0,
+        "grounded": false,
+        "invulnerable": 0.2916666666666678,
+        "inventory": [
+          "normal",
+          "normal"
+        ]
+      }
+    ],
+    "arrows": [
+      {
+        "id": 1,
+        "owner": 1,
+        "x": 22.853125000000105,
+        "y": 15.451875000000001,
+        "vx": -23,
+        "vy": 0.11249999999999999,
+        "angle": 3.136701388249328,
+        "stuck": false,
+        "age": 0.025,
+        "kind": "normal"
+      }
+    ],
+    "events": [
+      {
+        "type": "jump",
+        "x": 23.583125000000095,
+        "y": 16.000000000000004,
+        "actor": 1
+      }
+    ],
+    "paused": false,
+    "timeScale": 1,
+    "online": {
+      "room": "D999F457",
+      "player": 1
+    },
+    "cameraClose": true
+  },
+  "playerOne": {
+    "tick": 352,
+    "phase": "playing",
+    "countdown": 0,
+    "round": 1,
+    "roundTime": 1.7333333333333296,
+    "winner": null,
+    "mode": "versus",
+    "matchTime": 1.7333333333333296,
+    "chests": [],
+    "chestTimer": 10.266666666666765,
+    "map": "moss",
+    "seed": 209577939,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": true,
+        "x": 6.921874999999957,
+        "y": 15.450000000000003,
+        "vx": 7.8,
+        "vy": 0,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": true,
+        "invulnerable": 0,
+        "inventory": [
+          "normal",
+          "normal",
+          "normal"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": true,
+        "x": 23.08138888888898,
+        "y": 15.450000000000003,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "respawnAt": null,
+        "ammo": 2,
+        "score": 0,
+        "kills": 0,
+        "grounded": true,
+        "invulnerable": 0,
+        "inventory": [
+          "normal",
+          "normal"
+        ]
+      }
+    ],
+    "arrows": [
+      {
+        "id": 1,
+        "owner": 1,
+        "x": 10.011458333333692,
+        "y": 16.226562500000014,
+        "vx": 0,
+        "vy": 0,
+        "angle": 3.0263447534025225,
+        "stuck": true,
+        "age": 1.0499999999999987,
+        "kind": "normal"
+      }
+    ],
+    "events": [],
+    "paused": false,
+    "timeScale": 1,
+    "online": {
+      "room": "D999F457",
+      "player": 0
+    },
+    "cameraClose": true
+  },
+  "disconnect": "O outro jogador saiu. Crie uma nova sala para jogar de novo.",
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'Failed to load resource: net::ERR_BLOCKED_BY_CLIENT',\n+   'Failed to load resource: net::ERR_BLOCKED_BY_CLIENT',\n+   'Failed to load resource: net::ERR_BLOCKED_BY_CLIENT'\n+ ]\n- []\n\n    at file:///home/lol/Projects/the-last-arrow-web-wt/rodada-astra/scripts/proof-retomada.mjs:44:9",
+  "ownPagesAtEnd": 0
+}

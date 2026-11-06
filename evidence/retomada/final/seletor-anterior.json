@@ -1,0 +1,12 @@
+{
+  "errors": [],
+  "blocked": [
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "error": "net::ERR_BLOCKED_BY_CLIENT"
+    }
+  ],
+  "http": [],
+  "failure": "locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Regras', { exact: true })\u001b[22m\n\n    at /home/lol/Projects/the-last-arrow-web-wt/rodada-astra/scripts/proof-online-final.mjs:11:183",
+  "ownPagesAtEnd": 0
+}
