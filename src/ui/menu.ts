@@ -137,7 +137,7 @@ export class Menu {
       if (winner) panel.style.setProperty('--fighter', winner.color);
       const s = this.stats;
       const stat = (value: number, label: string) => `<div class="stat"><strong>${value}</strong><span>${label}</span></div>`;
-      panel.innerHTML = `<img class="victory-logo" src="${asset('ui/logo.png')}" alt="" aria-hidden="true"><div class="victory-row">${winner ? `<img class="victory-portrait" src="${portrait(winner.id)}" alt="">` : ''}<div><p class="eyebrow">A ÚLTIMA FLECHA TEM DONO</p><h2 class="winner"></h2><p>${victorySummary(s?.mode, s?.score ?? 0, !!winner)}</p>${s ? `<div class="victory-stats">${stat(s.kills, s.kills === 1 ? 'abate' : 'abates')}${stat(s.catches, s.catches === 1 ? 'flecha pega' : 'flechas pegas')}${s.stomps ? stat(s.stomps, s.stomps === 1 ? 'pisão' : 'pisões') : ''}</div>` : ''}</div></div>`;
+      panel.innerHTML = `<img class="victory-logo" src="${asset('ui/logo.png')}" alt="" aria-hidden="true"><div class="victory-row">${winner ? `<img class="victory-portrait" src="${portrait(winner.id)}" alt="">` : ''}<div><p class="eyebrow">A ÚLTIMA FLECHA TEM DONO</p><h2 class="winner"></h2><p>${victorySummary(s?.mode, s?.score ?? 0, !!winner)}</p>${s && winner ? `<div class="victory-stats">${stat(s.kills, s.kills === 1 ? 'abate' : 'abates')}${stat(s.catches, s.catches === 1 ? 'flecha pega' : 'flechas pegas')}${s.stomps ? stat(s.stomps, s.stomps === 1 ? 'pisão' : 'pisões') : ''}</div>` : ''}</div></div>`;
       panel.querySelector('.winner')!.textContent = winner ? `${winner.name} venceu` : 'Empate';
       panel.append(this.button('Revanche  →', this.actions.rematch, true), this.button('Escolher outra arena', this.actions.home));
     } else {
