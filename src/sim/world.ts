@@ -45,11 +45,14 @@ export interface Arrow {
   kind?: ArrowKind;
   /** A piercing bolt damages each fighter at most once. */
   hitTargets?: number[];
+  /** Last open point before a piercing bolt entered terrain; used when it expires. */
+  lastFreeX?: number; lastFreeY?: number;
 }
 export interface SimEvent {
   type: 'jump' | 'dash' | 'shoot' | 'impact' | 'catch' | 'pickup' | 'kill' | 'round' | 'victory' | 'chest-spawn' | 'chest-open' | 'explosion';
   x: number; y: number; actor: number; target?: number;
   kind?: ArrowKind; radius?: number; chestId?: number; reward?: ArrowKind[];
+  cause?: 'arrow' | 'bolt' | 'bomb' | 'stomp';
 }
 export interface World {
   level: Level; options: Required<MatchOptions>; fighters: Fighter[]; arrows: Arrow[];

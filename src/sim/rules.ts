@@ -2,7 +2,7 @@ import { DT, COUNTDOWN_SECONDS, HEADHUNTER_SECONDS, RESPAWN_SECONDS, resetRound,
 import type { World, Fighter } from './world.ts';
 import { delta, WIDTH, HEIGHT } from './level.ts';
 import { quiver } from './inventory.ts';
-export function kill(w: World, victim: Fighter, killer: number): void {
+export function kill(w: World, victim: Fighter, killer: number, cause: World['events'][number]['cause'] = 'arrow'): void {
   if (!victim.alive || victim.invulnerable > 0) return;
   victim.alive = false; victim.charging = false;
   victim.respawnAt = w.options.mode === 'headhunter' ? w.matchTime + RESPAWN_SECONDS : null;
@@ -10,7 +10,7 @@ export function kill(w: World, victim: Fighter, killer: number): void {
     w.fighters[killer].kills++;
     if (w.options.mode === 'headhunter') w.fighters[killer].score++;
   }
-  w.events.push({ type: 'kill', x: victim.x, y: victim.y, actor: killer, target: victim.id });
+  w.events.push({ type: 'kill', x: victim.x, y: victim.y, actor: killer, target: victim.id, cause });
   // Dead fighters drop their quiver; zero-ammo survivors can still finish a round.
   const inventory = quiver(victim);
   for (let n = 0; n < inventory.length; n++) w.arrows.push({ id: w.nextArrowId++, owner: victim.id,
@@ -22,7 +22,7 @@ export function checkStomps(w: World): void {
     if (a === b || !a.alive || !b.alive || a.vy <= 1 || b.invulnerable > 0) continue;
     const before = delta(a.prevY, b.prevY, HEIGHT), now = delta(a.y, b.y, HEIGHT);
     if (Math.abs(delta(a.x, b.x, WIDTH)) < 0.6 && before >= 0.96 && now <= 1.12 && now > 0.55) {
-      kill(w, b, a.id); a.vy = -10;
+      kill(w, b, a.id, 'stomp'); a.vy = -10;
     }
   }
 }

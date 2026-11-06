@@ -3,7 +3,7 @@ import type { World, Fighter, Chest } from './world.ts';
 import { emptyIntent, clearIntent } from './input.ts';
 import type { Intent } from './input.ts';
 import { delta, wrap, solid, platformAt, nextPlatform, WIDTH, HEIGHT } from './level.ts';
-import { ARROW_GRAVITY, ARROW_SPEED, BOLT_GRAVITY } from './arrows.ts';
+import { ARROW_GRAVITY, ARROW_SPEED, BOLT_GRAVITY, BOMB_RADIUS } from './arrows.ts';
 import { moveFighter } from './physics.ts';
 export interface Brain {
   intent: Intent; reaction: number; target: number; aimError: number; shootTimer: number;
@@ -53,6 +53,22 @@ export function predictShot(w: World, f: Fighter, target: Fighter): { aimX: numb
     if (rays.every(ray => ray.blocked)) break;
   }
   return null;
+}
+/** Refuse an immediate self-blast, including a wall that moved into the aim lane while drawing. */
+function safeBombShot(w: World, f: Fighter, aimX: number, aimY: number): boolean {
+  let x = f.x + aimX * 0.22, y = f.y + aimY * 0.22, vy = aimY * ARROW_SPEED;
+  const vx = aimX * ARROW_SPEED;
+  for (let tick = 0; tick < 24; tick++) {
+    vy += ARROW_GRAVITY * DT;
+    const samples = Math.max(1, Math.ceil(Math.hypot(vx, vy) * DT / 0.12));
+    for (let n = 0; n < samples; n++) {
+      x = wrap(x + vx * DT / samples, WIDTH); y = wrap(y + vy * DT / samples, HEIGHT);
+      const impact = solid(w.level, x, y) || w.fighters.some(other => other !== f && other.alive &&
+        Math.abs(delta(x, other.x, WIDTH)) <= 0.39 && Math.abs(delta(y, other.y, HEIGHT)) <= 0.58);
+      if (impact) return Math.hypot(delta(x, f.x, WIDTH), delta(y, f.y, HEIGHT)) > BOMB_RADIUS + 0.4;
+    }
+  }
+  return true;
 }
 export function think(w: World, f: Fighter): Intent {
   const b = f.brain, i = b.intent, settings = tuning[w.options.difficulty];
@@ -175,6 +191,11 @@ export function think(w: World, f: Fighter): Intent {
   const prediction = hard && !i.dash && f.ammo > 0 && (f.charging || (b.shootTimer <= 0 && b.travelled >= 2.5)) ? predictShot(w, f, target) : null;
   const aimX = prediction?.aimX ?? Math.round(Math.cos(angle) * 1000) / 1000;
   const aimY = prediction?.aimY ?? Math.round(Math.sin(angle) * 1000) / 1000;
+  if (f.inventory?.[0] === 'bomb' && !safeBombShot(w, f, aimX, aimY)) {
+    // Cancel, don't release: updateBow interprets a released hold as a real shot.
+    b.hold = 0; f.charging = false; b.shootTimer = Math.max(b.shootTimer, 0.3);
+    return i;
+  }
   const miss = Math.abs(leadX * aimY - leadY * aimX);
   const range = b.shots === 0 && !hard ? 6.5 : settings.range;
   const canHit = hard ? prediction !== null : miss < 0.85 && clearShot(w, f, aimX, aimY, flight);

@@ -24,7 +24,7 @@ export function updateBow(w: World, f: Fighter, i: Intent): void {
 function explode(w: World, a: Arrow): void {
   w.events.push({ type: 'explosion', x: a.x, y: a.y, actor: a.owner, kind: 'bomb', radius: BOMB_RADIUS });
   for (const f of w.fighters) {
-    if (Math.hypot(delta(a.x, f.x, WIDTH), delta(a.y, f.y, HEIGHT)) <= BOMB_RADIUS) kill(w, f, a.owner);
+    if (Math.hypot(delta(a.x, f.x, WIDTH), delta(a.y, f.y, HEIGHT)) <= BOMB_RADIUS) kill(w, f, a.owner, 'bomb');
   }
 }
 export function stepArrows(w: World): void {
@@ -46,6 +46,7 @@ export function stepArrows(w: World): void {
       const steps = Math.max(1, Math.ceil(Math.hypot(a.vx, a.vy) * DT / 0.12));
       for (let n = 0; n < steps && !remove && !a.stuck; n++) {
         const oldX = a.x, oldY = a.y;
+        if (kind === 'bolt' && !solid(w.level, oldX, oldY)) { a.lastFreeX = oldX; a.lastFreeY = oldY; }
         a.x = wrap(a.x + a.vx * DT / steps, WIDTH); a.y = wrap(a.y + a.vy * DT / steps, HEIGHT);
         if (kind !== 'bolt' && solid(w.level, a.x, a.y)) {
           a.x = oldX; a.y = oldY; a.vx = a.vy = 0; a.stuck = true;
@@ -61,7 +62,7 @@ export function stepArrows(w: World): void {
             w.events.push({ type: 'catch', x: a.x, y: a.y, actor: f.id, kind });
             remove = true;
           } else if (kind === 'bolt') {
-            kill(w, f, a.owner);
+            kill(w, f, a.owner, 'bolt');
             (a.hitTargets ??= []).push(f.id);
           } else {
             // Spawn protection blocks damage but isn't a catch: that requires a timed dash.
@@ -76,7 +77,20 @@ export function stepArrows(w: World): void {
     // Retire runaway projectiles without unbounded piercing damage or lost normal ammo.
     if (!remove && !a.stuck && a.age > 7) {
       if (kind === 'bomb') { explode(w, a); remove = true; }
-      else { a.stuck = true; a.vx = a.vy = 0; }
+      else {
+        if (solid(w.level, a.x, a.y)) {
+          if (a.lastFreeX !== undefined && a.lastFreeY !== undefined) { a.x = a.lastFreeX; a.y = a.lastFreeY; }
+          else {
+            // Legacy bolts have no entry point. Retrace their incoming direction to the first open sample.
+            const speed = Math.hypot(a.vx, a.vy), dx = speed ? a.vx / speed : 1, dy = speed ? a.vy / speed : 0;
+            for (let d = 0.1; d <= Math.hypot(WIDTH, HEIGHT); d += 0.1) {
+              const x = wrap(a.x - dx * d, WIDTH), y = wrap(a.y - dy * d, HEIGHT);
+              if (!solid(w.level, x, y)) { a.x = x; a.y = y; break; }
+            }
+          }
+        }
+        a.stuck = true; a.vx = a.vy = 0;
+      }
     }
     if (remove) w.arrows.splice(index, 1);
   }
