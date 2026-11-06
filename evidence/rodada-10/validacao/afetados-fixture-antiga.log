@@ -1,0 +1,42 @@
+✔ spawn protection lasts one active second, cannot be shortened by dash, and is not a catch (1.969529ms)
+✔ hard bot predicts an incoming arrow and catches it instead of overwriting dash direction to aim (0.864654ms)
+✖ normal bot repositions before its opening shot and prefers a nearby chest over the enemy (6.058097ms)
+✔ bot wall-jumps and approaches a chest across the horizontal wrap (0.208861ms)
+✔ a hard bot cancels a pending bomb release beside the Totem column instead of suicide (2.371701ms)
+✔ bots never select a protected target and cancel a drawn shot when protection starts (1.823858ms)
+✔ hard bot drops for a stomp from above instead of firing, but does not stomp through a floor (0.549292ms)
+✔ hard shot predictor follows falling-target physics and its eight-way shot hits in the real integrator (1.129835ms)
+✔ hard prediction respects walls for normal/bomb arrows, piercing bolts and horizontal wrap (1.369596ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 8
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 84.141002
+
+✖ failing tests:
+
+test at tests/round-features.test.ts:174:1
+✖ normal bot repositions before its opening shot and prefers a nearby chest over the enemy (6.058097ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 10.230486111110686
+  - 7.5
+  
+      at TestContext.<anonymous> (file:///home/lol/Projects/the-last-arrow-web-wt/rodada-astra/tests/round-features.test.ts:184:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 10.230486111110686,
+    expected: 7.5,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

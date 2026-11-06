@@ -1,0 +1,297 @@
+{
+  "owner": "tla-rodada-10-story",
+  "pid": 1193465,
+  "before": true,
+  "errors": [],
+  "pagesAtEnd": 0,
+  "screens": {
+    "arena-juice-real--catch-1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 346.046875,
+          "y": 531.71875,
+          "w": 29.25,
+          "h": 31.375,
+          "text": "P1"
+        },
+        {
+          "x": 511.359375,
+          "y": 531.71875,
+          "w": 100.75,
+          "h": 31.375,
+          "text": "Stormdragon"
+        },
+        {
+          "x": 740.6875,
+          "y": 531.71875,
+          "w": 44.984375,
+          "h": 31.375,
+          "text": "Kaze"
+        },
+        {
+          "x": 937.5,
+          "y": 531.71875,
+          "w": 54.359375,
+          "h": 31.375,
+          "text": "Akane"
+        }
+      ]
+    },
+    "arena-juice-real--catch-900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 224.8125,
+          "y": 342.9375,
+          "w": 25.90625,
+          "h": 28.1875,
+          "text": "P1"
+        },
+        {
+          "x": 328.921875,
+          "y": 342.9375,
+          "w": 83.484375,
+          "h": 28.1875,
+          "text": "Stormdragon"
+        },
+        {
+          "x": 483.53125,
+          "y": 342.9375,
+          "w": 38.5625,
+          "h": 28.1875,
+          "text": "Kaze"
+        },
+        {
+          "x": 612.640625,
+          "y": 342.9375,
+          "w": 46.125,
+          "h": 28.1875,
+          "text": "Akane"
+        }
+      ]
+    },
+    "arena-juice-real--catch-844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.821,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 170.046875,
+          "y": 257.75,
+          "w": 25.90625,
+          "h": 28.1875,
+          "text": "P1"
+        },
+        {
+          "x": 243.796875,
+          "y": 257.75,
+          "w": 83.484375,
+          "h": 28.1875,
+          "text": "Stormdragon"
+        },
+        {
+          "x": 368.0625,
+          "y": 257.75,
+          "w": 38.5625,
+          "h": 28.1875,
+          "text": "Kaze"
+        },
+        {
+          "x": 466.8125,
+          "y": 257.75,
+          "w": 46.125,
+          "h": 28.1875,
+          "text": "Akane"
+        }
+      ]
+    },
+    "arena-hud-real--wrap-com-direcao-1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 23.859375,
+          "y": 273.421875,
+          "w": 29.25,
+          "h": 31.375,
+          "text": "P1"
+        },
+        {
+          "x": 1259.328125,
+          "y": 273.421875,
+          "w": 100.75,
+          "h": 31.375,
+          "text": "Stormdragon"
+        },
+        {
+          "x": 538.96875,
+          "y": 70.515625,
+          "w": 44.984375,
+          "h": 31.375,
+          "text": "Kaze"
+        },
+        {
+          "x": 776.84375,
+          "y": 627.71875,
+          "w": 54.359375,
+          "h": 31.375,
+          "text": "Akane"
+        }
+      ]
+    },
+    "arena-hud-real--wrap-com-direcao-900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 12.28125,
+          "y": 172.671875,
+          "w": 25.90625,
+          "h": 28.1875,
+          "text": "P1"
+        },
+        {
+          "x": 812,
+          "y": 172.671875,
+          "w": 83.484375,
+          "h": 28.1875,
+          "text": "Stormdragon"
+        },
+        {
+          "x": 350.609375,
+          "y": 71.59375,
+          "w": 38.5625,
+          "h": 28.1875,
+          "text": "Kaze"
+        },
+        {
+          "x": 506.875,
+          "y": 406.21875,
+          "w": 46.125,
+          "h": 28.1875,
+          "text": "Akane"
+        }
+      ]
+    },
+    "arena-hud-real--wrap-com-direcao-844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.821,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 6.484375,
+          "y": 126.578125,
+          "w": 25.90625,
+          "h": 28.1875,
+          "text": "P1"
+        },
+        {
+          "x": 605.328125,
+          "y": 126.578125,
+          "w": 83.484375,
+          "h": 28.1875,
+          "text": "Stormdragon"
+        },
+        {
+          "x": 265.625,
+          "y": 69.84375,
+          "w": 38.5625,
+          "h": 28.1875,
+          "text": "Kaze"
+        },
+        {
+          "x": 385.1875,
+          "y": 306.5,
+          "w": 46.125,
+          "h": 28.1875,
+          "text": "Akane"
+        }
+      ]
+    }
+  }
+}

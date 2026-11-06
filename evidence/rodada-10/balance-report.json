@@ -1,0 +1,2052 @@
+{
+  "protocol": "20 consecutive rounds per authored map/difficulty, seed 3; same 5Hz P1 controller before/after; round wins, not match wins; simulation seconds, no render/FPS claim",
+  "maps": [
+    {
+      "map": "moss",
+      "difficulty": "easy",
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 1,
+          "seconds": 4.0333333333333234,
+          "humanKills": 0
+        },
+        {
+          "round": 2,
+          "winner": 0,
+          "seconds": 16.624999999999698,
+          "humanKills": 2
+        },
+        {
+          "round": 3,
+          "winner": 3,
+          "seconds": 14.474999999999818,
+          "humanKills": 2
+        },
+        {
+          "round": 4,
+          "winner": 0,
+          "seconds": 4.300000000000003,
+          "humanKills": 5
+        },
+        {
+          "round": 5,
+          "winner": null,
+          "seconds": 9.300000000000113,
+          "humanKills": 6
+        },
+        {
+          "round": 6,
+          "winner": 1,
+          "seconds": 26.88333333333245,
+          "humanKills": 6
+        },
+        {
+          "round": 7,
+          "winner": 2,
+          "seconds": 12.083333333333288,
+          "humanKills": 6
+        },
+        {
+          "round": 8,
+          "winner": 1,
+          "seconds": 7.108333333333476,
+          "humanKills": 7
+        },
+        {
+          "round": 9,
+          "winner": 3,
+          "seconds": 10.425000000000049,
+          "humanKills": 8
+        },
+        {
+          "round": 10,
+          "winner": 2,
+          "seconds": 11.583333333333316,
+          "humanKills": 10
+        },
+        {
+          "round": 11,
+          "winner": 0,
+          "seconds": 4.441666666666677,
+          "humanKills": 13
+        },
+        {
+          "round": 12,
+          "winner": 1,
+          "seconds": 7.575000000000166,
+          "humanKills": 13
+        },
+        {
+          "round": 13,
+          "winner": 3,
+          "seconds": 12.366666666666605,
+          "humanKills": 13
+        },
+        {
+          "round": 14,
+          "winner": 0,
+          "seconds": 6.908333333333466,
+          "humanKills": 15
+        },
+        {
+          "round": 15,
+          "winner": 2,
+          "seconds": 4.533333333333348,
+          "humanKills": 17
+        },
+        {
+          "round": 16,
+          "winner": 2,
+          "seconds": 4.283333333333336,
+          "humanKills": 18
+        },
+        {
+          "round": 17,
+          "winner": 0,
+          "seconds": 7.100000000000143,
+          "humanKills": 21
+        },
+        {
+          "round": 18,
+          "winner": 0,
+          "seconds": 8.191666666666842,
+          "humanKills": 23
+        },
+        {
+          "round": 19,
+          "winner": 0,
+          "seconds": 11.866666666666633,
+          "humanKills": 25
+        },
+        {
+          "round": 20,
+          "winner": 3,
+          "seconds": 12.69999999999992,
+          "humanKills": 26
+        }
+      ],
+      "events": {
+        "jump": 495,
+        "shoot": 163,
+        "impact": 128,
+        "dash": 47,
+        "pickup": 155,
+        "kill": 61,
+        "round": 20,
+        "chest-spawn": 7,
+        "chest-open": 2
+      },
+      "byFighter": [
+        {
+          "id": 0,
+          "shots": 99,
+          "catches": 0,
+          "kills": 26,
+          "chests": 1,
+          "travel": 1352.71768608375,
+          "airTicks": 10433,
+          "activeTicks": 15458
+        },
+        {
+          "id": 1,
+          "shots": 18,
+          "catches": 0,
+          "kills": 9,
+          "chests": 0,
+          "travel": 1241.3928847500283,
+          "airTicks": 11689,
+          "activeTicks": 14616
+        },
+        {
+          "id": 2,
+          "shots": 23,
+          "catches": 0,
+          "kills": 9,
+          "chests": 0,
+          "travel": 1547.6398706696089,
+          "airTicks": 14412,
+          "activeTicks": 17525
+        },
+        {
+          "id": 3,
+          "shots": 23,
+          "catches": 0,
+          "kills": 17,
+          "chests": 1,
+          "travel": 1518.302221600667,
+          "airTicks": 13604,
+          "activeTicks": 18013
+        }
+      ],
+      "firstBotKills": [
+        1.9666666666666621,
+        4.866666666666698,
+        3.1249999999999916,
+        5.791666666666744,
+        2.916666666666659,
+        1.3916666666666642,
+        5.483333333333396,
+        4.866666666666698,
+        11.583333333333316,
+        1.3916666666666642,
+        3.874999999999989,
+        1.2083333333333315,
+        4.533333333333348,
+        3.9166666666666554,
+        6.341666666666772,
+        3.083333333333325,
+        4.09166666666666
+      ],
+      "maxQuiet": 7.5333333333334975,
+      "wins": 7,
+      "winRate": 0.35,
+      "meanSeconds": 9.839166666666635,
+      "timeouts": 0
+    },
+    {
+      "map": "totem",
+      "difficulty": "easy",
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 3,
+          "seconds": 9.100000000000124,
+          "humanKills": 0
+        },
+        {
+          "round": 2,
+          "winner": 3,
+          "seconds": 28.208333333332373,
+          "humanKills": 0
+        },
+        {
+          "round": 3,
+          "winner": 2,
+          "seconds": 10.766666666666696,
+          "humanKills": 1
+        },
+        {
+          "round": 4,
+          "winner": 3,
+          "seconds": 4.433333333333343,
+          "humanKills": 1
+        },
+        {
+          "round": 5,
+          "winner": 0,
+          "seconds": 5.608333333333402,
+          "humanKills": 3
+        },
+        {
+          "round": 6,
+          "winner": 2,
+          "seconds": 16.383333333333045,
+          "humanKills": 3
+        },
+        {
+          "round": 7,
+          "winner": 2,
+          "seconds": 6.31666666666677,
+          "humanKills": 3
+        },
+        {
+          "round": 8,
+          "winner": 1,
+          "seconds": 7.025000000000139,
+          "humanKills": 3
+        },
+        {
+          "round": 9,
+          "winner": 0,
+          "seconds": 10.025000000000071,
+          "humanKills": 5
+        },
+        {
+          "round": 10,
+          "winner": 0,
+          "seconds": 7.091666666666809,
+          "humanKills": 8
+        },
+        {
+          "round": 11,
+          "winner": 1,
+          "seconds": 4.566666666666683,
+          "humanKills": 10
+        },
+        {
+          "round": 12,
+          "winner": 0,
+          "seconds": 5.7166666666667405,
+          "humanKills": 12
+        },
+        {
+          "round": 13,
+          "winner": 2,
+          "seconds": 8.575000000000154,
+          "humanKills": 12
+        },
+        {
+          "round": 14,
+          "winner": 2,
+          "seconds": 9.366666666666775,
+          "humanKills": 13
+        },
+        {
+          "round": 15,
+          "winner": 0,
+          "seconds": 9.616666666666761,
+          "humanKills": 16
+        },
+        {
+          "round": 16,
+          "winner": 3,
+          "seconds": 10.1083333333334,
+          "humanKills": 16
+        },
+        {
+          "round": 17,
+          "winner": 3,
+          "seconds": 8.966666666666798,
+          "humanKills": 16
+        },
+        {
+          "round": 18,
+          "winner": 0,
+          "seconds": 4.550000000000016,
+          "humanKills": 19
+        },
+        {
+          "round": 19,
+          "winner": 3,
+          "seconds": 8.900000000000135,
+          "humanKills": 19
+        },
+        {
+          "round": 20,
+          "winner": 3,
+          "seconds": 9.300000000000113,
+          "humanKills": 19
+        }
+      ],
+      "events": {
+        "jump": 539,
+        "shoot": 149,
+        "dash": 39,
+        "impact": 109,
+        "pickup": 131,
+        "kill": 60,
+        "round": 20,
+        "chest-spawn": 3,
+        "chest-open": 2
+      },
+      "byFighter": [
+        {
+          "id": 0,
+          "shots": 80,
+          "catches": 0,
+          "kills": 19,
+          "chests": 0,
+          "travel": 1001.384559244779,
+          "airTicks": 7920,
+          "activeTicks": 12651
+        },
+        {
+          "id": 1,
+          "shots": 18,
+          "catches": 0,
+          "kills": 12,
+          "chests": 0,
+          "travel": 1387.9846999089598,
+          "airTicks": 13835,
+          "activeTicks": 15968
+        },
+        {
+          "id": 2,
+          "shots": 25,
+          "catches": 0,
+          "kills": 15,
+          "chests": 1,
+          "travel": 1588.030589281107,
+          "airTicks": 15447,
+          "activeTicks": 18391
+        },
+        {
+          "id": 3,
+          "shots": 26,
+          "catches": 0,
+          "kills": 14,
+          "chests": 1,
+          "travel": 1580.6667217844565,
+          "airTicks": 15055,
+          "activeTicks": 18366
+        }
+      ],
+      "firstBotKills": [
+        2.2416666666666614,
+        6.6083333333334515,
+        6.65000000000012,
+        1.908333333333329,
+        2.8166666666666593,
+        8.53333333333349,
+        1.908333333333329,
+        1.9166666666666623,
+        2.508333333333327,
+        4.566666666666683,
+        4.816666666666696,
+        3.491666666666657,
+        7.041666666666806,
+        1.2333333333333314,
+        1.4916666666666638,
+        3.691666666666656,
+        3.9166666666666554
+      ],
+      "maxQuiet": 8.408333333333497,
+      "wins": 6,
+      "winRate": 0.3,
+      "meanSeconds": 9.23125000000002,
+      "timeouts": 0
+    },
+    {
+      "map": "canopy",
+      "difficulty": "easy",
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 3,
+          "seconds": 6.125000000000094,
+          "humanKills": 0
+        },
+        {
+          "round": 2,
+          "winner": 0,
+          "seconds": 8.966666666666798,
+          "humanKills": 2
+        },
+        {
+          "round": 3,
+          "winner": 0,
+          "seconds": 9.916666666666744,
+          "humanKills": 4
+        },
+        {
+          "round": 4,
+          "winner": 2,
+          "seconds": 4.375000000000007,
+          "humanKills": 5
+        },
+        {
+          "round": 5,
+          "winner": 3,
+          "seconds": 10.650000000000036,
+          "humanKills": 5
+        },
+        {
+          "round": 6,
+          "winner": 2,
+          "seconds": 5.708333333333407,
+          "humanKills": 6
+        },
+        {
+          "round": 7,
+          "winner": 0,
+          "seconds": 3.216666666666658,
+          "humanKills": 8
+        },
+        {
+          "round": 8,
+          "winner": 0,
+          "seconds": 5.975000000000087,
+          "humanKills": 10
+        },
+        {
+          "round": 9,
+          "winner": 0,
+          "seconds": 7.725000000000174,
+          "humanKills": 12
+        },
+        {
+          "round": 10,
+          "winner": 0,
+          "seconds": 8.15833333333351,
+          "humanKills": 15
+        },
+        {
+          "round": 11,
+          "winner": 0,
+          "seconds": 8.700000000000147,
+          "humanKills": 17
+        },
+        {
+          "round": 12,
+          "winner": 0,
+          "seconds": 5.7166666666667405,
+          "humanKills": 20
+        },
+        {
+          "round": 13,
+          "winner": 2,
+          "seconds": 8.47500000000016,
+          "humanKills": 20
+        },
+        {
+          "round": 14,
+          "winner": 2,
+          "seconds": 8.316666666666835,
+          "humanKills": 20
+        },
+        {
+          "round": 15,
+          "winner": 2,
+          "seconds": 6.225000000000099,
+          "humanKills": 20
+        },
+        {
+          "round": 16,
+          "winner": 0,
+          "seconds": 5.083333333333376,
+          "humanKills": 23
+        },
+        {
+          "round": 17,
+          "winner": 0,
+          "seconds": 6.825000000000129,
+          "humanKills": 25
+        },
+        {
+          "round": 18,
+          "winner": 1,
+          "seconds": 6.483333333333445,
+          "humanKills": 27
+        },
+        {
+          "round": 19,
+          "winner": 1,
+          "seconds": 10.975000000000017,
+          "humanKills": 28
+        },
+        {
+          "round": 20,
+          "winner": 3,
+          "seconds": 8.541666666666822,
+          "humanKills": 29
+        }
+      ],
+      "events": {
+        "jump": 440,
+        "shoot": 129,
+        "impact": 94,
+        "dash": 41,
+        "kill": 60,
+        "round": 20,
+        "pickup": 112
+      },
+      "byFighter": [
+        {
+          "id": 0,
+          "shots": 88,
+          "catches": 0,
+          "kills": 29,
+          "chests": 0,
+          "travel": 1237.2567426510686,
+          "airTicks": 10955,
+          "activeTicks": 13688
+        },
+        {
+          "id": 1,
+          "shots": 15,
+          "catches": 0,
+          "kills": 9,
+          "chests": 0,
+          "travel": 1225.5991937466406,
+          "airTicks": 12648,
+          "activeTicks": 14277
+        },
+        {
+          "id": 2,
+          "shots": 14,
+          "catches": 0,
+          "kills": 11,
+          "chests": 0,
+          "travel": 995.1583656903816,
+          "airTicks": 10030,
+          "activeTicks": 11664
+        },
+        {
+          "id": 3,
+          "shots": 12,
+          "catches": 0,
+          "kills": 11,
+          "chests": 0,
+          "travel": 1143.4009397386167,
+          "airTicks": 11893,
+          "activeTicks": 13208
+        }
+      ],
+      "firstBotKills": [
+        3.058333333333325,
+        2.6249999999999933,
+        2.2249999999999948,
+        3.8166666666666558,
+        5.433333333333393,
+        3.324999999999991,
+        2.016666666666662,
+        3.958333333333322,
+        4.433333333333343,
+        4.083333333333326,
+        3.8583333333333223,
+        1.3916666666666642,
+        1.9166666666666623,
+        4.391666666666675,
+        6.483333333333445,
+        3.4749999999999903,
+        4.008333333333322
+      ],
+      "maxQuiet": 3.3749999999999907,
+      "wins": 10,
+      "winRate": 0.5,
+      "meanSeconds": 7.307916666666765,
+      "timeouts": 0
+    },
+    {
+      "map": "falls",
+      "difficulty": "easy",
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 3,
+          "seconds": 9.58333333333343,
+          "humanKills": 2
+        },
+        {
+          "round": 2,
+          "winner": 0,
+          "seconds": 6.816666666666795,
+          "humanKills": 5
+        },
+        {
+          "round": 3,
+          "winner": 1,
+          "seconds": 6.433333333333443,
+          "humanKills": 5
+        },
+        {
+          "round": 4,
+          "winner": 1,
+          "seconds": 12.299999999999942,
+          "humanKills": 5
+        },
+        {
+          "round": 5,
+          "winner": 2,
+          "seconds": 8.075000000000182,
+          "humanKills": 5
+        },
+        {
+          "round": 6,
+          "winner": 0,
+          "seconds": 6.166666666666763,
+          "humanKills": 7
+        },
+        {
+          "round": 7,
+          "winner": 3,
+          "seconds": 3.658333333333323,
+          "humanKills": 9
+        },
+        {
+          "round": 8,
+          "winner": 2,
+          "seconds": 15.3833333333331,
+          "humanKills": 9
+        },
+        {
+          "round": 9,
+          "winner": 0,
+          "seconds": 10.800000000000027,
+          "humanKills": 12
+        },
+        {
+          "round": 10,
+          "winner": 2,
+          "seconds": 5.8500000000000805,
+          "humanKills": 13
+        },
+        {
+          "round": 11,
+          "winner": 0,
+          "seconds": 10.408333333333383,
+          "humanKills": 15
+        },
+        {
+          "round": 12,
+          "winner": 3,
+          "seconds": 11.10000000000001,
+          "humanKills": 16
+        },
+        {
+          "round": 13,
+          "winner": 0,
+          "seconds": 3.0083333333333253,
+          "humanKills": 19
+        },
+        {
+          "round": 14,
+          "winner": 2,
+          "seconds": 3.824999999999989,
+          "humanKills": 20
+        },
+        {
+          "round": 15,
+          "winner": 3,
+          "seconds": 14.783333333333134,
+          "humanKills": 20
+        },
+        {
+          "round": 16,
+          "winner": 3,
+          "seconds": 8.983333333333464,
+          "humanKills": 20
+        },
+        {
+          "round": 17,
+          "winner": 2,
+          "seconds": 6.533333333333448,
+          "humanKills": 20
+        },
+        {
+          "round": 18,
+          "winner": 2,
+          "seconds": 10.616666666666704,
+          "humanKills": 22
+        },
+        {
+          "round": 19,
+          "winner": 0,
+          "seconds": 8.958333333333465,
+          "humanKills": 25
+        },
+        {
+          "round": 20,
+          "winner": 1,
+          "seconds": 6.533333333333448,
+          "humanKills": 26
+        }
+      ],
+      "events": {
+        "jump": 434,
+        "shoot": 128,
+        "dash": 33,
+        "impact": 94,
+        "pickup": 118,
+        "kill": 60,
+        "round": 20,
+        "chest-spawn": 3,
+        "chest-open": 2,
+        "catch": 1
+      },
+      "byFighter": [
+        {
+          "id": 0,
+          "shots": 74,
+          "catches": 1,
+          "kills": 27,
+          "chests": 0,
+          "travel": 1170.9689278098242,
+          "airTicks": 9318,
+          "activeTicks": 11894
+        },
+        {
+          "id": 1,
+          "shots": 11,
+          "catches": 0,
+          "kills": 10,
+          "chests": 0,
+          "travel": 1135.6348316004742,
+          "airTicks": 10779,
+          "activeTicks": 12711
+        },
+        {
+          "id": 2,
+          "shots": 24,
+          "catches": 0,
+          "kills": 13,
+          "chests": 1,
+          "travel": 1615.451831171253,
+          "airTicks": 15951,
+          "activeTicks": 17952
+        },
+        {
+          "id": 3,
+          "shots": 19,
+          "catches": 0,
+          "kills": 10,
+          "chests": 1,
+          "travel": 1293.4320487833375,
+          "airTicks": 12319,
+          "activeTicks": 14344
+        }
+      ],
+      "firstBotKills": [
+        9.58333333333343,
+        1.3416666666666643,
+        3.433333333333324,
+        1.1999999999999982,
+        5.766666666666743,
+        3.658333333333323,
+        1.3416666666666643,
+        3.1583333333333248,
+        1.1999999999999982,
+        6.166666666666763,
+        3.516666666666657,
+        1.3416666666666643,
+        1.3416666666666643,
+        2.7416666666666596,
+        10.616666666666704,
+        2.291666666666661
+      ],
+      "maxQuiet": 4.250000000000001,
+      "wins": 6,
+      "winRate": 0.3,
+      "meanSeconds": 8.490833333333374,
+      "timeouts": 0
+    },
+    {
+      "map": "roots",
+      "difficulty": "easy",
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 0,
+          "seconds": 12.224999999999946,
+          "humanKills": 2
+        },
+        {
+          "round": 2,
+          "winner": 2,
+          "seconds": 8.00833333333352,
+          "humanKills": 2
+        },
+        {
+          "round": 3,
+          "winner": 3,
+          "seconds": 9.35000000000011,
+          "humanKills": 3
+        },
+        {
+          "round": 4,
+          "winner": 3,
+          "seconds": 10.391666666666717,
+          "humanKills": 4
+        },
+        {
+          "round": 5,
+          "winner": 3,
+          "seconds": 3.0166666666666586,
+          "humanKills": 5
+        },
+        {
+          "round": 6,
+          "winner": 0,
+          "seconds": 13.541666666666538,
+          "humanKills": 8
+        },
+        {
+          "round": 7,
+          "winner": 3,
+          "seconds": 18.08333333333295,
+          "humanKills": 9
+        },
+        {
+          "round": 8,
+          "winner": 0,
+          "seconds": 10.28333333333339,
+          "humanKills": 11
+        },
+        {
+          "round": 9,
+          "winner": 0,
+          "seconds": 5.608333333333402,
+          "humanKills": 13
+        },
+        {
+          "round": 10,
+          "winner": 0,
+          "seconds": 2.4666666666666606,
+          "humanKills": 16
+        },
+        {
+          "round": 11,
+          "winner": 2,
+          "seconds": 4.875000000000032,
+          "humanKills": 16
+        },
+        {
+          "round": 12,
+          "winner": 3,
+          "seconds": 7.725000000000174,
+          "humanKills": 16
+        },
+        {
+          "round": 13,
+          "winner": 3,
+          "seconds": 15.61666666666642,
+          "humanKills": 17
+        },
+        {
+          "round": 14,
+          "winner": 0,
+          "seconds": 8.3583333333335,
+          "humanKills": 20
+        },
+        {
+          "round": 15,
+          "winner": 3,
+          "seconds": 22.624999999999357,
+          "humanKills": 20
+        },
+        {
+          "round": 16,
+          "winner": 3,
+          "seconds": 5.641666666666737,
+          "humanKills": 22
+        },
+        {
+          "round": 17,
+          "winner": 3,
+          "seconds": 5.016666666666706,
+          "humanKills": 22
+        },
+        {
+          "round": 18,
+          "winner": 0,
+          "seconds": 9.70000000000009,
+          "humanKills": 25
+        },
+        {
+          "round": 19,
+          "winner": 3,
+          "seconds": 3.6499999999999897,
+          "humanKills": 25
+        },
+        {
+          "round": 20,
+          "winner": 2,
+          "seconds": 7.5833333333335,
+          "humanKills": 25
+        }
+      ],
+      "events": {
+        "jump": 509,
+        "shoot": 141,
+        "dash": 38,
+        "impact": 115,
+        "pickup": 136,
+        "kill": 60,
+        "chest-spawn": 5,
+        "round": 20,
+        "chest-open": 3
+      },
+      "byFighter": [
+        {
+          "id": 0,
+          "shots": 76,
+          "catches": 0,
+          "kills": 25,
+          "chests": 0,
+          "travel": 1203.8974488935717,
+          "airTicks": 9537,
+          "activeTicks": 12799
+        },
+        {
+          "id": 1,
+          "shots": 21,
+          "catches": 0,
+          "kills": 11,
+          "chests": 2,
+          "travel": 1407.7696837889114,
+          "airTicks": 13807,
+          "activeTicks": 16910
+        },
+        {
+          "id": 2,
+          "shots": 17,
+          "catches": 0,
+          "kills": 5,
+          "chests": 0,
+          "travel": 1232.69888546228,
+          "airTicks": 11838,
+          "activeTicks": 14843
+        },
+        {
+          "id": 3,
+          "shots": 27,
+          "catches": 0,
+          "kills": 19,
+          "chests": 1,
+          "travel": 1574.5321263758815,
+          "airTicks": 14530,
+          "activeTicks": 18250
+        }
+      ],
+      "firstBotKills": [
+        6.616666666666785,
+        2.966666666666659,
+        6.266666666666768,
+        3.766666666666656,
+        3.0083333333333253,
+        5.183333333333381,
+        4.766666666666693,
+        3.608333333333323,
+        1.0083333333333322,
+        2.749999999999993,
+        6.45000000000011,
+        1.0083333333333322,
+        5.641666666666737,
+        1.5333333333333303,
+        3.3666666666666574,
+        1.0083333333333322
+      ],
+      "maxQuiet": 6.758333333333459,
+      "wins": 7,
+      "winRate": 0.35,
+      "meanSeconds": 9.18833333333332,
+      "timeouts": 0
+    },
+    {
+      "map": "moss",
+      "difficulty": "normal",
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 1,
+          "seconds": 4.516666666666681,
+          "humanKills": 0
+        },
+        {
+          "round": 2,
+          "winner": 1,
+          "seconds": 7.550000000000165,
+          "humanKills": 2
+        },
+        {
+          "round": 3,
+          "winner": 2,
+          "seconds": 15.724999999999747,
+          "humanKills": 2
+        },
+        {
+          "round": 4,
+          "winner": 1,
+          "seconds": 10.091666666666734,
+          "humanKills": 3
+        },
+        {
+          "round": 5,
+          "winner": 0,
+          "seconds": 10.45833333333338,
+          "humanKills": 6
+        },
+        {
+          "round": 6,
+          "winner": 2,
+          "seconds": 14.666666666666474,
+          "humanKills": 6
+        },
+        {
+          "round": 7,
+          "winner": 2,
+          "seconds": 11.924999999999963,
+          "humanKills": 7
+        },
+        {
+          "round": 8,
+          "winner": 3,
+          "seconds": 11.225000000000003,
+          "humanKills": 8
+        },
+        {
+          "round": 9,
+          "winner": 0,
+          "seconds": 4.550000000000016,
+          "humanKills": 11
+        },
+        {
+          "round": 10,
+          "winner": 0,
+          "seconds": 4.575000000000017,
+          "humanKills": 12
+        },
+        {
+          "round": 11,
+          "winner": 2,
+          "seconds": 11.441666666666658,
+          "humanKills": 13
+        },
+        {
+          "round": 12,
+          "winner": 1,
+          "seconds": 11.200000000000005,
+          "humanKills": 15
+        },
+        {
+          "round": 13,
+          "winner": 0,
+          "seconds": 8.491666666666825,
+          "humanKills": 18
+        },
+        {
+          "round": 14,
+          "winner": 1,
+          "seconds": 10.700000000000033,
+          "humanKills": 18
+        },
+        {
+          "round": 15,
+          "winner": 0,
+          "seconds": 4.408333333333342,
+          "humanKills": 21
+        },
+        {
+          "round": 16,
+          "winner": 0,
+          "seconds": 5.625000000000069,
+          "humanKills": 24
+        },
+        {
+          "round": 17,
+          "winner": 0,
+          "seconds": 9.441666666666771,
+          "humanKills": 26
+        },
+        {
+          "round": 18,
+          "winner": 1,
+          "seconds": 12.891666666666575,
+          "humanKills": 26
+        },
+        {
+          "round": 19,
+          "winner": 3,
+          "seconds": 3.8333333333333224,
+          "humanKills": 28
+        },
+        {
+          "round": 20,
+          "winner": 0,
+          "seconds": 5.183333333333381,
+          "humanKills": 29
+        }
+      ],
+      "events": {
+        "jump": 431,
+        "shoot": 180,
+        "impact": 134,
+        "dash": 44,
+        "pickup": 133,
+        "kill": 60,
+        "round": 20,
+        "chest-spawn": 3,
+        "catch": 3
+      },
+      "byFighter": [
+        {
+          "id": 0,
+          "shots": 89,
+          "catches": 0,
+          "kills": 30,
+          "chests": 0,
+          "travel": 1203.2006950107616,
+          "airTicks": 9530,
+          "activeTicks": 13804
+        },
+        {
+          "id": 1,
+          "shots": 38,
+          "catches": 0,
+          "kills": 12,
+          "chests": 0,
+          "travel": 1394.4434024565544,
+          "airTicks": 12851,
+          "activeTicks": 16055
+        },
+        {
+          "id": 2,
+          "shots": 21,
+          "catches": 1,
+          "kills": 9,
+          "chests": 0,
+          "travel": 1292.109455866401,
+          "airTicks": 11513,
+          "activeTicks": 14621
+        },
+        {
+          "id": 3,
+          "shots": 32,
+          "catches": 2,
+          "kills": 9,
+          "chests": 0,
+          "travel": 1385.0727273417274,
+          "airTicks": 12482,
+          "activeTicks": 16241
+        }
+      ],
+      "firstBotKills": [
+        1.9666666666666621,
+        7.550000000000165,
+        2.3333333333333277,
+        3.7499999999999893,
+        5.658333333333404,
+        6.225000000000099,
+        4.908333333333367,
+        3.224999999999991,
+        11.441666666666658,
+        11.200000000000005,
+        3.358333333333324,
+        4.975000000000037,
+        3.333333333333324,
+        3.8333333333333224,
+        5.008333333333372
+      ],
+      "maxQuiet": 4.49166666666668,
+      "wins": 8,
+      "winRate": 0.4,
+      "meanSeconds": 8.925000000000008,
+      "timeouts": 0
+    },
+    {
+      "map": "totem",
+      "difficulty": "normal",
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 0,
+          "seconds": 4.475000000000012,
+          "humanKills": 1
+        },
+        {
+          "round": 2,
+          "winner": 3,
+          "seconds": 5.041666666666707,
+          "humanKills": 1
+        },
+        {
+          "round": 3,
+          "winner": 3,
+          "seconds": 8.116666666666847,
+          "humanKills": 1
+        },
+        {
+          "round": 4,
+          "winner": 3,
+          "seconds": 14.658333333333141,
+          "humanKills": 1
+        },
+        {
+          "round": 5,
+          "winner": 3,
+          "seconds": 13.45833333333321,
+          "humanKills": 1
+        },
+        {
+          "round": 6,
+          "winner": 3,
+          "seconds": 5.083333333333376,
+          "humanKills": 2
+        },
+        {
+          "round": 7,
+          "winner": 2,
+          "seconds": 11.458333333333323,
+          "humanKills": 2
+        },
+        {
+          "round": 8,
+          "winner": 0,
+          "seconds": 7.241666666666816,
+          "humanKills": 4
+        },
+        {
+          "round": 9,
+          "winner": 0,
+          "seconds": 8.21666666666684,
+          "humanKills": 7
+        },
+        {
+          "round": 10,
+          "winner": 2,
+          "seconds": 3.491666666666657,
+          "humanKills": 7
+        },
+        {
+          "round": 11,
+          "winner": 3,
+          "seconds": 12.883333333333242,
+          "humanKills": 7
+        },
+        {
+          "round": 12,
+          "winner": 2,
+          "seconds": 7.5000000000001625,
+          "humanKills": 7
+        },
+        {
+          "round": 13,
+          "winner": 2,
+          "seconds": 11.549999999999985,
+          "humanKills": 8
+        },
+        {
+          "round": 14,
+          "winner": 0,
+          "seconds": 9.691666666666757,
+          "humanKills": 9
+        },
+        {
+          "round": 15,
+          "winner": 3,
+          "seconds": 10.558333333333374,
+          "humanKills": 9
+        },
+        {
+          "round": 16,
+          "winner": 1,
+          "seconds": 6.4750000000001116,
+          "humanKills": 9
+        },
+        {
+          "round": 17,
+          "winner": 3,
+          "seconds": 15.183333333333112,
+          "humanKills": 9
+        },
+        {
+          "round": 18,
+          "winner": 0,
+          "seconds": 4.42500000000001,
+          "humanKills": 11
+        },
+        {
+          "round": 19,
+          "winner": 1,
+          "seconds": 12.049999999999956,
+          "humanKills": 11
+        },
+        {
+          "round": 20,
+          "winner": 0,
+          "seconds": 3.3416666666666575,
+          "humanKills": 13
+        }
+      ],
+      "events": {
+        "jump": 513,
+        "shoot": 156,
+        "dash": 34,
+        "impact": 108,
+        "pickup": 117,
+        "kill": 60,
+        "round": 20,
+        "chest-spawn": 5,
+        "chest-open": 2,
+        "catch": 2
+      },
+      "byFighter": [
+        {
+          "id": 0,
+          "shots": 67,
+          "catches": 0,
+          "kills": 13,
+          "chests": 0,
+          "travel": 918.6056225857471,
+          "airTicks": 7851,
+          "activeTicks": 10919
+        },
+        {
+          "id": 1,
+          "shots": 21,
+          "catches": 1,
+          "kills": 12,
+          "chests": 0,
+          "travel": 1197.73067445688,
+          "airTicks": 12294,
+          "activeTicks": 14187
+        },
+        {
+          "id": 2,
+          "shots": 34,
+          "catches": 0,
+          "kills": 18,
+          "chests": 0,
+          "travel": 1572.5348035349734,
+          "airTicks": 15191,
+          "activeTicks": 18267
+        },
+        {
+          "id": 3,
+          "shots": 34,
+          "catches": 1,
+          "kills": 17,
+          "chests": 2,
+          "travel": 1588.6868709456544,
+          "airTicks": 15160,
+          "activeTicks": 18566
+        }
+      ],
+      "firstBotKills": [
+        2.2416666666666614,
+        2.099999999999995,
+        3.133333333333325,
+        1.908333333333329,
+        1.4916666666666638,
+        3.3666666666666574,
+        1.2333333333333314,
+        5.275000000000052,
+        1.4916666666666638,
+        4.400000000000008,
+        4.049999999999991,
+        1.7333333333333296,
+        2.0749999999999953,
+        5.808333333333412,
+        1.2333333333333314,
+        1.4916666666666638,
+        3.0749999999999917,
+        1.908333333333329,
+        2.583333333333327
+      ],
+      "maxQuiet": 8.841666666666805,
+      "wins": 6,
+      "winRate": 0.3,
+      "meanSeconds": 8.745000000000015,
+      "timeouts": 0
+    },
+    {
+      "map": "canopy",
+      "difficulty": "normal",
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 3,
+          "seconds": 5.275000000000052,
+          "humanKills": 1
+        },
+        {
+          "round": 2,
+          "winner": 3,
+          "seconds": 11.724999999999975,
+          "humanKills": 1
+        },
+        {
+          "round": 3,
+          "winner": 3,
+          "seconds": 5.175000000000047,
+          "humanKills": 2
+        },
+        {
+          "round": 4,
+          "winner": 0,
+          "seconds": 4.741666666666692,
+          "humanKills": 5
+        },
+        {
+          "round": 5,
+          "winner": 0,
+          "seconds": 9.066666666666793,
+          "humanKills": 8
+        },
+        {
+          "round": 6,
+          "winner": 2,
+          "seconds": 8.466666666666827,
+          "humanKills": 8
+        },
+        {
+          "round": 7,
+          "winner": 2,
+          "seconds": 9.46666666666677,
+          "humanKills": 9
+        },
+        {
+          "round": 8,
+          "winner": 3,
+          "seconds": 7.825000000000179,
+          "humanKills": 10
+        },
+        {
+          "round": 9,
+          "winner": 0,
+          "seconds": 8.958333333333465,
+          "humanKills": 11
+        },
+        {
+          "round": 10,
+          "winner": 3,
+          "seconds": 12.4416666666666,
+          "humanKills": 12
+        },
+        {
+          "round": 11,
+          "winner": 1,
+          "seconds": 12.183333333333282,
+          "humanKills": 12
+        },
+        {
+          "round": 12,
+          "winner": 1,
+          "seconds": 8.133333333333512,
+          "humanKills": 12
+        },
+        {
+          "round": 13,
+          "winner": 3,
+          "seconds": 12.333333333333274,
+          "humanKills": 14
+        },
+        {
+          "round": 14,
+          "winner": 0,
+          "seconds": 10.950000000000019,
+          "humanKills": 16
+        },
+        {
+          "round": 15,
+          "winner": 0,
+          "seconds": 3.849999999999989,
+          "humanKills": 19
+        },
+        {
+          "round": 16,
+          "winner": 2,
+          "seconds": 6.666666666666788,
+          "humanKills": 19
+        },
+        {
+          "round": 17,
+          "winner": 3,
+          "seconds": 10.80833333333336,
+          "humanKills": 21
+        },
+        {
+          "round": 18,
+          "winner": 1,
+          "seconds": 15.983333333333066,
+          "humanKills": 22
+        },
+        {
+          "round": 19,
+          "winner": 0,
+          "seconds": 10.958333333333352,
+          "humanKills": 24
+        },
+        {
+          "round": 20,
+          "winner": 3,
+          "seconds": 5.691666666666739,
+          "humanKills": 26
+        }
+      ],
+      "events": {
+        "jump": 505,
+        "shoot": 197,
+        "impact": 160,
+        "dash": 49,
+        "kill": 60,
+        "pickup": 152,
+        "round": 20,
+        "catch": 5,
+        "chest-spawn": 4,
+        "chest-open": 2
+      },
+      "byFighter": [
+        {
+          "id": 0,
+          "shots": 97,
+          "catches": 1,
+          "kills": 27,
+          "chests": 0,
+          "travel": 1306.6591524054932,
+          "airTicks": 11701,
+          "activeTicks": 15075
+        },
+        {
+          "id": 1,
+          "shots": 21,
+          "catches": 1,
+          "kills": 6,
+          "chests": 0,
+          "travel": 1078.6896824172677,
+          "airTicks": 10997,
+          "activeTicks": 12589
+        },
+        {
+          "id": 2,
+          "shots": 40,
+          "catches": 0,
+          "kills": 12,
+          "chests": 2,
+          "travel": 1631.6457821260647,
+          "airTicks": 16465,
+          "activeTicks": 18646
+        },
+        {
+          "id": 3,
+          "shots": 39,
+          "catches": 3,
+          "kills": 15,
+          "chests": 0,
+          "travel": 1425.5935228605015,
+          "airTicks": 14145,
+          "activeTicks": 16636
+        }
+      ],
+      "firstBotKills": [
+        3.2916666666666576,
+        1.9583333333333288,
+        2.8499999999999925,
+        5.258333333333384,
+        3.658333333333323,
+        6.191666666666764,
+        5.258333333333384,
+        5.475000000000062,
+        3.3666666666666574,
+        5.441666666666727,
+        12.333333333333274,
+        7.208333333333481,
+        1.4833333333333305,
+        10.80833333333336,
+        3.166666666666658,
+        3.191666666666658,
+        5.691666666666739
+      ],
+      "maxQuiet": 2.2749999999999946,
+      "wins": 6,
+      "winRate": 0.3,
+      "meanSeconds": 9.03500000000004,
+      "timeouts": 0
+    },
+    {
+      "map": "falls",
+      "difficulty": "normal",
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 0,
+          "seconds": 7.550000000000165,
+          "humanKills": 2
+        },
+        {
+          "round": 2,
+          "winner": 1,
+          "seconds": 3.058333333333325,
+          "humanKills": 3
+        },
+        {
+          "round": 3,
+          "winner": 2,
+          "seconds": 23.24999999999932,
+          "humanKills": 4
+        },
+        {
+          "round": 4,
+          "winner": 3,
+          "seconds": 6.950000000000135,
+          "humanKills": 4
+        },
+        {
+          "round": 5,
+          "winner": 3,
+          "seconds": 22.533333333332696,
+          "humanKills": 5
+        },
+        {
+          "round": 6,
+          "winner": 2,
+          "seconds": 7.225000000000149,
+          "humanKills": 5
+        },
+        {
+          "round": 7,
+          "winner": 2,
+          "seconds": 11.066666666666679,
+          "humanKills": 5
+        },
+        {
+          "round": 8,
+          "winner": 2,
+          "seconds": 6.616666666666785,
+          "humanKills": 5
+        },
+        {
+          "round": 9,
+          "winner": 2,
+          "seconds": 9.5250000000001,
+          "humanKills": 6
+        },
+        {
+          "round": 10,
+          "winner": 0,
+          "seconds": 5.658333333333404,
+          "humanKills": 7
+        },
+        {
+          "round": 11,
+          "winner": 3,
+          "seconds": 6.216666666666765,
+          "humanKills": 8
+        },
+        {
+          "round": 12,
+          "winner": 1,
+          "seconds": 7.091666666666809,
+          "humanKills": 8
+        },
+        {
+          "round": 13,
+          "winner": 1,
+          "seconds": 4.816666666666696,
+          "humanKills": 10
+        },
+        {
+          "round": 14,
+          "winner": 1,
+          "seconds": 6.141666666666762,
+          "humanKills": 10
+        },
+        {
+          "round": 15,
+          "winner": 1,
+          "seconds": 5.325000000000054,
+          "humanKills": 10
+        },
+        {
+          "round": 16,
+          "winner": 2,
+          "seconds": 8.850000000000138,
+          "humanKills": 11
+        },
+        {
+          "round": 17,
+          "winner": 0,
+          "seconds": 6.100000000000093,
+          "humanKills": 14
+        },
+        {
+          "round": 18,
+          "winner": 2,
+          "seconds": 2.233333333333328,
+          "humanKills": 16
+        },
+        {
+          "round": 19,
+          "winner": 0,
+          "seconds": 3.108333333333325,
+          "humanKills": 19
+        },
+        {
+          "round": 20,
+          "winner": 2,
+          "seconds": 4.49166666666668,
+          "humanKills": 19
+        }
+      ],
+      "events": {
+        "jump": 423,
+        "shoot": 149,
+        "dash": 26,
+        "impact": 100,
+        "pickup": 119,
+        "kill": 60,
+        "round": 20,
+        "chest-spawn": 2,
+        "chest-open": 2,
+        "explosion": 1,
+        "catch": 2
+      },
+      "byFighter": [
+        {
+          "id": 0,
+          "shots": 60,
+          "catches": 1,
+          "kills": 19,
+          "chests": 0,
+          "travel": 827.9175943878188,
+          "airTicks": 6465,
+          "activeTicks": 9229
+        },
+        {
+          "id": 1,
+          "shots": 19,
+          "catches": 0,
+          "kills": 12,
+          "chests": 0,
+          "travel": 954.3071618155022,
+          "airTicks": 9098,
+          "activeTicks": 10934
+        },
+        {
+          "id": 2,
+          "shots": 36,
+          "catches": 0,
+          "kills": 16,
+          "chests": 0,
+          "travel": 1547.1533706952212,
+          "airTicks": 15002,
+          "activeTicks": 17430
+        },
+        {
+          "id": 3,
+          "shots": 34,
+          "catches": 1,
+          "kills": 13,
+          "chests": 2,
+          "travel": 1492.3979822264027,
+          "airTicks": 14070,
+          "activeTicks": 16200
+        }
+      ],
+      "firstBotKills": [
+        5.625000000000069,
+        1.1999999999999982,
+        6.291666666666769,
+        1.3416666666666643,
+        4.383333333333341,
+        1.4999999999999971,
+        1.3416666666666643,
+        2.7916666666666594,
+        3.691666666666656,
+        5.208333333333382,
+        2.999999999999992,
+        1.3416666666666643,
+        4.816666666666696,
+        4.850000000000031,
+        1.3416666666666643,
+        3.191666666666658,
+        2.041666666666662,
+        2.533333333333327
+      ],
+      "maxQuiet": 4.325000000000005,
+      "wins": 4,
+      "winRate": 0.2,
+      "meanSeconds": 7.8904166666666695,
+      "timeouts": 0
+    },
+    {
+      "map": "roots",
+      "difficulty": "normal",
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 2,
+          "seconds": 13.241666666666555,
+          "humanKills": 0
+        },
+        {
+          "round": 2,
+          "winner": 2,
+          "seconds": 4.0333333333333234,
+          "humanKills": 2
+        },
+        {
+          "round": 3,
+          "winner": 3,
+          "seconds": 6.908333333333466,
+          "humanKills": 3
+        },
+        {
+          "round": 4,
+          "winner": 1,
+          "seconds": 6.7416666666667915,
+          "humanKills": 4
+        },
+        {
+          "round": 5,
+          "winner": 2,
+          "seconds": 7.441666666666826,
+          "humanKills": 5
+        },
+        {
+          "round": 6,
+          "winner": 0,
+          "seconds": 4.883333333333366,
+          "humanKills": 8
+        },
+        {
+          "round": 7,
+          "winner": 0,
+          "seconds": 3.166666666666658,
+          "humanKills": 11
+        },
+        {
+          "round": 8,
+          "winner": 2,
+          "seconds": 3.7249999999999894,
+          "humanKills": 11
+        },
+        {
+          "round": 9,
+          "winner": 2,
+          "seconds": 15.166666666666446,
+          "humanKills": 12
+        },
+        {
+          "round": 10,
+          "winner": 3,
+          "seconds": 12.083333333333288,
+          "humanKills": 14
+        },
+        {
+          "round": 11,
+          "winner": 2,
+          "seconds": 6.225000000000099,
+          "humanKills": 15
+        },
+        {
+          "round": 12,
+          "winner": 2,
+          "seconds": 4.541666666666682,
+          "humanKills": 15
+        },
+        {
+          "round": 13,
+          "winner": 0,
+          "seconds": 12.799999999999914,
+          "humanKills": 17
+        },
+        {
+          "round": 14,
+          "winner": 2,
+          "seconds": 7.875000000000181,
+          "humanKills": 17
+        },
+        {
+          "round": 15,
+          "winner": 0,
+          "seconds": 10.858333333333357,
+          "humanKills": 19
+        },
+        {
+          "round": 16,
+          "winner": 0,
+          "seconds": 4.908333333333367,
+          "humanKills": 21
+        },
+        {
+          "round": 17,
+          "winner": 0,
+          "seconds": 8.575000000000154,
+          "humanKills": 24
+        },
+        {
+          "round": 18,
+          "winner": 0,
+          "seconds": 5.691666666666739,
+          "humanKills": 26
+        },
+        {
+          "round": 19,
+          "winner": 0,
+          "seconds": 4.583333333333351,
+          "humanKills": 28
+        },
+        {
+          "round": 20,
+          "winner": 0,
+          "seconds": 5.766666666666743,
+          "humanKills": 31
+        }
+      ],
+      "events": {
+        "jump": 415,
+        "shoot": 156,
+        "dash": 47,
+        "impact": 116,
+        "pickup": 116,
+        "catch": 5,
+        "kill": 60,
+        "chest-spawn": 4,
+        "round": 20
+      },
+      "byFighter": [
+        {
+          "id": 0,
+          "shots": 90,
+          "catches": 1,
+          "kills": 31,
+          "chests": 0,
+          "travel": 1319.9410869687051,
+          "airTicks": 11158,
+          "activeTicks": 14419
+        },
+        {
+          "id": 1,
+          "shots": 14,
+          "catches": 1,
+          "kills": 1,
+          "chests": 0,
+          "travel": 747.9795340442873,
+          "airTicks": 6842,
+          "activeTicks": 9366
+        },
+        {
+          "id": 2,
+          "shots": 25,
+          "catches": 0,
+          "kills": 16,
+          "chests": 0,
+          "travel": 1180.4672655521786,
+          "airTicks": 11570,
+          "activeTicks": 14021
+        },
+        {
+          "id": 3,
+          "shots": 27,
+          "catches": 3,
+          "kills": 12,
+          "chests": 0,
+          "travel": 1302.8160626902277,
+          "airTicks": 12381,
+          "activeTicks": 15829
+        }
+      ],
+      "firstBotKills": [
+        5.266666666666718,
+        4.0333333333333234,
+        6.158333333333429,
+        3.8916666666666555,
+        2.499999999999994,
+        1.524999999999997,
+        7.233333333333483,
+        12.083333333333288,
+        4.641666666666687,
+        1.0083333333333322,
+        3.9749999999999885,
+        2.399999999999994,
+        7.133333333333478,
+        3.383333333333324,
+        3.791666666666656,
+        1.8583333333333292
+      ],
+      "maxQuiet": 4.149999999999996,
+      "wins": 9,
+      "winRate": 0.45,
+      "meanSeconds": 7.4608333333333645,
+      "timeouts": 0
+    }
+  ],
+  "summary": {
+    "easy": {
+      "rounds": 100,
+      "wins": 36,
+      "winRate": 0.36,
+      "meanSeconds": 8.811500000000024,
+      "timeouts": 0
+    },
+    "normal": {
+      "rounds": 100,
+      "wins": 33,
+      "winRate": 0.33,
+      "meanSeconds": 8.411250000000022,
+      "timeouts": 0
+    }
+  }
+}

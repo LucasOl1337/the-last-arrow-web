@@ -1,0 +1,239 @@
+{
+  "balance": {
+    "easy": {
+      "before": {
+        "rounds": 100,
+        "wins": 22,
+        "winRate": 0.22,
+        "meanSeconds": 8.829250000000025,
+        "timeouts": 0,
+        "maxQuietSeconds": 11.883333333333299,
+        "botCatches": 62
+      },
+      "after": {
+        "rounds": 100,
+        "wins": 36,
+        "winRate": 0.36,
+        "meanSeconds": 8.811500000000024,
+        "timeouts": 0,
+        "maxQuietSeconds": 8.408333333333497,
+        "botCatches": 0
+      }
+    },
+    "normal": {
+      "before": {
+        "rounds": 100,
+        "wins": 12,
+        "winRate": 0.12,
+        "meanSeconds": 9.152416666666651,
+        "timeouts": 0,
+        "maxQuietSeconds": 10.425000000000049,
+        "botCatches": 106
+      },
+      "after": {
+        "rounds": 100,
+        "wins": 33,
+        "winRate": 0.33,
+        "meanSeconds": 8.411250000000022,
+        "timeouts": 0,
+        "maxQuietSeconds": 8.841666666666805,
+        "botCatches": 14
+      }
+    }
+  },
+  "fps": [
+    {
+      "map": "moss",
+      "difficulty": "easy",
+      "before": 60.00219641983567,
+      "after": 60.00219641983566,
+      "diagnostic": 59.55820258678168,
+      "maxGapMs": 16.80000000000109,
+      "frameWorkMs": 1.565820895471791,
+      "shotsP1": 6,
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 2,
+          "seconds": 6.216666666666765
+        }
+      ]
+    },
+    {
+      "map": "totem",
+      "difficulty": "easy",
+      "before": 60.002795471336434,
+      "after": 60.002795471336434,
+      "diagnostic": 59.29638486177415,
+      "maxGapMs": 16.80000000000291,
+      "frameWorkMs": 0.7912202381190755,
+      "shotsP1": 8,
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 2,
+          "seconds": 4.808333333333362
+        },
+        {
+          "round": 2,
+          "winner": 2,
+          "seconds": 5.875000000000082
+        }
+      ]
+    },
+    {
+      "map": "canopy",
+      "difficulty": "easy",
+      "before": 60.00219641983565,
+      "after": 60.002795471336405,
+      "diagnostic": 59.47105328464571,
+      "maxGapMs": 16.80000000000291,
+      "frameWorkMs": 0.7442622950464354,
+      "shotsP1": 12,
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 3,
+          "seconds": 15.024999999999787
+        }
+      ]
+    },
+    {
+      "map": "falls",
+      "difficulty": "easy",
+      "before": 60.00219641983569,
+      "after": 60.002795471336455,
+      "diagnostic": 59.647441018267095,
+      "maxGapMs": 16.80000000000291,
+      "frameWorkMs": 0.730505952351017,
+      "shotsP1": 8,
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 3,
+          "seconds": 7.408333333333491
+        },
+        {
+          "round": 2,
+          "winner": 0,
+          "seconds": 6.416666666666775
+        }
+      ]
+    },
+    {
+      "map": "roots",
+      "difficulty": "easy",
+      "before": 60.002795471336455,
+      "after": 60.00279547133636,
+      "diagnostic": 59.64691158588008,
+      "maxGapMs": 16.80000000000291,
+      "frameWorkMs": 0.7592261904778536,
+      "shotsP1": 7,
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 2,
+          "seconds": 7.91666666666685
+        }
+      ]
+    },
+    {
+      "map": "moss",
+      "difficulty": "normal",
+      "before": 60.00219641983565,
+      "after": 60.00219641983565,
+      "diagnostic": 59.558151300782036,
+      "maxGapMs": 16.80000000000291,
+      "frameWorkMs": 0.7239940387547993,
+      "shotsP1": 7,
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 2,
+          "seconds": 6.858333333333464
+        }
+      ]
+    },
+    {
+      "map": "totem",
+      "difficulty": "normal",
+      "before": 60.00219641983565,
+      "after": 60.00219641983565,
+      "diagnostic": 59.558679945323235,
+      "maxGapMs": 16.80000000000291,
+      "frameWorkMs": 0.9420268256217241,
+      "shotsP1": 8,
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 0,
+          "seconds": 5.675000000000072
+        }
+      ]
+    },
+    {
+      "map": "canopy",
+      "difficulty": "normal",
+      "before": 60.00219641983556,
+      "after": 60.00219641983574,
+      "diagnostic": 59.55867994532367,
+      "maxGapMs": 16.800000000017462,
+      "frameWorkMs": 1.5311475409480748,
+      "shotsP1": 6,
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 1,
+          "seconds": 6.491666666666779
+        },
+        {
+          "round": 2,
+          "winner": 3,
+          "seconds": 4.666666666666688
+        }
+      ]
+    },
+    {
+      "map": "falls",
+      "difficulty": "normal",
+      "before": 60.00219641983574,
+      "after": 60.00279547133636,
+      "diagnostic": 59.559683766441445,
+      "maxGapMs": 16.800000000017462,
+      "frameWorkMs": 2.229464285740895,
+      "shotsP1": 11,
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 2,
+          "seconds": 6.6416666666667865
+        }
+      ]
+    },
+    {
+      "map": "roots",
+      "difficulty": "normal",
+      "before": 60.001597380296346,
+      "after": 59.80311894730529,
+      "diagnostic": 58.77288540605168,
+      "maxGapMs": 33.40000000002328,
+      "frameWorkMs": 2.968310911834841,
+      "shotsP1": 7,
+      "rounds": [
+        {
+          "round": 1,
+          "winner": 2,
+          "seconds": 5.733333333333408
+        },
+        {
+          "round": 2,
+          "winner": 2,
+          "seconds": 6.300000000000103
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "pagesAtEnd": 0,
+  "renderer": "ANGLE (NVIDIA, Vulkan 1.4.351 (NVIDIA NVIDIA GeForce RTX 4070 Ti SUPER (0x00002705)), NVIDIA)"
+}

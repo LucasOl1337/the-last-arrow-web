@@ -1,0 +1,50 @@
+✖ Storm chooses the approach platform, Kaze the higher flank, from the same Musgo encounter (1.563641ms)
+✖ Akane detours to a distant chest; armed Storm keeps pressuring the opponent (0.259641ms)
+✔ an empty quiver overrides personality so Storm still seeks that chest (0.157851ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 61.402174
+
+✖ failing tests:
+
+test at tests/round-ten-personality.test.ts:16:1
+✖ Storm chooses the approach platform, Kaze the higher flank, from the same Musgo encounter (1.563641ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  4 !== 18
+  
+      at TestContext.<anonymous> (file:///home/lol/Projects/the-last-arrow-web-wt/rodada-astra/tests/round-ten-personality.test.ts:19:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.start (node:internal/test_runner/test:1257:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 4,
+    expected: 18,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/round-ten-personality.test.ts:22:1
+✖ Akane detours to a distant chest; armed Storm keeps pressuring the opponent (0.259641ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to: 6.5
+      at TestContext.<anonymous> (file:///home/lol/Projects/the-last-arrow-web-wt/rodada-astra/tests/round-ten-personality.test.ts:24:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 6.5,
+    expected: 6.5,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }

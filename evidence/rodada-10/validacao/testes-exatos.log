@@ -1,0 +1,18 @@
+✔ easy telegraphs a fixed leftward draw for at least 400ms, without tracking a target that crosses behind (1.993869ms)
+✔ normal gives at least 260ms to read a committed shot, shorter than easy (0.392541ms)
+✔ Storm chooses the approach platform, Kaze the higher flank, from the same Musgo encounter (1.560487ms)
+✔ Akane detours to a distant chest; armed Storm keeps pressuring the opponent (0.270742ms)
+✔ an empty quiver overrides personality so Storm still seeks that chest (0.1475ms)
+✔ easy cannot instantly catch an arrow first seen 78ms from impact (1.328595ms)
+✔ normal cannot instantly catch an arrow first seen 78ms from impact (0.215421ms)
+✔ hard retains its deliberate close-range interception (0.178371ms)
+✔ normal may catch a threat observed for its full reaction time, but not through terrain (0.564723ms)
+✔ supply route descends past the real edge of Totem continuous wrap ledge (2.2678ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 74.981161

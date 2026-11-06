@@ -1,0 +1,27 @@
+✖ supply route descends past the real edge of Totem continuous wrap ledge (2.11007ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 63.437021
+
+✖ failing tests:
+
+test at tests/round-ten-wrap-route.test.ts:9:1
+✖ supply route descends past the real edge of Totem continuous wrap ledge (2.11007ms)
+  AssertionError [ERR_ASSERTION]: exit at real edge, not seam: 3.700000000000003
+      at TestContext.<anonymous> (file:///home/lol/Projects/the-last-arrow-web-wt/rodada-astra/tests/round-ten-wrap-route.test.ts:18:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.start (node:internal/test_runner/test:1257:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

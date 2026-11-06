@@ -1,0 +1,297 @@
+{
+  "owner": "tla-rodada-10-story",
+  "pid": 1198063,
+  "before": false,
+  "errors": [],
+  "pagesAtEnd": 0,
+  "screens": {
+    "arena-juice-real--catch-1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 330.046875,
+          "y": 509.71875,
+          "w": 61.28125,
+          "h": 53.296875,
+          "text": "PEGOU!P1"
+        },
+        {
+          "x": 511.359375,
+          "y": 531.71875,
+          "w": 100.75,
+          "h": 31.375,
+          "text": "PEGOU!Stormdragon"
+        },
+        {
+          "x": 740.6875,
+          "y": 531.71875,
+          "w": 44.984375,
+          "h": 31.375,
+          "text": "PEGOU!Kaze"
+        },
+        {
+          "x": 937.5,
+          "y": 531.71875,
+          "w": 54.359375,
+          "h": 31.375,
+          "text": "PEGOU!Akane"
+        }
+      ]
+    },
+    "arena-juice-real--catch-900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 210.8125,
+          "y": 322.9375,
+          "w": 54.453125,
+          "h": 48.1875,
+          "text": "PEGOU!P1"
+        },
+        {
+          "x": 328.921875,
+          "y": 342.9375,
+          "w": 83.484375,
+          "h": 28.1875,
+          "text": "PEGOU!Stormdragon"
+        },
+        {
+          "x": 483.53125,
+          "y": 342.9375,
+          "w": 38.5625,
+          "h": 28.1875,
+          "text": "PEGOU!Kaze"
+        },
+        {
+          "x": 612.640625,
+          "y": 342.9375,
+          "w": 46.125,
+          "h": 28.1875,
+          "text": "PEGOU!Akane"
+        }
+      ]
+    },
+    "arena-juice-real--catch-844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.821,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 156.046875,
+          "y": 237.75,
+          "w": 54.453125,
+          "h": 48.1875,
+          "text": "PEGOU!P1"
+        },
+        {
+          "x": 243.796875,
+          "y": 257.75,
+          "w": 83.484375,
+          "h": 28.1875,
+          "text": "PEGOU!Stormdragon"
+        },
+        {
+          "x": 368.0625,
+          "y": 257.75,
+          "w": 38.5625,
+          "h": 28.1875,
+          "text": "PEGOU!Kaze"
+        },
+        {
+          "x": 466.8125,
+          "y": 257.75,
+          "w": 46.125,
+          "h": 28.1875,
+          "text": "PEGOU!Akane"
+        }
+      ]
+    },
+    "arena-hud-real--wrap-com-direcao-1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 13.859375,
+          "y": 273.421875,
+          "w": 49.21875,
+          "h": 31.375,
+          "text": "PEGOU!←P1"
+        },
+        {
+          "x": 1239.328125,
+          "y": 273.421875,
+          "w": 120.71875,
+          "h": 31.375,
+          "text": "PEGOU!→Stormdragon"
+        },
+        {
+          "x": 532.96875,
+          "y": 70.515625,
+          "w": 57.109375,
+          "h": 31.375,
+          "text": "PEGOU!↑Kaze"
+        },
+        {
+          "x": 770.84375,
+          "y": 627.71875,
+          "w": 66.484375,
+          "h": 31.375,
+          "text": "PEGOU!↓Akane"
+        }
+      ]
+    },
+    "arena-hud-real--wrap-com-direcao-900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 5,
+          "y": 172.671875,
+          "w": 42.78125,
+          "h": 28.1875,
+          "text": "PEGOU!←P1"
+        },
+        {
+          "x": 795,
+          "y": 172.671875,
+          "w": 100.359375,
+          "h": 28.1875,
+          "text": "PEGOU!→Stormdragon"
+        },
+        {
+          "x": 345.609375,
+          "y": 71.59375,
+          "w": 49.109375,
+          "h": 28.1875,
+          "text": "PEGOU!↑Kaze"
+        },
+        {
+          "x": 501.375,
+          "y": 406.21875,
+          "w": 56.671875,
+          "h": 28.1875,
+          "text": "PEGOU!↓Akane"
+        }
+      ]
+    },
+    "arena-hud-real--wrap-com-direcao-844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.821,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true,
+      "labels": [
+        {
+          "x": 5,
+          "y": 126.578125,
+          "w": 42.78125,
+          "h": 28.1875,
+          "text": "PEGOU!←P1"
+        },
+        {
+          "x": 588.328125,
+          "y": 126.578125,
+          "w": 100.359375,
+          "h": 28.1875,
+          "text": "PEGOU!→Stormdragon"
+        },
+        {
+          "x": 260.625,
+          "y": 69.84375,
+          "w": 49.109375,
+          "h": 28.1875,
+          "text": "PEGOU!↑Kaze"
+        },
+        {
+          "x": 379.6875,
+          "y": 306.5,
+          "w": 56.671875,
+          "h": 28.1875,
+          "text": "PEGOU!↓Akane"
+        }
+      ]
+    }
+  }
+}
