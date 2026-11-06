@@ -22,6 +22,14 @@ export class Effects {
   private rings: { mesh: THREE.Mesh; life: number; max: number; size: number }[] = [];
   private color = new THREE.Color(); private dummy = new THREE.Object3D();
   shake = 0; slow = 0; flash = 0; hitstop = 0;
+  private dotLimit = DOTS; private leafLimit = LEAVES; private emission = 0;
+  setLowQuality() {
+    this.dotLimit = 150; this.leafLimit = 40;
+    this.dCursor %= this.dotLimit; this.lCursor %= this.leafLimit;
+    this.dGeo.setDrawRange(0, this.dotLimit); this.leaves.count = this.leafLimit;
+    this.dLife.fill(0, this.dotLimit); this.lLife.fill(0, this.leafLimit);
+  }
+  get particleBudget() { return { dots: this.dotLimit, leaves: this.leafLimit }; }
   /** Camera push-in toward the last kill (scene coords); `zoom` eases 0→1→0 around the slow-motion. */
   focus = new THREE.Vector2(16, 9); zoom = 0; private zoomHold = 0;
   /** Screen shake grows with each hit and is capped, so double kills and bombs read stronger than a single arrow. */
@@ -60,15 +68,17 @@ export class Effects {
   }
   /** Scene-space emitter (y up). */
   private dot(x: number, y: number, color: THREE.ColorRepresentation, vx: number, vy: number, life: number, size: number, grav = -9, drag = 1.5, z = 1) {
-    const n = this.dCursor; this.dCursor = (n + 1) % DOTS;
+    if (this.dotLimit < DOTS && ++this.emission % 3 !== 0) return;
+    const n = this.dCursor; this.dCursor = (n + 1) % this.dotLimit;
     this.dPos[n * 3] = x; this.dPos[n * 3 + 1] = y; this.dPos[n * 3 + 2] = z;
     this.dVel[n * 3] = vx; this.dVel[n * 3 + 1] = vy; this.dVel[n * 3 + 2] = (Math.random() - 0.5) * 0.5;
     this.dLife[n] = this.dMax[n] = life; this.dSize[n] = size; this.dGrav[n] = grav; this.dDrag[n] = drag;
     this.color.set(color); this.color.toArray(this.dCol, n * 3);
   }
   private leafBurst(x: number, y: number, color: THREE.ColorRepresentation, count: number, speed: number) {
-    for (let k = 0; k < count; k++) {
-      const n = this.lCursor; this.lCursor = (n + 1) % LEAVES;
+    const emitted = this.leafLimit < LEAVES ? Math.ceil(count / 3) : count;
+    for (let k = 0; k < emitted; k++) {
+      const n = this.lCursor; this.lCursor = (n + 1) % this.leafLimit;
       const a = Math.random() * Math.PI * 2, s = speed * (0.35 + Math.random() * 0.65);
       this.lPos.set([x, y, 1 + (Math.random() - 0.5) * 0.4], n * 3);
       this.lVel.set([Math.cos(a) * s, Math.sin(a) * s + 2.5, (Math.random() - 0.5) * 2], n * 3);
@@ -139,7 +149,7 @@ export class Effects {
     this.zoom += ((this.zoomHold > 0 ? 1 : 0) - this.zoom) * Math.min(1, realDt * (this.zoomHold > 0 ? 9 : 3));
     if (this.zoom < 0.001) this.zoom = 0;
     const dt = gameDt > 0 ? Math.max(gameDt, realDt * 0.3) : 0;
-    for (let n = 0; n < DOTS; n++) {
+    for (let n = 0; n < this.dotLimit; n++) {
       if (this.dLife[n] <= 0) continue;
       this.dLife[n] -= dt;
       const drag = Math.exp(-this.dDrag[n] * dt);
@@ -148,8 +158,8 @@ export class Effects {
       if (this.dLife[n] <= 0) this.dPos[n * 3 + 2] = 999;
     }
     // Fade by shrinking size relative to remaining life (cheap: no per-vertex alpha attribute).
-    for (let n = 0; n < DOTS; n++) if (this.dLife[n] > 0) this.dSize[n] = Math.max(0, this.dSize[n] * (this.dLife[n] / Math.max(this.dLife[n] + dt, 1e-4)));
-    for (let n = 0; n < LEAVES; n++) {
+    for (let n = 0; n < this.dotLimit; n++) if (this.dLife[n] > 0) this.dSize[n] = Math.max(0, this.dSize[n] * (this.dLife[n] / Math.max(this.dLife[n] + dt, 1e-4)));
+    for (let n = 0; n < this.leafLimit; n++) {
       if (this.lLife[n] <= 0) continue;
       this.lLife[n] -= dt;
       const i = n * 3, drag = Math.exp(-2.2 * dt);

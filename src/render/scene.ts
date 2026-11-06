@@ -118,6 +118,11 @@ export class ArenaScene {
     this.terrain = buildTerrain(level, this.theme, this.stone);
     this.arena.add(this.terrain.group);
   }
+  setLowQuality() {
+    this.bloomEnabled = false;
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5) * 0.7);
+    this.resize(this.canvas.clientWidth, this.canvas.clientHeight);
+  }
   resize(width: number, height: number) {
     this.renderer.setSize(width, height, false); this.camera.aspect = width / height;
     this.baseZ = Math.max(19.4, 33.8 / this.camera.aspect) / (2 * Math.tan(THREE.MathUtils.degToRad(15)));

@@ -11,6 +11,7 @@ import { Menu } from './ui/menu.ts';
 import { Controls } from './ui/controls.ts';
 import { TouchControls } from './ui/touch.ts';
 import { AudioEngine } from './audio.ts';
+import { AutoQuality } from './render/quality.ts';
 
 const params = new URLSearchParams(location.search);
 const seed = Number(params.get('seed') ?? '1');
@@ -28,6 +29,8 @@ let world = createWorld({ seed }), running = false, paused = false, timeScale = 
 let arena: ArenaScene | null = null, fighters: FightersView, arrows: ArrowsView, fx: Effects, chests: ChestsView;
 let lastTime = performance.now(), shownVictory = false, seenRound = 0;
 let frames = 0, measuredSeconds = 0, frameMsTotal = 0, maxFrameMs = 0;
+const quality = new AutoQuality();
+let sampledFrame = false;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const menu = new Menu({
   start: opts => startMatch(opts), resume: () => setPaused(false), rematch: () => startMatch(world.options),
@@ -64,26 +67,33 @@ function startMatch(opts: MatchOptions = {}) {
     stats = world.fighters.map(() => ({ kills: 0, catches: 0, stomps: 0 })); wasCharging = world.fighters.map(() => false);
     seenRound = world.round; shownVictory = false; paused = false; running = true; timeScale = 1; accumulator = 0;
     frames = measuredSeconds = frameMsTotal = maxFrameMs = 0;
+    sampledFrame = false; quality.begin(); hud.setLowQuality(quality.level === 'low');
     controls.reset(); controls.active = true; menu.hide(); game.hidden = false;
     arena.resize(game.clientWidth, game.clientHeight); audio.setPaused(false); void audio.unlock().catch(() => {});
   } catch (error) { console.error(error); running = false; menu.show('error'); }
 }
-/** Stomp kills reset the killer's vy to exactly −10 while standing just above the victim (rules.checkStomps). */
+/** Kill cause comes from the sim, including stomps across the wrap seam. */
 function record(e: (typeof world.events)[number]) {
   const s = stats[e.actor];
   if (!s) return;
   if (e.type === 'catch') s.catches++;
   if (e.type === 'kill' && e.target !== undefined && e.target !== e.actor) {
     s.kills++;
-    const killer = world.fighters[e.actor], victim = world.fighters[e.target];
-    if (killer.vy === -10 && victim.y - killer.y > 0.5 && victim.y - killer.y < 1.2) s.stomps++;
+    if (e.cause === 'stomp') s.stomps++;
   }
 }
 // Audio is unlocked by a real gesture; autoplay remains silent until the first interaction.
 window.addEventListener('pointerdown', () => { void audio.unlock().catch(() => {}); }, { once: true });
 window.addEventListener('keydown', () => { void audio.unlock().catch(() => {}); }, { once: true });
+function matchEnded() { return world.phase === 'matchover'; }
 function frame(now: number) {
-  const elapsed = Math.min((now - lastTime) / 1000, 0.05); lastTime = now;
+  const realElapsed = (now - lastTime) / 1000;
+  const elapsed = Math.min(realElapsed, 0.05); lastTime = now;
+  const sampleActive = running && !paused && !document.hidden && timeScale === 1 && world.phase !== 'matchover';
+  // Models/initial compilation load before this window; measure the first two seconds of ready gameplay.
+  if (quality.sample(now, sampleActive && !!fighters?.usingModels && world.phase === 'playing') && arena) {
+    arena.setLowQuality(); fx.setLowQuality(); hud.setLowQuality(true);
+  }
   if (running && arena) {
     const start = performance.now();
     const intents = controls.sample();
@@ -99,7 +109,7 @@ function frame(now: number) {
         if (world.round !== seenRound) { seenRound = world.round; fx.reset(); }
         for (const event of world.events) { fx.event(event, world); audio.event(event, world); fighters.event(event.type, event.actor); record(event); }
         world.fighters.forEach((f, id) => { if (f.charging && !wasCharging[id]) audio.draw(); wasCharging[id] = f.charging; });
-        if (world.winner !== null && world.fighters[world.winner].score >= 5) { accumulator = 0; break; }
+        if (matchEnded()) { accumulator = 0; break; }
       }
     }
     // Test hook timeScale 0 freezes the sim only; poses keep animating so frozen states can be inspected.
@@ -111,13 +121,14 @@ function frame(now: number) {
     if (world.phase === 'matchover' && !shownVictory) {
       shownVictory = true; controls.active = false;
       const winner = world.winner === null ? null : world.fighters[world.winner];
-      menu.show('victory', winner ? CHARACTERS[winner.character].name : undefined, winner ? { ...stats[winner.id], score: winner.score } : undefined);
+      menu.show('victory', winner ? CHARACTERS[winner.character].name : undefined, { ...(winner ? stats[winner.id] : { kills: 0, catches: 0, stomps: 0 }), score: winner?.score ?? 0, mode: world.options.mode });
     }
-    if (!paused && timeScale === 1) {
-      frames++; measuredSeconds += elapsed; const cost = performance.now() - start;
+    if (sampleActive && sampledFrame) {
+      frames++; measuredSeconds += realElapsed; const cost = performance.now() - start;
       frameMsTotal += cost; maxFrameMs = Math.max(maxFrameMs, cost);
     }
   }
+  sampledFrame = sampleActive;
   requestAnimationFrame(frame);
 }
 window.__tla = {
@@ -127,6 +138,7 @@ window.__tla = {
   state: () => ({ ...snapshot(world), paused, timeScale }),
   visuals: () => fighters?.inspect() ?? [],
   diagnostics: () => ({ frames, fps: measuredSeconds ? frames / measuredSeconds : 0, averageFrameWorkMs: frames ? frameMsTotal / frames : 0, maxFrameWorkMs: maxFrameMs,
+    quality: { ...quality.inspect(), bloom: arena?.bloomEnabled ?? true, pixelRatio: arena?.renderer.getPixelRatio() ?? 1, particles: fx?.particleBudget },
     drawCalls: arena?.renderer.info.render.calls ?? 0, triangles: arena?.renderer.info.render.triangles ?? 0,
     geometries: arena?.renderer.info.memory.geometries ?? 0, textures: arena?.renderer.info.memory.textures ?? 0,
     models: fighters?.usingModels ?? false, modelError: fighters?.loadError ? String(fighters.loadError) : null,
@@ -141,7 +153,7 @@ declare global {
       setTimeScale: (value: number) => void; startMatch: (opts?: MatchOptions) => void;
       state: () => ReturnType<typeof snapshot> & { paused: boolean; timeScale: number };
       visuals: () => ReturnType<FightersView['inspect']>;
-      diagnostics: () => { frames: number; fps: number; averageFrameWorkMs: number; maxFrameWorkMs: number; drawCalls: number; triangles: number; geometries: number; textures: number; models: boolean; modelError: string | null; audioFailures: string[]; renderer: unknown };
+      diagnostics: () => { frames: number; fps: number; averageFrameWorkMs: number; maxFrameWorkMs: number; quality: ReturnType<AutoQuality['inspect']> & { bloom: boolean; pixelRatio: number; particles?: Effects['particleBudget'] }; drawCalls: number; triangles: number; geometries: number; textures: number; models: boolean; modelError: string | null; audioFailures: string[]; renderer: unknown };
     };
   }
 }
