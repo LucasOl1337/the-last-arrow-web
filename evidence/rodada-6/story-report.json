@@ -1,0 +1,63 @@
+{
+  "owner": "tla-rodada-6-story",
+  "pid": 261801,
+  "errors": [],
+  "screens": {
+    "1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.821,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  },
+  "pagesAtStart": 0,
+  "pagesAtEnd": 0
+}

@@ -1,0 +1,8 @@
+{"owner":"tla-rodada-6","pid":253981,"type":"open-video","bench":"tla"}
+{"owner":"tla-rodada-6","pid":253981,"type":"close-video","bench":"tla"}
+{"owner":"tla-rodada-6","pid":253981,"type":"open-proof","bench":"tla"}
+{"owner":"tla-rodada-6","pid":253981,"type":"close-proof","bench":"tla"}
+{"owner":"tla-rodada-6","pid":253981,"type":"browser-closed","bench":"tla"}
+{"owner":"tla-rodada-6-story","pid":261801,"type":"open","bench":"tla"}
+{"owner":"tla-rodada-6-story","pid":261801,"type":"close","bench":"tla"}
+{"owner":"tla-rodada-6-story","pid":261801,"type":"browser-closed","bench":"tla"}

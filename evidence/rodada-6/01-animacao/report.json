@@ -1,0 +1,4621 @@
+{
+  "owner": "tla-rodada-6",
+  "pid": 249957,
+  "final": false,
+  "errors": [],
+  "maps": {},
+  "screens": {
+    "1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 247,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  },
+  "pagesAtStart": 0,
+  "pagesAtEnd": 0,
+  "draw": [
+    {
+      "state": "shoot",
+      "yaw": -0.35,
+      "feet": [
+        7,
+        2,
+        0.55
+      ],
+      "headHeight": 1.854443638464664,
+      "animationTime": 0.18000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 1,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06260870293443199,
+        0.10317498537664793
+      ],
+      "bowDirection": [
+        0.5266002131897167,
+        -0.03680444437197572,
+        0.2708241992348558
+      ],
+      "nock": [
+        7.377162842299434,
+        3.640981013357301,
+        0.78
+      ]
+    },
+    {
+      "state": "shoot",
+      "yaw": -2.791592653589793,
+      "feet": [
+        13,
+        2,
+        0.55
+      ],
+      "headHeight": 1.9255602033091503,
+      "animationTime": 0.18000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 6.2898150386425815,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 1,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.04163317649099829,
+        0.08308174498931198
+      ],
+      "bowDirection": [
+        -0.5730528463075792,
+        -0.03454416792291726,
+        0.15578673951966182
+      ],
+      "nock": [
+        12.60728135886759,
+        3.734420605507814,
+        0.78
+      ]
+    },
+    {
+      "state": "shoot",
+      "yaw": -0.35,
+      "feet": [
+        19,
+        2,
+        0.55
+      ],
+      "headHeight": 2.241401832550192,
+      "animationTime": 0.18000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 7.486026693155408,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 1,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.03005516331695146,
+        0.07664530683757498
+      ],
+      "bowDirection": [
+        0.6875542264973369,
+        -0.07539103027668226,
+        0.40803305331343054
+      ],
+      "nock": [
+        19.48620356230517,
+        3.988819127208745,
+        0.78
+      ]
+    },
+    {
+      "state": "shoot",
+      "yaw": -2.791592653589793,
+      "feet": [
+        25,
+        2,
+        0.55
+      ],
+      "headHeight": 2.1797366173655908,
+      "animationTime": 0.18000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 6.671453729771413,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 1,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06287791757549677,
+        0.11542256446574051
+      ],
+      "bowDirection": [
+        -0.8168723400654017,
+        -0.03574566072880003,
+        0.1733327849182854
+      ],
+      "nock": [
+        24.39453850770804,
+        4.019021324061732,
+        0.78
+      ]
+    }
+  ],
+  "runHalf": [
+    {
+      "state": "run",
+      "yaw": -0.35,
+      "feet": [
+        7,
+        2,
+        0.55
+      ],
+      "headHeight": 1.6273128557507222,
+      "animationTime": 0.2423247930542604,
+      "animationSpeed": 0.6921587919287636,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.12967891444453716,
+        0.379572335678791
+      ],
+      "bowDirection": [
+        -0.19142384083384822,
+        -0.31823569420903386,
+        -0.5755383860898095
+      ],
+      "nock": null
+    },
+    {
+      "state": "run",
+      "yaw": -2.791592653589793,
+      "feet": [
+        13,
+        2,
+        0.55
+      ],
+      "headHeight": 1.7143011952287521,
+      "animationTime": 0.21707951531348513,
+      "animationSpeed": 0.6200500294586829,
+      "strideSpeed": 6.2898150386425815,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.12088440415062829,
+        0.37680379816851683
+      ],
+      "bowDirection": [
+        0.5892784210131481,
+        -0.2196434794600779,
+        0.3437628607667359
+      ],
+      "nock": null
+    },
+    {
+      "state": "run",
+      "yaw": -0.35,
+      "feet": [
+        19,
+        2,
+        0.55
+      ],
+      "headHeight": 1.962843261942683,
+      "animationTime": 0.18239181557399456,
+      "animationSpeed": 0.52097062431875,
+      "strideSpeed": 7.486026693155408,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.1496250209524499,
+        0.25098398380352416
+      ],
+      "bowDirection": [
+        -0.3317552853549266,
+        -0.2086875012938223,
+        -0.8464485961328596
+      ],
+      "nock": null
+    },
+    {
+      "state": "run",
+      "yaw": -2.791592653589793,
+      "feet": [
+        25,
+        2,
+        0.55
+      ],
+      "headHeight": 1.938189449491154,
+      "animationTime": 0.2046615408433305,
+      "animationSpeed": 0.5845802366276214,
+      "strideSpeed": 6.671453729771413,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.11496269266590975,
+        0.4362936837561482
+      ],
+      "bowDirection": [
+        0.8111283096417736,
+        -0.29422173015265995,
+        0.4731711258810698
+      ],
+      "nock": null
+    }
+  ],
+  "runFull": [
+    {
+      "state": "run",
+      "yaw": -0.35,
+      "feet": [
+        7,
+        2,
+        0.55
+      ],
+      "headHeight": 1.6301086684209087,
+      "animationTime": 0.4499724306328895,
+      "animationSpeed": 1.3843175838575272,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.09907256774750683,
+        0.23632497716214784
+      ],
+      "bowDirection": [
+        0.4171382352450381,
+        -0.12585169887676573,
+        0.016208873059645745
+      ],
+      "nock": null
+    },
+    {
+      "state": "run",
+      "yaw": -2.791592653589793,
+      "feet": [
+        13,
+        2,
+        0.55
+      ],
+      "headHeight": 1.6677174585823304,
+      "animationTime": 0.40309452415109004,
+      "animationSpeed": 1.2401000589173659,
+      "strideSpeed": 6.2898150386425815,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0477702394320092,
+        0.31822646586828496
+      ],
+      "bowDirection": [
+        -0.28858489839068824,
+        -0.2736451796358046,
+        0.28785801890233276
+      ],
+      "nock": null
+    },
+    {
+      "state": "run",
+      "yaw": -0.35,
+      "feet": [
+        19,
+        2,
+        0.55
+      ],
+      "headHeight": 1.9103850429628437,
+      "animationTime": 0.33868300286961955,
+      "animationSpeed": 1.0419412486375,
+      "strideSpeed": 7.486026693155408,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.029626087223968867,
+        0.47864546414538545
+      ],
+      "bowDirection": [
+        0.21562326067140702,
+        -0.653007949999576,
+        -0.2547556080628411
+      ],
+      "nock": null
+    },
+    {
+      "state": "run",
+      "yaw": -2.791592653589793,
+      "feet": [
+        25,
+        2,
+        0.55
+      ],
+      "headHeight": 1.8836771687615488,
+      "animationTime": 0.38003561183161694,
+      "animationSpeed": 1.1691604732552427,
+      "strideSpeed": 6.671453729771413,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.03710235324350997,
+        0.45595131235543285
+      ],
+      "bowDirection": [
+        -0.33609748284361274,
+        -0.5017994301429072,
+        0.38908039082011414
+      ],
+      "nock": null
+    }
+  ],
+  "jump": [
+    {
+      "tick": 0,
+      "y": 15.45,
+      "vy": 0,
+      "grounded": true,
+      "state": "run",
+      "yaw": -0.35,
+      "feet": [
+        7,
+        2,
+        0.55
+      ],
+      "headHeight": 1.6649155705400398,
+      "animationTime": 0.8652677057901477,
+      "animationSpeed": 1.3843175838575272,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 1,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.148074352142205,
+        0.36477604231424854
+      ],
+      "bowDirection": [
+        -0.18281302404493882,
+        -0.33490022949094556,
+        -0.5254835621257996
+      ],
+      "nock": null
+    },
+    {
+      "tick": 1,
+      "y": 15.314722222222223,
+      "vy": -16.233333333333334,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        2.1341955555555465,
+        0.55
+      ],
+      "headHeight": 1.7213110109765335,
+      "animationTime": 0.016599999999999455,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0.8616661429405212,
+        "jump": 0.13833382725715637,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.12644118874208443,
+        0.3285486055892064
+      ],
+      "bowDirection": [
+        -0.10461867399820335,
+        -0.4044031723910164,
+        -0.43593519631171196
+      ],
+      "nock": null
+    },
+    {
+      "tick": 3,
+      "y": 15.05083333333333,
+      "vy": -15.7,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        2.3986433333333395,
+        0.55
+      ],
+      "headHeight": 1.7888572068355932,
+      "animationTime": 0.033300000000000184,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0.722499668598175,
+        "jump": 0.27750036120414734,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.1318570267817365,
+        0.29474127497490654
+      ],
+      "bowDirection": [
+        -0.008636949161184404,
+        -0.43573089681042676,
+        -0.34896560651316055
+      ],
+      "nock": null
+    },
+    {
+      "tick": 6,
+      "y": 14.67166666666666,
+      "vy": -14.899999999999997,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        2.654166666666672,
+        0.55
+      ],
+      "headHeight": 1.8683740442788732,
+      "animationTime": 0.05,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0.5833331346511841,
+        "jump": 0.4166668653488159,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.16101148938813603,
+        0.27011117886039004
+      ],
+      "bowDirection": [
+        0.07659193337425663,
+        -0.42951127799204114,
+        -0.2774143475370705
+      ],
+      "nock": null
+    },
+    {
+      "tick": 8,
+      "y": 14.429999999999993,
+      "vy": -14.366666666666662,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        2.9007566666666715,
+        0.55
+      ],
+      "headHeight": 1.9503643200797312,
+      "animationTime": 0.06669999999999981,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0.4441666007041931,
+        "jump": 0.5558333992958069,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.20540599489571898,
+        0.26811034764850294
+      ],
+      "bowDirection": [
+        0.1413138225351105,
+        -0.4034499244727039,
+        -0.23420990625875798
+      ],
+      "nock": null
+    },
+    {
+      "tick": 9,
+      "y": 14.312499999999993,
+      "vy": -14.099999999999994,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        3.13703000000001,
+        0.55
+      ],
+      "headHeight": 2.0385894924444834,
+      "animationTime": 0.08330000000000018,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0.3058333992958069,
+        "jump": 0.6941666007041931,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.25827850870618807,
+        0.2944970889626508
+      ],
+      "bowDirection": [
+        0.18033362737991432,
+        -0.3676794214853514,
+        -0.21982684888339482
+      ],
+      "nock": null
+    },
+    {
+      "tick": 12,
+      "y": 13.97333333333333,
+      "vy": -13.299999999999992,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        3.365833333333338,
+        0.55
+      ],
+      "headHeight": 2.119172953520118,
+      "animationTime": 0.1,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0.1666668802499771,
+        "jump": 0.8333331346511841,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.30142967952724886,
+        0.3345982949627153
+      ],
+      "bowDirection": [
+        0.19437766558652392,
+        -0.3418848857864658,
+        -0.2316325551245334
+      ],
+      "nock": null
+    },
+    {
+      "tick": 14,
+      "y": 13.758333333333333,
+      "vy": -12.766666666666657,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        3.585703333333333,
+        0.55
+      ],
+      "headHeight": 2.1912646058069933,
+      "animationTime": 0.11669999999999983,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0.027500363066792488,
+        "jump": 0.9724996089935303,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.3475272153199014,
+        0.3895960145520294
+      ],
+      "bowDirection": [
+        0.18102111835836077,
+        -0.3273362567185396,
+        -0.25650326586425665
+      ],
+      "nock": null
+    },
+    {
+      "tick": 15,
+      "y": 13.654166666666669,
+      "vy": -12.49999999999999,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        3.795416666666666,
+        0.55
+      ],
+      "headHeight": 2.1867774447576114,
+      "animationTime": 0.1333000000000002,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.330398955740387,
+        0.3789052449803956
+      ],
+      "bowDirection": [
+        0.1768644230178733,
+        -0.33640666827987165,
+        -0.27156361295604164
+      ],
+      "nock": null
+    },
+    {
+      "tick": 17,
+      "y": 13.452500000000004,
+      "vy": -11.966666666666654,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        3.9963033333333247,
+        0.55
+      ],
+      "headHeight": 2.1648733184718107,
+      "animationTime": 0.14989999999999964,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.301315380639009,
+        0.35463529867204
+      ],
+      "bowDirection": [
+        0.17841118203461725,
+        -0.3484662961243563,
+        -0.2834112641620852
+      ],
+      "nock": null
+    },
+    {
+      "tick": 19,
+      "y": 13.259722222222226,
+      "vy": -11.43333333333332,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.189515555555545,
+        0.55
+      ],
+      "headHeight": 2.122447188797043,
+      "animationTime": 0.16659999999999947,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.2565519127183311,
+        0.3080037770047941
+      ],
+      "bowDirection": [
+        0.17753000080343995,
+        -0.36672452086306695,
+        -0.2934983394241897
+      ],
+      "nock": null
+    },
+    {
+      "tick": 21,
+      "y": 13.075833333333339,
+      "vy": -10.899999999999984,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.3738033333333295,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 24,
+      "y": 12.81666666666667,
+      "vy": -10.099999999999982,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.549166666666661,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 26,
+      "y": 12.655000000000001,
+      "vy": -9.566666666666647,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.715596666666663,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 27,
+      "y": 12.5775,
+      "vy": -9.29999999999998,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.872190000000002,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 30,
+      "y": 12.358333333333334,
+      "vy": -8.499999999999977,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.020833333333332,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 31,
+      "y": 12.289722222222224,
+      "vy": -8.23333333333331,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.159728888888882,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 33,
+      "y": 12.159166666666671,
+      "vy": -7.699999999999976,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.290576666666663,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 35,
+      "y": 12.037500000000009,
+      "vy": -7.166666666666643,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.411783333333322,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 37,
+      "y": 11.924722222222233,
+      "vy": -6.63333333333331,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.524835555555541,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 39,
+      "y": 11.820833333333344,
+      "vy": -6.0999999999999766,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.628963333333324,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 42,
+      "y": 11.681666666666679,
+      "vy": -5.299999999999977,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.724166666666655,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 43,
+      "y": 11.639722222222233,
+      "vy": -5.03333333333331,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.809942222222208,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 45,
+      "y": 11.562500000000007,
+      "vy": -4.499999999999977,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.8873499999999925,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 48,
+      "y": 11.463333333333338,
+      "vy": -3.699999999999977,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.955833333333327,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 49,
+      "y": 11.434722222222227,
+      "vy": -3.4333333333333105,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.015048888888881,
+        0.55
+      ],
+      "headHeight": 2.0880348716697785,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 51,
+      "y": 11.384166666666673,
+      "vy": -2.8999999999999773,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.065736666666661,
+        0.55
+      ],
+      "headHeight": 2.0880348716697767,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 53,
+      "y": 11.342500000000008,
+      "vy": -2.366666666666644,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.107263333333323,
+        0.55
+      ],
+      "headHeight": 2.0880348716697767,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 55,
+      "y": 11.309722222222234,
+      "vy": -1.8333333333333108,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.140155555555541,
+        0.55
+      ],
+      "headHeight": 2.0880348716697767,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 57,
+      "y": 11.28583333333335,
+      "vy": -1.2999999999999776,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.1641233333333165,
+        0.55
+      ],
+      "headHeight": 2.0880348716697767,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 60,
+      "y": 11.266666666666683,
+      "vy": -0.49999999999997774,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.179166666666649,
+        0.55
+      ],
+      "headHeight": 2.0880348716697767,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 61,
+      "y": 11.26472222222224,
+      "vy": -0.23333333333331108,
+      "grounded": false,
+      "state": "jump",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.185262222222205,
+        0.55
+      ],
+      "headHeight": 2.0880348716697767,
+      "animationTime": 0.18,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 1,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.22125153580064438,
+        0.27104354747381976
+      ],
+      "bowDirection": [
+        0.17660062871136972,
+        -0.3809767806745157,
+        -0.3015334009054953
+      ],
+      "nock": null
+    },
+    {
+      "tick": 63,
+      "y": 11.26750000000002,
+      "vy": 0.30000000000002225,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.182509999999979,
+        0.55
+      ],
+      "headHeight": 2.078407099367098,
+      "animationTime": 0.016700000000000728,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0.8608336448669434,
+        "fall": 0.13916634023189545,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.21326911388247805,
+        0.2626046713996555
+      ],
+      "bowDirection": [
+        0.17587930887816405,
+        -0.3841326763784245,
+        -0.3022457725115676
+      ],
+      "nock": null
+    },
+    {
+      "tick": 65,
+      "y": 11.279166666666683,
+      "vy": 0.8333333333333555,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.170916666666651,
+        0.55
+      ],
+      "headHeight": 2.0492035560580284,
+      "animationTime": 0.033300000000000184,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0.722500205039978,
+        "fall": 0.277499794960022,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.19020651811892098,
+        0.23751898103056668
+      ],
+      "bowDirection": [
+        0.173614555459082,
+        -0.39352554014801466,
+        -0.3041935920631135
+      ],
+      "nock": null
+    },
+    {
+      "tick": 67,
+      "y": 11.299722222222236,
+      "vy": 1.3666666666666887,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.150368888888874,
+        0.55
+      ],
+      "headHeight": 2.0045312646873867,
+      "animationTime": 0.05,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0.5833333730697632,
+        "fall": 0.41666659712791443,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.1589981608736979,
+        0.2001382613564786
+      ],
+      "bowDirection": [
+        0.17015875267058256,
+        -0.40854663369715105,
+        -0.3046831024412118
+      ],
+      "nock": null
+    },
+    {
+      "tick": 69,
+      "y": 11.32916666666668,
+      "vy": 1.900000000000022,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.120896666666653,
+        0.55
+      ],
+      "headHeight": 1.942902215209564,
+      "animationTime": 0.06670000000000073,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0.4441666007041931,
+        "fall": 0.5558333992958069,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.12550139095994517,
+        0.15655880174495973
+      ],
+      "bowDirection": [
+        0.1644119409498348,
+        -0.42883461977320003,
+        -0.30357049756370214
+      ],
+      "nock": null
+    },
+    {
+      "tick": 71,
+      "y": 11.367500000000014,
+      "vy": 2.4333333333333553,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.082743333333319,
+        0.55
+      ],
+      "headHeight": 1.8831553092909994,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0.3058331310749054,
+        "fall": 0.694166898727417,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.1008652207729277,
+        0.12383191750806244
+      ],
+      "bowDirection": [
+        0.16011194987633637,
+        -0.44744716969741205,
+        -0.29895981873521804
+      ],
+      "nock": null
+    },
+    {
+      "tick": 73,
+      "y": 11.414722222222238,
+      "vy": 2.9666666666666885,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        6.035475555555539,
+        0.55
+      ],
+      "headHeight": 1.8412886953102925,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0.16666632890701294,
+        "fall": 0.8333336710929871,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.08695322547357431,
+        0.10167569947047905
+      ],
+      "bowDirection": [
+        0.15538922214681605,
+        -0.45967469470031563,
+        -0.2974728695300838
+      ],
+      "nock": null
+    },
+    {
+      "tick": 75,
+      "y": 11.470833333333353,
+      "vy": 3.5000000000000218,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.979283333333312,
+        0.55
+      ],
+      "headHeight": 1.7991545546886014,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0.027499530464410782,
+        "fall": 0.9725004434585571,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07610965475974751,
+        0.08169706511107133
+      ],
+      "bowDirection": [
+        0.15020234979781755,
+        -0.4714629147656426,
+        -0.2957324577212956
+      ],
+      "nock": null
+    },
+    {
+      "tick": 77,
+      "y": 11.535833333333358,
+      "vy": 4.033333333333355,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.914569999999976,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 79,
+      "y": 11.609722222222246,
+      "vy": 4.566666666666689,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.840582222222199,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 81,
+      "y": 11.692500000000024,
+      "vy": 5.100000000000022,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.757669999999974,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 83,
+      "y": 11.784166666666692,
+      "vy": 5.633333333333355,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.666396666666641,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 85,
+      "y": 11.884722222222244,
+      "vy": 6.166666666666688,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.565688888888868,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 87,
+      "y": 11.994166666666686,
+      "vy": 6.7000000000000215,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.456056666666644,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 89,
+      "y": 12.112500000000018,
+      "vy": 7.233333333333355,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.338223333333316,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 91,
+      "y": 12.239722222222241,
+      "vy": 7.766666666666688,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.2107955555555385,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 93,
+      "y": 12.375833333333354,
+      "vy": 8.300000000000022,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        5.075273333333312,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 95,
+      "y": 12.520833333333357,
+      "vy": 8.833333333333357,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.9300499999999765,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 97,
+      "y": 12.67472222222225,
+      "vy": 9.366666666666692,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.7759022222221965,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 99,
+      "y": 12.83750000000003,
+      "vy": 9.900000000000027,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.612829999999965,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 101,
+      "y": 13.009166666666697,
+      "vy": 10.433333333333362,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.441876666666637,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 103,
+      "y": 13.189722222222255,
+      "vy": 10.966666666666697,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.26100888888886,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 105,
+      "y": 13.379166666666698,
+      "vy": 11.500000000000032,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        4.071216666666629,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216829,
+        0.07799396803295089
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 108,
+      "y": 13.680000000000028,
+      "vy": 12.300000000000034,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        3.8724999999999685,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216784,
+        0.07799396803295044
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 109,
+      "y": 13.78472222222225,
+      "vy": 12.566666666666702,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        3.666115555555532,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0743142257921674,
+        0.07799396803295
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 111,
+      "y": 14.000833333333361,
+      "vy": 13.100000000000037,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        3.450913333333304,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0743142257921674,
+        0.07799396803295
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 113,
+      "y": 14.225833333333362,
+      "vy": 13.633333333333372,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        3.2255299999999725,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07431422579216784,
+        0.07799396803295
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 115,
+      "y": 14.459722222222254,
+      "vy": 14.166666666666707,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        2.991222222222195,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0743142257921674,
+        0.07799396803295
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881125,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 117,
+      "y": 14.702500000000036,
+      "vy": 14.700000000000042,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        2.747989999999957,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0743142257921674,
+        0.07799396803295
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881129,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 119,
+      "y": 14.954166666666708,
+      "vy": 15.233333333333377,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        2.497356666666626,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0743142257921674,
+        0.07799396803295
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.4737377729881129,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 121,
+      "y": 15.214722222222264,
+      "vy": 15.766666666666712,
+      "grounded": false,
+      "state": "fall",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        2.2363288888888526,
+        0.55
+      ],
+      "headHeight": 1.7907970548586976,
+      "animationTime": 0.08000000000000002,
+      "animationSpeed": 0,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 1,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0743142257921674,
+        0.07799396803295
+      ],
+      "bowDirection": [
+        0.1491232333858754,
+        -0.47373777298811337,
+        -0.2953613126156157
+      ],
+      "nock": null
+    },
+    {
+      "tick": 123,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "land",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        2.000406666666658,
+        0.55
+      ],
+      "headHeight": 1.7822198749682632,
+      "animationTime": 0.016700000000000728,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0.14,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 0.791250467300415,
+        "land": 0.20874951779842377,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07342050181648929,
+        0.07638920077770583
+      ],
+      "bowDirection": [
+        0.14844842456156115,
+        -0.4762412210923044,
+        -0.293372296921959
+      ],
+      "nock": null
+    },
+    {
+      "tick": 126,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "land",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.7288551839111972,
+      "animationTime": 0.03340000000000055,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0.12330000000000019,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 0.5825002789497375,
+        "land": 0.41749972105026245,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07062838043293374,
+        0.07223105630233073
+      ],
+      "bowDirection": [
+        0.1483114758718589,
+        -0.4717523950489184,
+        -0.28624507014784106
+      ],
+      "nock": null
+    },
+    {
+      "tick": 127,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "land",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.6771196431074427,
+      "animationTime": 0.05,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0.10670000000000074,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 0.37500008940696716,
+        "land": 0.6249998807907104,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06885617665365862,
+        0.06927528188615195
+      ],
+      "bowDirection": [
+        0.14911786229664337,
+        -0.46968586925873845,
+        -0.2733661300066246
+      ],
+      "nock": null
+    },
+    {
+      "tick": 129,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "land",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.640973210598236,
+      "animationTime": 0.06660000000000037,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0.09010000000000037,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 0.16749989986419678,
+        "land": 0.8325001001358032,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06866128590743381,
+        0.06823186556368643
+      ],
+      "bowDirection": [
+        0.15189239137980515,
+        -0.46697417277625997,
+        -0.254311408759451
+      ],
+      "nock": null
+    },
+    {
+      "tick": 131,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "land",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.625518284704452,
+      "animationTime": 0.08330000000000018,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0.07340000000000055,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06948754343771801,
+        0.06843439666776074
+      ],
+      "bowDirection": [
+        0.15648105622647002,
+        -0.4631337243269371,
+        -0.23112346058040628
+      ],
+      "nock": null
+    },
+    {
+      "tick": 133,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "land",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.6411181110261683,
+      "animationTime": 0.09990000000000054,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0.056800000000000184,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07001403387475369,
+        0.06933396181562479
+      ],
+      "bowDirection": [
+        0.16110099123635635,
+        -0.45423018454817576,
+        -0.21812271871533742
+      ],
+      "nock": null
+    },
+    {
+      "tick": 135,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "land",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.671974880652722,
+      "animationTime": 0.11670000000000072,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0.04,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07190116536874269,
+        0.07172566013380699
+      ],
+      "bowDirection": [
+        0.16528670354231778,
+        -0.445403741074343,
+        -0.2058153428311238
+      ],
+      "nock": null
+    },
+    {
+      "tick": 137,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "land",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.727402330039102,
+      "animationTime": 0.13330000000000017,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0.023400000000000545,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.073133495727292,
+        0.0784400616185148
+      ],
+      "bowDirection": [
+        0.17145273006665107,
+        -0.43373581609360157,
+        -0.19684746847732068
+      ],
+      "nock": null
+    },
+    {
+      "tick": 139,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "land",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.776133656250794,
+      "animationTime": 0.14,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0.006700000000000726,
+      "weights": {
+        "idle": 0,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 1,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0751946618012389,
+        0.08368193067715035
+      ],
+      "bowDirection": [
+        0.17413821409688524,
+        -0.4334274927598507,
+        -0.19387535380001852
+      ],
+      "nock": null
+    },
+    {
+      "tick": 141,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8005520029098818,
+      "animationTime": 0.016600000000000364,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0.13833393156528473,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0.8616660833358765,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06817513809723685,
+        0.08062527581238266
+      ],
+      "bowDirection": [
+        0.17313371109613307,
+        -0.45926755023598087,
+        -0.19245433325576333
+      ],
+      "nock": null
+    },
+    {
+      "tick": 143,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.810125971084688,
+      "animationTime": 0.033300000000000184,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0.2775004506111145,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0.7224995493888855,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06306191750328827,
+        0.07739702190641351
+      ],
+      "bowDirection": [
+        0.17253437366176883,
+        -0.48007051178585813,
+        -0.1922244134300858
+      ],
+      "nock": null
+    },
+    {
+      "tick": 145,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8195504443903472,
+      "animationTime": 0.05,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0.41666698455810547,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0.5833330154418945,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06057090166401391,
+        0.07473969736929265
+      ],
+      "bowDirection": [
+        0.1722311348513461,
+        -0.4990881205459856,
+        -0.1933133168724238
+      ],
+      "nock": null
+    },
+    {
+      "tick": 147,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8287718839418994,
+      "animationTime": 0.06660000000000037,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0.5550001859664917,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0.4449998438358307,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06072638712061984,
+        0.07268511244921116
+      ],
+      "bowDirection": [
+        0.17204681179337378,
+        -0.5161478146701133,
+        -0.19583646348467146
+      ],
+      "nock": null
+    },
+    {
+      "tick": 150,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8379474819575439,
+      "animationTime": 0.08340000000000056,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0.6949999928474426,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0.304999977350235,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06356037633891631,
+        0.07122001516022625
+      ],
+      "bowDirection": [
+        0.1717732691218785,
+        -0.5314051964473196,
+        -0.19977992984851406
+      ],
+      "nock": null
+    },
+    {
+      "tick": 151,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8468652316868206,
+      "animationTime": 0.1,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0.8333331942558289,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0.16666679084300995,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.06900762236087221,
+        0.07040108505693876
+      ],
+      "bowDirection": [
+        0.17121928508444917,
+        -0.5444357318263084,
+        -0.2051449922191254
+      ],
+      "nock": null
+    },
+    {
+      "tick": 153,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8556782323122105,
+      "animationTime": 0.11670000000000073,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 0.9724997282028198,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0.027500269934535027,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07711474324346979,
+        0.07020656148286397
+      ],
+      "bowDirection": [
+        0.17012195061274404,
+        -0.5554423727766364,
+        -0.21169623542138438
+      ],
+      "nock": null
+    },
+    {
+      "tick": 156,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8574152708825835,
+      "animationTime": 0.13340000000000055,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07901762614528929,
+        0.07018065959942543
+      ],
+      "bowDirection": [
+        0.16924483205070295,
+        -0.5575008457382311,
+        -0.21348519901639249
+      ],
+      "nock": null
+    },
+    {
+      "tick": 157,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8574367533603224,
+      "animationTime": 0.15,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07900886160786946,
+        0.07004679583806173
+      ],
+      "bowDirection": [
+        0.16853972329955624,
+        -0.5576978503035313,
+        -0.21354498753118004
+      ],
+      "nock": null
+    },
+    {
+      "tick": 159,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8574582182321495,
+      "animationTime": 0.16660000000000036,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07900018014494803,
+        0.06991394436404041
+      ],
+      "bowDirection": [
+        0.1678342880733492,
+        -0.5578941098869894,
+        -0.21360469468733664
+      ],
+      "nock": null
+    },
+    {
+      "tick": 162,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8574811216664227,
+      "animationTime": 0.18340000000000053,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07901532324144034,
+        0.0698911082180218
+      ],
+      "bowDirection": [
+        0.16724108474992505,
+        -0.5580116224284755,
+        -0.21346843857539824
+      ],
+      "nock": null
+    },
+    {
+      "tick": 163,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.857503594672644,
+      "animationTime": 0.19990000000000052,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07903041365687757,
+        0.06986920826847065
+      ],
+      "bowDirection": [
+        0.1666587457142068,
+        -0.5581260864907427,
+        -0.21333392766765988
+      ],
+      "nock": null
+    },
+    {
+      "tick": 165,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8575335805270838,
+      "animationTime": 0.21660000000000035,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07904774857390162,
+        0.06985441346072685
+      ],
+      "bowDirection": [
+        0.16611521474671775,
+        -0.5582713162761803,
+        -0.21311478294403846
+      ],
+      "nock": null
+    },
+    {
+      "tick": 167,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.857563585167953,
+      "animationTime": 0.23330000000000017,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07906522850808484,
+        0.0698397177400385
+      ],
+      "bowDirection": [
+        0.16557169324866727,
+        -0.5584161635755502,
+        -0.2128951562789982
+      ],
+      "nock": null
+    },
+    {
+      "tick": 169,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8576031177002066,
+      "animationTime": 0.25,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0790912058496751,
+        0.06983232482986024
+      ],
+      "bowDirection": [
+        0.16508814508190106,
+        -0.5586010985477112,
+        -0.21245419271805072
+      ],
+      "nock": null
+    },
+    {
+      "tick": 171,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.857642409549912,
+      "animationTime": 0.2666000000000004,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07911719426695552,
+        0.06982502649778466
+      ],
+      "bowDirection": [
+        0.16460724558061735,
+        -0.5587843905881922,
+        -0.21201539251613513
+      ],
+      "nock": null
+    },
+    {
+      "tick": 173,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.857688503366199,
+      "animationTime": 0.2833000000000002,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07914846913224549,
+        0.06982516890286217
+      ],
+      "bowDirection": [
+        0.164225491701389,
+        -0.558975088333955,
+        -0.21131865673632502
+      ],
+      "nock": null
+    },
+    {
+      "tick": 175,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8577346024577497,
+      "animationTime": 0.30000000000000004,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07917991623697196,
+        0.06982537149083035
+      ],
+      "bowDirection": [
+        0.16384368951884554,
+        -0.5591649671672756,
+        -0.21062084368522405
+      ],
+      "nock": null
+    },
+    {
+      "tick": 177,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8577787779325945,
+      "animationTime": 0.31660000000000044,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07920302647063782,
+        0.06983338160860386
+      ],
+      "bowDirection": [
+        0.16363652098623582,
+        -0.5592825365522422,
+        -0.20974147861869552
+      ],
+      "nock": null
+    },
+    {
+      "tick": 179,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8578232006902233,
+      "animationTime": 0.33330000000000026,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07922639410318233,
+        0.06984147565905285
+      ],
+      "bowDirection": [
+        0.16342748869526957,
+        -0.5593997253708558,
+        -0.20885681491831593
+      ],
+      "nock": null
+    },
+    {
+      "tick": 181,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8578508698231109,
+      "animationTime": 0.3500000000000001,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07922079502861257,
+        0.06985869382536025
+      ],
+      "bowDirection": [
+        0.16359613413198204,
+        -0.5593617847711787,
+        -0.2079605745965036
+      ],
+      "nock": null
+    },
+    {
+      "tick": 183,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.857878472595972,
+      "animationTime": 0.3667000000000008,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07921518158851937,
+        0.06987594969596156
+      ],
+      "bowDirection": [
+        0.1637660086914252,
+        -0.5593218922143275,
+        -0.20706460906669344
+      ],
+      "nock": null
+    },
+    {
+      "tick": 185,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8579055150933805,
+      "animationTime": 0.38330000000000025,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07921132340050585,
+        0.06988970377347625
+      ],
+      "bowDirection": [
+        0.16410905192677916,
+        -0.5592120743513957,
+        -0.2061962593200348
+      ],
+      "nock": null
+    },
+    {
+      "tick": 187,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8579325266033395,
+      "animationTime": 0.3999000000000006,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07920750166829515,
+        0.0699034921184376
+      ],
+      "bowDirection": [
+        0.16445188948313394,
+        -0.5591005002278058,
+        -0.20532825634793406
+      ],
+      "nock": null
+    },
+    {
+      "tick": 189,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.85795790537184,
+      "animationTime": 0.4166000000000004,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07920390956421475,
+        0.06990917234165916
+      ],
+      "bowDirection": [
+        0.1648270902807809,
+        -0.5589966358569938,
+        -0.2044790080628464
+      ],
+      "nock": null
+    },
+    {
+      "tick": 191,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8579832496046076,
+      "animationTime": 0.43330000000000024,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07920036037751688,
+        0.06991484805741432
+      ],
+      "bowDirection": [
+        0.1652022191070195,
+        -0.55889105561856,
+        -0.20363020817785912
+      ],
+      "nock": null
+    },
+    {
+      "tick": 193,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8580057680371063,
+      "animationTime": 0.45000000000000007,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07919574056870538,
+        0.06991521943709156
+      ],
+      "bowDirection": [
+        0.16554771351947117,
+        -0.5588039665644651,
+        -0.20286328469604267
+      ],
+      "nock": null
+    },
+    {
+      "tick": 195,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.858028126518581,
+      "animationTime": 0.46660000000000046,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07919119911549233,
+        0.0699156296341239
+      ],
+      "bowDirection": [
+        0.16589088783004868,
+        -0.5587159601210434,
+        -0.20210132774142575
+      ],
+      "nock": null
+    },
+    {
+      "tick": 197,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8580469117356118,
+      "animationTime": 0.4833000000000003,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0791841742576831,
+        0.06992108231476113
+      ],
+      "bowDirection": [
+        0.16623019490680946,
+        -0.5585868347129717,
+        -0.201530712408597
+      ],
+      "nock": null
+    },
+    {
+      "tick": 199,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8580656547416194,
+      "animationTime": 0.5000000000000001,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07917719569868975,
+        0.06992660215666824
+      ],
+      "bowDirection": [
+        0.16656918379827879,
+        -0.5584564941649011,
+        -0.20096104255422656
+      ],
+      "nock": null
+    },
+    {
+      "tick": 201,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8580554268302891,
+      "animationTime": 0.5166000000000005,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07916685654238176,
+        0.06993679641874762
+      ],
+      "bowDirection": [
+        0.1666854585737756,
+        -0.5584503837153267,
+        -0.20078590148740424
+      ],
+      "nock": null
+    },
+    {
+      "tick": 203,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8580450531269719,
+      "animationTime": 0.5333000000000003,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07915646487536598,
+        0.06994707636428643
+      ],
+      "bowDirection": [
+        0.1668026246269143,
+        -0.5584440421606902,
+        -0.20060980477987203
+      ],
+      "nock": null
+    },
+    {
+      "tick": 205,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.858035581965905,
+      "animationTime": 0.5499000000000007,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07914601492678175,
+        0.06995501311361618
+      ],
+      "bowDirection": [
+        0.16683277672388286,
+        -0.5584270495008812,
+        -0.2007014528509959
+      ],
+      "nock": null
+    },
+    {
+      "tick": 207,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8580259757366524,
+      "animationTime": 0.5666000000000005,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0791355117707826,
+        0.0699630181485058
+      ],
+      "bowDirection": [
+        0.16686279841700902,
+        -0.5584099150179584,
+        -0.20079429936031812
+      ],
+      "nock": null
+    },
+    {
+      "tick": 209,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8580163771385059,
+      "animationTime": 0.5833000000000004,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.0791245249779009,
+        0.06997956509876913
+      ],
+      "bowDirection": [
+        0.16668799146191482,
+        -0.5584745836553018,
+        -0.2011135187236154
+      ],
+      "nock": null
+    },
+    {
+      "tick": 211,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8580066999617162,
+      "animationTime": 0.6000000000000002,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07911354679847804,
+        0.0699962021722138
+      ],
+      "bowDirection": [
+        0.16651177893913882,
+        -0.558539498126756,
+        -0.20143342816017773
+      ],
+      "nock": null
+    },
+    {
+      "tick": 213,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8579969841163222,
+      "animationTime": 0.6166000000000006,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07910201873390399,
+        0.07002276382499106
+      ],
+      "bowDirection": [
+        0.16611192268947406,
+        -0.5587032576488626,
+        -0.2019352217387677
+      ],
+      "nock": null
+    },
+    {
+      "tick": 215,
+      "y": 15.450000000000003,
+      "vy": 0,
+      "grounded": true,
+      "state": "idle",
+      "yaw": -0.35,
+      "feet": [
+        8,
+        1.9999999999999964,
+        0.55
+      ],
+      "headHeight": 1.8579871302160877,
+      "animationTime": 0.6333000000000004,
+      "animationSpeed": 1,
+      "strideSpeed": 5.634545201878161,
+      "landingTime": 0,
+      "weights": {
+        "idle": 1,
+        "run": 0,
+        "jump": 0,
+        "fall": 0,
+        "land": 0,
+        "shoot": 0,
+        "victory": 1,
+        "death": 1
+      },
+      "toes": [
+        0.07909043205693989,
+        0.07004957544041579
+      ],
+      "bowDirection": [
+        0.16570824356206693,
+        -0.5588675524232167,
+        -0.20243921167140655
+      ],
+      "nock": null
+    }
+  ]
+}

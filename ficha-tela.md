@@ -46,6 +46,26 @@ Galeria consultada. Story `Arena/Menu real` já importa produção; acrescentado
 - **Prova:** `check:storybook`, `build-storybook` e build do jogo passaram. `menu-story-report.json`: zero erros, portão aprovado nas três larguras e CTA dentro da tela; interação por setas no seletor preservada. Stories de som e menu abertas em todos os tamanhos. Os diálogos curtos conservam a exceção de área já documentada.
 - **Limites:** mapa do menu continua uma miniatura do tema, não uma planta das plataformas. Brilho de Storm e diferença entre corpo visual/hitbox da rodada 4 preservados; não adicionada carga de renderização nem zoom.
 
+## Rodada 6 — ficha antes do ajuste
+
+1. **Quem usa:** P1 humano no teclado contra três bots, 1600×900.
+2. **Tarefas:** ler tiro e direção; acompanhar corrida; prever queda/pouso.
+3. **Objeto:** corpo animado dos quatro arqueiros, sem mudar hitbox, mapas ou HUD.
+4. **Visão simultânea:** arco, pés, plataforma e flecha real.
+5. **Medido:** vídeo inicial de 12 s no Templo; `shoot` baixa a cabeça de ~0,76 para ~0,46 unidade no Mizu; `fire` mantém ~0,76 e aponta +X. Corridas têm deslocamentos diferentes (2,44–3,24 unidades/1,25 s); quatro texturas 4096².
+6. **Estado:** até quatro correções: tiro em pé; cadência proporcional por modelo; pulo/queda/pouso com ações separadas; textura 2048² com comparação. Simulação preservada.
+
+Galeria consultada. Prova inicial: `evidence/rodada-6/antes/video-antes.mp4` e frames abertos. Fixture de animação importa o renderer real; nenhuma alteração de componente DOM/menu. Prova integrada e portão de arena em 1366×768 e 900×1000 permanecem obrigatórios.
+
+### Crítica da rodada 6 (06/11/2026, 10:44 Brasília)
+
+- **Tarefa sem rolar:** arena continua inteira nos dois viewports do portão; story real também passou em 844×390. Nenhum menu/HUD foi redesenhado.
+- **Primeiro olhar:** arco e corpo agora permanecem em pé ao sacar. Antes o personagem perdia quase metade da altura e virava 90°; depois a mão estende para o lado correto nos quatro modelos. Frames dos dois vídeos de 12 s e prints de tiro foram abertos.
+- **Ajuste depois de olhar:** corrida usa deslocamento raiz medido antes de removê-lo, incluindo escala horizontal real; pulo/queda não disputam mais a mesma ação do mixer. Pouso tem 140 ms de recuperação, sem travar controle. O salto real de P1 registrou jump → fall → land → idle, com pesos simultâneos na transição.
+- **Texturas:** comparativo `texturas-4096-vs-2048.png` (4096 acima, 2048 abaixo) aberto: mantidos contorno, rosto, faixas de roupa e cores. JPEG 2048²/92/4:4:4; geometria comprimida e rig byte a byte preservados. Não há justificativa visual para manter 4096² nesta câmera.
+- **Limites:** Storm continua muito luminoso; morte ainda é dissolução/tombo, não física. Cadência corrigida não equivale a foot-lock/IK (especialmente mira em movimento). Queda continua extraída de `jump`, agora como ação independente. Vídeos Playwright não têm áudio; o relatório verifica carregamento, não qualidade sonora.
+- **Prova:** cinco PNGs de mapas, poses, stories, responsividade e frames conferidos. FPS real mínimo 60,056; diagnóstico mínimo 59,586. Zero erros; servidores/abas próprios fechados. Story `Arena/Animacao real/TiroEmPe` importa `FightersView` e `ArenaScene`, sem renderer paralelo.
+
 ## Regras e catálogo
 
 - Uma ação principal: entrar na arena. Configuração compacta, título sobre a arte fornecida; sem painel administrativo.
