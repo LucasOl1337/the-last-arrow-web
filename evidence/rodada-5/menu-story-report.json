@@ -1,6 +1,6 @@
 {
   "owner": "tla-rodada-5-menu-story",
-  "pid": 147628,
+  "pid": 168391,
   "errors": [],
   "pagesAtStart": 0,
   "pagesAtEnd": 0,
@@ -8,8 +8,8 @@
     "844": {
       "medidas": {
         "principal_achado": true,
-        "principal_topo": 28,
-        "principal_fracao": 0.77,
+        "principal_topo": 51,
+        "principal_fracao": 0.71,
         "editores": 0,
         "editor_altura": null,
         "salvar_visiveis": 0,
@@ -26,8 +26,8 @@
     "900": {
       "medidas": {
         "principal_achado": true,
-        "principal_topo": 131,
-        "principal_fracao": 0.573,
+        "principal_topo": 137,
+        "principal_fracao": 0.565,
         "editores": 0,
         "editor_altura": null,
         "salvar_visiveis": 0,
@@ -45,7 +45,7 @@
       "medidas": {
         "principal_achado": true,
         "principal_topo": 28,
-        "principal_fracao": 0.817,
+        "principal_fracao": 0.805,
         "editores": 0,
         "editor_altura": null,
         "salvar_visiveis": 0,
