@@ -13,3 +13,8 @@ export const Controles: Story = { args: { screen: 'controls' } };
 export const Pausa: Story = { args: { screen: 'pause' } };
 export const Vitoria: Story = { args: { screen: 'victory' } };
 export const ErroGrafico: Story = { args: { screen: 'error' } };
+export const SomSilenciadoExternamente: Story = { render: () => {
+  let muted = true;
+  const menu = new Menu({ start: () => menu.show('pause'), resume: () => menu.show('menu'), rematch: () => menu.show('menu'), home: () => menu.show('menu'), mute: () => (muted = !muted) });
+  menu.show('pause'); menu.setMuted(muted); return menu.element;
+} };

@@ -22,7 +22,7 @@ const audio = new AudioEngine(), hud = new Hud(); game.append(hud.element);
 /** Per-fighter match stats for the victory screen (catches and stomps come from sim events). */
 let stats: { kills: number; catches: number; stomps: number }[] = [];
 let wasCharging: boolean[] = [];
-function toggleMute() { audio.setMuted(!audio.muted); hud.setMuted(audio.muted); return audio.muted; }
+function toggleMute() { audio.setMuted(!audio.muted); hud.setMuted(audio.muted); menu.setMuted(audio.muted); return audio.muted; }
 hud.onMute = toggleMute;
 let world = createWorld({ seed }), running = false, paused = false, timeScale = 1, accumulator = 0;
 let arena: ArenaScene | null = null, fighters: FightersView, arrows: ArrowsView, fx: Effects, chests: ChestsView;

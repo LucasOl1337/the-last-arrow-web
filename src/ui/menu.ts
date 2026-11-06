@@ -38,6 +38,13 @@ export class Menu {
     this.element.querySelector<HTMLElement>('button, select')?.focus({ preventScroll: true });
   }
   hide() { this.element.hidden = true; }
+  setMuted(muted: boolean) {
+    this.muted = muted;
+    this.element.querySelectorAll<HTMLButtonElement>('[data-sound]').forEach(button => {
+      button.textContent = muted ? 'Som desligado' : 'Som ligado';
+      button.setAttribute('aria-pressed', String(muted));
+    });
+  }
   private button(label: string, action: () => void, primary = false) {
     const button = document.createElement('button'); button.type = 'button'; button.textContent = label; button.className = primary ? 'primary' : 'secondary'; button.onclick = action; return button;
   }
@@ -99,7 +106,11 @@ export class Menu {
     actions.append(this.soundButton());
     this.element.querySelector('form')!.onsubmit = e => { e.preventDefault(); this.actions.start({ ...this.options, characters: [...this.options.characters!] }); };
   }
-  private soundButton() { const button = this.button(this.muted ? 'Som desligado' : 'Som ligado', () => { this.muted = this.actions.mute(); button.textContent = this.muted ? 'Som desligado' : 'Som ligado'; }); return button; }
+  private soundButton() {
+    const button = this.button(this.muted ? 'Som desligado' : 'Som ligado', () => this.setMuted(this.actions.mute()));
+    button.dataset.sound = ''; button.setAttribute('aria-pressed', String(this.muted));
+    return button;
+  }
   private renderOverlay() {
     const panel = document.createElement('div'); panel.className = 'overlay-panel'; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true');
     panel.setAttribute('aria-label', this.screen === 'controls' ? 'Controles' : this.screen === 'pause' ? 'Partida pausada' : this.screen === 'error' ? 'Erro gráfico' : 'Vitória');
