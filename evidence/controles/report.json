@@ -1,0 +1,105 @@
+{
+  "url": "http://127.0.0.1:4176/",
+  "errors": [],
+  "layouts": [
+    {
+      "id": "mouse-space",
+      "aimShotCrouch": true,
+      "jump": "w",
+      "skill": "Space",
+      "pass": true
+    },
+    {
+      "id": "mouse-q",
+      "aimShotCrouch": true,
+      "jump": "Space",
+      "skill": "q",
+      "pass": true
+    },
+    {
+      "id": "mouse-r",
+      "aimShotCrouch": true,
+      "jump": "w",
+      "skill": "r",
+      "pass": true
+    },
+    {
+      "id": "mouse-h",
+      "aimShotCrouch": true,
+      "jump": "w",
+      "skill": "h",
+      "pass": true
+    },
+    {
+      "id": "classic",
+      "aimShotCrouch": false,
+      "jump": "k",
+      "skill": "l",
+      "pass": true
+    }
+  ],
+  "gates": [
+    {
+      "width": 1366,
+      "height": 768,
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 1,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    {
+      "width": 900,
+      "height": 1000,
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 1,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 1,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  ],
+  "persisted": true,
+  "ownPagesAtEnd": 0
+}

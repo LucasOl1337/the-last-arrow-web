@@ -1,0 +1,8 @@
+{
+  "url": "http://127.0.0.1:4176/",
+  "errors": [],
+  "layouts": [],
+  "gates": [],
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n3 !== 2\n\n    at file:///home/lol/Projects/the-last-arrow-web-wt/rodada-astra/scripts/proof-controls.mjs:11:516",
+  "ownPagesAtEnd": 0
+}

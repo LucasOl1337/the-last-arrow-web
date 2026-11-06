@@ -1,0 +1,11 @@
+{
+  "errors": [],
+  "room": "F200F7EC",
+  "aim": {
+    "aimX": 0.9265743573858264,
+    "aimY": -0.37611163267711223,
+    "facing": -1
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(events.some(e=>e.type==='jump'&&e.actor===0))\n\n    at file:///home/lol/Projects/the-last-arrow-web-wt/rodada-astra/scripts/proof-controls-online.mjs:7:71",
+  "ownPagesAtEnd": 0
+}

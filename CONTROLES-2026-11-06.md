@@ -29,4 +29,12 @@ Mira contínua projetada pelo canvas/câmera, independente de andar; não limita
 -5stories reais do seletor passaram em844×390. Story antes da integração; preview6107 estava com índice velho no navegador, superfície privada6108 corrigiu sem mexer em browser compartilhado. Primeiro ensaio usava fixture dentro do piso (y16,45 em mapa cujo chão é16); corrigida para15,45. Sem alterar produto para satisfazer fixture.
 - Ajuste UI: Voltar saía da tela horizontal; painel compacto corrigiu, prova final passou. Prints conferidos em`evidence/controles/`.
 
-Publicação segue Hostinger+arrow.symbiose.si, build local, sem Actions. Conferir salas antes do deploy. Nenhum arquivo pendente da worktree principal foi tocado.
+## Publicado e conferido — 17:16 Brasília
+
+Produção`2eba63c4dfe200185e65f1a75ba2579058d8bca9`, confirmada em`/version.json`. As salas estavam0. Primeiro deploy foi cortado pelo limite da ferramenta durante transferência; nenhum publisher continuava vivo e produção permaneceu na versão antiga. Mesma release retomada por cópia incremental+validação Node, sem envio duplicado de sala, depois ativada às17:13.
+
+**No domínio público:** os5layouts foram exercitados de novo contra o build publicado (pulo/skill, clique/mira independente, agachar, clássico, reload/persistência e3larguras); zero erros JS. Outro cliente remoto confirmou mira livre (`aimX0,92657`, `aimY−0,37611` enquanto facing−1), agachar, shoot/jump/dash e pausa cancelando saque sem gastar munição. Primeiro ensaio público esperava evento de pulo em150ms e estava cedo/durante deslocamento: corrigida prova para aguardar chão e evento, não o jogo. Registros anteriores preservados.
+
+Prints públicos e folha abertos em`evidence/controles/publico*`; provas e notas entregues. Sem alegar teste de todo tipo de conexão, clipe novo de agachar ou múltiplas skills; esses não fazem parte deste pedido de keybinds.
+
+Hostinger+arrow.symbiose.si, build local, sem Actions. Nenhum arquivo pendente da worktree principal foi tocado. Previews/abas próprias são encerrados; jogo público fica ativo.

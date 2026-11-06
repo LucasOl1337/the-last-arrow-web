@@ -1,0 +1,103 @@
+{
+  "gates": [
+    {
+      "story": "plataforma",
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 1,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    {
+      "story": "atirador",
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 1,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    {
+      "story": "moba",
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 1,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    {
+      "story": "alternativo",
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 1,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    {
+      "story": "classico",
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 1,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  ],
+  "localP2": true,
+  "padPauseResume": true,
+  "pauseLayoutChange": true,
+  "ownPagesAtEnd": 0
+}
