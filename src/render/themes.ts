@@ -1,3 +1,5 @@
+import type { Level } from '../sim/level.ts';
+
 /** Per-map art direction, matched to the concepts in art/lvl_*.png and art/raw/key.png. */
 export interface Theme {
   id: string;
@@ -60,3 +62,5 @@ export const THEMES: Record<string, Theme> = {
   },
 };
 export function themeFor(id: string): Theme { return THEMES[id] ?? THEMES.moss; }
+/** Layout variants declare which art family they inherit (e.g. falls → totem). */
+export function themeForLevel(level: Pick<Level, 'id' | 'theme'>): Theme { return themeFor(level.theme ?? level.id); }

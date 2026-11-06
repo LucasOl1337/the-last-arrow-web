@@ -1,0 +1,1094 @@
+{
+  "owner": "tla-rodada-4-finish",
+  "pid": 76606,
+  "errors": [],
+  "maps": {
+    "moss": {
+      "finished": {
+        "tick": 18724,
+        "phase": "matchover",
+        "countdown": 0,
+        "round": 11,
+        "roundTime": 13.699999999999863,
+        "winner": 1,
+        "mode": "versus",
+        "matchTime": 124.75000000004535,
+        "chests": [],
+        "chestTimer": 10.300000000000097,
+        "map": "moss",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": false,
+            "x": 9.110486111111008,
+            "y": 4.449999999999999,
+            "vx": 7.8,
+            "vy": 0,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 2,
+            "kills": 6,
+            "grounded": true,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 16.678263888889617,
+            "y": 2.4499999999999993,
+            "vx": 0.6749999999999993,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 5,
+            "score": 5,
+            "kills": 12,
+            "grounded": true,
+            "invulnerable": 0,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal",
+              "normal",
+              "bomb"
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 20.715833333332952,
+            "y": 3.0122222222222206,
+            "vx": 7.8,
+            "vy": 5.866666666666666,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 4,
+            "kills": 9,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 17.74083333333344,
+            "y": 0.4953888888889111,
+            "vx": -7.8,
+            "vy": 20.119999999999997,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 0,
+            "kills": 6,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          }
+        ],
+        "arrows": [
+          {
+            "id": 175,
+            "owner": 1,
+            "x": 2.4807638888890367,
+            "y": 17.082500000000017,
+            "vx": 0,
+            "vy": 0,
+            "angle": -1.5707963267948966,
+            "stuck": true,
+            "age": 6.308333333333437,
+            "kind": "normal"
+          },
+          {
+            "id": 176,
+            "owner": 1,
+            "x": 10.0413888888896,
+            "y": 16.71562500000001,
+            "vx": 0,
+            "vy": 0,
+            "angle": 2.9958933359402784,
+            "stuck": true,
+            "age": 2.8249999999999926,
+            "kind": "normal"
+          },
+          {
+            "id": 177,
+            "owner": 3,
+            "x": 9.792777777777417,
+            "y": 15.986319444444447,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.18692254520401377,
+            "stuck": true,
+            "age": 2.474999999999994,
+            "kind": "normal"
+          },
+          {
+            "id": 179,
+            "owner": 3,
+            "x": 17.520833333333442,
+            "y": 0.8953888888889111,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.5,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          },
+          {
+            "id": 180,
+            "owner": 3,
+            "x": 17.74083333333344,
+            "y": 0.8953888888889111,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          }
+        ],
+        "events": [
+          {
+            "type": "kill",
+            "x": 17.74083333333344,
+            "y": 0.4953888888889111,
+            "actor": 1,
+            "target": 3
+          },
+          {
+            "type": "victory",
+            "x": 16,
+            "y": 9,
+            "actor": 1
+          }
+        ],
+        "paused": false,
+        "timeScale": 24
+      }
+    },
+    "totem": {
+      "finished": {
+        "tick": 16850,
+        "phase": "matchover",
+        "countdown": 0,
+        "round": 11,
+        "roundTime": 10.416666666666716,
+        "winner": 3,
+        "mode": "versus",
+        "matchTime": 109.13333333336625,
+        "chests": [],
+        "chestTimer": 1.5833333333333703,
+        "map": "totem",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": false,
+            "x": 19.13166666666646,
+            "y": 11.556666666666672,
+            "vx": -7.8,
+            "vy": 11.200000000000008,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 3,
+            "kills": 9,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 20.57694444444455,
+            "y": 10.758333333333333,
+            "vx": -3.8999999999999977,
+            "vy": -12.766666666666657,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 1,
+            "kills": 4,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 4.518611111111113,
+            "y": 12.136666666666713,
+            "vx": 4.333333333333335,
+            "vy": -5.299999999999977,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 2,
+            "kills": 7,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 2.887462132645929,
+            "y": 12.123333333333342,
+            "vx": 7.8,
+            "vy": 15.20000000000002,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 5,
+            "kills": 13,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          }
+        ],
+        "arrows": [
+          {
+            "id": 167,
+            "owner": 0,
+            "x": 18.911666666666463,
+            "y": 11.956666666666672,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.5,
+            "stuck": true,
+            "age": 7.641666666666836,
+            "kind": "normal"
+          },
+          {
+            "id": 168,
+            "owner": 0,
+            "x": 19.13166666666646,
+            "y": 11.956666666666672,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8,
+            "stuck": true,
+            "age": 7.641666666666836,
+            "kind": "normal"
+          },
+          {
+            "id": 173,
+            "owner": 3,
+            "x": 23.740000000000094,
+            "y": 15.974118055555635,
+            "vx": 0,
+            "vy": 0,
+            "angle": 1.5707963267948966,
+            "stuck": true,
+            "age": 5.525000000000064,
+            "kind": "normal"
+          },
+          {
+            "id": 174,
+            "owner": 2,
+            "x": 23.42399809447219,
+            "y": 3.0282935721948547,
+            "vx": 0,
+            "vy": 0,
+            "angle": -0.42769588569172307,
+            "stuck": true,
+            "age": 5.116666666666711,
+            "kind": "normal"
+          },
+          {
+            "id": 175,
+            "owner": 3,
+            "x": 16.842499999999447,
+            "y": 10.992847222222217,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.11202896242598802,
+            "stuck": true,
+            "age": 3.0166666666666586,
+            "kind": "normal"
+          },
+          {
+            "id": 178,
+            "owner": 2,
+            "x": 6.296340155121122,
+            "y": 10.061454983768435,
+            "vx": 0,
+            "vy": 0,
+            "angle": -0.7701837023785192,
+            "stuck": true,
+            "age": 0.7,
+            "kind": "normal"
+          },
+          {
+            "id": 179,
+            "owner": 2,
+            "x": 4.298611111111113,
+            "y": 12.536666666666713,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.5,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          },
+          {
+            "id": 180,
+            "owner": 2,
+            "x": 4.518611111111113,
+            "y": 12.536666666666713,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          },
+          {
+            "id": 181,
+            "owner": 2,
+            "x": 4.738611111111113,
+            "y": 12.536666666666713,
+            "vx": 0,
+            "vy": 0,
+            "angle": 1.1,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          },
+          {
+            "id": 182,
+            "owner": 2,
+            "x": 4.9586111111111135,
+            "y": 12.536666666666713,
+            "vx": 0,
+            "vy": 0,
+            "angle": 1.4,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          }
+        ],
+        "events": [
+          {
+            "type": "kill",
+            "x": 4.518611111111113,
+            "y": 12.136666666666713,
+            "actor": 3,
+            "target": 2
+          },
+          {
+            "type": "victory",
+            "x": 16,
+            "y": 9,
+            "actor": 3
+          }
+        ],
+        "paused": false,
+        "timeScale": 24
+      }
+    },
+    "canopy": {
+      "finished": {
+        "tick": 15727,
+        "phase": "matchover",
+        "countdown": 0,
+        "round": 10,
+        "roundTime": 20.483333333332812,
+        "winner": 1,
+        "mode": "versus",
+        "matchTime": 102.7833333333612,
+        "chests": [],
+        "chestTimer": 3.516666666666697,
+        "map": "canopy",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": false,
+            "x": 9.988888888888681,
+            "y": 12.696666666666676,
+            "vx": 7.8,
+            "vy": 8.8,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 1,
+            "kills": 5,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 4.603611111111142,
+            "y": 10.000833333333361,
+            "vx": -4.766666666666665,
+            "vy": 13.100000000000037,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 5,
+            "score": 5,
+            "kills": 9,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 7.662986111111081,
+            "y": 4.850000000000001,
+            "vx": -6.066666666666672,
+            "vy": 9.333333333333336,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 1,
+            "kills": 8,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 10.724583333333513,
+            "y": 6.206944444444453,
+            "vx": 3.8999999999999977,
+            "vy": 12.03333333333337,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 3,
+            "kills": 8,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          }
+        ],
+        "arrows": [
+          {
+            "id": 144,
+            "owner": 1,
+            "x": 16.24979166666668,
+            "y": 13.064878472222262,
+            "vx": 0,
+            "vy": 0,
+            "angle": -1.5707963267948966,
+            "stuck": true,
+            "age": 17.61666666666631,
+            "kind": "normal"
+          },
+          {
+            "id": 148,
+            "owner": 1,
+            "x": 11.687658915498552,
+            "y": 16.04050613772081,
+            "vx": 0,
+            "vy": 0,
+            "angle": -2.3895399086502844,
+            "stuck": true,
+            "age": 15.533333333333092,
+            "kind": "normal"
+          },
+          {
+            "id": 159,
+            "owner": 0,
+            "x": 13.992499999999765,
+            "y": 6.736406250000005,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.08296131914806251,
+            "stuck": true,
+            "age": 11.458333333333323,
+            "kind": "normal"
+          },
+          {
+            "id": 171,
+            "owner": 2,
+            "x": 7.4429861111110815,
+            "y": 5.250000000000002,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.5,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          },
+          {
+            "id": 172,
+            "owner": 2,
+            "x": 7.662986111111081,
+            "y": 5.250000000000002,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          },
+          {
+            "id": 173,
+            "owner": 2,
+            "x": 7.882986111111081,
+            "y": 5.250000000000002,
+            "vx": 0,
+            "vy": 0,
+            "angle": 1.1,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          }
+        ],
+        "events": [
+          {
+            "type": "kill",
+            "x": 7.662986111111081,
+            "y": 4.850000000000001,
+            "actor": 1,
+            "target": 2
+          },
+          {
+            "type": "victory",
+            "x": 16,
+            "y": 9,
+            "actor": 1
+          }
+        ],
+        "paused": false,
+        "timeScale": 24
+      }
+    },
+    "falls": {
+      "realtime": {
+        "fps": 60.09119870073153,
+        "diagnostics": {
+          "frames": 630,
+          "fps": 59.907001511938596,
+          "averageFrameWorkMs": 1.2057142857114769,
+          "maxFrameWorkMs": 35.200000000186265,
+          "drawCalls": 62,
+          "triangles": 337743,
+          "geometries": 47,
+          "textures": 44,
+          "models": true,
+          "modelError": null,
+          "audioFailures": [],
+          "renderer": "WebKit WebGL"
+        }
+      },
+      "finished": {
+        "tick": 17475,
+        "phase": "matchover",
+        "countdown": 0,
+        "round": 14,
+        "roundTime": 4.683333333333356,
+        "winner": 3,
+        "mode": "versus",
+        "matchTime": 105.31666666669655,
+        "chests": [],
+        "chestTimer": 7.31666666666686,
+        "map": "falls",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": false,
+            "x": 29.9172916666666,
+            "y": 7.166666666666664,
+            "vx": -3.0333333333333306,
+            "vy": -11.166666666666652,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 3,
+            "kills": 10,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 4.209513888889006,
+            "y": 5.463333333333331,
+            "vx": 7.8,
+            "vy": -3.699999999999977,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 2,
+            "kills": 10,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 10.210972222222452,
+            "y": 7.696666666666669,
+            "vx": 0.8666666666666634,
+            "vy": 2.933333333333333,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 3,
+            "kills": 11,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 6.356111111111112,
+            "y": 2.3172222222222203,
+            "vx": 1.7333333333333334,
+            "vy": -5.966666666666649,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 2,
+            "score": 5,
+            "kills": 11,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": [
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [
+          {
+            "id": 187,
+            "owner": 2,
+            "x": 9.990972222222451,
+            "y": 8.09666666666667,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.5,
+            "stuck": true,
+            "age": 1.358333333333331,
+            "kind": "normal"
+          },
+          {
+            "id": 188,
+            "owner": 2,
+            "x": 10.210972222222452,
+            "y": 8.09666666666667,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8,
+            "stuck": true,
+            "age": 1.358333333333331,
+            "kind": "normal"
+          },
+          {
+            "id": 189,
+            "owner": 2,
+            "x": 10.430972222222453,
+            "y": 8.09666666666667,
+            "vx": 0,
+            "vy": 0,
+            "angle": 1.1,
+            "stuck": true,
+            "age": 1.358333333333331,
+            "kind": "normal"
+          },
+          {
+            "id": 190,
+            "owner": 1,
+            "x": 24.26127889831922,
+            "y": 11.957193323903176,
+            "vx": 0,
+            "vy": 0,
+            "angle": 2.305874851991697,
+            "stuck": true,
+            "age": 1.1333333333333317,
+            "kind": "normal"
+          },
+          {
+            "id": 191,
+            "owner": 0,
+            "x": 29.6972916666666,
+            "y": 7.566666666666665,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.5,
+            "stuck": true,
+            "age": 1.083333333333332,
+            "kind": "normal"
+          },
+          {
+            "id": 192,
+            "owner": 0,
+            "x": 29.9172916666666,
+            "y": 7.566666666666665,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8,
+            "stuck": true,
+            "age": 1.083333333333332,
+            "kind": "normal"
+          },
+          {
+            "id": 193,
+            "owner": 0,
+            "x": 30.1372916666666,
+            "y": 7.566666666666665,
+            "vx": 0,
+            "vy": 0,
+            "angle": 1.1,
+            "stuck": true,
+            "age": 1.083333333333332,
+            "kind": "normal"
+          },
+          {
+            "id": 195,
+            "owner": 1,
+            "x": 3.989513888889006,
+            "y": 5.8633333333333315,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.5,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          },
+          {
+            "id": 196,
+            "owner": 1,
+            "x": 4.209513888889006,
+            "y": 5.8633333333333315,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          }
+        ],
+        "events": [
+          {
+            "type": "kill",
+            "x": 4.209513888889006,
+            "y": 5.463333333333331,
+            "actor": 3,
+            "target": 1
+          },
+          {
+            "type": "victory",
+            "x": 16,
+            "y": 9,
+            "actor": 3
+          }
+        ],
+        "paused": false,
+        "timeScale": 24
+      }
+    },
+    "roots": {
+      "realtime": {
+        "fps": 60.04843824124276,
+        "diagnostics": {
+          "frames": 631,
+          "fps": 59.90809661248668,
+          "averageFrameWorkMs": 0.7442155309019997,
+          "maxFrameWorkMs": 32.5,
+          "drawCalls": 56,
+          "triangles": 200860,
+          "geometries": 50,
+          "textures": 47,
+          "models": true,
+          "modelError": null,
+          "audioFailures": [],
+          "renderer": "WebKit WebGL"
+        }
+      },
+      "finished": {
+        "tick": 18167,
+        "phase": "matchover",
+        "countdown": 0,
+        "round": 11,
+        "roundTime": 16.65833333333303,
+        "winner": 3,
+        "mode": "versus",
+        "matchTime": 120.10833333337499,
+        "chests": [],
+        "chestTimer": 7.341666666666861,
+        "map": "roots",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": false,
+            "x": 19.46666666666664,
+            "y": 7.0090000000000074,
+            "vx": -7.8,
+            "vy": 19,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 1,
+            "kills": 6,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 1.6546527777777342,
+            "y": 8.86472222222222,
+            "vx": -1.8083333333333302,
+            "vy": -13.033333333333324,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 1,
+            "kills": 6,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 4.223958333333144,
+            "y": 5.449999999999999,
+            "vx": 3.049999999999999,
+            "vy": 0,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 4,
+            "kills": 8,
+            "grounded": true,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 31.701805555555552,
+            "y": 7.246000000000009,
+            "vx": 0.43333333333333,
+            "vy": 11.813333333333349,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 5,
+            "kills": 13,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [
+          {
+            "id": 185,
+            "owner": 1,
+            "x": 25.948333333333025,
+            "y": 10.692326388888887,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.15207752646444533,
+            "stuck": true,
+            "age": 6.858333333333464,
+            "kind": "normal"
+          },
+          {
+            "id": 187,
+            "owner": 1,
+            "x": 8.891041666666837,
+            "y": 13.909618055555569,
+            "vx": 0,
+            "vy": 0,
+            "angle": 1.5707963267948966,
+            "stuck": true,
+            "age": 4.8250000000000295,
+            "kind": "normal"
+          },
+          {
+            "id": 188,
+            "owner": 1,
+            "x": 17.148901472099375,
+            "y": 15.039588111234252,
+            "vx": 0,
+            "vy": 0,
+            "angle": -0.6937604693022758,
+            "stuck": true,
+            "age": 3.274999999999991,
+            "kind": "normal"
+          },
+          {
+            "id": 190,
+            "owner": 3,
+            "x": 4.974680549532678,
+            "y": 10.491326382865964,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8231000495073277,
+            "stuck": true,
+            "age": 1.6999999999999964,
+            "kind": "normal"
+          },
+          {
+            "id": 192,
+            "owner": 1,
+            "x": 1.4346527777777343,
+            "y": 9.26472222222222,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.5,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          },
+          {
+            "id": 193,
+            "owner": 1,
+            "x": 1.6546527777777342,
+            "y": 9.26472222222222,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8,
+            "stuck": true,
+            "age": 0,
+            "kind": "bolt"
+          },
+          {
+            "id": 194,
+            "owner": 1,
+            "x": 1.8746527777777342,
+            "y": 9.26472222222222,
+            "vx": 0,
+            "vy": 0,
+            "angle": 1.1,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          }
+        ],
+        "events": [
+          {
+            "type": "kill",
+            "x": 1.6546527777777342,
+            "y": 8.86472222222222,
+            "actor": 3,
+            "target": 1
+          },
+          {
+            "type": "victory",
+            "x": 16,
+            "y": 9,
+            "actor": 3
+          }
+        ],
+        "paused": false,
+        "timeScale": 24
+      }
+    }
+  },
+  "story": {
+    "1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.821,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  },
+  "pagesAtStart": 0,
+  "pagesAtEnd": 0,
+  "kill": {
+    "id": 1,
+    "x": 20.13229166666588,
+    "y": 5.075833333333332,
+    "tick": 786,
+    "phase": "roundover"
+  }
+}

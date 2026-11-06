@@ -18,6 +18,15 @@
 
 Galeria consultada nesta rodada. Antes: `evidence/rodada-2/poses-templo.png` e `canopy-autoplay.png`, abertos: nomes minúsculos e bordas internas serrilhadas competem com textura/rosto. Manter a câmera atual (arena já ocupa ~93% da altura); ampliar zoom arriscaria cortar as plataformas superiores.
 
+### Crítica da rodada 4 (06/11/2026, Brasília)
+
+- **Tarefa sem rolar:** localizar arqueiros/ler nomes é possível na própria arena; quatro nomes estão em 16 px a 1600×900 e ≥11 px nos viewports menores. Portão integrado passou em 1366×768 (99,9% de área principal) e 900×1000 (50,6%, letterbox).
+- **Primeiro olhar:** agora cai nas silhuetas coloridas, não apenas na pintura. Templo e Copas preservam fundos diferentes sem perder identidade dos jogadores. A altura em pé é ~112 px, antes ~84 px; luz/sombra separa tecido do cenário.
+- **Ajuste após olhar:** primeira prova mostrou nomes cortados no salto/wrap e sobre placar. Segunda rodada prende os nomes à arena e separa rótulos próximos/placar, com zero sobreposições medidas. Para arqueiro parcialmente fora da arena, o nome fica na faixa livre mais próxima, em vez de desaparecer.
+- **Mira:** o close revelou clipe orientado no eixo errado; corrigido e conferido novamente pela posição do osso da mão e pelo print `evidence/rodada-4/mira-regressao-close.png`. A pose de saque é agachada (altura menor que em pé), comportamento do clipe, não mudança de hitbox.
+- **Limites honestos:** há brilho forte no Storm e decoração de fundo ainda detalhada. O topo do corpo pode sair da tela durante o wrap vertical; não é plataforma atravessada. Não foi aplicada câmera mais fechada, pois pioraria o recorte. Não houve prova de colisão visual 1:1: a hitbox continua 0,64×1,10 por contrato do brief.
+- **Artefatos:** antes em `evidence/rodada-4/01-legibilidade/`, ajuste de HUD em `02-hud/`, final na raiz. PNGs de jogo, mira, abate e responsividade abertos e conferidos, não apenas produzidos.
+
 ## Regras e catálogo
 
 - Uma ação principal: entrar na arena. Configuração compacta, título sobre a arte fornecida; sem painel administrativo.

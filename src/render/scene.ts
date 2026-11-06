@@ -5,7 +5,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import type { Level } from '../sim/level.ts';
 import { asset } from '../paths.ts';
-import { themeFor } from './themes.ts';
+import { themeFor, themeForLevel } from './themes.ts';
 import type { Theme } from './themes.ts';
 import { buildTerrain } from './terrain.ts';
 import type { TerrainBuild } from './terrain.ts';
@@ -114,7 +114,7 @@ export class ArenaScene {
   }
   setLevel(level: Level) {
     this.terrain?.dispose(); if (this.terrain) this.arena.remove(this.terrain.group);
-    this.applyTheme(themeFor(level.id));
+    this.applyTheme(themeForLevel(level));
     this.terrain = buildTerrain(level, this.theme, this.stone);
     this.arena.add(this.terrain.group);
   }

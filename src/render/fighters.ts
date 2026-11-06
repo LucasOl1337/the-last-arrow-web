@@ -8,6 +8,7 @@ import { patchCharacterMaterial, addOutline } from './characterMaterial.ts';
 import type { CharacterUniforms } from './characterMaterial.ts';
 import { ProceduralPuppet } from './puppet.ts';
 import { blob, softDot } from './textures.ts';
+import { themeForLevel } from './themes.ts';
 import { ARROW_SPEED, ARROW_GRAVITY, BOLT_GRAVITY } from '../sim/arrows.ts';
 
 /** Visual height of a fighter in tiles (hitbox is 0.64×1.10; feet stay on the hitbox base, the body grows up). */
@@ -99,7 +100,7 @@ export class FightersView {
     });
   }
   reset(w: World) {
-    this.world = w; this.selfLight = SELF_LIGHT[w.level.id] ?? 0.22;
+    this.world = w; this.selfLight = SELF_LIGHT[themeForLevel(w.level).id] ?? SELF_LIGHT.moss;
     for (const v of this.views) this.dispose(v);
     this.views = w.fighters.map(f => this.build(f));
   }
