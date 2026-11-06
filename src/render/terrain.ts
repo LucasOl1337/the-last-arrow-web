@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import type { Level } from '../sim/level.ts';
 import { WIDTH, HEIGHT } from '../sim/level.ts';
 import type { Theme } from './themes.ts';
+import { disposeInstances } from './disposal.ts';
 import { rng, fern, grass, vines, wood, runes, flame, flower, mossTex, softDot } from './textures.ts';
 
 /** Block depth: front face at z=FRONT, back at FRONT-DEPTH. Fighters stand at z≈0.55. */
@@ -304,6 +305,6 @@ export function buildTerrain(level: Level, theme: Theme, stone: THREE.Texture): 
   return {
     group, lights,
     update: time => { for (const fn of animated) fn(time); },
-    dispose: () => { for (const d of disposables) d.dispose(); group.clear(); },
+    dispose: () => { disposeInstances(group); for (const d of disposables) d.dispose(); group.clear(); },
   };
 }

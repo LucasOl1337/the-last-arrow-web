@@ -11,6 +11,7 @@ import { blob, softDot } from './textures.ts';
 import { themeForLevel } from './themes.ts';
 import { ARROW_SPEED, ARROW_GRAVITY, BOLT_GRAVITY } from '../sim/arrows.ts';
 import { clipWindow, runTimeScale } from './animation.ts';
+import { disposeSkeletons } from './disposal.ts';
 
 /** Visual height of a fighter in tiles (hitbox is 0.64×1.10; feet stay on the hitbox base, the body grows up). */
 export const VISUAL_HEIGHT = 2.4;
@@ -119,9 +120,10 @@ export class FightersView {
     v.puppet?.dispose();
     if (v.rig) {
       v.rig.mixer.stopAllAction(); v.rig.mixer.uncacheRoot(v.rig.model);
+      disposeSkeletons(v.rig.model);
       // Skinned geometry is shared with the cached template: only materials are per fighter.
       v.rig.model.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) (m.material as THREE.Material).dispose(); });
-      for (const g of v.rig.ghosts) { this.scene.remove(g.model); g.material.dispose(); }
+      for (const g of v.rig.ghosts) { this.scene.remove(g.model); disposeSkeletons(g.model); g.material.dispose(); }
     }
     for (const mesh of [v.shadow, v.halo, v.backdrop, ...v.aimDots]) (mesh.material as THREE.Material).dispose();
     v.nock.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) { m.geometry.dispose(); (m.material as THREE.Material).dispose(); } });
