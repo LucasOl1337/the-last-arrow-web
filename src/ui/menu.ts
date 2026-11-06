@@ -2,9 +2,10 @@ import { CHARACTERS } from '../sim/world.ts';
 import type { MatchOptions } from '../sim/world.ts';
 import { LEVELS, themeOf } from '../sim/level.ts';
 import { asset, portrait } from '../paths.ts';
+import { victorySummary } from './match-copy.ts';
 export interface MenuActions { start: (opts: MatchOptions) => void; resume: () => void; rematch: () => void; home: () => void; mute: () => boolean }
 export type Screen = 'menu' | 'controls' | 'pause' | 'victory' | 'error';
-export interface VictoryStats { kills: number; catches: number; stomps: number; score: number }
+export interface VictoryStats { kills: number; catches: number; stomps: number; score: number; mode?: MatchOptions['mode'] }
 /** Menu thumbnails reuse the arena backgrounds. */
 const MAP_THUMBS: Record<string, string> = { moss: 'bg/ruins.jpg', totem: 'bg/templo.jpg', canopy: 'bg/copas.jpg' };
 const MAP_LABELS: Record<string, string> = { moss: 'Musgo', totem: 'Totem', canopy: 'Copas', falls: 'Cachoeira', roots: 'Raízes' };
@@ -63,6 +64,9 @@ export class Menu {
       this.element.querySelector<HTMLSelectElement>('#mode')!.focus();
     });
     mode.setAttribute('aria-label', 'Modo');
+    select('rules', 'Regras', [{ value: 'versus', label: 'Versus · 5 vitórias' }, { value: 'headhunter', label: 'Headhunter · 2 min' }], this.options.mode ?? 'versus', v => {
+      this.options.mode = v as MatchOptions['mode']; this.updateRuleCopy();
+    });
     const humans = this.options.humans!;
     select('bots', 'Adversários', Array.from({ length: humans === 0 ? 1 : humans === 1 ? 3 : 3 }, (_, n) => {
       const count = humans === 0 ? 4 : humans === 1 ? n + 1 : n;
@@ -106,6 +110,12 @@ export class Menu {
     actions.append(this.button('Controles', () => { this.returnScreen = 'menu'; this.show('controls'); }));
     actions.append(this.soundButton());
     this.element.querySelector('form')!.onsubmit = e => { e.preventDefault(); this.actions.start({ ...this.options, characters: [...this.options.characters!] }); };
+    this.updateRuleCopy();
+  }
+  private updateRuleCopy() {
+    const headhunter = this.options.mode === 'headhunter';
+    this.element.querySelector('.tagline')!.textContent = headhunter ? 'Dois minutos. Cada abate conta. Volte à luta.' : 'Três flechas. Um acerto. Nenhuma segunda vida.';
+    this.element.querySelector('.menu-foot')!.textContent = `PvP local · 2–4 arqueiros · ${headhunter ? 'Mais abates em 2 minutos · reaparece em 1,5s' : 'Primeiro a 5 vitórias'}`;
   }
   private soundButton() {
     const button = this.button(this.muted ? 'Som desligado' : 'Som ligado', () => this.setMuted(this.actions.mute()));
@@ -116,7 +126,7 @@ export class Menu {
     const panel = document.createElement('div'); panel.className = 'overlay-panel'; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true');
     panel.setAttribute('aria-label', this.screen === 'controls' ? 'Controles' : this.screen === 'pause' ? 'Partida pausada' : this.screen === 'error' ? 'Erro gráfico' : 'Vitória');
     if (this.screen === 'controls') {
-      panel.innerHTML = `<p class="eyebrow">CADA FLECHA CONTA</p><h2>Como jogar</h2><table><thead><tr><th>Ação</th><th>Jogador 1</th><th>Jogador 2</th></tr></thead><tbody><tr><td>Mover / mirar</td><td>W A S D</td><td>Setas</td></tr><tr><td>Segurar / soltar tiro</td><td>J</td><td>Numpad 1 / ,</td></tr><tr><td>Pular</td><td>K / Espaço</td><td>Numpad 2 / .</td></tr><tr><td>Esquivar / pegar flecha</td><td>L</td><td>Numpad 3 / /</td></tr></tbody></table><p>Controle: direcional mira, A pula, X/RT atira, B/RB esquiva, Start pausa.</p><p>Segure pulo para subir mais; baixo acelera a queda. Pule contra a parede para escalar.</p><p>Flecha ou pisão mata. Esquive contra flechas para pegá-las; recolha as cravadas. As quatro bordas se conectam.</p><p>Sem vencedor após 90 segundos, o round empata. Primeiro a cinco vitórias ganha a partida.</p><p class="muted">Teclado ou gamepad necessário. No celular, use um controle; prefira a tela deitada.</p>`;
+      panel.innerHTML = `<p class="eyebrow">CADA FLECHA CONTA</p><h2>Como jogar</h2><table><thead><tr><th>Ação</th><th>Jogador 1</th><th>Jogador 2</th></tr></thead><tbody><tr><td>Mover / mirar</td><td>W A S D</td><td>Setas</td></tr><tr><td>Segurar / soltar tiro</td><td>J</td><td>Numpad 1 / ,</td></tr><tr><td>Pular</td><td>K / Espaço</td><td>Numpad 2 / .</td></tr><tr><td>Esquivar / pegar flecha</td><td>L</td><td>Numpad 3 / /</td></tr></tbody></table><p>Controle: direcional mira, A pula, X/RT atira, B/RB esquiva, Start pausa.</p><p>Segure pulo para subir mais; baixo acelera a queda. Pule contra a parede para escalar.</p><p>Flecha ou pisão mata. Esquive contra flechas para pegá-las; recolha as cravadas. As quatro bordas se conectam.</p><p>Versus: primeiro a cinco vitórias; round empata após 90 segundos.</p><p>Headhunter: mais abates em dois minutos; reaparece após 1,5 segundo. Placar igual empata.</p><p class="muted">Teclado ou gamepad necessário. No celular, use um controle; prefira a tela deitada.</p>`;
       panel.append(this.button('Voltar', () => this.show(this.returnScreen), true));
     } else if (this.screen === 'pause') {
       panel.innerHTML = '<p class="eyebrow">RESPIRE. MIRE DE NOVO.</p><h2>Partida pausada</h2><p>O combate espera por você.</p>';
@@ -127,7 +137,7 @@ export class Menu {
       if (winner) panel.style.setProperty('--fighter', winner.color);
       const s = this.stats;
       const stat = (value: number, label: string) => `<div class="stat"><strong>${value}</strong><span>${label}</span></div>`;
-      panel.innerHTML = `<img class="victory-logo" src="${asset('ui/logo.png')}" alt="" aria-hidden="true"><div class="victory-row">${winner ? `<img class="victory-portrait" src="${portrait(winner.id)}" alt="">` : ''}<div><p class="eyebrow">A ÚLTIMA FLECHA TEM DONO</p><h2 class="winner"></h2><p>${winner ? 'Cinco vitórias. A arena é sua.' : 'Ninguém levou a arena desta vez.'}</p>${s ? `<div class="victory-stats">${stat(s.kills, s.kills === 1 ? 'abate' : 'abates')}${stat(s.catches, s.catches === 1 ? 'flecha pega' : 'flechas pegas')}${s.stomps ? stat(s.stomps, s.stomps === 1 ? 'pisão' : 'pisões') : ''}</div>` : ''}</div></div>`;
+      panel.innerHTML = `<img class="victory-logo" src="${asset('ui/logo.png')}" alt="" aria-hidden="true"><div class="victory-row">${winner ? `<img class="victory-portrait" src="${portrait(winner.id)}" alt="">` : ''}<div><p class="eyebrow">A ÚLTIMA FLECHA TEM DONO</p><h2 class="winner"></h2><p>${victorySummary(s?.mode, s?.score ?? 0, !!winner)}</p>${s ? `<div class="victory-stats">${stat(s.kills, s.kills === 1 ? 'abate' : 'abates')}${stat(s.catches, s.catches === 1 ? 'flecha pega' : 'flechas pegas')}${s.stomps ? stat(s.stomps, s.stomps === 1 ? 'pisão' : 'pisões') : ''}</div>` : ''}</div></div>`;
       panel.querySelector('.winner')!.textContent = winner ? `${winner.name} venceu` : 'Empate';
       panel.append(this.button('Revanche  →', this.actions.rematch, true), this.button('Escolher outra arena', this.actions.home));
     } else {

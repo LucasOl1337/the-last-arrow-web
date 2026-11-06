@@ -66,6 +66,17 @@ Galeria consultada. Prova inicial: `evidence/rodada-6/antes/video-antes.mp4` e f
 - **Limites:** Storm continua muito luminoso; morte ainda é dissolução/tombo, não física. Cadência corrigida não equivale a foot-lock/IK (especialmente mira em movimento). Queda continua extraída de `jump`, agora como ação independente. Vídeos Playwright não têm áudio; o relatório verifica carregamento, não qualidade sonora.
 - **Prova:** cinco PNGs de mapas, poses, stories, responsividade e frames conferidos. FPS real mínimo 60,056; diagnóstico mínimo 59,586. Zero erros; servidores/abas próprios fechados. Story `Arena/Animacao real/TiroEmPe` importa `FightersView` e `ArenaScene`, sem renderer paralelo.
 
+## Rodada 7 — ficha antes do ajuste
+
+1. **Quem usa:** P1 no teclado contra três bots, inclusive PC com CPU lenta; arena horizontal.
+2. **Tarefas:** escolher regra da partida; acompanhar placar/tempo corretos; continuar jogando após ajuste automático de qualidade.
+3. **Objeto:** arena e quatro arqueiros; aviso secundário não pode ocupar o centro.
+4. **Simultâneo:** jogadores, placar, regra vigente e tempo restante; qualidade baixa não muda regras/input.
+5. **Medido:** cinco mapas, quatro arqueiros, headhunter de 120 s implementado só na simulação; menu não permite escolhê-lo, HUD ainda diz “Primeiro a 5 / 90s”. Sem governor apesar do comentário no renderer.
+6. **Estado:** selecionar Versus ou Headhunter antes de jogar; qualidade só reduz após média real <50 FPS em janela inicial de 2 s, sem oscilar nem interferir na pausa. Aviso discreto e estado vigente no HUD.
+
+Galeria consultada. Stories canônicas para configuração, resultado headhunter/empate e HUD leve antes da integração. Estados sem login/carregamento remoto/permissão não se aplicam. Portão em 1366×768, 900×1000 e 844×390; a arena em letterbox ocupa 50,6% em 900×1000.
+
 ## Regras e catálogo
 
 - Uma ação principal: entrar na arena. Configuração compacta, título sobre a arte fornecida; sem painel administrativo.

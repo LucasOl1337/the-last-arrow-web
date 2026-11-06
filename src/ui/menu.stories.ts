@@ -13,6 +13,13 @@ export const Controles: Story = { args: { screen: 'controls' } };
 export const Pausa: Story = { args: { screen: 'pause' } };
 export const Vitoria: Story = { args: { screen: 'victory' } };
 export const ErroGrafico: Story = { args: { screen: 'error' } };
+const headhunterResult = (draw: boolean) => {
+  const menu = new Menu({ start: () => {}, resume: () => {}, rematch: () => menu.show('menu'), home: () => menu.show('menu'), mute: () => false });
+  menu.show('victory', draw ? undefined : 'Akane', { score: 18, kills: 18, catches: 14, stomps: 6, mode: 'headhunter' });
+  return menu.element;
+};
+export const VitoriaHeadhunter: Story = { render: () => headhunterResult(false) };
+export const EmpateHeadhunter: Story = { render: () => headhunterResult(true) };
 export const SomSilenciadoExternamente: Story = { render: () => {
   let muted = true;
   const menu = new Menu({ start: () => menu.show('pause'), resume: () => menu.show('menu'), rematch: () => menu.show('menu'), home: () => menu.show('menu'), mute: () => (muted = !muted) });

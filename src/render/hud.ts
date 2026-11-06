@@ -3,6 +3,7 @@ import type { ArrowKind, World } from '../sim/world.ts';
 import { CHARACTERS } from '../sim/world.ts';
 import { asset, portrait } from '../paths.ts';
 import { VISUAL_HEIGHT } from './fighters.ts';
+import { matchStatus } from '../ui/match-copy.ts';
 
 /** Seconds the overhead quiver stays visible after the last ammo change. */
 const AMMO_VISIBLE = 1.5;
@@ -19,6 +20,7 @@ export class Hud {
   private roundCard = document.createElement('div');
   private footer = document.createElement('div');
   private muteButton = document.createElement('button');
+  private qualityNotice = document.createElement('div');
   private cards: HTMLElement[] = [];
   private overheads: Overhead[] = [];
   private signature = '';
@@ -37,12 +39,18 @@ export class Hud {
     this.muteButton.type = 'button'; this.muteButton.className = 'mute-toggle'; this.muteButton.title = 'Som (M)';
     this.muteButton.addEventListener('click', () => this.setMuted(this.onMute?.() ?? false));
     this.setMuted(false);
-    this.element.append(this.score, this.countdown, this.roundCard, this.footer, this.muteButton);
+    this.qualityNotice.className = 'quality-notice'; this.qualityNotice.hidden = true;
+    this.qualityNotice.setAttribute('role', 'status');
+    this.element.append(this.score, this.countdown, this.roundCard, this.footer, this.muteButton, this.qualityNotice);
   }
   setMuted(muted: boolean) {
     this.muteButton.textContent = muted ? '🔇 M' : '🔊 M';
     this.muteButton.setAttribute('aria-label', muted ? 'Ligar som (M)' : 'Desligar som (M)');
     this.muteButton.setAttribute('aria-pressed', String(muted));
+  }
+  setLowQuality(low: boolean) {
+    this.qualityNotice.hidden = !low;
+    this.qualityNotice.textContent = low ? 'Modo leve · ajuste automático' : '';
   }
   reset(w: World) {
     this.score.replaceChildren(); this.overheads.forEach(o => o.root.remove());
@@ -107,7 +115,7 @@ export class Hud {
     });
   }
   update(w: World, paused: boolean, camera: THREE.Camera, now = performance.now() / 1000) {
-    const signature = `${w.phase}:${w.round}:${w.winner}:${Math.floor(w.roundTime)}:${w.fighters.map(f => `${f.ammo},${f.score},${f.alive}`).join(':')}`;
+    const signature = `${w.options.mode}:${w.phase}:${w.round}:${w.winner}:${Math.ceil(w.matchTime)}:${Math.floor(w.roundTime)}:${w.fighters.map(f => `${f.ammo},${f.score},${f.alive}`).join(':')}`;
     if (signature !== this.signature) {
       this.signature = signature;
       w.fighters.forEach((f, n) => {
@@ -115,7 +123,7 @@ export class Hud {
         this.cards[n].querySelector('.points')!.textContent = String(f.score);
         this.cards[n].querySelector('.ammo')!.textContent = '➶'.repeat(f.ammo) || 'sem flechas';
       });
-      this.footer.textContent = `${w.level.name}   /   Primeiro a 5   /   ${Math.max(0, 90 - Math.floor(w.roundTime))}s   /   Esc pausa   /   M som`;
+      this.footer.textContent = `${w.level.name}   /   ${matchStatus(w)}   /   Esc pausa   /   M som`;
     }
     this.renderCountdown(w, now);
     this.renderRoundCard(w);
@@ -146,6 +154,7 @@ export class Hud {
       return { x: r.left - area.left, y: r.top - area.top, width: r.width, height: r.height };
     };
     const blocked = [rect(this.score), rect(this.footer), rect(this.muteButton)];
+    if (!this.qualityNotice.hidden) blocked.push(rect(this.qualityNotice));
     const measured = anchors.map(a => ({ ...a, width: a.overhead.root.offsetWidth, height: a.overhead.root.offsetHeight }));
     for (const a of measured) {
       const clampY = (y: number) => THREE.MathUtils.clamp(y, gap, area.height - a.height - gap);
