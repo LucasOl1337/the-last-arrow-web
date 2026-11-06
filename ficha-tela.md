@@ -27,6 +27,25 @@ Galeria consultada nesta rodada. Antes: `evidence/rodada-2/poses-templo.png` e `
 - **Limites honestos:** há brilho forte no Storm e decoração de fundo ainda detalhada. O topo do corpo pode sair da tela durante o wrap vertical; não é plataforma atravessada. Não foi aplicada câmera mais fechada, pois pioraria o recorte. Não houve prova de colisão visual 1:1: a hitbox continua 0,64×1,10 por contrato do brief.
 - **Artefatos:** antes em `evidence/rodada-4/01-legibilidade/`, ajuste de HUD em `02-hud/`, final na raiz. PNGs de jogo, mira, abate e responsividade abertos e conferidos, não apenas produzidos.
 
+## Rodada 5 — ficha antes do ajuste
+
+1. **Quem usa:** P1 no teclado/gamepad, desktop 1600×900 e notebook 1366×768.
+2. **Tarefas:** jogar e pausar sem perder flechas; conferir som vigente; escolher arena/revanche.
+3. **Objeto:** estado do combate e os mesmos controles do menu canônico.
+4. **Visão simultânea:** som real e rótulo do botão; nome e miniatura da arena escolhida.
+5. **Medido:** 5 mapas em uma faixa de 267 px no notebook; Cachoeira/Raízes usam miniatura genérica e nomes espremidos; `M` deixa “Som ligado” apesar do HUD mudo.
+6. **Estado:** áudio tem uma fonte de verdade; pausa cancela saque humano sem consumir munição. Limite de dois polimentos: escolhas de mapa com tema correto/nome curto (nome completo acessível) e configuração acima da dobra em tela horizontal baixa.
+
+Galeria consultada. Story `Arena/Menu real` já importa produção; acrescentado estado silenciado externamente e medidos 1366×768, 900×1000 e 844×390 (celular horizontal). Sem redesign da arena, sem mudança de simulação. A regressão de pausa/blur não altera aparência; Storybook não se aplica à lógica de input.
+
+### Crítica dos prints da rodada 5
+
+- **Tarefa sem rolar:** desktop/notebook já cabiam; no print 844×390 a arte tomava a primeira tela e escondia configuração/CTA. O portão de área sozinho não enxergou isso (mediu `.menu-content`, que inclui o logo). Acrescentada asserção específica de CTA inteiramente dentro do viewport. Ajuste por altura, só abaixo de 600 px: logo à esquerda, configuração à direita. Antes `evidence/rodada-5/antes/menu-story-844.png`; depois `menu-story-844.png`, ambos abertos.
+- **Primeiro olhar:** no jogo cai em P1 azul/arqueiros e nas plataformas; no menu a arte permanece, mas as cinco arenas têm miniatura carregada e tema correspondente. Nomes curtos não quebram em duas linhas a 1366 px; nome completo continua no radio acessível.
+- **Estado antes escondido:** pausa exibia “Som ligado” com HUD já mudo; agora teclado, HUD e menu concordam e a story importa o mesmo `Menu`. Story revelou ainda URL de fundo relativa ao CSS compilado (`assets/assets/bg/key.jpg`, 404); URL absoluta derivada da base do documento corrigiu o catálogo sem hardcode de deploy.
+- **Prova:** `check:storybook`, `build-storybook` e build do jogo passaram. `menu-story-report.json`: zero erros, portão aprovado nas três larguras e CTA dentro da tela; interação por setas no seletor preservada. Stories de som e menu abertas em todos os tamanhos. Os diálogos curtos conservam a exceção de área já documentada.
+- **Limites:** mapa do menu continua uma miniatura do tema, não uma planta das plataformas. Brilho de Storm e diferença entre corpo visual/hitbox da rodada 4 preservados; não adicionada carga de renderização nem zoom.
+
 ## Regras e catálogo
 
 - Uma ação principal: entrar na arena. Configuração compacta, título sobre a arte fornecida; sem painel administrativo.
