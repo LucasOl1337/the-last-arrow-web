@@ -4,7 +4,7 @@ import type { Fighter, World } from '../sim/world.ts';
 import { delta, WIDTH, HEIGHT } from '../sim/level.ts';
 interface Puppet {
   root: THREE.Group; body: THREE.Group; bow: THREE.Group; leftLeg: THREE.Group; rightLeg: THREE.Group;
-  arm: THREE.Group; halo: THREE.Mesh; character: number;
+  arm: THREE.Group; halo: THREE.Mesh; character: number; deathAt: number;
 }
 const box = new THREE.BoxGeometry(1, 1, 1);
 const sphere = new THREE.SphereGeometry(1, 8, 6);
@@ -57,13 +57,18 @@ export class FightersView {
     part(bow, belt, -0.12, 0, 0, 0.018, 0.92, 0.018);
     const halo = new THREE.Mesh(new THREE.RingGeometry(0.65, 0.72, 24), new THREE.MeshBasicMaterial({ color: c.color, transparent: true, opacity: 0.8, side: THREE.DoubleSide, depthWrite: false }));
     halo.position.z = 0.4; root.add(halo);
-    return { root, body, bow, leftLeg, rightLeg, arm, halo, character: f.character };
+    return { root, body, bow, leftLeg, rightLeg, arm, halo, character: f.character, deathAt: -1 };
   }
   update(w: World, alpha: number, time: number) {
     w.fighters.forEach((f, id) => {
       const p = this.puppets[id];
-      p.root.visible = f.alive;
-      p.root.position.set(f.prevX + delta(f.prevX, f.x, WIDTH) * alpha, 18 - (f.prevY + delta(f.prevY, f.y, HEIGHT) * alpha), 0.6);
+      if (f.alive) p.deathAt = -1;
+      else if (p.deathAt < 0) p.deathAt = time;
+      const dying = f.alive ? 0 : time - p.deathAt;
+      p.root.visible = f.alive || dying < 0.45;
+      p.root.scale.setScalar(f.alive ? 1 : Math.max(0.05, 1 - dying * 1.9));
+      p.root.rotation.z = f.alive ? 0 : dying * f.facing * 8;
+      p.root.position.set(f.prevX + delta(f.prevX, f.x, WIDTH) * alpha, 18 - (f.prevY + delta(f.prevY, f.y, HEIGHT) * alpha) + Math.sin(dying * 6) * 0.7, 0.6);
       const run = Math.sin(time * 24 + id) * Math.min(Math.abs(f.vx) / 8, 1);
       p.leftLeg.rotation.z = f.grounded ? run * 0.5 : -0.35;
       p.rightLeg.rotation.z = f.grounded ? -run * 0.5 : 0.5;

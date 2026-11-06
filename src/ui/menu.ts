@@ -10,7 +10,17 @@ export class Menu {
   private options: MatchOptions = { humans: 1, bots: 3, map: 'moss', difficulty: 'normal', characters: ['mizu', 'stormdragon', 'kaze', 'akane'] };
   private winner = 'Mizu';
   private muted = false;
-  constructor(private actions: MenuActions) { this.element.className = 'menu-layer'; this.show('menu'); }
+  constructor(private actions: MenuActions) {
+    this.element.className = 'menu-layer';
+    this.element.addEventListener('keydown', event => {
+      if (event.key !== 'Tab') return;
+      const items = this.element.querySelectorAll<HTMLElement>('button, select');
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    });
+    this.show('menu');
+  }
   show(screen: Screen, winner?: string) {
     this.screen = screen; if (winner) this.winner = winner;
     this.element.hidden = false; this.element.classList.toggle('full-menu', screen === 'menu' || screen === 'controls');
@@ -32,6 +42,7 @@ export class Menu {
     };
     const mode = select('mode', 'Modo', [{ value: '1', label: '1 jogador + bots' }, { value: '2', label: '2 jogadores locais' }, { value: '0', label: 'Assistir · 4 bots' }], String(this.options.humans), v => {
       this.options.humans = Number(v); this.options.bots = 4 - Number(v); this.renderMenu();
+      this.element.querySelector<HTMLSelectElement>('#mode')!.focus();
     });
     mode.setAttribute('aria-label', 'Modo');
     const humans = this.options.humans!;
@@ -55,7 +66,7 @@ export class Menu {
     const panel = document.createElement('div'); panel.className = 'overlay-panel'; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true');
     panel.setAttribute('aria-label', this.screen === 'controls' ? 'Controles' : this.screen === 'pause' ? 'Partida pausada' : this.screen === 'error' ? 'Erro gráfico' : 'Vitória');
     if (this.screen === 'controls') {
-      panel.innerHTML = `<p class="eyebrow">CADA FLECHA CONTA</p><h2>Como jogar</h2><table><thead><tr><th>Ação</th><th>Jogador 1</th><th>Jogador 2</th></tr></thead><tbody><tr><td>Mover / mirar</td><td>W A S D</td><td>Setas</td></tr><tr><td>Segurar / soltar tiro</td><td>J</td><td>Numpad 1 / ,</td></tr><tr><td>Pular</td><td>K / Espaço</td><td>Numpad 2 / .</td></tr><tr><td>Esquivar / pegar flecha</td><td>L</td><td>Numpad 3 / /</td></tr></tbody></table><p>Controle: direcional mira, A pula, X/RT atira, B/RB esquiva, Start pausa.</p><p>Segure pulo para subir mais; baixo acelera a queda. Pule contra a parede para escalar.</p><p>Flecha ou pisão mata. Esquive contra flechas para pegá-las; recolha as cravadas. As quatro bordas se conectam.</p><p class="muted">Teclado ou gamepad necessário. No celular, use um controle; prefira a tela deitada.</p>`;
+      panel.innerHTML = `<p class="eyebrow">CADA FLECHA CONTA</p><h2>Como jogar</h2><table><thead><tr><th>Ação</th><th>Jogador 1</th><th>Jogador 2</th></tr></thead><tbody><tr><td>Mover / mirar</td><td>W A S D</td><td>Setas</td></tr><tr><td>Segurar / soltar tiro</td><td>J</td><td>Numpad 1 / ,</td></tr><tr><td>Pular</td><td>K / Espaço</td><td>Numpad 2 / .</td></tr><tr><td>Esquivar / pegar flecha</td><td>L</td><td>Numpad 3 / /</td></tr></tbody></table><p>Controle: direcional mira, A pula, X/RT atira, B/RB esquiva, Start pausa.</p><p>Segure pulo para subir mais; baixo acelera a queda. Pule contra a parede para escalar.</p><p>Flecha ou pisão mata. Esquive contra flechas para pegá-las; recolha as cravadas. As quatro bordas se conectam.</p><p>Sem vencedor após 90 segundos, o round empata. Primeiro a cinco vitórias ganha a partida.</p><p class="muted">Teclado ou gamepad necessário. No celular, use um controle; prefira a tela deitada.</p>`;
       panel.append(this.button('Voltar', () => this.show(this.returnScreen), true));
     } else if (this.screen === 'pause') {
       panel.innerHTML = '<p class="eyebrow">RESPIRE. MIRE DE NOVO.</p><h2>Partida pausada</h2><p>O combate espera por você.</p>';

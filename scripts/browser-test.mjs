@@ -3,6 +3,7 @@ import { spawn } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { setTimeout as delay } from 'node:timers/promises';
+import { checkScreen } from './check-screen.mjs';
 
 // Run through agent-bench fila tla rodar -- agent-bench exec tla -- npm run test:browser.
 // The sole browser/tab belong to this process and close in finally. Never attach to a user's browser.
@@ -41,7 +42,10 @@ try {
     assert.equal(measurements.rolagem_horizontal, false); assert.equal(measurements.rolagens_ate_principal, 0);
     assert.equal(measurements.salvar_visiveis, 0); assert.equal(measurements.inputs_vazios_em_branco, 0);
     assert.equal(measurements.ajudas_longas.length, 0);
-    report.checks.push({ label, measurements });
+    const officialGate = await checkScreen(page, selector);
+    const exception = selector === '.overlay-panel' ? 'Diálogo curto de ação, não editor: expandir até 40% só criaria espaço vazio.' : null;
+    assert.deepEqual(officialGate.falhas.filter(f => !(exception && f.startsWith('b.'))), []);
+    report.checks.push({ label, measurements, officialGate, exception });
     await page.screenshot({ path: `${out}/${label}.png` });
   };
   if (stories) {
@@ -75,7 +79,7 @@ try {
     await delay(150); assert.equal(await page.evaluate(() => window.__tla.state().tick), pausedTick);
     await page.getByRole('button', { name: 'Continuar', exact: true }).click();
     await page.evaluate(() => window.__tla.setTimeScale(24));
-    await page.waitForFunction(() => window.__tla.state().phase === 'matchover', { timeout: 25000 });
+    await page.waitForFunction(() => window.__tla.state().phase === 'matchover', undefined, { timeout: 25000 });
     await page.getByRole('heading', { name: /venceu/ }).waitFor();
     report.humanMatch = await page.evaluate(() => window.__tla.state());
     assert.equal(report.humanMatch.fighters.length, 4); assert.equal(report.humanMatch.fighters[0].human, true);
@@ -84,10 +88,74 @@ try {
     await page.goto(`${url}/?autoplay=bots4&seed=42`);
     await page.waitForFunction(() => window.__tla?.state().phase === 'playing');
     await page.evaluate(() => window.__tla.setTimeScale(24));
-    await page.waitForFunction(() => window.__tla.state().round > 1, { timeout: 10000 });
+    await page.waitForFunction(() => window.__tla.state().round > 1, undefined, { timeout: 10000 });
     report.autoplay = await page.evaluate(() => window.__tla.state());
     assert.equal(report.autoplay.fighters.filter(f => f.human).length, 0); await gate('autoplay', '#game');
     report.renderer = await page.evaluate(() => window.__tla.diagnostics());
+    // Prove actual keyboard -> production input -> simulation, including both P2 binding sets.
+    await page.evaluate(() => {
+      window.__tla.startMatch({ humans: 2, bots: 0, seed: 15 });
+      const w = window.__tla.world; w.phase = 'playing';
+      Object.assign(w.fighters[0], { x: 6, y: 15.45, prevX: 6, prevY: 15.45, grounded: true });
+      Object.assign(w.fighters[1], { x: 26, y: 15.45, prevX: 26, prevY: 15.45, grounded: true });
+    });
+    await page.keyboard.down('d'); await delay(100); await page.keyboard.up('d');
+    assert.ok(await page.evaluate(() => window.__tla.world.fighters[0].x > 6.1));
+    await page.keyboard.down('j'); await delay(70);
+    assert.equal(await page.evaluate(() => window.__tla.world.fighters[0].ammo), 3);
+    await page.keyboard.up('j'); await page.waitForFunction(() => window.__tla.world.fighters[0].ammo === 2);
+    await page.keyboard.down('k'); await delay(80); await page.keyboard.up('k');
+    assert.ok(await page.evaluate(() => window.__tla.world.fighters[0].vy < 0));
+    await page.keyboard.press('l'); await page.waitForFunction(() => window.__tla.world.fighters[0].dashCooldown > 0);
+    await page.keyboard.down('ArrowLeft'); await delay(100); await page.keyboard.up('ArrowLeft');
+    assert.ok(await page.evaluate(() => window.__tla.world.fighters[1].x < 25.9));
+    await page.keyboard.down(','); await delay(70); await page.keyboard.up(',');
+    await page.waitForFunction(() => window.__tla.world.fighters[1].ammo === 2);
+    await page.keyboard.down('.'); await delay(70); await page.keyboard.up('.');
+    assert.ok(await page.evaluate(() => window.__tla.world.fighters[1].vy < 0));
+    await page.keyboard.press('/'); await page.waitForFunction(() => window.__tla.world.fighters[1].dashCooldown > 0);
+    await delay(250); await page.keyboard.down('Numpad1'); await delay(60); await page.keyboard.up('Numpad1');
+    await page.waitForFunction(() => window.__tla.world.fighters[1].ammo === 1);
+    await page.waitForFunction(() => window.__tla.world.fighters[1].grounded);
+    await page.keyboard.down('Numpad2'); await delay(70); await page.keyboard.up('Numpad2');
+    assert.ok(await page.evaluate(() => window.__tla.world.fighters[1].vy < 0));
+    await page.waitForFunction(() => window.__tla.world.fighters[1].dashCooldown === 0);
+    await page.keyboard.press('Numpad3'); await page.waitForFunction(() => window.__tla.world.fighters[1].dashCooldown > 0);
+    report.keyboard = 'P1 WASD/J/K/L and P2 arrows/comma/period/slash/Numpad1/2/3 exercised';
+    // Standard Gamepad API mock only at the hardware boundary; Controls remains production code.
+    await page.evaluate(() => {
+      window.__tla.startMatch({ humans: 2, bots: 0, seed: 15 }); window.__tla.world.phase = 'playing';
+      window.__testPads = [0, 1].map(index => ({ index, connected: true, mapping: 'standard', axes: [0, 0], buttons: Array.from({ length: 16 }, () => ({ pressed: false, value: 0 })) }));
+      navigator.getGamepads = () => window.__testPads;
+      window.__testPads[0].axes[0] = 1; window.__testPads[1].axes[0] = -1;
+      window.__testPads[0].buttons[2].pressed = true; window.__testPads[1].buttons[2].pressed = true;
+    });
+    await delay(100);
+    await page.evaluate(() => { window.__testPads[0].buttons[2].pressed = false; window.__testPads[1].buttons[2].pressed = false; });
+    await page.waitForFunction(() => window.__tla.world.fighters.every(f => f.ammo === 2));
+    await page.evaluate(() => { window.__testPads[0].buttons[0].pressed = true; window.__testPads[1].buttons[1].pressed = true; });
+    await page.waitForFunction(() => window.__tla.world.fighters[1].dashCooldown > 0);
+    await page.evaluate(() => { window.__testPads[0].buttons[9].pressed = true; });
+    await page.waitForFunction(() => window.__tla.state().paused);
+    await page.evaluate(() => { window.__testPads[0].buttons[9].pressed = false; }); await delay(50);
+    await page.evaluate(() => { window.__testPads[0].buttons[9].pressed = true; });
+    await page.waitForFunction(() => !window.__tla.state().paused);
+    report.gamepad = 'Two standard gamepads: move, release shot, jump, dash and Start pause/resume';
+    await page.evaluate(() => { delete navigator.getGamepads; delete window.__testPads; });
+    for (const [map, difficulty] of [['totem', 'easy'], ['canopy', 'hard']]) {
+      await page.evaluate(({ map, difficulty }) => { window.__tla.startMatch({ humans: 0, bots: 4, map, difficulty, seed: 42 }); window.__tla.setTimeScale(24); }, { map, difficulty });
+      await page.waitForFunction(() => window.__tla.state().round > 1, undefined, { timeout: 15000 });
+      await gate(`map-${map}`, '#game');
+    }
+    await page.evaluate(() => { window.__tla.startMatch({ humans: 0, bots: 4, seed: 42 }); });
+    await page.waitForFunction(() => window.__tla.diagnostics().frames >= 240);
+    report.performance = await page.evaluate(() => window.__tla.diagnostics());
+    const before = await page.evaluate(() => window.__tla.diagnostics().geometries);
+    await page.evaluate(() => window.__tla.startMatch({ humans: 0, bots: 4, seed: 42 }));
+    await page.waitForFunction(() => window.__tla.diagnostics().frames > 2);
+    const after = await page.evaluate(() => window.__tla.diagnostics().geometries);
+    // Three.js uploads halo geometries lazily when a dash first makes them visible.
+    assert.ok(after <= before, `Revanche acumulou geometrias: ${before} -> ${after}`); report.rematchGeometries = { before, after };
   }
   assert.deepEqual(report.errors, []);
   await page.close(); report.pagesAtEnd = context.pages().length;

@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import type { World } from '../sim/world.ts';
 import { CHARACTERS } from '../sim/world.ts';
 export class Hud {
@@ -8,6 +9,7 @@ export class Hud {
   private cards: HTMLElement[] = [];
   private labels: HTMLElement[] = [];
   private signature = '';
+  private projected = new THREE.Vector3();
   constructor() {
     this.element.className = 'hud'; this.score.className = 'scoreboard'; this.banner.className = 'round-banner'; this.banner.setAttribute('aria-live', 'polite');
     this.footer.className = 'arena-footer'; this.element.append(this.score, this.banner, this.footer);
@@ -24,7 +26,7 @@ export class Hud {
       label.textContent = f.human ? `P${f.id + 1}` : CHARACTERS[f.character].name; this.element.append(label); return label;
     });
   }
-  update(w: World, paused: boolean) {
+  update(w: World, paused: boolean, camera: THREE.Camera) {
     const signature = `${w.phase}:${Math.ceil(w.phaseTime)}:${w.round}:${w.winner}:${Math.floor(w.roundTime)}:${w.fighters.map(f => `${f.ammo},${f.score},${f.alive}`).join(':')}`;
     if (signature !== this.signature) {
       this.signature = signature;
@@ -37,6 +39,10 @@ export class Hud {
       this.footer.textContent = `${w.level.name}   /   Primeiro a 5   /   ${Math.max(0, 90 - Math.floor(w.roundTime))}s   /   Esc pausa`;
     }
     this.banner.hidden = paused;
-    w.fighters.forEach((f, n) => { const l = this.labels[n]; l.hidden = !f.alive; l.style.left = `${(f.x + 0.9) / 33.8 * 100}%`; l.style.top = `${(f.y - 1.1 + 0.7) / 19.4 * 100}%`; });
+    w.fighters.forEach((f, n) => {
+      const l = this.labels[n]; l.hidden = !f.alive;
+      this.projected.set(f.x, 18 - f.y + 0.93, 0.6).project(camera);
+      l.style.left = `${(this.projected.x + 1) * 50}%`; l.style.top = `${(1 - this.projected.y) * 50}%`;
+    });
   }
 }
