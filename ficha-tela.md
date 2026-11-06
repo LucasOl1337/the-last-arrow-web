@@ -11,6 +11,14 @@
 
 Galeria consultada: preservar formato conhecido. Stories reais de câmera e sala antes de conectar ao jogo; estados conectando/aguardando/ativo/erro. Provar1366×768,900×1000,844×390. O combate mantém proporção16:9; área menor em janela vertical é deliberada para não cortar a arena inteira na visão ampla.
 
+### Crítica da retomada — prints abertos, 16:10
+
+- Câmera próxima aumenta personagens28% sem alterar clipes aprovados; segue quem joga e mantém C/botão para ver a arena inteira. Recorta adversários distantes deliberadamente; por isso não é padrão para dois locais. Print público mostra P1 maior e flecha legível.
+- Sala reaproveita cores/tipografia; convite é selecionável se clipboard falhar. Primeira story mostrou botões cinzentos genéricos e Voltar fora da tela844×390; corrigidos para botões reais secundários e layout compacto horizontal. Agora 18 portões reais passam (6 stories×3larguras) e TODOS os botões cabem.
+- Entrada/espera/erro, menu com online, pausa online e câmera foram vistos nas folhas de conferência. Ação principal não exige rolar. Código vazio é entrada do usuário, não configuração vigente ausente; removido placeholder que a régua interpreta como valor implícito.
+- Online não pode prometer pausa: overlay explica que combate continua; controles próprios param e Continuar/Voltar estão visíveis. HUD também diferencia sessão online. Renderização e animações existentes não foram substituídas.
+- Limite visual: brilho branco de Storm preservado conforme aprovação, e prova em bancada convencional ativa modo leve (~49FPS na leitura após revanche); não extrapolar os60FPS da prova headless antiga para esta superfície.
+
 ## Rodada 10 — catch e wrap (antes do código visual)
 
 1. **Quem usa:** P1 teclado contra3 bots, desktop1600×900/notebook1366×768/celular horizontal844×390.

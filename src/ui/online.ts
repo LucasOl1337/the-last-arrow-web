@@ -10,13 +10,15 @@ export class OnlinePanel {
     const title=document.createElement('h2');title.textContent='Duelo online';
     const hint=document.createElement('p');hint.textContent='Dois jogadores, cada um no seu aparelho. Crie uma sala e envie o convite.';
     this.status.setAttribute('role','status');
-    const field=document.createElement('label');field.textContent='Código da sala';this.input.maxLength=8;this.input.autocomplete='off';this.input.value=code;this.input.placeholder='Ex.: 12AB34CD';field.append(this.input);
+    const field=document.createElement('label');field.textContent='Código da sala';this.input.maxLength=8;this.input.autocomplete='off';this.input.setAttribute('aria-label','Código da sala');this.input.value=code;field.append(this.input);
     const make=(text:string,fn:()=>void)=>{const b=document.createElement('button');b.type='button';b.className='secondary';b.textContent=text;b.onclick=fn;return b;};
     const create=make('Criar sala',actions.create);create.className='primary';
     const join=make('Entrar na sala',()=>actions.join(this.input.value.trim().toUpperCase()));
     this.invite.readOnly=true;this.invite.setAttribute('aria-label','Link do convite');this.invite.hidden=true;
     this.copy=make('Copiar convite',()=>{void navigator.clipboard.writeText(this.invite.value).then(()=>this.status.textContent='Convite copiado. Envie para seu amigo.').catch(()=>{this.invite.select();this.status.textContent='Selecione e copie o link acima.';});});this.copy.hidden=true;
     panel.append(title,hint,create,field,join,this.status,this.invite,this.copy,make('Voltar ao menu',actions.back));this.element.append(panel);
+    this.input.addEventListener('keydown',e=>{if(e.key==='Enter')join.click();});
+    this.element.addEventListener('keydown',e=>{if(e.key==='Escape'){actions.back();return;}if(e.key!=='Tab')return;const items=[...panel.querySelectorAll<HTMLElement>('button,input')].filter(el=>!el.hidden);const first=items[0],last=items.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}});
   }
   show(message='') {this.element.hidden=false;this.status.textContent=message;}
   hide() {this.element.hidden=true;}

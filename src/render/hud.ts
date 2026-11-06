@@ -25,6 +25,7 @@ export class Hud {
   private countdown = document.createElement('div');
   private roundCard = document.createElement('div');
   private footer = document.createElement('div');
+  online = false;
   private muteButton = document.createElement('button');
   private qualityNotice = document.createElement('div');
   private cards: HTMLElement[] = [];
@@ -146,7 +147,7 @@ export class Hud {
         this.cards[n].querySelector('.points')!.textContent = String(f.score);
         this.cards[n].querySelector('.ammo')!.textContent = '➶'.repeat(f.ammo) || 'sem flechas';
       });
-      this.footer.textContent = `${w.level.name}   /   ${matchStatus(w)}${matchMedia('(pointer: coarse)').matches ? '' : '   /   Esc pausa   /   M som'}`;
+      this.footer.textContent = `${w.level.name}   /   ${matchStatus(w)}${matchMedia('(pointer: coarse)').matches ? '' : this.online ? '   /   Online · sem pausa   /   M som' : '   /   Esc pausa   /   M som'}`;
     }
     this.renderCountdown(w, now);
     this.renderRoundCard(w);

@@ -20,11 +20,12 @@ test('two remote players share authoritative world, full rooms reject, disconnec
  const a=client(url),b=client(url),c=client(url);
  try {
    await Promise.all([a,b,c].map(p=>new Promise<void>(r=>p.ws.once('open',r))));
-   a.send({type:'join',map:'moss'});const joined=await a.wait('joined');assert.equal(joined.player,0);await a.wait('waiting');
+   a.send({type:'join',map:'totem',mode:'headhunter'});const joined=await a.wait('joined');assert.equal(joined.player,0);await a.wait('waiting');
    b.send({type:'join',room:joined.room});assert.equal((await b.wait('joined')).player,1);
    await Promise.all([a.wait('start'),b.wait('start')]);
    c.send({type:'join',room:joined.room});assert.match((await c.wait('error')).message,/cheia/);
    const first=await a.wait('state');assert.equal(first.world.fighters.length,2);
+   assert.equal(first.world.options.map,'totem');assert.equal(first.world.options.mode,'headhunter');
    const r=app.rooms.get(joined.room)!;
    await new Promise(r=>setTimeout(r,60));assert.equal(r.world.tick,0,'wait until both assets are ready');
    a.send({type:'ready'});b.send({type:'ready'});r.world.phase='playing';r.world.fighters.forEach(f=>f.invulnerable=10);
@@ -32,6 +33,9 @@ test('two remote players share authoritative world, full rooms reject, disconnec
    await new Promise(r=>setTimeout(r,180));assert.ok(r.world.fighters[1].x<x);
    a.messages.length=b.messages.length=0;
    const [sa,sb]=await Promise.all([a.wait('state'),b.wait('state')]);assert.deepEqual(sa.world,sb.world);
+   r.world.phase='matchover';r.world.fighters[0].score=5;
+   a.send({type:'rematch'});await new Promise(r=>setTimeout(r,40));assert.equal(r.world.phase,'matchover','one vote cannot reset opponent');
+   b.send({type:'rematch'});await a.wait('start');await b.wait('start');assert.equal(r.world.phase,'countdown');assert.equal(r.world.fighters[0].score,0);assert.equal(r.loaded.size,0);
    a.ws.close();await b.wait('left');assert.equal(app.rooms.size,0);
  }finally{a.ws.terminate();b.ws.terminate();c.ws.terminate();await app.close();}
 });

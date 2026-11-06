@@ -15,6 +15,7 @@ export class OnlineClient {
     this.timeout=setTimeout(()=>{if(!this.stopped){onMessage({type:'error',message:'A conexão demorou demais. Tente entrar novamente.'});this.close();}},10000);
     this.ws.onopen=()=>{this.ws.send(JSON.stringify({type:'join',room,...options}));};
     this.ws.onmessage=e=>{
+      if(this.stopped)return;
       const m=JSON.parse(e.data) as ServerMessage;
       if(m.type==='joined') {clearTimeout(this.timeout);this.player=m.player;this.room=m.room;}
       onMessage(m);

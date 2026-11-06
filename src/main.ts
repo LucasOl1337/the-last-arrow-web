@@ -64,7 +64,7 @@ function connectOnline(room: string) {
     if(m.type==='start') {pendingState=null;onlineEvents=[];onlineReady=false;onlineStartedAt=performance.now();startMatch(m.options);onlinePanel.hide();}
     if(m.type==='state') {pendingState=m;onlineEvents.push(...m.events);}
     if(m.type==='error'||m.type==='left') {running=false;controls.active=false;controls.reset();audio.setPaused(true);menu.hide();onlinePanel.show(m.type==='left'?'O outro jogador saiu. Crie uma nova sala para jogar de novo.':m.message);}
-  });
+  },menu.selectedOptions());
 }
 if(params.has('room')) {menu.hide();onlinePanel.show('Convite recebido. Toque em Entrar na sala.');} 
 const controls = new Controls(() => { if (running && world.phase !== 'matchover') setPaused(!paused); }, () => { if (running && world.phase !== 'matchover') setPaused(true); });
@@ -88,7 +88,10 @@ portraitTouch.addEventListener('change', () => {
 });
 function setPaused(value: boolean) {
   if (!running || contextLost) return;
-  if (online) { controls.reset();online.send(emptyIntent(),performance.now()+100);return; } // a remote duel never pauses the other player
+  if (online) {
+    paused=value;controls.reset();controls.active=!paused;online.send(emptyIntent(),performance.now()+100);
+    if(paused)menu.show('pause');else menu.hide();return; // server and remote player continue
+  }
   paused = value; accumulator = 0; controls.reset(); controls.active = !paused && !portraitTouch.matches; audio.setPaused(paused || portraitTouch.matches);
   // Resetting input is not releasing the bow. Cancel human draws on pause/blur
   // so resuming cannot spend a flecha without a fresh shooting gesture.
@@ -121,6 +124,7 @@ function startMatch(opts: MatchOptions = {}) {
     if (opts.map && !LEVELS.some(level => level.id === opts.map)) notice.set('map', 'Arena inválida: jogando em Musgo');
     world = createWorld({ ...opts, seed: opts.seed ?? seed });
     cameraClose=!!online || world.options.humans===1;updateCameraButton();
+    hud.online=!!online;menu.online=!!online;
     arena.setLevel(world.level); fighters.reset(world); hud.reset(world); fx.reset(); chests.reset();
     stats = world.fighters.map(() => ({ kills: 0, catches: 0, stomps: 0 })); wasCharging = world.fighters.map(() => false);
     seenRound = world.round; shownVictory = false; paused = false; running = true; timeScale = 1; accumulator = 0;
@@ -185,7 +189,7 @@ function frame(now: number) {
       }
     }
     // Test hook timeScale 0 freezes the sim only; poses keep animating so frozen states can be inspected.
-    const animDt = frozen ? 0 : elapsed * (timeScale || 1) * (!reducedMotion && fx.slow > 0 ? 0.3 : 1) * (!reducedMotion && fx.hitstop > 0 ? 0 : 1);
+    const animDt = frozen && !online ? 0 : elapsed * (timeScale || 1) * (!reducedMotion && fx.slow > 0 ? 0.3 : 1) * (!reducedMotion && fx.hitstop > 0 ? 0 : 1);
     fighters.update(world, online ? Math.min(1,(now-networkStateAt)/(1000/30)) : frozen || world.phase !== 'playing' ? 1 : accumulator / DT, now / 1000, animDt);
     arrows.update(world, now / 1000); chests.update(world, now / 1000); fx.update(frozen ? 0 : elapsed, frozen ? 0 : elapsed * timeScale, world);
     flash.style.opacity = reducedMotion ? '0' : String(fx.flash * 0.7);

@@ -18,6 +18,7 @@ export class Menu {
   private winner: string | null = 'Mizu';
   private stats: VictoryStats | null = null;
   private muted = false;
+  online = false;
   constructor(private actions: MenuActions) {
     this.element.className = 'menu-layer';
     // Injected from TS so the URL follows BASE_URL (GitHub Pages subpath) instead of a root-absolute CSS url.
@@ -40,6 +41,7 @@ export class Menu {
     this.element.querySelector<HTMLElement>('button, select')?.focus({ preventScroll: true });
   }
   hide() { this.element.hidden = true; }
+  selectedOptions() { return {map:this.options.map,mode:this.options.mode}; }
   setMuted(muted: boolean) {
     this.muted = muted;
     this.element.querySelectorAll<HTMLButtonElement>('[data-sound]').forEach(button => {
@@ -125,12 +127,12 @@ export class Menu {
   }
   private renderOverlay() {
     const panel = document.createElement('div'); panel.className = 'overlay-panel'; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true');
-    panel.setAttribute('aria-label', this.screen === 'controls' ? 'Controles' : this.screen === 'pause' ? 'Partida pausada' : this.screen === 'error' || this.screen === 'recovering' ? 'Erro gráfico' : 'Vitória');
+    panel.setAttribute('aria-label', this.screen === 'controls' ? 'Controles' : this.screen === 'pause' ? (this.online ? 'Duelo em andamento' : 'Partida pausada') : this.screen === 'error' || this.screen === 'recovering' ? 'Erro gráfico' : 'Vitória');
     if (this.screen === 'controls') {
       panel.innerHTML = `<p class="eyebrow">CADA FLECHA CONTA</p><h2>Como jogar</h2><table><thead><tr><th>Ação</th><th>Jogador 1</th><th>Jogador 2</th></tr></thead><tbody><tr><td>Mover / mirar</td><td>W A S D</td><td>Setas</td></tr><tr><td>Segurar / soltar tiro</td><td>J</td><td>Numpad 1 / ,</td></tr><tr><td>Pular</td><td>K / Espaço</td><td>Numpad 2 / .</td></tr><tr><td>Esquivar / pegar flecha</td><td>L</td><td>Numpad 3 / /</td></tr></tbody></table><p>Controle: direcional mira, A pula, X/RT atira, B/RB esquiva, Start pausa.</p><p>Segure pulo para subir mais; baixo acelera a queda. Pule contra a parede para escalar.</p><p>Flecha ou pisão mata. Esquive contra flechas para pegá-las; recolha as cravadas. As quatro bordas se conectam.</p><p>Versus: primeiro a cinco vitórias; round empata após 90 segundos.</p><p>Headhunter: mais abates em dois minutos; reaparece após 1,5 segundo. Placar igual empata.</p><p class="muted">No celular: tela deitada, stick move e mira. Segure e solte Atirar; Dash pega flechas.</p>`;
       panel.append(this.button('Voltar', () => this.show(this.returnScreen), true));
     } else if (this.screen === 'pause') {
-      panel.innerHTML = '<p class="eyebrow">RESPIRE. MIRE DE NOVO.</p><h2>Partida pausada</h2><p>O combate espera por você.</p>';
+      panel.innerHTML = this.online ? '<p class="eyebrow">DUELO ONLINE</p><h2>O duelo continua</h2><p>Seu arqueiro fica parado, mas a partida não pausa para o outro jogador.</p>' : '<p class="eyebrow">RESPIRE. MIRE DE NOVO.</p><h2>Partida pausada</h2><p>O combate espera por você.</p>';
       panel.append(this.button('Continuar', this.actions.resume, true), this.button('Controles', () => { this.returnScreen = 'pause'; this.show('controls'); }), this.soundButton(), this.button('Voltar ao menu', this.actions.home));
     } else if (this.screen === 'victory') {
       const winner = CHARACTERS.find(c => c.name === this.winner);
