@@ -1,0 +1,192 @@
+{
+  "moss": {
+    "fps": 60.00166209590292,
+    "diagnosticFps": 58.48158414915119,
+    "quality": "normal",
+    "rounds": 12,
+    "scores": [
+      0,
+      5,
+      3,
+      4
+    ],
+    "scoreAgreesWithRoundEvents": true,
+    "sampledBotStillnessMaxSeconds": {
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    "killsByCause": {
+      "arrow": 17,
+      "stomp": 18,
+      "bolt": 1
+    },
+    "events": {
+      "jump": 263,
+      "shoot": 144,
+      "dash": 63,
+      "catch": 47,
+      "kill": 36,
+      "pickup": 67,
+      "impact": 76,
+      "chest-spawn": 6,
+      "round": 11,
+      "chest-open": 3,
+      "victory": 1
+    }
+  },
+  "totem": {
+    "fps": 60.00265939764642,
+    "diagnosticFps": 58.94578631565322,
+    "quality": "normal",
+    "rounds": 8,
+    "scores": [
+      0,
+      0,
+      3,
+      5
+    ],
+    "scoreAgreesWithRoundEvents": true,
+    "sampledBotStillnessMaxSeconds": {
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    "killsByCause": {
+      "stomp": 8,
+      "arrow": 16
+    },
+    "events": {
+      "jump": 170,
+      "shoot": 75,
+      "kill": 24,
+      "pickup": 45,
+      "impact": 33,
+      "dash": 34,
+      "catch": 25,
+      "round": 7,
+      "victory": 1
+    }
+  },
+  "canopy": {
+    "fps": 60.00265939764642,
+    "diagnosticFps": 59.41294353412681,
+    "quality": "normal",
+    "rounds": 13,
+    "scores": [
+      0,
+      4,
+      5,
+      3
+    ],
+    "scoreAgreesWithRoundEvents": true,
+    "sampledBotStillnessMaxSeconds": {
+      "1": 0,
+      "2": 0,
+      "3": 0.25
+    },
+    "killsByCause": {
+      "arrow": 22,
+      "stomp": 16
+    },
+    "events": {
+      "jump": 325,
+      "shoot": 139,
+      "kill": 38,
+      "pickup": 84,
+      "impact": 71,
+      "dash": 59,
+      "catch": 42,
+      "round": 12,
+      "chest-spawn": 9,
+      "chest-open": 4,
+      "victory": 1
+    }
+  },
+  "falls": {
+    "fps": 60.00166209590294,
+    "diagnosticFps": 59.4129435341269,
+    "quality": "normal",
+    "rounds": 8,
+    "scores": [
+      0,
+      2,
+      1,
+      5
+    ],
+    "scoreAgreesWithRoundEvents": true,
+    "sampledBotStillnessMaxSeconds": {
+      "1": 0,
+      "2": 0,
+      "3": 0.25
+    },
+    "killsByCause": {
+      "arrow": 13,
+      "stomp": 11
+    },
+    "events": {
+      "jump": 184,
+      "shoot": 97,
+      "dash": 38,
+      "catch": 28,
+      "impact": 53,
+      "pickup": 54,
+      "kill": 24,
+      "chest-spawn": 3,
+      "chest-open": 2,
+      "round": 7,
+      "victory": 1
+    }
+  },
+  "roots": {
+    "fps": 60.00166209590294,
+    "diagnosticFps": 59.41039326839987,
+    "quality": "normal",
+    "rounds": 7,
+    "scores": [
+      0,
+      1,
+      1,
+      5
+    ],
+    "scoreAgreesWithRoundEvents": true,
+    "sampledBotStillnessMaxSeconds": {
+      "1": 0,
+      "2": 0,
+      "3": 0.25
+    },
+    "killsByCause": {
+      "arrow": 12,
+      "stomp": 9
+    },
+    "events": {
+      "jump": 169,
+      "shoot": 76,
+      "dash": 31,
+      "catch": 23,
+      "impact": 38,
+      "kill": 21,
+      "pickup": 30,
+      "round": 6,
+      "chest-spawn": 3,
+      "chest-open": 1,
+      "explosion": 1,
+      "victory": 1
+    }
+  },
+  "headhunter": {
+    "scores": [
+      1,
+      8,
+      17,
+      16
+    ],
+    "matchTime": 120,
+    "scoreAgreesWithKills": true,
+    "suicides": 0,
+    "killsByCause": {
+      "arrow": 15,
+      "stomp": 27
+    }
+  }
+}

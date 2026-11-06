@@ -1,0 +1,150 @@
+{
+  "errors": [],
+  "renderers": [
+    {
+      "kind": "bench-chromium",
+      "rate": 1,
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "vendor": "Google Inc. (NVIDIA Corporation)",
+      "dpr": 1,
+      "visibility": "visible",
+      "fps": 32.02514272074474,
+      "diagnostics": {
+        "frames": 260,
+        "fps": 31.96498604605417,
+        "averageFrameWorkMs": 5.1692307692271875,
+        "maxFrameWorkMs": 370.20000000018626,
+        "quality": {
+          "level": "low",
+          "detectedFps": 32.65871641347914,
+          "sampleSeconds": 2.0209,
+          "sampleFrames": 66,
+          "decided": true,
+          "bloom": false,
+          "pixelRatio": 0.7,
+          "particles": {
+            "dots": 150,
+            "leaves": 40
+          }
+        },
+        "drawCalls": 65,
+        "triangles": 256136,
+        "geometries": 52,
+        "textures": 37,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "bench-chromium",
+      "rate": 4,
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "vendor": "Google Inc. (NVIDIA Corporation)",
+      "dpr": 1,
+      "visibility": "visible",
+      "fps": 35.125533868199426,
+      "diagnostics": {
+        "frames": 267,
+        "fps": 32.10060594402233,
+        "averageFrameWorkMs": 4.237453183525482,
+        "maxFrameWorkMs": 71.59999999962747,
+        "quality": {
+          "level": "low",
+          "detectedFps": 32.65871641347914,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": true,
+          "bloom": false,
+          "pixelRatio": 0.7,
+          "particles": {
+            "dots": 150,
+            "leaves": 40
+          }
+        },
+        "drawCalls": 61,
+        "triangles": 199714,
+        "geometries": 52,
+        "textures": 47,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "private-chrome",
+      "rate": 1,
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "vendor": "Google Inc. (NVIDIA Corporation)",
+      "dpr": 1,
+      "visibility": "visible",
+      "fps": 28.14034247395521,
+      "diagnostics": {
+        "frames": 236,
+        "fps": 29.134004073822616,
+        "averageFrameWorkMs": 6.211864406791499,
+        "maxFrameWorkMs": 436.20000000018626,
+        "quality": {
+          "level": "low",
+          "detectedFps": 30.43456568377987,
+          "sampleSeconds": 2.0043,
+          "sampleFrames": 61,
+          "decided": true,
+          "bloom": false,
+          "pixelRatio": 0.7,
+          "particles": {
+            "dots": 150,
+            "leaves": 40
+          }
+        },
+        "drawCalls": 65,
+        "triangles": 256136,
+        "geometries": 52,
+        "textures": 37,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "private-chrome",
+      "rate": 4,
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "vendor": "Google Inc. (NVIDIA Corporation)",
+      "dpr": 1,
+      "visibility": "visible",
+      "fps": 33.21862630039982,
+      "diagnostics": {
+        "frames": 257,
+        "fps": 30.960498259224916,
+        "averageFrameWorkMs": 5.033463035018006,
+        "maxFrameWorkMs": 89.09999999962747,
+        "quality": {
+          "level": "low",
+          "detectedFps": 30.43456568377987,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": true,
+          "bloom": false,
+          "pixelRatio": 0.7,
+          "particles": {
+            "dots": 150,
+            "leaves": 40
+          }
+        },
+        "drawCalls": 61,
+        "triangles": 199714,
+        "geometries": 52,
+        "textures": 47,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  ],
+  "pagesAtEnd": 0
+}

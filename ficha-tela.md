@@ -77,6 +77,15 @@ Galeria consultada. Prova inicial: `evidence/rodada-6/antes/video-antes.mp4` e f
 
 Galeria consultada. Stories canônicas para configuração, resultado headhunter/empate e HUD leve antes da integração. Estados sem login/carregamento remoto/permissão não se aplicam. Portão em 1366×768, 900×1000 e 844×390; a arena em letterbox ocupa 50,6% em 900×1000.
 
+### Crítica da rodada 7 (06/11/2026, 11:30 Brasília)
+
+- **Tarefa sem rolar:** Regras fica junto de Modo/Adversários. Primeira story com linha extra cortou o CTA horizontal; três seletores na mesma linha corrigiram. Portão de menu/HUD/arena passa em 1366×768, 900×1000 e 844×390; teste específico também exige Começar/Revanche inteiros no viewport.
+- **Primeiro olhar:** arena e arqueiros preservados na qualidade normal. Modo leve é aviso pequeno no canto inferior esquerdo, fora do combate, sem roubar foco; entra nas exclusões do posicionamento de nomes. HUD é DOM e fica nítido mesmo com raster 720p.
+- **Ajustes após ver:** resultado em 844×390 cortava Revanche; reduzi logo/retrato/padding apenas em telas baixas. Empate não mostra estatísticas inventadas de um vencedor. Stories reais `Configuracao`, `HeadhunterLeve`, `VitoriaHeadhunter`, `EmpateHeadhunter` conferidas nas três larguras; resultado mantém a exceção de área de diálogo curto (22–30%, não editor).
+- **Leve:** o buffer reduzido amacia a imagem 3D e retira brilho do cenário, mas plataforma, flecha, cor e contorno dos arqueiros seguem reconhecíveis. Print 4K e rematch1600 abertos. Visual normal com bloom e pools500/160 permaneceu intacto nos cinco mapas. Não alego qualidade idêntica entre leve e normal.
+- **Antes/depois/prova:** `evidence/rodada-7/antes/`, `story-*.png`, `cpu4-4k-antes.png`, `cpu4-4k-leve.png`, `cpu4-leve-1600.png`; todos os prints vistos diretamente ou nas folhas `conferencia-*.jpg`. `story-report.json` e `report.json` guardam os portões; `quality-report.json` mede 13,44→59,88 FPS após raster cap, CPU4 real por CDP.
+- **Limite de ambiente:** Chromium com janela apresentada pelo Xvnc permanece ~30–36 FPS, inclusive em Vulkan e modo leve; mudar backend não resolveu. Medição oficial usa render isolado com GPU real, como rodadas4–6, na bancada tla. Não é prova de 60FPS da transmissão VNC.
+
 ## Regras e catálogo
 
 - Uma ação principal: entrar na arena. Configuração compacta, título sobre a arte fornecida; sem painel administrativo.

@@ -1,0 +1,130 @@
+{
+  "owner": "tla-rodada-7-rules",
+  "errors": [],
+  "cases": {
+    "draw": {
+      "state": {
+        "tick": 1,
+        "phase": "matchover",
+        "countdown": 0,
+        "round": 1,
+        "roundTime": 0.008333333333333333,
+        "winner": null,
+        "mode": "headhunter",
+        "matchTime": 120,
+        "chests": [],
+        "chestTimer": 11.991666666666667,
+        "map": "totem",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 3,
+            "y": 1.0022222222222226,
+            "vx": 0,
+            "vy": 0.26666666666666666,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 3,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 11,
+            "y": 1.0022222222222226,
+            "vx": 0,
+            "vy": 0.26666666666666666,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 3,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.991666666666667,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 19.003611111111113,
+            "y": 1.0022222222222226,
+            "vx": 0.43333333333333335,
+            "vy": 0.26666666666666666,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 3,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.991666666666667,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 27.003611111111113,
+            "y": 1.0022222222222226,
+            "vx": 0.43333333333333335,
+            "vy": 0.26666666666666666,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 3,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.991666666666667,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [
+          {
+            "type": "victory",
+            "x": 16,
+            "y": 9,
+            "actor": -1
+          }
+        ],
+        "paused": false,
+        "timeScale": 0
+      },
+      "events": [
+        {
+          "type": "victory",
+          "x": 16,
+          "y": 9,
+          "actor": -1,
+          "tick": 1
+        }
+      ],
+      "text": "A ÚLTIMA FLECHA TEM DONOEmpateTempo esgotado. Empate em abates.Revanche  →Escolher outra arena"
+    }
+  },
+  "pagesAtEnd": 0
+}

@@ -1,0 +1,730 @@
+{
+  "owner": "tla-rodada-7-rules",
+  "errors": [],
+  "cases": {
+    "bolt": {
+      "state": {
+        "tick": 33,
+        "phase": "playing",
+        "countdown": 0,
+        "round": 1,
+        "roundTime": 0.275,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0.275,
+        "chests": [],
+        "chestTimer": 11.725000000000016,
+        "map": "totem",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 8.5,
+            "y": 8.74666666666668,
+            "vx": 0,
+            "vy": 8.8,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 9.443611111111132,
+            "y": 2.2466666666666697,
+            "vx": -6.0666666666666655,
+            "vy": 8.8,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.725000000000016,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 17.44361111111114,
+            "y": 2.2466666666666697,
+            "vx": -6.0666666666666655,
+            "vy": 8.8,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.725000000000016,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 25.47347222222224,
+            "y": 1.4499999999999993,
+            "vx": -4.633333333333332,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": true,
+            "invulnerable": 9.725000000000016,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [
+          {
+            "id": 1,
+            "owner": 0,
+            "x": 11.40333333333328,
+            "y": 7.967395833333335,
+            "vx": 23,
+            "vy": 0.011666666666666667,
+            "angle": 0.0005072463333069582,
+            "stuck": false,
+            "age": 0.11666666666666665,
+            "kind": "bolt",
+            "lastFreeX": 9.965833333333308,
+            "lastFreeY": 7.966836805555559
+          }
+        ],
+        "events": [],
+        "paused": false,
+        "timeScale": 0
+      },
+      "events": [
+        {
+          "type": "chest-open",
+          "x": 8.5,
+          "y": 7.5,
+          "actor": 0,
+          "chestId": 99,
+          "reward": [
+            "bolt"
+          ],
+          "tick": 1
+        },
+        {
+          "type": "shoot",
+          "x": 8.5,
+          "y": 7.966666666666669,
+          "actor": 0,
+          "kind": "bolt",
+          "tick": 20
+        }
+      ],
+      "text": ""
+    },
+    "bomb": {
+      "state": {
+        "tick": 14,
+        "phase": "playing",
+        "countdown": 0,
+        "round": 1,
+        "roundTime": 0.11666666666666665,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0.11666666666666665,
+        "chests": [],
+        "chestTimer": 11.88333333333334,
+        "map": "totem",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 8.5,
+            "y": 7.702222222222229,
+            "vx": 0,
+            "vy": 3.4666666666666663,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 0,
+            "kills": 1,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 9.171388888888877,
+            "y": 7.702222222222229,
+            "vx": -5.6333333333333355,
+            "vy": 3.4666666666666663,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 18.620833333333316,
+            "y": 1.2333333333333378,
+            "vx": -6.066666666666669,
+            "vy": 3.733333333333333,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.88333333333334,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 26.620833333333316,
+            "y": 1.2333333333333378,
+            "vx": -6.066666666666669,
+            "vy": 3.733333333333333,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.88333333333334,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [
+          {
+            "id": 2,
+            "owner": 1,
+            "x": 8.951388888888877,
+            "y": 8.10222222222223,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.5,
+            "stuck": true,
+            "age": 0.008333333333333333,
+            "kind": "normal"
+          },
+          {
+            "id": 3,
+            "owner": 1,
+            "x": 9.171388888888877,
+            "y": 8.10222222222223,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8,
+            "stuck": true,
+            "age": 0.008333333333333333,
+            "kind": "normal"
+          },
+          {
+            "id": 4,
+            "owner": 1,
+            "x": 9.391388888888878,
+            "y": 8.10222222222223,
+            "vx": 0,
+            "vy": 0,
+            "angle": 1.1,
+            "stuck": true,
+            "age": 0.008333333333333333,
+            "kind": "normal"
+          }
+        ],
+        "events": [],
+        "paused": false,
+        "timeScale": 0
+      },
+      "events": [
+        {
+          "type": "chest-open",
+          "x": 8.5,
+          "y": 7.5,
+          "actor": 0,
+          "chestId": 99,
+          "reward": [
+            "bomb"
+          ],
+          "tick": 1
+        },
+        {
+          "type": "shoot",
+          "x": 8.5,
+          "y": 7.702222222222229,
+          "actor": 0,
+          "kind": "bomb",
+          "tick": 13
+        },
+        {
+          "type": "explosion",
+          "x": 8.81583333333333,
+          "y": 7.702378472222229,
+          "actor": 0,
+          "kind": "bomb",
+          "radius": 1.6,
+          "tick": 13
+        },
+        {
+          "type": "kill",
+          "x": 8.5,
+          "y": 7.702222222222229,
+          "actor": 0,
+          "target": 0,
+          "cause": "bomb",
+          "tick": 13
+        },
+        {
+          "type": "kill",
+          "x": 9.171388888888877,
+          "y": 7.702222222222229,
+          "actor": 0,
+          "target": 1,
+          "cause": "bomb",
+          "tick": 13
+        }
+      ],
+      "text": ""
+    },
+    "stomp": {
+      "state": {
+        "tick": 2,
+        "phase": "playing",
+        "countdown": 0,
+        "round": 1,
+        "roundTime": 0.016666666666666666,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0.016666666666666666,
+        "chests": [],
+        "chestTimer": 11.983333333333334,
+        "map": "totem",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 8,
+            "y": 14.35666666666667,
+            "vx": 0,
+            "vy": -10,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 1,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 8.01979166666667,
+            "y": 15.450000000000003,
+            "vx": 1.5833333333333333,
+            "vy": 0,
+            "alive": false,
+            "respawnAt": null,
+            "ammo": 0,
+            "score": 0,
+            "kills": 0,
+            "grounded": true,
+            "invulnerable": 0,
+            "inventory": []
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 19.010833333333338,
+            "y": 1.0066666666666677,
+            "vx": 0.8666666666666667,
+            "vy": 0.5333333333333333,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.983333333333334,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 27.010833333333338,
+            "y": 1.0066666666666677,
+            "vx": 0.8666666666666667,
+            "vy": 0.5333333333333333,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.983333333333334,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [
+          {
+            "id": 1,
+            "owner": 1,
+            "x": 7.79979166666667,
+            "y": 15.850000000000003,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.5,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          },
+          {
+            "id": 2,
+            "owner": 1,
+            "x": 8.01979166666667,
+            "y": 15.850000000000003,
+            "vx": 0,
+            "vy": 0,
+            "angle": 0.8,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          },
+          {
+            "id": 3,
+            "owner": 1,
+            "x": 8.23979166666667,
+            "y": 15.850000000000003,
+            "vx": 0,
+            "vy": 0,
+            "angle": 1.1,
+            "stuck": true,
+            "age": 0,
+            "kind": "normal"
+          }
+        ],
+        "events": [
+          {
+            "type": "kill",
+            "x": 8.01979166666667,
+            "y": 15.450000000000003,
+            "actor": 0,
+            "target": 1,
+            "cause": "stomp"
+          }
+        ],
+        "paused": false,
+        "timeScale": 0
+      },
+      "events": [
+        {
+          "type": "kill",
+          "x": 8.01979166666667,
+          "y": 15.450000000000003,
+          "actor": 0,
+          "target": 1,
+          "cause": "stomp",
+          "tick": 2
+        }
+      ],
+      "text": ""
+    },
+    "expiry": {
+      "state": {
+        "tick": 8,
+        "phase": "playing",
+        "countdown": 0,
+        "round": 1,
+        "roundTime": 0.06666666666666667,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0.06666666666666667,
+        "chests": [],
+        "chestTimer": 11.933333333333337,
+        "map": "totem",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 9.68,
+            "y": 7.580000000000005,
+            "vx": 0,
+            "vy": 2.1333333333333333,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": [
+              "normal",
+              "normal",
+              "bolt"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 11,
+            "y": 1.0800000000000018,
+            "vx": 0,
+            "vy": 2.1333333333333333,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.933333333333337,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 19.13000000000001,
+            "y": 1.0800000000000018,
+            "vx": 3.4666666666666677,
+            "vy": 2.1333333333333333,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.933333333333337,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 27.13000000000001,
+            "y": 1.0800000000000018,
+            "vx": 3.4666666666666677,
+            "vy": 2.1333333333333333,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.933333333333337,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0
+      },
+      "events": [
+        {
+          "type": "pickup",
+          "x": 9.99,
+          "y": 7.5,
+          "actor": 0,
+          "kind": "bolt",
+          "tick": 2
+        }
+      ],
+      "text": ""
+    },
+    "draw": {
+      "state": {
+        "tick": 1,
+        "phase": "matchover",
+        "countdown": 0,
+        "round": 1,
+        "roundTime": 0.008333333333333333,
+        "winner": null,
+        "mode": "headhunter",
+        "matchTime": 120,
+        "chests": [],
+        "chestTimer": 11.991666666666667,
+        "map": "totem",
+        "seed": 3,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 3,
+            "y": 1.0022222222222226,
+            "vx": 0,
+            "vy": 0.26666666666666666,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 3,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 0,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": false,
+            "x": 11,
+            "y": 1.0022222222222226,
+            "vx": 0,
+            "vy": 0.26666666666666666,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 3,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.991666666666667,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Kaze",
+            "human": false,
+            "x": 19.003611111111113,
+            "y": 1.0022222222222226,
+            "vx": 0.43333333333333335,
+            "vy": 0.26666666666666666,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 3,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.991666666666667,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Akane",
+            "human": false,
+            "x": 27.003611111111113,
+            "y": 1.0022222222222226,
+            "vx": 0.43333333333333335,
+            "vy": 0.26666666666666666,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 3,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 9.991666666666667,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [
+          {
+            "type": "victory",
+            "x": 16,
+            "y": 9,
+            "actor": -1
+          }
+        ],
+        "paused": false,
+        "timeScale": 0
+      },
+      "events": [
+        {
+          "type": "victory",
+          "x": 16,
+          "y": 9,
+          "actor": -1,
+          "tick": 1
+        }
+      ],
+      "text": "A ÚLTIMA FLECHA TEM DONOEmpateTempo esgotado. Empate em abates.0abates0flechas pegasRevanche  →Escolher outra arena"
+    }
+  },
+  "pagesAtEnd": 0
+}

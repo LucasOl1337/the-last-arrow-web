@@ -1,0 +1,231 @@
+{
+  "owner": "tla-rodada-7-story",
+  "errors": [],
+  "screens": {
+    "arena-menu-real--configuracao-1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 28,
+        "principal_fracao": 0.815,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-menu-real--configuracao-900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 132,
+        "principal_fracao": 0.572,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-menu-real--configuracao-844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 47,
+        "principal_fracao": 0.733,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-hud-real--headhunter-leve-1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-hud-real--headhunter-leve-900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-hud-real--headhunter-leve-844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.821,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-menu-real--vitoria-headhunter-1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 172,
+        "principal_fracao": 0.258,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [
+        "b. objeto principal ocupa 26% da janela (mínimo 40%)"
+      ],
+      "passou": false
+    },
+    "arena-menu-real--vitoria-headhunter-900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 288,
+        "principal_fracao": 0.301,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [
+        "b. objeto principal ocupa 30% da janela (mínimo 40%)"
+      ],
+      "passou": false
+    },
+    "arena-menu-real--vitoria-headhunter-844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 39,
+        "principal_fracao": 0.607,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "arena-menu-real--empate-headhunter-1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 207,
+        "principal_fracao": 0.216,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [
+        "b. objeto principal ocupa 22% da janela (mínimo 40%)"
+      ],
+      "passou": false
+    },
+    "arena-menu-real--empate-headhunter-900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 323,
+        "principal_fracao": 0.252,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [
+        "b. objeto principal ocupa 25% da janela (mínimo 40%)"
+      ],
+      "passou": false
+    },
+    "arena-menu-real--empate-headhunter-844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 70,
+        "principal_fracao": 0.485,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  },
+  "pagesAtEnd": 0
+}

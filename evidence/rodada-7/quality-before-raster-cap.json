@@ -1,0 +1,69 @@
+{
+  "owner": "tla-rodada-7-quality",
+  "errors": [],
+  "cpuThrottle": 4,
+  "viewport": {
+    "width": 3840,
+    "height": 2160
+  },
+  "deviceScaleFactor": 2,
+  "pagesAtEnd": 0,
+  "decision": {
+    "frames": 53,
+    "fps": 10.600424016960673,
+    "averageFrameWorkMs": 16.333962264207173,
+    "maxFrameWorkMs": 278.79999999981374,
+    "quality": {
+      "level": "low",
+      "detectedFps": 13.885445078105628,
+      "sampleSeconds": 2.0165,
+      "sampleFrames": 28,
+      "decided": true,
+      "bloom": false,
+      "pixelRatio": 1.0499999999999998,
+      "particles": {
+        "dots": 150,
+        "leaves": 40
+      }
+    },
+    "drawCalls": 68,
+    "triangles": 370526,
+    "geometries": 41,
+    "textures": 25,
+    "models": true,
+    "modelError": null,
+    "audioFailures": [],
+    "renderer": "WebKit WebGL"
+  },
+  "after": {
+    "fps": 22.578995297082198,
+    "maxGap": 66.70000000000073,
+    "diagnostics": {
+      "frames": 258,
+      "fps": 17.8143578200197,
+      "averageFrameWorkMs": 9.075581395341617,
+      "maxFrameWorkMs": 278.79999999981374,
+      "quality": {
+        "level": "low",
+        "detectedFps": 13.885445078105628,
+        "sampleSeconds": 2.0165,
+        "sampleFrames": 28,
+        "decided": true,
+        "bloom": false,
+        "pixelRatio": 1.0499999999999998,
+        "particles": {
+          "dots": 150,
+          "leaves": 40
+        }
+      },
+      "drawCalls": 76,
+      "triangles": 371038,
+      "geometries": 52,
+      "textures": 31,
+      "models": true,
+      "modelError": null,
+      "audioFailures": [],
+      "renderer": "WebKit WebGL"
+    }
+  }
+}

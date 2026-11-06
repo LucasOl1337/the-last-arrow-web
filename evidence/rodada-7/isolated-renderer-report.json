@@ -1,0 +1,52 @@
+{
+  "errors": [],
+  "renderers": [
+    {
+      "kind": "isolated-render",
+      "rate": 1,
+      "renderer": "ANGLE (NVIDIA, Vulkan 1.4.351 (NVIDIA NVIDIA GeForce RTX 4070 Ti SUPER (0x00002705)), NVIDIA)",
+      "vendor": "Google Inc. (NVIDIA)",
+      "dpr": 1,
+      "visibility": "visible",
+      "fps": 60.003189538314324,
+      "diagnostics": {
+        "frames": 478,
+        "fps": 59.628506917156024,
+        "averageFrameWorkMs": 0.890794979083005,
+        "maxFrameWorkMs": 68.5,
+        "drawCalls": 75,
+        "triangles": 199968,
+        "geometries": 52,
+        "textures": 50,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "isolated-render",
+      "rate": 4,
+      "renderer": "ANGLE (NVIDIA, Vulkan 1.4.351 (NVIDIA NVIDIA GeForce RTX 4070 Ti SUPER (0x00002705)), NVIDIA)",
+      "vendor": "Google Inc. (NVIDIA)",
+      "dpr": 1,
+      "visibility": "visible",
+      "fps": 60.00199342170836,
+      "diagnostics": {
+        "frames": 477,
+        "fps": 59.75197294250254,
+        "averageFrameWorkMs": 2.901048218068009,
+        "maxFrameWorkMs": 115.20000000018626,
+        "drawCalls": 75,
+        "triangles": 199968,
+        "geometries": 52,
+        "textures": 60,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  ],
+  "pagesAtEnd": 0
+}

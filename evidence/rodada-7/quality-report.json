@@ -1,0 +1,96 @@
+{
+  "owner": "tla-rodada-7-quality",
+  "errors": [],
+  "cpuThrottle": 4,
+  "viewport": {
+    "width": 3840,
+    "height": 2160
+  },
+  "deviceScaleFactor": 2,
+  "pagesAtEnd": 0,
+  "decision": {
+    "frames": 53,
+    "fps": 10.160069011789513,
+    "averageFrameWorkMs": 13.779245283138359,
+    "maxFrameWorkMs": 154.80000000074506,
+    "quality": {
+      "level": "low",
+      "detectedFps": 13.440215043440698,
+      "sampleSeconds": 2.0832999999999995,
+      "sampleFrames": 28,
+      "decided": true,
+      "bloom": false,
+      "pixelRatio": 0.3333333333333333,
+      "particles": {
+        "dots": 150,
+        "leaves": 40
+      }
+    },
+    "drawCalls": 68,
+    "triangles": 370526,
+    "geometries": 41,
+    "textures": 25,
+    "models": true,
+    "modelError": null,
+    "audioFailures": [],
+    "renderer": "WebKit WebGL"
+  },
+  "after": {
+    "fps": 59.877998577897536,
+    "maxGap": 33.399999999999636,
+    "diagnostics": {
+      "frames": 593,
+      "fps": 41.18227148353427,
+      "averageFrameWorkMs": 5.023271500860132,
+      "maxFrameWorkMs": 154.80000000074506,
+      "quality": {
+        "level": "low",
+        "detectedFps": 13.440215043440698,
+        "sampleSeconds": 2.0832999999999995,
+        "sampleFrames": 28,
+        "decided": true,
+        "bloom": false,
+        "pixelRatio": 0.3333333333333333,
+        "particles": {
+          "dots": 150,
+          "leaves": 40
+        }
+      },
+      "drawCalls": 76,
+      "triangles": 371038,
+      "geometries": 52,
+      "textures": 31,
+      "models": true,
+      "modelError": null,
+      "audioFailures": [],
+      "renderer": "WebKit WebGL"
+    }
+  },
+  "rematch": {
+    "frames": 138,
+    "fps": 52.077436884410695,
+    "averageFrameWorkMs": 2.2985507246052874,
+    "maxFrameWorkMs": 4.2000000001862645,
+    "quality": {
+      "level": "low",
+      "detectedFps": 13.440215043440698,
+      "sampleSeconds": 0,
+      "sampleFrames": 0,
+      "decided": true,
+      "bloom": false,
+      "pixelRatio": 0.8,
+      "particles": {
+        "dots": 150,
+        "leaves": 40
+      }
+    },
+    "drawCalls": 67,
+    "triangles": 370524,
+    "geometries": 43,
+    "textures": 35,
+    "models": true,
+    "modelError": null,
+    "audioFailures": [],
+    "renderer": "WebKit WebGL"
+  }
+}
