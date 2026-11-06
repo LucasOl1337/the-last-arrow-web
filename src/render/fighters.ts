@@ -10,7 +10,7 @@ import { ProceduralPuppet } from './puppet.ts';
 import { blob, softDot } from './textures.ts';
 import { themeForLevel } from './themes.ts';
 import { ARROW_SPEED, ARROW_GRAVITY, BOLT_GRAVITY } from '../sim/arrows.ts';
-import { runTimeScale } from './animation.ts';
+import { clipWindow, runTimeScale } from './animation.ts';
 
 /** Visual height of a fighter in tiles (hitbox is 0.64×1.10; feet stay on the hitbox base, the body grows up). */
 export const VISUAL_HEIGHT = 2.4;
@@ -31,12 +31,13 @@ const RIM_STRENGTH = 1.4;
 const SELF_LIGHT: Record<string, number> = { moss: 0.48, totem: 0.65, canopy: 0.55 };
 const AIM_DOTS = 5;
 /** Clip windows (seconds). `hold` stops at `end`; `loop` wraps inside the window. */
-const WINDOWS: Record<ClipName | 'death', { clip: ClipName; start: number; end: number; mode: 'loop' | 'hold' }> = {
+const WINDOWS: Record<ClipName | 'land' | 'death', { clip: ClipName; start: number; end: number; mode: 'loop' | 'hold' }> = {
   idle: { clip: 'idle', start: 0, end: 15.3, mode: 'loop' },
   run: { clip: 'run', start: 0, end: 1.25, mode: 'loop' },
   jump: { clip: 'jump', start: 0.12, end: 0.3, mode: 'hold' },
   // The fall clip turns the body toward the camera; the descending half of a jump keeps the profile.
   fall: { clip: 'jump', start: 0.3, end: 0.38, mode: 'hold' },
+  land: { clip: 'jump', start: 0.38, end: 0.52, mode: 'hold' },
   // `fire` keeps a standing bow stance; hold the drawn string, then play its short release.
   shoot: { clip: 'shoot', start: 0.02, end: 0.2, mode: 'hold' },
   victory: { clip: 'victory', start: 0, end: 5.6, mode: 'loop' },
@@ -45,7 +46,7 @@ const WINDOWS: Record<ClipName | 'death', { clip: ClipName; start: number; end: 
 type State = keyof typeof WINDOWS;
 
 interface Rig {
-  model: THREE.Object3D; mixer: THREE.AnimationMixer; actions: Record<ClipName, THREE.AnimationAction>;
+  model: THREE.Object3D; mixer: THREE.AnimationMixer; actions: Record<State, THREE.AnimationAction>;
   uniforms: CharacterUniforms[]; outlines: THREE.Material[]; spine1?: THREE.Object3D; spine2?: THREE.Object3D; bowHand?: THREE.Object3D;
   ghosts: { model: THREE.Object3D; bones: THREE.Object3D[]; material: THREE.MeshBasicMaterial; life: number }[];
   bones: THREE.Object3D[]; runSpeed: number;
@@ -53,7 +54,7 @@ interface Rig {
 interface View {
   root: THREE.Group; pivot: THREE.Group; character: number; rig: Rig | null; puppet: ProceduralPuppet | null;
   state: State; stateTime: number; yaw: number; aim: number; deathAt: number; ghostClock: number;
-  wasGrounded: boolean; lastVy: number; releaseTime: number;
+  wasGrounded: boolean; lastVy: number; releaseTime: number; landingTime: number;
   shadow: THREE.Mesh; halo: THREE.Mesh; backdrop: THREE.Sprite; aimDots: THREE.Mesh[]; aimFade: number; nock: THREE.Group;
 }
 
@@ -92,7 +93,18 @@ export class FightersView {
       v.root.updateWorldMatrix(true, true);
       const hand = v.rig?.bowHand?.getWorldPosition(new THREE.Vector3());
       const shoulder = v.rig?.model.getObjectByName('mixamorigLeftShoulder')?.getWorldPosition(new THREE.Vector3());
+      const action = v.rig?.actions[v.state];
+      const head = v.rig?.model.getObjectByName('mixamorigHead')?.getWorldPosition(new THREE.Vector3());
       return { state: v.state, yaw: v.yaw, feet: v.root.position.toArray(),
+        headHeight: head ? head.y - v.root.position.y : null,
+        animationTime: action?.time, animationSpeed: action?.getEffectiveTimeScale(),
+        strideSpeed: v.rig ? v.rig.runSpeed * v.rig.model.scale.x : null,
+        landingTime: v.landingTime,
+        weights: v.rig ? Object.fromEntries(Object.entries(v.rig.actions).map(([name, a]) => [name, a.getEffectiveWeight()])) : {},
+        toes: ['mixamorigLeftToeBase', 'mixamorigRightToeBase'].map(name => {
+          const p = v.rig?.model.getObjectByName(name)?.getWorldPosition(new THREE.Vector3());
+          return p ? p.y - v.root.position.y : null;
+        }),
         bowDirection: hand && shoulder ? hand.sub(shoulder).toArray() : null,
         nock: v.nock.visible ? v.nock.position.toArray() : null };
     });
@@ -131,7 +143,14 @@ export class FightersView {
     const outlines = skinned.map(m => addOutline(m, outlineColor, 2.25).material);
     pivot.add(model);
     const mixer = new THREE.AnimationMixer(model);
-    const actions = Object.fromEntries((Object.keys(kit.clips) as ClipName[]).map(name => [name, mixer.clipAction(kit.clips[name])])) as Record<ClipName, THREE.AnimationAction>;
+    // A separate action for each state is essential: crossfading jump → fall must not seek jump in place.
+    const actions = Object.fromEntries((Object.keys(WINDOWS) as State[]).map(name => {
+      const win = WINDOWS[name];
+      const clip = clipWindow(kit.clips[win.clip], name, win.start, name === 'shoot' ? 0.65 : win.end);
+      const action = mixer.clipAction(clip);
+      if (win.mode === 'hold') { action.setLoop(THREE.LoopOnce, 1); action.clampWhenFinished = true; }
+      return [name, action];
+    })) as Record<State, THREE.AnimationAction>;
     const bones: THREE.Object3D[] = []; model.traverse(o => { if ((o as THREE.Bone).isBone) bones.push(o); });
     const ghosts = Array.from({ length: GHOSTS }, () => {
       const ghost = instantiate(kit); ghost.scale.copy(model.scale);
@@ -174,19 +193,17 @@ export class FightersView {
     });
     const nock = nockedArrow(color); nock.visible = false; this.scene.add(nock);
     const view: View = { root, pivot, character: f.character, rig, puppet, state: 'idle', stateTime: 0, yaw: f.facing > 0 ? -0.35 : -Math.PI + 0.35,
-      aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, shadow, halo, backdrop, aimDots, aimFade: 0, nock };
+      aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, landingTime: 0, shadow, halo, backdrop, aimDots, aimFade: 0, nock };
     if (rig) this.play(view, 'idle', 0);
     return view;
   }
   private play(v: View, state: State, fade = FADE) {
     if (!v.rig) return;
-    const win = WINDOWS[state], next = v.rig.actions[win.clip];
-    const prevClip = WINDOWS[v.state].clip;
+    const next = v.rig.actions[state], prev = v.rig.actions[v.state];
     v.state = state; v.stateTime = 0;
-    if (next.isRunning() && prevClip === win.clip) { next.time = win.start; return; }
-    next.reset(); next.time = win.start; next.setEffectiveWeight(1); next.setEffectiveTimeScale(1); next.play();
-    const prev = v.rig.actions[prevClip];
-    if (fade > 0 && prev !== next && prev.isRunning()) next.crossFadeFrom(prev, fade, false);
+    next.reset(); next.setEffectiveWeight(1); next.setEffectiveTimeScale(1); next.play();
+    // A clamped/paused pose still has weight and must fade out, too.
+    if (fade > 0 && prev !== next && prev.isScheduled()) next.crossFadeFrom(prev, fade, false);
     else for (const a of Object.values(v.rig.actions)) if (a !== next) a.stop();
   }
   private choose(v: View, f: Fighter, w: World): State {
@@ -194,14 +211,15 @@ export class FightersView {
     if ((w.phase === 'roundover' || w.phase === 'matchover') && w.winner === f.id) return 'victory';
     if (f.charging || v.releaseTime > 0) return 'shoot';
     if (!f.grounded) return f.vy < 0 ? 'jump' : 'fall';
-    return Math.abs(f.vx) > 0.6 ? 'run' : 'idle';
+    if (Math.abs(f.vx) > 0.6) return 'run';
+    return v.landingTime > 0 ? 'land' : 'idle';
   }
   /** Fixed-step events (called from the sim loop) that affect poses. */
   event(type: string, actor: number) {
     const v = this.views[actor]; if (!v) return;
     if (type === 'shoot') {
       v.releaseTime = 0.18;
-      if (v.rig && v.state === 'shoot') v.rig.actions.shoot.time = 0.2;
+      if (v.rig && v.state === 'shoot') { v.rig.actions.shoot.paused = false; v.rig.actions.shoot.time = 0.18; }
     }
     if (type === 'dash') v.ghostClock = 0;
   }
@@ -222,9 +240,15 @@ export class FightersView {
       const turn = Math.atan2(Math.sin(targetYaw - v.yaw), Math.cos(targetYaw - v.yaw));
       v.yaw += turn * Math.min(1, dt * 24);
       v.pivot.rotation.y = v.yaw;
-      // Landing dust.
-      if (f.alive && f.grounded && !v.wasGrounded && v.lastVy > 6) this.onLand?.(x, y + HALF_H, Math.min(1, v.lastVy / 19));
+      // Landing recovery is visual only; it never delays input or changes collision.
+      v.landingTime = Math.max(0, v.landingTime - dt);
+      if (f.alive && f.grounded && !v.wasGrounded) {
+        v.landingTime = 0.14;
+        if (v.lastVy > 6) this.onLand?.(x, y + HALF_H, Math.min(1, v.lastVy / 19));
+      }
+      if (!f.grounded) v.landingTime = 0;
       v.wasGrounded = f.grounded; v.lastVy = f.vy;
+      v.pivot.scale.y = 1 - 0.055 * Math.sin(Math.PI * v.landingTime / 0.14);
       const visible = f.alive || dying < 0.9;
       v.root.visible = visible;
       v.backdrop.material.opacity = f.alive ? 0.95 : Math.max(0, 0.95 - dying * 1.5);
@@ -244,20 +268,21 @@ export class FightersView {
   private animateRig(v: View, f: Fighter, w: World, dt: number, dying: number) {
     const rig = v.rig!;
     const want = this.choose(v, f, w);
-    if (want !== v.state) this.play(v, want, want === 'death' ? 0.08 : FADE);
+    if (want !== v.state) this.play(v, want, want === 'death' || want === 'land' ? 0.08 : FADE);
     v.stateTime += dt;
-    const win = WINDOWS[v.state], action = rig.actions[win.clip];
+    const win = WINDOWS[v.state], action = rig.actions[v.state];
     let speed = 1;
     if (v.state === 'run') speed = runTimeScale(f.vx, rig.runSpeed, rig.model.scale.x);
     if (v.state === 'death') speed = 1.8;
     const releasing = v.state === 'shoot' && !f.charging && v.releaseTime > 0;
     if (releasing) speed = 2;
+    // Clamp before mixer evaluation, not a frame after sampling beyond the window.
+    if (v.state === 'shoot' && !releasing) {
+      action.time = Math.min(action.time + dt, win.end - win.start);
+      speed = 0;
+    }
     action.setEffectiveTimeScale(speed);
     rig.mixer.update(dt);
-    if (!releasing && action.time >= win.end) {
-      if (win.mode === 'loop') action.time = win.start + (action.time - win.end) % (win.end - win.start);
-      else { action.time = win.end; action.setEffectiveTimeScale(0); }
-    }
     // Aim offset: pitch the spine around the facing plane normal so the bow follows 8-way aim.
     const aimTarget = f.alive && (f.charging || v.releaseTime > 0) ? Math.atan2(-f.aimY, Math.abs(f.aimX)) : 0;
     v.aim += (THREE.MathUtils.clamp(aimTarget, -1.1, 1.1) - v.aim) * Math.min(1, dt * 18);
