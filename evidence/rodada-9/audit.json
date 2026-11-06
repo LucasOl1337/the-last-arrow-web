@@ -1,0 +1,24 @@
+{
+  "sessionMatches": 8,
+  "timeOrigins": 1,
+  "allRealTime": true,
+  "unexpectedErrors": {
+    "session": 0,
+    "robustness": 0,
+    "visibility": 0,
+    "story": 0
+  },
+  "nativePreexistingTargetsPreserved": true,
+  "ownPagesAtEnd": 0,
+  "minimumMeasuredFPS": 60.00183084643358,
+  "minimumWholeMatchDiagnosticFPS": 59.706185715780464,
+  "pngCount": 44,
+  "sourceCommits": [
+    "23e6372",
+    "df04d7d"
+  ],
+  "proofCommits": [
+    "a45cf86",
+    "b7af1ea"
+  ]
+}

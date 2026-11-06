@@ -1,5 +1,24 @@
 # Ficha da tela — The Last Arrow
 
+## Rodada 9 — recuperação (antes do código de UI)
+
+1. **Quem usa:** jogador em sessão longa, desktop/notebook ou celular horizontal.
+2. **Tarefas:** entender uma interrupção; retomar sem perder placar; continuar com fallback quando um asset falha.
+3. **Objeto:** a mesma arena, preservada durante perda de contexto; aviso curto sem cobrir o combate.
+4. **Simultâneo:** placar/arena e motivo + ação de recuperação, sem diagnóstico técnico obrigatório.
+5. **Medido:** cinco mapas, quatro kits GLB, seis arquivos de áudio; overlay atual apenas manda recarregar e nunca retoma contexto restaurado.
+6. **Estado:** contexto perdido congela; restaurado volta pausado com Continuar; asset404 usa fallback e aviso persistente; mapa inválido usa Musgo com aviso.
+
+Galeria consultada: preservar formato conhecido, ação visível sem rolagem. Reusar overlay do Menu e um status compacto no HUD; nada de novo painel. Stories: contexto perdido e aviso de recursos. Portão em1366×768,900×1000,844×390. Exceção de área: diálogo de recuperação não deve ocupar40% só para passar a régua; sua camada ocupa a tela, texto/CTA devem caber integralmente.
+
+### Crítica rodada9 — antes/depois conferidos
+
+- **Antes:** restaurar WebGL deixava a mesma mensagem de erro genérica e obrigava reload; stone404 deixava plataformas pretas, sem explicar o fallback. Prints `antes/contexto-{perdido,restaurado}.png` e `antes/assets-404.png` conferidos.
+- **Depois:** olho cai no título “Imagem interrompida”, sem culpar o navegador; recuperação abre pausa com Continuar em destaque, arena/placar preservados. Não precisa rolar. Único reload secundário só para perda permanente, explicitamente rotulado.
+- Status de assets fica na faixa inferior, sem ocultar o centro nem exigir clique; stone fallback branco mantém plataformas visíveis e tintadas. Visual simplificado é deliberado, não apresentação normal. Aviso é pequeno, mas legível nos prints integrais; texto agregado cabe nas três larguras sem corte.
+- Stories reais `Arena/Menu real/ContextoPerdido` e `Arena/Recursos reais/AssetsIndisponiveis`: seis portões aprovados, caixa/CTA inteiros no viewport, Tab contido no diálogo. Folha `conferencia-story.jpg` e prints reais `assets-404.png`, `contexto-restaurado.png`, `aba-retomada-{pausada,jogando}.png` abertos e conferidos.
+- Ajuste frente ao antes: mensagem específica + recuperação sem reload + texel de fallback em vez de plataforma preta. Sem reformular o menu existente.
+
 1. **Quem usa:** jogador de arena local, teclado ou controle, desktop/notebook; dois jogadores podem compartilhar a máquina.
 2. **Tarefas:** configurar uma partida; lutar lendo arena, munição e placar; reiniciar ou trocar configuração após a vitória.
 3. **Objeto principal:** arena 32×18 durante a partida; configuração da partida no menu.

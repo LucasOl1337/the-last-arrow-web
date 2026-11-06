@@ -1,0 +1,696 @@
+{
+  "owner": "tla-rodada-9-robustness",
+  "pid": 985794,
+  "before": false,
+  "errors": [],
+  "expectedErrors": [
+    {
+      "type": "http",
+      "text": "404",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/bg/templo.jpg"
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/bg/templo.jpg"
+    },
+    {
+      "type": "http",
+      "text": "404",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/audio/mizu_shoot.wav"
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/audio/mizu_shoot.wav"
+    },
+    {
+      "type": "http",
+      "text": "404",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/tex/stone.jpg"
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/tex/stone.jpg"
+    },
+    {
+      "type": "http",
+      "text": "404",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/bg/templo.jpg"
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/bg/templo.jpg"
+    },
+    {
+      "type": "http",
+      "text": "404",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/models/mizu.glb"
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/models/mizu.glb"
+    },
+    {
+      "type": "http",
+      "text": "404",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/bg/templo.jpg"
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://127.0.0.1:4176/the-last-arrow-web/assets/bg/templo.jpg"
+    }
+  ],
+  "pagesAtEnd": 0,
+  "tabSwitchHidden": false,
+  "visibility": {
+    "state": {
+      "tick": 185,
+      "phase": "playing",
+      "countdown": 0,
+      "round": 1,
+      "roundTime": 0.3416666666666669,
+      "winner": null,
+      "mode": "versus",
+      "matchTime": 0.3416666666666669,
+      "chests": [],
+      "chestTimer": 11.658333333333353,
+      "map": "moss",
+      "seed": 3,
+      "fighters": [
+        {
+          "id": 0,
+          "name": "Mizu",
+          "human": false,
+          "x": 7.295833333333263,
+          "y": 15.450000000000003,
+          "vx": 7.8,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": true,
+          "invulnerable": 0.6583333333333345,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 1,
+          "name": "Stormdragon",
+          "human": false,
+          "x": 29.29583333333329,
+          "y": 15.450000000000003,
+          "vx": 7.8,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": true,
+          "invulnerable": 0.6583333333333345,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Kaze",
+          "human": false,
+          "x": 14.295833333333292,
+          "y": 7.449999999999999,
+          "vx": 7.8,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": true,
+          "invulnerable": 0.6583333333333345,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Akane",
+          "human": false,
+          "x": 22.15430555555551,
+          "y": 3.871666666666666,
+          "vx": 7.8,
+          "vy": -6.366666666666643,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 0.6583333333333345,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        }
+      ],
+      "arrows": [],
+      "events": [],
+      "paused": false,
+      "timeScale": 1
+    },
+    "hidden": false
+  },
+  "resize": {
+    "1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 247,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "844x390": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.821,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 390,
+        "largura": 844,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "1600x900": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 1,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 900,
+        "largura": 1600,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  },
+  "lost": {
+    "state": {
+      "tick": 433,
+      "phase": "playing",
+      "countdown": 0,
+      "round": 1,
+      "roundTime": 2.4083333333333274,
+      "winner": null,
+      "mode": "versus",
+      "matchTime": 2.4083333333333274,
+      "chests": [],
+      "chestTimer": 9.591666666666804,
+      "map": "moss",
+      "seed": 3,
+      "fighters": [
+        {
+          "id": 0,
+          "name": "Mizu",
+          "human": false,
+          "x": 16.525833333332898,
+          "y": 2.4499999999999993,
+          "vx": 7.8,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": true,
+          "invulnerable": 0,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 1,
+          "name": "Stormdragon",
+          "human": false,
+          "x": 7.774374999999651,
+          "y": 13.696666666666673,
+          "vx": -6.425000000000004,
+          "vy": 2.933333333333333,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 0,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Kaze",
+          "human": false,
+          "x": 18.337777777777646,
+          "y": 9.980000000000011,
+          "vx": 7.8,
+          "vy": -6.899999999999976,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 0,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Akane",
+          "human": false,
+          "x": 20.301805555555518,
+          "y": 5.788555555555579,
+          "vx": -7.8,
+          "vy": 17.126666666666704,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 0,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        }
+      ],
+      "arrows": [],
+      "events": [],
+      "paused": false,
+      "timeScale": 1
+    },
+    "text": "Imagem interrompidaO placar está salvo nesta partida. Ao recuperar a imagem, você poderá continuar.Recarregar se não voltar"
+  },
+  "restored": {
+    "state": {
+      "tick": 433,
+      "phase": "playing",
+      "countdown": 0,
+      "round": 1,
+      "roundTime": 2.4083333333333274,
+      "winner": null,
+      "mode": "versus",
+      "matchTime": 2.4083333333333274,
+      "chests": [],
+      "chestTimer": 9.591666666666804,
+      "map": "moss",
+      "seed": 3,
+      "fighters": [
+        {
+          "id": 0,
+          "name": "Mizu",
+          "human": false,
+          "x": 16.525833333332898,
+          "y": 2.4499999999999993,
+          "vx": 7.8,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": true,
+          "invulnerable": 0,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 1,
+          "name": "Stormdragon",
+          "human": false,
+          "x": 7.774374999999651,
+          "y": 13.696666666666673,
+          "vx": -6.425000000000004,
+          "vy": 2.933333333333333,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 0,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Kaze",
+          "human": false,
+          "x": 18.337777777777646,
+          "y": 9.980000000000011,
+          "vx": 7.8,
+          "vy": -6.899999999999976,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 0,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Akane",
+          "human": false,
+          "x": 20.301805555555518,
+          "y": 5.788555555555579,
+          "vx": -7.8,
+          "vy": 17.126666666666704,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 0,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        }
+      ],
+      "arrows": [],
+      "events": [],
+      "paused": true,
+      "timeScale": 1
+    },
+    "text": "RESPIRE. MIRE DE NOVO.Partida pausadaO combate espera por você.ContinuarControlesSom ligadoVoltar ao menu",
+    "diagnostics": {
+      "frames": 203,
+      "fps": 44.94630798184433,
+      "averageFrameWorkMs": 1.634482758670238,
+      "maxFrameWorkMs": 59.5,
+      "quality": {
+        "level": "low",
+        "detectedFps": 38.18308043241099,
+        "sampleSeconds": 2.0166,
+        "sampleFrames": 77,
+        "decided": true,
+        "bloom": false,
+        "pixelRatio": 0.7,
+        "particles": {
+          "dots": 150,
+          "leaves": 40
+        }
+      },
+      "drawCalls": 48,
+      "triangles": 372712,
+      "geometries": 32,
+      "textures": 24,
+      "programs": 23,
+      "models": true,
+      "modelError": null,
+      "audioFailures": [],
+      "renderer": "WebKit WebGL"
+    }
+  },
+  "recoveryFPS": {
+    "fps": 60.00265939764644,
+    "maxGap": 16.80000000000109,
+    "diagnostics": {
+      "frames": 579,
+      "fps": 53.69612998358514,
+      "averageFrameWorkMs": 1.134369602783974,
+      "maxFrameWorkMs": 59.5,
+      "quality": {
+        "level": "low",
+        "detectedFps": 38.18308043241099,
+        "sampleSeconds": 2.0166,
+        "sampleFrames": 77,
+        "decided": true,
+        "bloom": false,
+        "pixelRatio": 0.7,
+        "particles": {
+          "dots": 150,
+          "leaves": 40
+        }
+      },
+      "drawCalls": 57,
+      "triangles": 373226,
+      "geometries": 44,
+      "textures": 27,
+      "programs": 34,
+      "models": true,
+      "modelError": null,
+      "audioFailures": [],
+      "renderer": "WebKit WebGL"
+    }
+  },
+  "invalidMap": {
+    "state": {
+      "tick": 144,
+      "phase": "playing",
+      "countdown": 0,
+      "round": 1,
+      "roundTime": 0,
+      "winner": null,
+      "mode": "versus",
+      "matchTime": 0,
+      "chests": [],
+      "chestTimer": 12,
+      "map": "moss",
+      "seed": 3,
+      "fighters": [
+        {
+          "id": 0,
+          "name": "Mizu",
+          "human": false,
+          "x": 5,
+          "y": 15.44,
+          "vx": 0,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 1,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 1,
+          "name": "Stormdragon",
+          "human": false,
+          "x": 27,
+          "y": 15.44,
+          "vx": 0,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 1,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Kaze",
+          "human": false,
+          "x": 12,
+          "y": 7.4399999999999995,
+          "vx": 0,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 1,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Akane",
+          "human": false,
+          "x": 20,
+          "y": 7.4399999999999995,
+          "vx": 0,
+          "vy": 0,
+          "alive": true,
+          "respawnAt": null,
+          "ammo": 3,
+          "score": 0,
+          "kills": 0,
+          "grounded": false,
+          "invulnerable": 1,
+          "inventory": [
+            "normal",
+            "normal",
+            "normal"
+          ]
+        }
+      ],
+      "arrows": [],
+      "events": [],
+      "paused": false,
+      "timeScale": 1
+    },
+    "text": "Arena inválida: jogando em MusgoMizuBOT ➶➶➶0StormdragonBOT ➶➶➶0KazeBOT ➶➶➶0AkaneBOT ➶➶➶0LUTEM!ROUND 1Ruínas do Musgo   /   Primeiro a 5 / 90s   /   Esc pausa   /   M som🔊 MMizuStormdragonKazeAkaneUMA ARENA. UMA ÚLTIMA CHANCE.Três flechas. Um acerto. Nenhuma segunda vida.Entre na arenaModo1 jogador + bots2 jogadores locaisAssistir · 4 botsRegrasVersus · 5 vitóriasHeadhunter · 2 minAdversários1 bot2 bots3 botsSeu arqueiro · P1MizuStormKazeAkaneArqueiro rivalMizuStormKazeAkaneArenaMusgoTotemCopasCachoeiraRaízesBotsFácilaprendendoNormalduelo justoDifícilsem piedadeComeçar partida  →ControlesSom ligadoPvP local · 2–4 arqueiros · Primeiro a 5 vitórias\n\n"
+  },
+  "missingAssets": {
+    "diagnostics": {
+      "frames": 214,
+      "fps": 56.56587016282523,
+      "averageFrameWorkMs": 1.2182242990793468,
+      "maxFrameWorkMs": 50,
+      "quality": {
+        "level": "normal",
+        "detectedFps": 59.99999999999996,
+        "sampleSeconds": 2.0000000000000013,
+        "sampleFrames": 120,
+        "decided": true,
+        "bloom": true,
+        "pixelRatio": 1,
+        "particles": {
+          "dots": 500,
+          "leaves": 160
+        }
+      },
+      "drawCalls": 81,
+      "triangles": 370976,
+      "geometries": 40,
+      "textures": 37,
+      "programs": 35,
+      "models": true,
+      "modelError": null,
+      "audioFailures": [
+        "mizu_shoot.wav"
+      ],
+      "renderer": "WebKit WebGL"
+    },
+    "text": "Áudio incompleto: alguns efeitos sem som · Texturas indisponíveis: cenário simplificado · Modelos incompletos: visual alternativoMizuP1 ➶➶➶0StormdragonBOT ➶➶➶0KazeBOT ➶➶➶0AkaneBOT ➶➶➶0Templo do Totem   /   Primeiro a 5 / 88s   /   Esc pausa   /   M som🔊 MP1StormdragonKazeAkaneUMA ARENA. UMA ÚLTIMA CHANCE.Três flechas. Um acerto. Nenhuma segunda vida.Entre na arenaModo1 jogador + bots2 jogadores locaisAssistir · 4 botsRegrasVersus · 5 vitóriasHeadhunter · 2 minAdversários1 bot2 bots3 botsSeu arqueiro · P1MizuStormKazeAkaneArqueiro rivalMizuStormKazeAkaneArenaMusgoTotemCopasCachoeiraRaízesBotsFácilaprendendoNormalduelo justoDifícilsem piedadeComeçar partida  →ControlesSom ligadoPvP local · 2–4 arqueiros · Primeiro a 5 vitórias\n\n",
+    "tick": 443
+  },
+  "retryFallback": {
+    "frames": 70,
+    "fps": 56.758290764615246,
+    "averageFrameWorkMs": 0.7828571427613497,
+    "maxFrameWorkMs": 1.5,
+    "quality": {
+      "level": "normal",
+      "detectedFps": null,
+      "sampleSeconds": 0,
+      "sampleFrames": 0,
+      "decided": false,
+      "bloom": true,
+      "pixelRatio": 1,
+      "particles": {
+        "dots": 500,
+        "leaves": 160
+      }
+    },
+    "drawCalls": 90,
+    "triangles": 371490,
+    "geometries": 40,
+    "textures": 37,
+    "programs": 35,
+    "models": true,
+    "modelError": null,
+    "audioFailures": [
+      "mizu_shoot.wav"
+    ],
+    "renderer": "WebKit WebGL"
+  }
+}
