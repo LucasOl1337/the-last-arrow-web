@@ -1,0 +1,17 @@
+{
+  "owner": "tla-rodada-5-pause",
+  "pid": 139067,
+  "errors": [],
+  "pagesAtStart": 0,
+  "pagesAtEnd": 0,
+  "afterResume": {
+    "ammo": 3,
+    "charging": false,
+    "paused": false
+  },
+  "afterBlur": {
+    "ammo": 2,
+    "charging": false,
+    "paused": false
+  }
+}

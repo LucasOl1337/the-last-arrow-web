@@ -46,6 +46,9 @@ if (matchMedia('(pointer: coarse)').matches) { const touch = new TouchControls()
 function setPaused(value: boolean) {
   if (!running) return;
   paused = value; accumulator = 0; controls.reset(); controls.active = !paused; audio.setPaused(paused);
+  // Resetting input is not releasing the bow. Cancel human draws on pause/blur
+  // so resuming cannot spend a flecha without a fresh shooting gesture.
+  if (paused) for (const f of world.fighters) if (f.human) { f.charging = false; f.charge = 0; }
   if (paused) menu.show('pause'); else menu.hide();
 }
 function startMatch(opts: MatchOptions = {}) {
