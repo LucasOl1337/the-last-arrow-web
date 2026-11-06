@@ -5,12 +5,22 @@ const files = {
   stormShoot: 'storm_shoot.ogg', stormDash: 'storm_dash.ogg', stormUlt: 'storm_ult.wav',
 } as const;
 type Sound = keyof typeof files;
-const MUSIC_VOLUME = 0.35;
+const MUSIC_VOLUME = 0.14;
+/** Transparent below -3.7 dBFS; soft saturation leaves headroom when effects coincide. */
+function safetyCurve() {
+  const curve = new Float32Array(4097);
+  for (let i = 0; i < curve.length; i++) {
+    const x = i * 2 / (curve.length - 1) - 1, a = Math.abs(x);
+    curve[i] = Math.sign(x) * (a <= 0.65 ? a : 0.65 + 0.2 * Math.tanh((a - 0.65) / 0.2));
+  }
+  return curve;
+}
 export class AudioEngine {
   private context: AudioContext | null = null;
   private gain: GainNode | null = null;
   private music: AudioBufferSourceNode | null = null;
   private buffers = new Map<Sound, AudioBuffer>();
+  private sampleLevels = new Map<Sound, number>();
   private noiseBuffer: AudioBuffer | null = null;
   private loading = false;
   muted = false;
@@ -19,14 +29,26 @@ export class AudioEngine {
   /** Music only starts after a real gesture (unlock is called from pointer/key handlers). */
   async unlock() {
     this.context ??= new AudioContext();
-    if (!this.gain) { this.gain = this.context.createGain(); this.gain.gain.value = this.muted ? 0 : 0.6; this.gain.connect(this.context.destination); }
+    if (!this.gain) {
+      this.gain = this.context.createGain(); this.gain.gain.value = this.muted ? 0 : this.suspended ? 0.16 : 0.6;
+      const safety = this.context.createWaveShaper(); safety.curve = safetyCurve(); safety.oversample = '4x';
+      this.gain.connect(safety); safety.connect(this.context.destination);
+    }
     await this.context.resume();
     if (this.loading) return;
     this.loading = true;
     await Promise.all(Object.entries(files).map(async ([key, file]) => {
       try {
         const response = await fetch(asset(`audio/${file}`)); if (!response.ok) throw new Error(String(response.status));
-        this.buffers.set(key as Sound, await this.context!.decodeAudioData(await response.arrayBuffer()));
+        const buffer = await this.context!.decodeAudioData(await response.arrayBuffer());
+        this.buffers.set(key as Sound, buffer);
+        // Source assets differ by ~29 dB. Match their peaks once on load, not per shot.
+        if (key !== 'music') {
+          let peak = 0;
+          for (let channel = 0; channel < buffer.numberOfChannels; channel++)
+            for (const value of buffer.getChannelData(channel)) peak = Math.max(peak, Math.abs(value));
+          this.sampleLevels.set(key as Sound, peak > 0 ? Math.min(32, 0.65 / peak) : 1);
+        }
       } catch { this.failures.push(file); }
     }));
     if (!this.music && this.buffers.has('music')) {
@@ -40,7 +62,7 @@ export class AudioEngine {
   private sample(name: Sound, volume = 0.6) {
     if (!this.context || !this.gain || !this.buffers.has(name)) return;
     const source = this.context.createBufferSource(), gain = this.context.createGain();
-    source.buffer = this.buffers.get(name)!; gain.gain.value = volume; source.connect(gain); gain.connect(this.gain); source.start();
+    source.buffer = this.buffers.get(name)!; gain.gain.value = volume * (this.sampleLevels.get(name) ?? 1); source.connect(gain); gain.connect(this.gain); source.start();
     source.onended = () => { source.disconnect(); gain.disconnect(); };
   }
   private tone(hz: number, duration: number, type: OscillatorType, end: number, volume = 0.15, delay = 0) {
@@ -72,8 +94,8 @@ export class AudioEngine {
   }
   /** Bowstring creak when a fighter starts drawing (not a sim event: main.ts detects the charge edge). */
   draw() {
-    this.tone(95, 0.32, 'sawtooth', 150, 0.035);
-    this.noise(0.3, 'bandpass', 1800, 0.05, { q: 8, endHz: 2600, attack: 0.08 });
+    this.tone(95, 0.32, 'sawtooth', 150, 0.06);
+    this.noise(0.3, 'bandpass', 1800, 0.08, { q: 8, endHz: 2600, attack: 0.08 });
   }
   private impact(material: 'stone' | 'wood') {
     if (material === 'stone') { // dry, bright click with a short grit tail
