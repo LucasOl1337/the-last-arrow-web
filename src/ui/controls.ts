@@ -1,6 +1,6 @@
 import { emptyIntent } from '../sim/input.ts';
 import type { Intent } from '../sim/input.ts';
-import type { TouchState } from './touch.ts';
+import type { TouchControls } from './touch.ts';
 const bindings = [
   { left: ['KeyA'], right: ['KeyD'], up: ['KeyW'], down: ['KeyS'], jump: ['KeyK', 'Space'], shoot: ['KeyJ'], dash: ['KeyL'] },
   { left: ['ArrowLeft'], right: ['ArrowRight'], up: ['ArrowUp'], down: ['ArrowDown'], jump: ['Numpad2', 'Period'], shoot: ['Numpad1', 'Comma'], dash: ['Numpad3', 'Slash'] },
@@ -16,7 +16,7 @@ export class Controls {
   private padPause = false;
   private touchPrev = { jump: false, shoot: false, dash: false };
   /** Optional virtual pad merged into player 1. */
-  touch: TouchState | null = null;
+  touch: TouchControls | null = null;
   active = false;
   constructor(private onPause: () => void, private onBlur: () => void) {
     window.addEventListener('keydown', e => {
@@ -28,7 +28,10 @@ export class Controls {
     window.addEventListener('blur', () => { this.reset(); if (this.active) this.onBlur(); });
     document.addEventListener('visibilitychange', () => { if (document.hidden) { this.reset(); if (this.active) this.onBlur(); } });
   }
-  reset() { this.down.clear(); this.pressed.clear(); this.frames.forEach(i => Object.assign(i, emptyIntent())); }
+  reset() {
+    this.down.clear(); this.pressed.clear(); this.frames.forEach(i => Object.assign(i, emptyIntent()));
+    this.touch?.reset(); this.touchPrev = { jump: false, shoot: false, dash: false };
+  }
   sample(): readonly Intent[] {
     const pads = navigator.getGamepads?.() ?? [];
     let pause = false;
@@ -53,7 +56,7 @@ export class Controls {
       i.dash ||= (b ? edge(b.dash) : false) || (dash && !this.padDash[id]);
       this.padJump[id] = jump; this.padShoot[id] = shoot; this.padDash[id] = dash; pause ||= button(9);
     }
-    const t = this.touch;
+    const t = this.touch?.state;
     if (t && this.active) {
       const i = this.frames[0];
       if (t.moveX) i.moveX = t.moveX; if (t.moveY) i.moveY = t.moveY;

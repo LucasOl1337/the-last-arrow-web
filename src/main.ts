@@ -45,10 +45,20 @@ window.addEventListener('keydown', event => {
   if (!game.hidden) toggleMute();
 });
 // Touch layer only on coarse pointers (phones/tablets); keyboard and gamepad keep working alongside.
-if (matchMedia('(pointer: coarse)').matches) { const touch = new TouchControls(); controls.touch = touch.state; game.append(touch.element); game.classList.add('touch'); }
+const portraitTouch = matchMedia('(pointer: coarse) and (orientation: portrait)');
+if (matchMedia('(pointer: coarse)').matches) {
+  const pauseTouch = () => { if (running && !matchEnded()) setPaused(true); };
+  const touch = new TouchControls(pauseTouch, pauseTouch);
+  controls.touch = touch; game.append(touch.element); game.classList.add('touch');
+}
+portraitTouch.addEventListener('change', () => {
+  accumulator = 0; controls.reset(); controls.active = running && !paused && !portraitTouch.matches && !matchEnded();
+  if (running) audio.setPaused(paused || portraitTouch.matches);
+  for (const f of world.fighters) if (f.human) { f.charging = false; f.charge = 0; }
+});
 function setPaused(value: boolean) {
   if (!running) return;
-  paused = value; accumulator = 0; controls.reset(); controls.active = !paused; audio.setPaused(paused);
+  paused = value; accumulator = 0; controls.reset(); controls.active = !paused && !portraitTouch.matches; audio.setPaused(paused || portraitTouch.matches);
   // Resetting input is not releasing the bow. Cancel human draws on pause/blur
   // so resuming cannot spend a flecha without a fresh shooting gesture.
   if (paused) for (const f of world.fighters) if (f.human) { f.charging = false; f.charge = 0; }
@@ -68,8 +78,8 @@ function startMatch(opts: MatchOptions = {}) {
     seenRound = world.round; shownVictory = false; paused = false; running = true; timeScale = 1; accumulator = 0;
     frames = measuredSeconds = frameMsTotal = maxFrameMs = 0;
     sampledFrame = false; quality.begin(); hud.setLowQuality(quality.level === 'low');
-    controls.reset(); controls.active = true; menu.hide(); game.hidden = false;
-    arena.resize(game.clientWidth, game.clientHeight); audio.setPaused(false); void audio.unlock().catch(() => {});
+    controls.reset(); controls.active = !portraitTouch.matches; menu.hide(); game.hidden = false;
+    arena.resize(game.clientWidth, game.clientHeight); audio.setPaused(portraitTouch.matches); void audio.unlock().catch(() => {});
   } catch (error) { console.error(error); running = false; menu.show('error'); }
 }
 /** Kill cause comes from the sim, including stomps across the wrap seam. */
@@ -89,7 +99,8 @@ function matchEnded() { return world.phase === 'matchover'; }
 function frame(now: number) {
   const realElapsed = (now - lastTime) / 1000;
   const elapsed = Math.min(realElapsed, 0.05); lastTime = now;
-  const sampleActive = running && !paused && !document.hidden && timeScale === 1 && world.phase !== 'matchover';
+  const frozen = paused || portraitTouch.matches;
+  const sampleActive = running && !frozen && !document.hidden && timeScale === 1 && world.phase !== 'matchover';
   // Models/initial compilation load before this window; measure the first two seconds of ready gameplay.
   if (quality.sample(now, sampleActive && !!fighters?.usingModels && world.phase === 'playing') && arena) {
     arena.setLowQuality(); fx.setLowQuality(); hud.setLowQuality(true);
@@ -97,8 +108,8 @@ function frame(now: number) {
   if (running && arena) {
     const start = performance.now();
     const intents = controls.sample();
-    if (paused) controls.consumeEdges();
-    if (!paused && world.phase !== 'matchover') {
+    if (frozen) controls.consumeEdges();
+    if (!frozen && world.phase !== 'matchover') {
       // Kill juice: 80 ms hitstop, then 0.3 s at 30% speed (skipped with reduced motion).
       const speed = timeScale * (reducedMotion ? 1 : fx.hitstop > 0 ? 0 : fx.slow > 0 ? 0.3 : 1);
       accumulator += elapsed * speed;
@@ -113,11 +124,11 @@ function frame(now: number) {
       }
     }
     // Test hook timeScale 0 freezes the sim only; poses keep animating so frozen states can be inspected.
-    const animDt = paused ? 0 : elapsed * (timeScale || 1) * (!reducedMotion && fx.slow > 0 ? 0.3 : 1) * (!reducedMotion && fx.hitstop > 0 ? 0 : 1);
-    fighters.update(world, paused || world.phase !== 'playing' ? 1 : accumulator / DT, now / 1000, animDt);
-    arrows.update(world, now / 1000); chests.update(world, now / 1000); fx.update(paused ? 0 : elapsed, paused ? 0 : elapsed * timeScale, world);
+    const animDt = frozen ? 0 : elapsed * (timeScale || 1) * (!reducedMotion && fx.slow > 0 ? 0.3 : 1) * (!reducedMotion && fx.hitstop > 0 ? 0 : 1);
+    fighters.update(world, frozen || world.phase !== 'playing' ? 1 : accumulator / DT, now / 1000, animDt);
+    arrows.update(world, now / 1000); chests.update(world, now / 1000); fx.update(frozen ? 0 : elapsed, frozen ? 0 : elapsed * timeScale, world);
     flash.style.opacity = reducedMotion ? '0' : String(fx.flash * 0.7);
-    arena.draw(now / 1000, reducedMotion ? 0 : fx.shake, fx.focus, reducedMotion ? 0 : fx.zoom); hud.update(world, paused, arena.camera, now / 1000);
+    arena.draw(now / 1000, reducedMotion ? 0 : fx.shake, fx.focus, reducedMotion ? 0 : fx.zoom); hud.update(world, frozen, arena.camera, now / 1000);
     if (world.phase === 'matchover' && !shownVictory) {
       shownVictory = true; controls.active = false;
       const winner = world.winner === null ? null : world.fighters[world.winner];

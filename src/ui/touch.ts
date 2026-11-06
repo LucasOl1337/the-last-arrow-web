@@ -10,17 +10,25 @@ export class TouchControls {
   private origin = { x: 0, y: 0 };
   private knob = document.createElement('div');
   private base = document.createElement('div');
-  constructor() {
+  private buttons = new Map<HTMLElement, { key: 'jump' | 'shoot' | 'dash'; ids: Set<number> }>();
+  constructor(onPause: () => void = () => {}, private onCancel: () => void = () => {}) {
     this.element.className = 'touch-layer';
-    this.element.setAttribute('aria-hidden', 'true');
+    const pause = document.createElement('button'); pause.className = 'touch-pause'; pause.type = 'button';
+    pause.textContent = 'Pausa'; pause.setAttribute('aria-label', 'Pausar partida'); pause.onclick = onPause;
+    const rotate = document.createElement('div'); rotate.className = 'rotate-notice'; rotate.setAttribute('role', 'status');
+    rotate.innerHTML = '<span aria-hidden="true">↻</span><strong>Gire o celular</strong><p>Jogue com a tela deitada.<br>A partida espera por você.</p>';
     const zone = document.createElement('div'); zone.className = 'touch-stick';
     this.base.className = 'stick-base'; this.knob.className = 'stick-knob'; this.base.append(this.knob); zone.append(this.base);
     const pad = document.createElement('div'); pad.className = 'touch-buttons';
     for (const [key, label] of [['dash', 'Dash'], ['shoot', 'Atirar'], ['jump', 'Pular']] as const) {
-      const b = document.createElement('div'); b.className = `touch-btn ${key}`; b.textContent = label;
-      b.addEventListener('pointerdown', e => { e.preventDefault(); b.setPointerCapture(e.pointerId); this.state[key] = true; b.classList.add('on'); });
-      const up = () => { this.state[key] = false; b.classList.remove('on'); };
-      b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up); b.addEventListener('lostpointercapture', up);
+      const b = document.createElement('button'); b.type = 'button'; b.className = `touch-btn ${key}`; b.textContent = label;
+      b.setAttribute('aria-label', key === 'shoot' ? 'Segurar e soltar para atirar' : label);
+      const ids = new Set<number>(); this.buttons.set(b, { key, ids });
+      b.addEventListener('pointerdown', e => { e.preventDefault(); ids.add(e.pointerId); b.setPointerCapture(e.pointerId); this.state[key] = true; b.classList.add('on'); });
+      const up = (e: PointerEvent) => { ids.delete(e.pointerId); this.state[key] = ids.size > 0; b.classList.toggle('on', this.state[key]); };
+      b.addEventListener('pointerup', up);
+      const cancel = (e: PointerEvent) => { if (ids.has(e.pointerId)) { this.reset(); this.onCancel(); } };
+      b.addEventListener('pointercancel', cancel); b.addEventListener('lostpointercapture', cancel);
       pad.append(b);
     }
     zone.addEventListener('pointerdown', e => {
@@ -41,8 +49,15 @@ export class TouchControls {
       if (e.pointerId !== this.stickId) return;
       this.stickId = null; this.state.moveX = this.state.moveY = 0; this.knob.style.transform = ''; this.base.classList.remove('on');
     };
-    zone.addEventListener('pointerup', release); zone.addEventListener('pointercancel', release);
-    this.element.append(zone, pad);
+    zone.addEventListener('pointerup', release);
+    const cancelStick = (e: PointerEvent) => { if (e.pointerId === this.stickId) { this.reset(); this.onCancel(); } };
+    zone.addEventListener('pointercancel', cancelStick); zone.addEventListener('lostpointercapture', cancelStick);
+    this.element.append(zone, pad, pause, rotate);
   }
-  reset() { Object.assign(this.state, { moveX: 0, moveY: 0, jump: false, shoot: false, dash: false }); this.stickId = null; this.knob.style.transform = ''; }
+  reset() {
+    Object.assign(this.state, { moveX: 0, moveY: 0, jump: false, shoot: false, dash: false });
+    this.stickId = null; this.knob.style.transform = ''; this.base.classList.remove('on');
+    // Capture can stay until pointerup; cleared owners ensure an old contact cannot reactivate input.
+    for (const [button, { ids }] of this.buttons) { ids.clear(); button.classList.remove('on'); }
+  }
 }
