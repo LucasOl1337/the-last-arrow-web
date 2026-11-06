@@ -1,0 +1,82 @@
+{
+  "owner": "tla-core",
+  "route": "isolated headless chromium / agent-bench tla",
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "checks": [
+    {
+      "label": "menu-1366x768",
+      "measurements": {
+        "principal_topo": 66.421875,
+        "principal_fracao": 0.7023064318722547,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      }
+    },
+    {
+      "label": "menu-900x1000",
+      "measurements": {
+        "principal_topo": 206.8125,
+        "principal_fracao": 0.45606944444444447,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      }
+    },
+    {
+      "label": "menu-360x800",
+      "measurements": {
+        "principal_topo": 24,
+        "principal_fracao": 0.74436328125,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      }
+    },
+    {
+      "label": "controles",
+      "measurements": {
+        "principal_topo": 78.265625,
+        "principal_fracao": 0.37302876403123475,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      }
+    },
+    {
+      "label": "vitoria",
+      "measurements": {
+        "principal_topo": 251.453125,
+        "principal_fracao": 0.16172141898487066,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      }
+    },
+    {
+      "label": "erro-grafico",
+      "measurements": {
+        "principal_topo": 266.953125,
+        "principal_fracao": 0.14280975475841873,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      }
+    }
+  ],
+  "pagesAtEnd": null
+}

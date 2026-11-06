@@ -18,4 +18,18 @@
 
 ## Crítica e provas
 
-A preencher após captura dos componentes reais e do jogo em navegador isolado.
+### Crítica das capturas (06/11/2026, 07:07 Brasília)
+
+1. **Tarefa 1 sem rolar:** sim, em 1366×768, 900×1000 e 360×800. Modo, bots, personagens, arena, dificuldade e Começar ficam visíveis. No menu de dois humanos o foco permanece no seletor de modo após sua reconstrução.
+2. **Primeiro olhar:** título e CTA dourado, com o confronto ilustrado à direita. Na partida, o centro fica reservado ao combate e o placar compacto no topo. Não há painel lateral ocupando a arena.
+3. **O que estava duro:** labels de 11 px e opções de 13 px no menu, difíceis no notebook; contador/nomes dos bonecos um pouco afastados. Ajustei labels para 12 px, opções para 14 px, CTA para 13 px e projetei os nomes pela câmera real em vez de uma aproximação de porcentagem. Acrescentei retenção do foco e ciclo Tab nos diálogos.
+
+**Antes:** `evidence/stories-before/menu-1366x768.png`, `menu-900x1000.png`, `menu-360x800.png`.
+
+**Depois:** mesmos nomes em `evidence/stories-after/`; arena em `evidence/browser-final/arena.png`. As capturas foram abertas e inspecionadas. A configuração ocupa 71%, 46,2% e 75,1% do viewport; sem rolagem horizontal, sem ajuda longa nem campos vazios. Todas as medidas do menu passaram.
+
+**Portão:** `scripts/check-screen.mjs` importa o `MEDIR_JS` e executa a função `julgar` do `checa_tela.py` da siTela sem alterar a régua; substitui somente o transporte por Playwright Node + Chromium headless explícito dentro da bancada/fila. Relatórios completos: `evidence/stories-after/report.json` e `evidence/browser-final/report.json`.
+
+**Exceção de produto:** pausa, vitória e erro são diálogos curtos de decisão, não objetos editáveis. Não precisam ocupar 40% da janela; a medida b fica registrada como exceção, não como sucesso artificial. Nenhum outro limite é relaxado. O menu principal e a arena passam sem essa exceção.
+
+**Limite visual restante:** os bonecos e blocos são a arte provisória pedida, não o acabamento final. A floresta tem detalhe que compete com os projéteis; fundo recebeu véu escuro e flechas recebem emissividade/rastro. A frente de arte pode simplificar ainda mais o contraste sem mudar a simulação.

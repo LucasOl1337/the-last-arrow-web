@@ -1,0 +1,200 @@
+{
+  "owner": "tla-core",
+  "route": "isolated headless chromium / agent-bench tla",
+  "errors": [],
+  "checks": [
+    {
+      "label": "menu-1366x768",
+      "measurements": {
+        "principal_topo": 62.921875,
+        "principal_fracao": 0.7100464879971937,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      },
+      "officialGate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 63,
+          "principal_fracao": 0.71,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 768,
+          "largura": 1366,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      },
+      "exception": null
+    },
+    {
+      "label": "menu-900x1000",
+      "measurements": {
+        "principal_topo": 203.3125,
+        "principal_fracao": 0.4615138888888889,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      },
+      "officialGate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 203,
+          "principal_fracao": 0.462,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 1000,
+          "largura": 900,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      },
+      "exception": null
+    },
+    {
+      "label": "menu-360x800",
+      "measurements": {
+        "principal_topo": 24,
+        "principal_fracao": 0.75111328125,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      },
+      "officialGate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 24,
+          "principal_fracao": 0.751,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 800,
+          "largura": 360,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      },
+      "exception": null
+    },
+    {
+      "label": "controles",
+      "measurements": {
+        "principal_topo": 60.71875,
+        "principal_fracao": 0.3944378355295266,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      },
+      "officialGate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 61,
+          "principal_fracao": 0.394,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 768,
+          "largura": 1366,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [
+          "b. objeto principal ocupa 39% da janela (mínimo 40%)"
+        ],
+        "passou": false
+      },
+      "exception": "Diálogo curto de ação, não editor: expandir até 40% só criaria espaço vazio."
+    },
+    {
+      "label": "vitoria",
+      "measurements": {
+        "principal_topo": 251.453125,
+        "principal_fracao": 0.16172141898487066,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      },
+      "officialGate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 251,
+          "principal_fracao": 0.162,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 768,
+          "largura": 1366,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [
+          "b. objeto principal ocupa 16% da janela (mínimo 40%)"
+        ],
+        "passou": false
+      },
+      "exception": "Diálogo curto de ação, não editor: expandir até 40% só criaria espaço vazio."
+    },
+    {
+      "label": "erro-grafico",
+      "measurements": {
+        "principal_topo": 266.953125,
+        "principal_fracao": 0.14280975475841873,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      },
+      "officialGate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 267,
+          "principal_fracao": 0.143,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 768,
+          "largura": 1366,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [
+          "b. objeto principal ocupa 14% da janela (mínimo 40%)"
+        ],
+        "passou": false
+      },
+      "exception": "Diálogo curto de ação, não editor: expandir até 40% só criaria espaço vazio."
+    }
+  ],
+  "pagesAtEnd": 0
+}

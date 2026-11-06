@@ -1,0 +1,294 @@
+{
+  "owner": "tla-core",
+  "route": "isolated headless chromium / agent-bench tla",
+  "errors": [],
+  "checks": [
+    {
+      "label": "menu-integrado",
+      "measurements": {
+        "principal_topo": 66.421875,
+        "principal_fracao": 0.7023064318722547,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      }
+    },
+    {
+      "label": "arena",
+      "measurements": {
+        "principal_topo": 0,
+        "principal_fracao": 0.9994878091714393,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      }
+    },
+    {
+      "label": "vitoria-integrada",
+      "measurements": {
+        "principal_topo": 251.453125,
+        "principal_fracao": 0.16172141898487066,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      }
+    },
+    {
+      "label": "autoplay",
+      "measurements": {
+        "principal_topo": 0,
+        "principal_fracao": 0.9994878091714393,
+        "rolagem_horizontal": false,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": 0,
+        "ajudas_longas": [],
+        "rolagens_ate_principal": 0
+      }
+    }
+  ],
+  "pagesAtEnd": 0,
+  "humanMatch": {
+    "tick": 4811,
+    "phase": "matchover",
+    "round": 9,
+    "roundTime": 0.7083333333333333,
+    "winner": 1,
+    "map": "moss",
+    "seed": 7,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": true,
+        "x": 5,
+        "y": 15.450000000000003,
+        "vx": 0,
+        "vy": 0,
+        "alive": false,
+        "ammo": 0,
+        "score": 0,
+        "kills": 0,
+        "grounded": true,
+        "invulnerable": 0
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": false,
+        "x": 0.1558333333331916,
+        "y": 15.450000000000003,
+        "vx": 7.8,
+        "vy": 0,
+        "alive": true,
+        "ammo": 2,
+        "score": 5,
+        "kills": 10,
+        "grounded": true,
+        "invulnerable": 0
+      },
+      {
+        "id": 2,
+        "name": "Kaze",
+        "human": false,
+        "x": 15.335833333333255,
+        "y": 7.752222222222223,
+        "vx": 7.8,
+        "vy": 4.266666666666667,
+        "alive": false,
+        "ammo": 0,
+        "score": 0,
+        "kills": 6,
+        "grounded": false,
+        "invulnerable": 0
+      },
+      {
+        "id": 3,
+        "name": "Akane",
+        "human": false,
+        "x": 16.664166666666745,
+        "y": 7.752222222222223,
+        "vx": -7.8,
+        "vy": 4.266666666666667,
+        "alive": false,
+        "ammo": 0,
+        "score": 4,
+        "kills": 11,
+        "grounded": false,
+        "invulnerable": 0
+      }
+    ],
+    "arrows": [
+      {
+        "id": 98,
+        "owner": 2,
+        "x": 15.115833333333255,
+        "y": 8.152222222222223,
+        "vx": 0,
+        "vy": 0,
+        "angle": 0.5,
+        "stuck": true,
+        "age": 0.2333333333333333
+      },
+      {
+        "id": 99,
+        "owner": 2,
+        "x": 15.335833333333255,
+        "y": 8.152222222222223,
+        "vx": 0,
+        "vy": 0,
+        "angle": 0.8,
+        "stuck": true,
+        "age": 0.2333333333333333
+      },
+      {
+        "id": 100,
+        "owner": 3,
+        "x": 16.444166666666746,
+        "y": 8.152222222222223,
+        "vx": 0,
+        "vy": 0,
+        "angle": 0.5,
+        "stuck": true,
+        "age": 0.2333333333333333
+      },
+      {
+        "id": 101,
+        "owner": 3,
+        "x": 16.664166666666745,
+        "y": 8.152222222222223,
+        "vx": 0,
+        "vy": 0,
+        "angle": 0.8,
+        "stuck": true,
+        "age": 0.2333333333333333
+      },
+      {
+        "id": 102,
+        "owner": 0,
+        "x": 4.78,
+        "y": 15.850000000000003,
+        "vx": 0,
+        "vy": 0,
+        "angle": 0.5,
+        "stuck": true,
+        "age": 0
+      },
+      {
+        "id": 103,
+        "owner": 0,
+        "x": 5,
+        "y": 15.850000000000003,
+        "vx": 0,
+        "vy": 0,
+        "angle": 0.8,
+        "stuck": true,
+        "age": 0
+      },
+      {
+        "id": 104,
+        "owner": 0,
+        "x": 5.22,
+        "y": 15.850000000000003,
+        "vx": 0,
+        "vy": 0,
+        "angle": 1.1,
+        "stuck": true,
+        "age": 0
+      }
+    ],
+    "paused": false,
+    "timeScale": 24
+  },
+  "autoplay": {
+    "tick": 525,
+    "phase": "countdown",
+    "round": 2,
+    "roundTime": 0,
+    "winner": null,
+    "map": "moss",
+    "seed": 42,
+    "fighters": [
+      {
+        "id": 0,
+        "name": "Mizu",
+        "human": false,
+        "x": 27,
+        "y": 15.44,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "ammo": 3,
+        "score": 0,
+        "kills": 0,
+        "grounded": false,
+        "invulnerable": 0
+      },
+      {
+        "id": 1,
+        "name": "Stormdragon",
+        "human": false,
+        "x": 12,
+        "y": 7.4399999999999995,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "ammo": 3,
+        "score": 1,
+        "kills": 1,
+        "grounded": false,
+        "invulnerable": 0
+      },
+      {
+        "id": 2,
+        "name": "Kaze",
+        "human": false,
+        "x": 20,
+        "y": 7.4399999999999995,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "ammo": 3,
+        "score": 0,
+        "kills": 1,
+        "grounded": false,
+        "invulnerable": 0
+      },
+      {
+        "id": 3,
+        "name": "Akane",
+        "human": false,
+        "x": 5,
+        "y": 15.44,
+        "vx": 0,
+        "vy": 0,
+        "alive": true,
+        "ammo": 3,
+        "score": 0,
+        "kills": 1,
+        "grounded": false,
+        "invulnerable": 0
+      }
+    ],
+    "arrows": [],
+    "paused": false,
+    "timeScale": 24
+  },
+  "renderer": {
+    "frames": 71,
+    "fps": 58.2970687225718,
+    "averageFrameWorkMs": 0.9408450697509336,
+    "maxFrameWorkMs": 26.80000001192093,
+    "drawCalls": 25,
+    "triangles": 2246,
+    "geometries": 16,
+    "textures": 4,
+    "audioFailures": [],
+    "renderer": "WebKit WebGL"
+  }
+}
