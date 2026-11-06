@@ -6,7 +6,7 @@ import { asset } from '../paths.ts';
 
 /** Clip names used by the renderer. Each model gets every one (Storm has no victory: idle stands in). */
 export type ClipName = 'idle' | 'run' | 'jump' | 'shoot' | 'fall' | 'victory';
-export interface ModelKit { template: THREE.Object3D; clips: Record<ClipName, THREE.AnimationClip>; height: number }
+export interface ModelKit { template: THREE.Object3D; clips: Record<ClipName, THREE.AnimationClip>; height: number; floor: number }
 /** One kit per character id; null when that model failed (renderer picks a fallback). */
 export type CharacterKits = Record<'mizu' | 'storm' | 'kaze' | 'akane', ModelKit | null>;
 
@@ -56,7 +56,7 @@ function buildKit(model: THREE.Object3D, sources: THREE.AnimationClip[]): ModelK
   };
   const box = new THREE.Box3().setFromObject(model);
   return {
-    template: model, height: box.max.y - box.min.y,
+    template: model, height: box.max.y - box.min.y, floor: box.min.y,
     clips: { idle: pick('idle'), run: pick('run'), jump: pick('jump'), shoot: pick('shoot'), fall: pick('fall'), victory: pick('victory_celebration', 'idle') },
   };
 }

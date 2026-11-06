@@ -2,11 +2,12 @@ import * as THREE from 'three';
 import type { ArrowKind, World } from '../sim/world.ts';
 import { CHARACTERS } from '../sim/world.ts';
 import { asset, portrait } from '../paths.ts';
+import { VISUAL_HEIGHT } from './fighters.ts';
 
 /** Seconds the overhead quiver stays visible after the last ammo change. */
 const AMMO_VISIBLE = 1.5;
-/** Head top above the hitbox centre: feet (−0.55) + visual height (1.8) + a small gap. */
-const LABEL_LIFT = 1.36;
+/** Feet remain at hitbox base; overhead tracks the visual head, not the smaller collider. */
+const LABEL_LIFT = VISUAL_HEIGHT - 0.55 + 0.16;
 const WIN_SCORE = 5;
 
 interface Overhead { root: HTMLElement; name: HTMLElement; pips: HTMLElement; quiver: string; changedAt: number }

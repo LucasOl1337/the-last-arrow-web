@@ -7,6 +7,17 @@
 5. **Dados medidos:** 3 mapas, 4 personagens, 2 modos humanos + espectador, até 4 jogadores, 0–6 flechas por jogador, vitória em 5 pontos; 3 fundos, 1 textura e 7 arquivos de áudio presentes.
 6. **Estado:** escolhas valem ao iniciar; HUD reflete a simulação; pausa congela a partida; vitória oferece revanche com as mesmas escolhas ou volta ao menu.
 
+## Rodada 4 — recorte antes da alteração
+
+1. **Quem usa:** jogador/espectador desktop, referência 1600×900.
+2. **Tarefas:** localizar os quatro arqueiros; ler direção de mira/munição; acompanhar abate e próximo round.
+3. **Objeto principal:** arqueiros reais GLB dentro da arena, não retratos do menu.
+4. **Visão simultânea:** silhueta, nome, arco, plataformas e flechas, preservando enquadramento completo.
+5. **Medido no código e prints:** altura visual 1,8 tiles (~84 px), nomes 8 px; 4 arqueiros, 5 mapas disponíveis. Temple/Copas têm alto contraste de fundo que compete com os modelos.
+6. **Estado:** mudança apenas visual; altura alvo 2,4 tiles, pés na base original, sem aumentar a hitbox. Prova integrada por `dist/` na bancada `tla`, conforme brief; catálogo de menu existente não é alterado.
+
+Galeria consultada nesta rodada. Antes: `evidence/rodada-2/poses-templo.png` e `canopy-autoplay.png`, abertos: nomes minúsculos e bordas internas serrilhadas competem com textura/rosto. Manter a câmera atual (arena já ocupa ~93% da altura); ampliar zoom arriscaria cortar as plataformas superiores.
+
 ## Regras e catálogo
 
 - Uma ação principal: entrar na arena. Configuração compacta, título sobre a arte fornecida; sem painel administrativo.

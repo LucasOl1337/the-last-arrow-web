@@ -11,7 +11,8 @@ import { blob, softDot } from './textures.ts';
 import { ARROW_SPEED, ARROW_GRAVITY, BOLT_GRAVITY } from '../sim/arrows.ts';
 
 /** Visual height of a fighter in tiles (hitbox is 0.64×1.10; feet stay on the hitbox base, the body grows up). */
-export const VISUAL_HEIGHT = 1.8;
+export const VISUAL_HEIGHT = 2.4;
+const VISUAL_WIDTH = 1.18;
 const HALF_H = 0.55;
 const RUN_SPEED = 7.8;
 /** Model-space speed of the run clip at timeScale 1 (root travel / duration ≈ 1.95 units/s). */
@@ -26,9 +27,9 @@ const LOOKS: { kit: keyof CharacterKits; fallback: keyof CharacterKits; tint: nu
   { kit: 'kaze', fallback: 'mizu', tint: 0x4f9a52, rim: 0x55ff6a },
   { kit: 'akane', fallback: 'storm', tint: 0xc4413f, rim: 0xff3b30 },
 ];
-const RIM_STRENGTH = 1.15;
-/** Self-illumination per map: the Temple is the darkest arena. */
-const SELF_LIGHT: Record<string, number> = { moss: 0.22, totem: 0.34, canopy: 0.18 };
+const RIM_STRENGTH = 1.4;
+/** Lift the baked cloth without washing out the face or turning the whole body neon. */
+const SELF_LIGHT: Record<string, number> = { moss: 0.48, totem: 0.65, canopy: 0.55 };
 const AIM_DOTS = 5;
 /** Clip windows (seconds). `hold` stops at `end`; `loop` wraps inside the window. */
 const WINDOWS: Record<ClipName | 'death', { clip: ClipName; start: number; end: number; mode: 'loop' | 'hold' }> = {
@@ -54,7 +55,7 @@ interface View {
   root: THREE.Group; pivot: THREE.Group; character: number; rig: Rig | null; puppet: ProceduralPuppet | null;
   state: State; stateTime: number; yaw: number; aim: number; deathAt: number; ghostClock: number;
   wasGrounded: boolean; lastVy: number; releaseTime: number;
-  shadow: THREE.Mesh; halo: THREE.Mesh; aimDots: THREE.Mesh[]; aimFade: number; nock: THREE.Group;
+  shadow: THREE.Mesh; halo: THREE.Mesh; backdrop: THREE.Sprite; aimDots: THREE.Mesh[]; aimFade: number; nock: THREE.Group;
 }
 
 const tmpV = new THREE.Vector3(), tmpQ = new THREE.Quaternion(), tmpQ2 = new THREE.Quaternion(), tmpQ3 = new THREE.Quaternion(), axis = new THREE.Vector3();
@@ -100,28 +101,30 @@ export class FightersView {
       v.rig.model.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) (m.material as THREE.Material).dispose(); });
       for (const g of v.rig.ghosts) { this.scene.remove(g.model); g.material.dispose(); }
     }
-    for (const mesh of [v.shadow, v.halo, ...v.aimDots]) (mesh.material as THREE.Material).dispose();
+    for (const mesh of [v.shadow, v.halo, v.backdrop, ...v.aimDots]) (mesh.material as THREE.Material).dispose();
     v.nock.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) { m.geometry.dispose(); (m.material as THREE.Material).dispose(); } });
   }
   private buildRig(kit: ModelKit, character: number, pivot: THREE.Group, tinted: boolean): Rig {
     const look = LOOKS[character];
     const model = instantiate(kit);
-    const scale = VISUAL_HEIGHT / kit.height; model.scale.setScalar(scale);
+    const scale = VISUAL_HEIGHT / kit.height;
+    model.scale.set(scale * VISUAL_WIDTH, scale, scale * VISUAL_WIDTH);
+    model.position.y = -kit.floor * scale;
     const uniforms: CharacterUniforms[] = [];
     const skinned: THREE.SkinnedMesh[] = [];
     model.traverse(o => { const m = o as THREE.SkinnedMesh; if (m.isMesh) {
       const u = patchCharacterMaterial(m.material as THREE.MeshStandardMaterial, look.rim, tinted ? look.tint : undefined);
       u.uSelf.value = this.selfLight; uniforms.push(u); if (m.isSkinnedMesh) skinned.push(m);
     } });
-    // Thin hull in the player's colour (model units: ~0.011 × 1.8 ≈ 0.02 tile ≈ 1 px at 1600×900).
-    const outlineColor = new THREE.Color(CHARACTERS[character].color).multiplyScalar(0.9);
-    const outlines = skinned.map(m => addOutline(m, outlineColor, 0.011).material);
+    // Constant CSS-pixel silhouette, independent of model units and viewport size.
+    const outlineColor = new THREE.Color(CHARACTERS[character].color);
+    const outlines = skinned.map(m => addOutline(m, outlineColor, 2.25).material);
     pivot.add(model);
     const mixer = new THREE.AnimationMixer(model);
     const actions = Object.fromEntries((Object.keys(kit.clips) as ClipName[]).map(name => [name, mixer.clipAction(kit.clips[name])])) as Record<ClipName, THREE.AnimationAction>;
     const bones: THREE.Object3D[] = []; model.traverse(o => { if ((o as THREE.Bone).isBone) bones.push(o); });
     const ghosts = Array.from({ length: GHOSTS }, () => {
-      const ghost = instantiate(kit); ghost.scale.setScalar(scale);
+      const ghost = instantiate(kit); ghost.scale.copy(model.scale);
       const material = new THREE.MeshBasicMaterial({ color: CHARACTERS[character].color, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
       ghost.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) { (m.material as THREE.Material).dispose(); m.material = material; m.castShadow = false; } });
       ghost.visible = false; ghost.matrixAutoUpdate = true;
@@ -140,11 +143,20 @@ export class FightersView {
       try { rig = this.buildRig(kit, f.character, pivot, !own); rig.ghosts.forEach(g => this.scene.add(g.model)); }
       catch (error) { console.warn('Falha ao montar personagem 3D', error); rig = null; }
     }
-    if (!rig) { puppet = new ProceduralPuppet(f.character); pivot.add(puppet.root); }
+    if (!rig) {
+      puppet = new ProceduralPuppet(f.character);
+      const height = new THREE.Box3().setFromObject(puppet.root).getSize(tmpV).y;
+      puppet.root.scale.multiplyScalar(VISUAL_HEIGHT / height);
+      pivot.add(puppet.root);
+    }
     const shadow = new THREE.Mesh(shadowGeometry, new THREE.MeshBasicMaterial({ map: blob(), transparent: true, depthWrite: false, opacity: 0.8 }));
     shadow.renderOrder = 1; this.scene.add(shadow);
     const halo = new THREE.Mesh(haloGeometry, new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.7, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }));
     halo.position.set(0, VISUAL_HEIGHT * 0.45, 0.5); root.add(halo);
+    // Local dark separation over bright painted scenery; depth-tested behind the body/terrain.
+    const backdrop = new THREE.Sprite(new THREE.SpriteMaterial({ map: blob(), transparent: true, opacity: 0.95, depthWrite: false, toneMapped: false }));
+    backdrop.position.set(0, VISUAL_HEIGHT * 0.5, -0.75);
+    backdrop.scale.set(2.1, VISUAL_HEIGHT * 1.5, 1); root.add(backdrop);
     // Short dotted trajectory (same speed/gravity as the sim) shown only while charging.
     const aimDots = Array.from({ length: AIM_DOTS }, () => {
       const dot = new THREE.Mesh(dotGeometry, new THREE.MeshBasicMaterial({ color, map: softDot(), transparent: true, opacity: 0, depthWrite: false, toneMapped: false }));
@@ -152,7 +164,7 @@ export class FightersView {
     });
     const nock = nockedArrow(color); nock.visible = false; this.scene.add(nock);
     const view: View = { root, pivot, character: f.character, rig, puppet, state: 'idle', stateTime: 0, yaw: f.facing > 0 ? -0.35 : -Math.PI + 0.35,
-      aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, shadow, halo, aimDots, aimFade: 0, nock };
+      aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, shadow, halo, backdrop, aimDots, aimFade: 0, nock };
     if (rig) this.play(view, 'idle', 0);
     return view;
   }
@@ -200,6 +212,7 @@ export class FightersView {
       v.wasGrounded = f.grounded; v.lastVy = f.vy;
       const visible = f.alive || dying < 0.9;
       v.root.visible = visible;
+      v.backdrop.material.opacity = f.alive ? 0.95 : Math.max(0, 0.95 - dying * 1.5);
       if (v.rig) this.animateRig(v, f, w, dt, dying);
       else if (v.puppet) {
         v.puppet.update(f, time, id);

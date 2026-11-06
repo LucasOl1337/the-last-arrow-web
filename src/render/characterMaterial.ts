@@ -53,22 +53,26 @@ float tlaNoise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0
 }
 
 /**
- * Inverted-hull outline sharing the fighter's skeleton: back faces pushed along the skinned normal.
+ * Inverted hull sharing the fighter's skeleton, expanded in screen space by CSS pixels.
  * One extra skinned draw per fighter; keeps silhouettes readable over busy painted backgrounds.
  */
 export function addOutline(mesh: THREE.SkinnedMesh, color: THREE.ColorRepresentation, thickness: number) {
   // Depth offset keeps the hull behind thin cloth layers (otherwise it speckles through capes/coats).
   const material = new THREE.MeshBasicMaterial({ color, side: THREE.BackSide, polygonOffset: true, polygonOffsetFactor: 6, polygonOffsetUnits: 6, toneMapped: false });
-  const uniforms = { uThickness: { value: thickness }, uOpacity: { value: 1 } };
-  material.customProgramCacheKey = () => 'tla-outline';
+  const uniforms = { uThickness: { value: thickness }, uViewport: { value: new THREE.Vector2(1600, 900) } };
+  material.customProgramCacheKey = () => 'tla-outline-screen';
   material.onBeforeCompile = shader => {
     Object.assign(shader.uniforms, uniforms);
-    shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nuniform float uThickness;')
-      .replace('#include <project_vertex>', 'transformed += normalize(objectNormal) * uThickness;\n#include <project_vertex>');
+    shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nuniform float uThickness; uniform vec2 uViewport;')
+      .replace('#include <project_vertex>', `#include <project_vertex>
+        vec2 edgeNormal = (projectionMatrix * vec4(normalMatrix * objectNormal, 0.0)).xy;
+        edgeNormal *= uViewport;
+        gl_Position.xy += edgeNormal / max(length(edgeNormal), 0.0001) * (2.0 * uThickness / uViewport) * gl_Position.w;`);
   };
   const outline = new THREE.SkinnedMesh(mesh.geometry, material);
   outline.bind(mesh.skeleton, mesh.bindMatrix);
   outline.frustumCulled = false; outline.renderOrder = -0.5;
+  outline.onBeforeRender = renderer => { renderer.getSize(uniforms.uViewport.value); };
   mesh.parent!.add(outline);
   outline.position.copy(mesh.position); outline.quaternion.copy(mesh.quaternion); outline.scale.copy(mesh.scale);
   return { outline, material };
