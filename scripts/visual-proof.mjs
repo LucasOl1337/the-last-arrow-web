@@ -65,6 +65,23 @@ try {
   await delay(350);
   await page.screenshot({ path: `${out}/death.png` });
   await page.evaluate(() => window.__tla.setTimeScale(1));
+  // Juice in real play: when a kill / dash happens, drop the test timescale to 5% so the effect is still on screen.
+  for (const [label, test] of [['juice-kill', 'kill'], ['juice-dash', 'dash']]) {
+    await page.evaluate(() => window.__tla.startMatch({ humans: 0, bots: 4, map: 'totem', seed: 21 }));
+    report[label] = await page.evaluate(test => new Promise(resolve => {
+      const t0 = performance.now();
+      const tick = () => {
+        const w = window.__tla.world;
+        const hit = test === 'kill' ? w.fighters.some(f => !f.alive) : w.fighters.some(f => f.alive && f.dashTime > 0.06);
+        if (hit) { window.__tla.setTimeScale(0.05); resolve({ tick: w.tick, ms: performance.now() - t0 }); }
+        else if (performance.now() - t0 > 25000) resolve(null); else requestAnimationFrame(tick);
+      };
+      tick();
+    }), test);
+    await delay(120);
+    await page.screenshot({ path: `${out}/${label}.png` });
+    await page.evaluate(() => window.__tla.setTimeScale(1));
+  }
   report.stateDistribution = await page.evaluate(async () => {
     // Sample poses for 6 s of real play to prove run/jump/fall/shoot all occur.
     window.__tla.startMatch({ humans: 0, bots: 4, map: 'moss', seed: 11 });
@@ -79,6 +96,21 @@ try {
     }
     return counts;
   });
+  // Fallback: every GLB request fails -> procedural puppets, game keeps running, no page errors.
+  {
+    const fallbackContext = await browser.newContext({ viewport: { width: 1600, height: 900 } });
+    await fallbackContext.route('**/assets/models/**', route => route.fulfill({ status: 404, body: 'blocked by proof' }));
+    const fb = await fallbackContext.newPage(); const pageErrors = [];
+    fb.on('pageerror', e => pageErrors.push(e.message));
+    await fb.goto(`${base}?autoplay=bots4&seed=3`);
+    await fb.waitForFunction(() => window.__tla?.diagnostics().modelError !== null, undefined, { timeout: 20000 });
+    await fb.waitForFunction(() => window.__tla.state().phase === 'playing' && window.__tla.diagnostics().frames > 60, undefined, { timeout: 20000 });
+    await delay(800);
+    await fb.screenshot({ path: `${out}/fallback-procedural.png` });
+    report.fallback = { pageErrors, diagnostics: await fb.evaluate(() => window.__tla.diagnostics()), tick: await fb.evaluate(() => window.__tla.state().tick) };
+    assert.deepEqual(pageErrors, []); assert.equal(report.fallback.diagnostics.models, false); assert.ok(report.fallback.tick > 100);
+    await fb.close(); await fallbackContext.close();
+  }
   for (const map of maps) {
     const p = report.maps[map].performance;
     assert.ok(p.models, `${map}: modelos 3D não carregaram`);
