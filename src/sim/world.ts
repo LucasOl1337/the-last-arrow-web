@@ -38,6 +38,7 @@ export interface Fighter {
   respawnAt: number | null;
   /** FIFO quiver. Optional for older consumers; ammo remains its numeric mirror. */
   inventory?: ArrowKind[];
+  crouching?: boolean;
 }
 export interface Arrow {
   id: number; owner: number; x: number; y: number; vx: number; vy: number;
@@ -102,7 +103,7 @@ function placeFighter(f: Fighter, spawn: { x: number; y: number }): void {
     ammo: 3, grounded: false, wall: 0, coyote: 0, jumpBuffer: 0, dashTime: 0, dashCooldown: 0,
     invulnerable: SPAWN_PROTECTION, wallLock: 0, charging: false, charge: 0, shotCooldown: 0,
     aimX: f.facing, aimY: 0, intent: emptyIntent(), brain: createBrain(), respawnAt: null,
-    inventory: ['normal', 'normal', 'normal'],
+    inventory: ['normal', 'normal', 'normal'], crouching: false,
   });
 }
 /** Maximise distance to the nearest living enemy using toroidal, not screen, distance. */

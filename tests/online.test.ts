@@ -29,8 +29,8 @@ test('two remote players share authoritative world, full rooms reject, disconnec
    const r=app.rooms.get(joined.room)!;
    await new Promise(r=>setTimeout(r,60));assert.equal(r.world.tick,0,'wait until both assets are ready');
    a.send({type:'ready'});b.send({type:'ready'});r.world.phase='playing';r.world.fighters.forEach(f=>f.invulnerable=10);
-   const x=r.world.fighters[1].x;b.send({type:'input',input:{...emptyIntent(),moveX:-1}});
-   await new Promise(r=>setTimeout(r,180));assert.ok(r.world.fighters[1].x<x);
+   const x=r.world.fighters[1].x;b.send({type:'input',input:{...emptyIntent(),moveX:-1,aimX:.6,aimY:-.8,crouch:true}});
+   await new Promise(r=>setTimeout(r,180));assert.ok(r.world.fighters[1].x<x);assert.equal(r.world.fighters[1].aimX,.6);assert.equal(r.world.fighters[1].aimY,-.8);
    a.messages.length=b.messages.length=0;
    const [sa,sb]=await Promise.all([a.wait('state'),b.wait('state')]);assert.deepEqual(sa.world,sb.world);
    r.world.phase='matchover';r.world.fighters[0].score=5;

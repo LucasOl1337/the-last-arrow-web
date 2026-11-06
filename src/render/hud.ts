@@ -4,6 +4,7 @@ import { CHARACTERS } from '../sim/world.ts';
 import { asset, portrait } from '../paths.ts';
 import { VISUAL_HEIGHT } from './fighters.ts';
 import { matchStatus } from '../ui/match-copy.ts';
+import { layoutHint, readLayout } from '../ui/control-layouts.ts';
 
 /** Seconds the overhead quiver stays visible after the last ammo change. */
 const AMMO_VISIBLE = 1.5;
@@ -107,7 +108,7 @@ export class Hud {
       const hint = document.createElement('div'); hint.className = 'controls-hint';
       hint.textContent = matchMedia('(pointer: coarse)').matches
         ? 'Stick: mover / mirar · Segure e solte Atirar · Pular · Dash pega flechas'
-        : 'WASD mover / mirar · Segure e solte J para atirar · K pula · L esquiva';
+        : layoutHint(readLayout());
       box.append(hint);
     }
     this.countdown.replaceChildren(box);
@@ -171,7 +172,7 @@ export class Hud {
         if (!quiver.length) { const empty = document.createElement('b'); empty.className = 'pip-empty'; empty.textContent = '0'; o.pips.append(empty); }
       }
       o.pips.classList.toggle('shown', now - o.changedAt < AMMO_VISIBLE || f.charging);
-      this.projected.set(f.x, 18 - f.y + LABEL_LIFT, 0.6).project(camera);
+      this.projected.set(f.x, 18 - f.y + (f.crouching ? VISUAL_HEIGHT*.58-.30+.16 : LABEL_LIFT), 0.6).project(camera);
       anchors.push({ overhead: o, x: (this.projected.x + 1) * 0.5, y: (1 - this.projected.y) * 0.5 });
     });
     this.placeOverheads(anchors);

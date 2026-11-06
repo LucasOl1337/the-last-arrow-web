@@ -2,6 +2,7 @@ import { DT, COUNTDOWN_SECONDS, HEADHUNTER_SECONDS, RESPAWN_SECONDS, resetRound,
 import type { World, Fighter } from './world.ts';
 import { delta, WIDTH, HEIGHT } from './level.ts';
 import { quiver } from './inventory.ts';
+import { bodyHalfHeight } from './body.ts';
 export function kill(w: World, victim: Fighter, killer: number, cause: World['events'][number]['cause'] = 'arrow'): void {
   if (!victim.alive || victim.invulnerable > 0) return;
   victim.alive = false; victim.charging = false;
@@ -21,7 +22,8 @@ export function checkStomps(w: World): void {
   for (const a of w.fighters) for (const b of w.fighters) {
     if (a === b || !a.alive || !b.alive || a.vy <= 1 || b.invulnerable > 0) continue;
     const before = delta(a.prevY, b.prevY, HEIGHT), now = delta(a.y, b.y, HEIGHT);
-    if (Math.abs(delta(a.x, b.x, WIDTH)) < 0.6 && before >= 0.96 && now <= 1.12 && now > 0.55) {
+    const contact=bodyHalfHeight(a)+bodyHalfHeight(b);
+    if (Math.abs(delta(a.x, b.x, WIDTH)) < 0.6 && before >= contact-.14 && now <= contact+.02 && now > contact/2) {
       kill(w, b, a.id, 'stomp'); a.vy = -10;
     }
   }

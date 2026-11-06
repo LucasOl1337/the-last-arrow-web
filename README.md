@@ -7,7 +7,7 @@ Jogue em **https://arrow.symbiose.si**. Three.js + TypeScript, sem Unity.
 - **Sozinho:** Começar partida; bots configuráveis, cinco arenas e dois modos.
 - **Dois no mesmo PC:** escolha 2 jogadores locais.
 - **Pela internet:** escolha arena, regras e os dois personagens; **Jogar online → Criar sala → Copiar convite**. O amigo abre o link e toca em Entrar na sala. Duelo de duas pessoas; não precisa instalar nem criar conta.
-- **Teclado:** WASD move/mira, segure e solte J para atirar, K/Espaço pula, L esquiva/pega flecha. Cada jogador online usa esses controles no seu aparelho. Dois locais: P2 usa setas e numpad1/2/3 (ou vírgula/ponto/barra).
+- **Controles:** menu Controles oferece5layouts e salva sua escolha. Padrão Plataforma+mouse: A/D anda, W pula, S agacha, Espaço esquiva/pega flecha; mouse mira, segure/solte clique esquerdo atira. Alternativas: Espaço pula+Q habilidade, W pula+R habilidade, W pula+H habilidade, ou clássico WASD/J/K/L. Habilidade é a esquiva existente, não poder novo. Cada jogador online usa seu layout no próprio aparelho. Dois locais: mouse só P1; P2 mantém setas e numpad1/2/3 (ou vírgula/ponto/barra). Detalhes/provas em [CONTROLES-2026-11-06.md](CONTROLES-2026-11-06.md).
 - **Câmera:** C ou botão alterna próxima/ampla. Próxima é28% maior e segue seu arqueiro. Dois locais começam na ampla.
 - **Celular:** deitado, stick/botões. Controle físico também suportado.
 - **Online não pausa:** Esc abre menu e solta seus controles, mas a partida continua para o outro. Voltar ao menu sai da sala. Revanche só começa quando ambos pedem.

@@ -3,6 +3,7 @@ import type { MatchOptions } from '../sim/world.ts';
 import { LEVELS, themeOf } from '../sim/level.ts';
 import { asset, portrait } from '../paths.ts';
 import { victorySummary } from './match-copy.ts';
+import { controlSettings } from './control-settings.ts';
 export interface MenuActions { start: (opts: MatchOptions) => void; resume: () => void; rematch: () => void; home: () => void; mute: () => boolean; online?: () => void }
 export type Screen = 'menu' | 'controls' | 'pause' | 'victory' | 'error' | 'recovering';
 export interface VictoryStats { kills: number; catches: number; stomps: number; score: number; mode?: MatchOptions['mode'] }
@@ -129,8 +130,11 @@ export class Menu {
     const panel = document.createElement('div'); panel.className = 'overlay-panel'; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true');
     panel.setAttribute('aria-label', this.screen === 'controls' ? 'Controles' : this.screen === 'pause' ? (this.online ? 'Duelo em andamento' : 'Partida pausada') : this.screen === 'error' || this.screen === 'recovering' ? 'Erro gráfico' : 'Vitória');
     if (this.screen === 'controls') {
-      panel.innerHTML = `<p class="eyebrow">CADA FLECHA CONTA</p><h2>Como jogar</h2><table><thead><tr><th>Ação</th><th>Jogador 1</th><th>Jogador 2</th></tr></thead><tbody><tr><td>Mover / mirar</td><td>W A S D</td><td>Setas</td></tr><tr><td>Segurar / soltar tiro</td><td>J</td><td>Numpad 1 / ,</td></tr><tr><td>Pular</td><td>K / Espaço</td><td>Numpad 2 / .</td></tr><tr><td>Esquivar / pegar flecha</td><td>L</td><td>Numpad 3 / /</td></tr></tbody></table><p>Controle: direcional mira, A pula, X/RT atira, B/RB esquiva, Start pausa.</p><p>Segure pulo para subir mais; baixo acelera a queda. Pule contra a parede para escalar.</p><p>Flecha ou pisão mata. Esquive contra flechas para pegá-las; recolha as cravadas. As quatro bordas se conectam.</p><p>Versus: primeiro a cinco vitórias; round empata após 90 segundos.</p><p>Headhunter: mais abates em dois minutos; reaparece após 1,5 segundo. Placar igual empata.</p><p class="muted">No celular: tela deitada, stick move e mira. Segure e solte Atirar; Dash pega flechas.</p>`;
-      panel.append(this.button('Voltar', () => this.show(this.returnScreen), true));
+      panel.classList.add('controls-panel');
+      panel.innerHTML = '<p class="eyebrow">CADA FLECHA CONTA</p><h2>Seu jeito de jogar</h2>';
+      panel.append(controlSettings());
+      const details=document.createElement('details');details.innerHTML='<summary>P2 local, controle, celular e regras</summary><p>P2 local: setas movem/miram; numpad 1 atira, 2 pula, 3 esquiva (ou vírgula, ponto e barra).</p><p>Controle: direcional mira, A pula, X/RT atira, B/RB esquiva, Start abre menu.</p><p>Celular: deitado, stick move/mira, botões atiram, pulam e esquivam.</p><p>Segure pulo para subir mais. Baixo acelera a queda; nos layouts com mouse, S agacha no chão e anda devagar.</p><p>Flecha ou pisão mata. A esquiva pega flechas; recolha as cravadas. As quatro bordas se conectam.</p><p>Versus: cinco vitórias, empate de round em 90 s. Headhunter: mais abates em dois minutos, reaparece em 1,5 s.</p>';
+      panel.append(details,this.button('Voltar', () => this.show(this.returnScreen), true));
     } else if (this.screen === 'pause') {
       panel.innerHTML = this.online ? '<p class="eyebrow">DUELO ONLINE</p><h2>O duelo continua</h2><p>Seu arqueiro fica parado, mas a partida não pausa para o outro jogador.</p>' : '<p class="eyebrow">RESPIRE. MIRE DE NOVO.</p><h2>Partida pausada</h2><p>O combate espera por você.</p>';
       panel.append(this.button('Continuar', this.actions.resume, true), this.button('Controles', () => { this.returnScreen = 'pause'; this.show('controls'); }), this.soundButton(), this.button('Voltar ao menu', this.actions.home));

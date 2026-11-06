@@ -1,5 +1,20 @@
 # Ficha da tela — The Last Arrow
 
+## Pedido de controles — 06/11 16:46
+
+1. **Quem usa:** jogador no PC com teclado/mouse; P2 local, controle e toque continuam funcionando.
+2. **Tarefas:** escolher layout ergonômico; mirar/atirar sem virar pelo movimento; pular/agachar/usar esquiva pela tecla preferida.
+3. **Objeto:** configuração compacta de controles no menu Controles e mira na arena.
+4. **Simultâneo:** nome do layout e teclas vigentes, com habilidade explicitamente identificada como esquiva/pegar flecha existente.
+5. **Medido:** hoje P1 usa WASD/J/K/L e mira só8direções; simulação sem agachar;4personagens e5mapas, online envia o mesmo Intent.
+6. **Estado:** escolha salva neste navegador, vale na próxima entrada e ao voltar da pausa; presets alternativos, nunca acumular todos. Mouse só P1/arqueiro próprio online; P2 local preservado.
+
+Galeria consultada: manter menu conhecido, controles em linhas compactas, sem novos poderes. Stories do componente real antes da integração; portões1366×768,900×1000,844×390. Agachar tem altura/velocidade menores, sem refazer clipes aprovados; testar flecha/solo/teto e reset.
+
+### Crítica dos controles — 17:10
+
+Seletor único+linha com as teclas atuais, dentro do menu conhecido. Tarefa sem rolar nas3larguras; primeiro print horizontal tinha Voltar fora, padding e margens reduzidos e portão repetido aprovou. Ajuda de P2/regras recolhida em details, não empurra o seletor. Cinco stories reais abertas na folha, menu desktop/mobile aberto. Mira mostra cursor cruzado no canvas, hint do round acompanha layout salvo. Captura de agachar mostra corpo baixo/pés no chão e nome reposicionado; não são clipes novos. No online comprovado movimento para esquerda com disparo diagonal para direita. Preservado visual aprovado; limitação assumida é agachar por adaptação do rig, não animação mocap nova.
+
 ## Retomada 06/11 15:42 — câmera e sala online
 
 1. **Quem usa:** Lucas no monitor; amigo em outro computador/celular, teclado/controle/toque.

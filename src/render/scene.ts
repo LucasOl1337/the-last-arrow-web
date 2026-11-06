@@ -128,6 +128,13 @@ export class ArenaScene {
     this.terrain = buildTerrain(level, this.theme, this.stone);
     this.arena.add(this.terrain.group);
   }
+  /** Pointer projection onto the fighters' plane, respecting canvas gutters and close camera. */
+  pointerOnArena(clientX:number,clientY:number) {
+    const rect=this.canvas.getBoundingClientRect();if(!rect.width||!rect.height)return null;
+    const ray=new THREE.Raycaster();ray.setFromCamera(new THREE.Vector2((clientX-rect.left)/rect.width*2-1,1-(clientY-rect.top)/rect.height*2),this.camera);
+    const hit=ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,0,1),-.55),new THREE.Vector3());
+    return hit?{x:hit.x,y:18-hit.y}:null;
+  }
   setLowQuality() {
     this.bloomEnabled = false; this.lowQuality = true;
     this.resize(this.canvas.clientWidth, this.canvas.clientHeight);

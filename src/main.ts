@@ -69,6 +69,12 @@ function connectOnline(room: string) {
 }
 if(params.has('room')) {menu.hide();onlinePanel.show('Convite recebido. Toque em Entrar na sala.');} 
 const controls = new Controls(() => { if (running && world.phase !== 'matchover') setPaused(!paused); }, () => { if (running && world.phase !== 'matchover') setPaused(true); });
+controls.attachPointer(canvas,(x,y)=>{
+  if(!arena)return null;const point=arena.pointerOnArena(x,y),f=world.fighters[online?.player??0];if(!point||!f)return null;
+  const dx=point.x-f.x,dy=point.y-f.y,length=Math.hypot(dx,dy);return length>.001?{x:dx/length,y:dy/length}:null;
+});
+const updatePointerCursor=()=>canvas.classList.toggle('mouse-aim',controls.layout.mouse);
+window.addEventListener('tla-layout-change',updatePointerCursor);updatePointerCursor();
 window.addEventListener('keydown', event => {
   if (event.code === 'KeyC' && !event.repeat && !game.hidden && !(event.target as HTMLElement)?.closest('input,textarea,select')) cameraButton.click();
   if (event.code !== 'KeyM' || event.repeat || event.ctrlKey || event.metaKey || event.altKey) return;
@@ -90,7 +96,7 @@ portraitTouch.addEventListener('change', () => {
 function setPaused(value: boolean) {
   if (!running || contextLost) return;
   if (online) {
-    paused=value;controls.reset();controls.active=!paused;online.send(emptyIntent(),performance.now()+100);
+    paused=value;controls.reset();controls.active=!paused;online.send({...emptyIntent(),cancelShot:true},performance.now()+100);
     if(paused)menu.show('pause');else menu.hide();return; // server and remote player continue
   }
   paused = value; accumulator = 0; controls.reset(); controls.active = !paused && !portraitTouch.matches; audio.setPaused(paused || portraitTouch.matches);
@@ -172,7 +178,7 @@ function frame(now: number) {
     }
     if (online) {
       if(!onlineReady && (fighters.usingModels || fighters.loadError || now-onlineStartedAt>10000)) {online.ready();onlineReady=true;}
-      if(online.send(frozen?emptyIntent():intents[0],now))controls.consumeEdges();
+      if(online.send(frozen?{...emptyIntent(),cancelShot:true}:intents[0],now))controls.consumeEdges();
     }
     if (!online && !frozen && world.phase !== 'matchover') {
       // Kill: 80 ms + 0.3 s slow-motion; catch: 45 ms only. Reduced motion skips both.

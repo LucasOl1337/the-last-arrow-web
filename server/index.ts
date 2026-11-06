@@ -69,7 +69,7 @@ export function createOnlineServer() {
       accumulator-=DT;
       for(const r of rooms.values()) {
         if(r.peers.length!==2 || r.loaded.size!==2 || r.world.phase==='matchover') continue;
-        for(const p of r.peers) if(Date.now()-p.seen>500) p.input=emptyIntent();
+        for(const p of r.peers) if(Date.now()-p.seen>500) p.input={...emptyIntent(),cancelShot:true};
         step(r.world,r.peers.map(p=>p.input));r.events.push(...r.world.events);
         for(const p of r.peers) p.input.jump=p.input.shoot=p.input.dash=false;
       }

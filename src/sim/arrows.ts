@@ -3,11 +3,13 @@ import type { World, Fighter, Arrow } from './world.ts';
 import type { Intent } from './input.ts';
 import { solid, wrap, delta, WIDTH, HEIGHT } from './level.ts';
 import { kill } from './rules.ts';
+import { bodyHalfHeight } from './body.ts';
 import { giveArrows, takeArrow, MAX_AMMO } from './inventory.ts';
 export { MAX_AMMO } from './inventory.ts';
 export const ARROW_SPEED = 23, ARROW_GRAVITY = 4.5, BOLT_GRAVITY = 0.1, BOMB_RADIUS = 1.6;
 export function updateBow(w: World, f: Fighter, i: Intent): void {
   f.shotCooldown = Math.max(0, f.shotCooldown - DT);
+  if(i.cancelShot){f.charging=false;f.charge=0;return;}
   if ((i.shoot || i.shootHeld) && !f.charging && f.shotCooldown <= 0 && f.ammo > 0) { f.charging = true; f.charge = 0; }
   if (!f.charging) return;
   f.charge += DT;
@@ -56,7 +58,7 @@ export function stepArrows(w: World): void {
         }
         for (const f of w.fighters) {
           if (!f.alive || (f.id === a.owner && a.age < 0.18) || a.hitTargets?.includes(f.id)) continue;
-          if (Math.abs(delta(f.x, a.x, WIDTH)) > 0.39 || Math.abs(delta(f.y, a.y, HEIGHT)) > 0.58) continue;
+          if (Math.abs(delta(f.x, a.x, WIDTH)) > 0.39 || Math.abs(delta(f.y, a.y, HEIGHT)) > bodyHalfHeight(f)+.03) continue;
           if (f.invulnerable > 0 && f.dashTime > 0) {
             giveArrows(f, [kind]);
             w.events.push({ type: 'catch', x: a.x, y: a.y, actor: f.id, kind });

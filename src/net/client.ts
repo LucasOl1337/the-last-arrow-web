@@ -25,7 +25,7 @@ export class OnlineClient {
   }
   send(input: Intent, now: number) {
     if(this.ws.readyState!==WebSocket.OPEN)return false;
-    if(now-this.lastSend<1000/30 && !input.jump && !input.shoot && !input.dash)return false;
+    if(now-this.lastSend<1000/30 && !input.jump && !input.shoot && !input.dash && !input.cancelShot)return false;
     this.lastSend=now;this.ws.send(JSON.stringify({type:'input',input}));return true;
   }
   ready() {if(this.ws.readyState===WebSocket.OPEN)this.ws.send(JSON.stringify({type:'ready'}));}

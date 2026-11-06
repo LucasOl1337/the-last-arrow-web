@@ -16,7 +16,7 @@ import { disposeSkeletons } from './disposal.ts';
 /** Visual height of a fighter in tiles (hitbox is 0.64×1.10; feet stay on the hitbox base, the body grows up). */
 export const VISUAL_HEIGHT = 2.4;
 const VISUAL_WIDTH = 1.18;
-const HALF_H = 0.55;
+import { HALF_H, bodyHalfHeight } from '../sim/body.ts';
 const FADE = 0.12;
 const GHOSTS = 3;
 /** Each character has its own GLB; tint only applies when falling back to a sibling model. */
@@ -235,7 +235,7 @@ export class FightersView {
       const dying = f.alive ? 0 : time - v.deathAt;
       const x = f.prevX + delta(f.prevX, f.x, WIDTH) * alpha;
       const y = f.prevY + delta(f.prevY, f.y, HEIGHT) * alpha;
-      const feet = HEIGHT - (y + HALF_H);
+      const feet = HEIGHT - (y + bodyHalfHeight(f));
       v.root.position.set(x, feet, 0.55);
       v.releaseTime = Math.max(0, v.releaseTime - dt);
       const aiming = f.charging || v.releaseTime > 0;
@@ -249,11 +249,11 @@ export class FightersView {
       v.landingTime = Math.max(0, v.landingTime - dt);
       if (f.alive && f.grounded && !v.wasGrounded) {
         v.landingTime = 0.14;
-        if (v.lastVy > 6) this.onLand?.(x, y + HALF_H, Math.min(1, v.lastVy / 19));
+        if (v.lastVy > 6) this.onLand?.(x, y + bodyHalfHeight(f), Math.min(1, v.lastVy / 19));
       }
       if (!f.grounded) v.landingTime = 0;
       v.wasGrounded = f.grounded; v.lastVy = f.vy;
-      v.pivot.scale.y = 1 - 0.055 * Math.sin(Math.PI * v.landingTime / 0.14);
+      v.pivot.scale.y = (f.crouching?.58:1) * (1 - 0.055 * Math.sin(Math.PI * v.landingTime / 0.14));
       const visible = f.alive || dying < 0.9;
       v.root.visible = visible;
       v.backdrop.material.opacity = f.alive ? 0.95 : Math.max(0, 0.95 - dying * 1.5);
@@ -267,7 +267,7 @@ export class FightersView {
       v.halo.visible = f.alive && f.invulnerable > 0;
       if (v.halo.visible) { (v.halo.material as THREE.MeshBasicMaterial).opacity = 0.35 + Math.sin(time * 18) * 0.2; v.halo.rotation.z = time * 2; }
       this.updateAim(v, f, x, feet, time);
-      this.updateShadow(v, w, x, y, visible ? (f.alive ? 1 : Math.max(0, 1 - dying * 1.4)) : 0);
+      this.updateShadow(v, w, x, y+bodyHalfHeight(f)-HALF_H, visible ? (f.alive ? 1 : Math.max(0, 1 - dying * 1.4)) : 0);
     });
   }
   private animateRig(v: View, f: Fighter, w: World, dt: number, dying: number) {
