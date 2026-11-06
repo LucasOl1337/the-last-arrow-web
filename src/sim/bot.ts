@@ -10,11 +10,12 @@ export interface Brain {
   hold: number; jumpHold: number; stuck: number; lastX: number; lastY: number;
   navigation: number; waypointX: number; waypointY: number; escape: number;
   planTime: number; patrol: number; travelled: number; shots: number; ready: boolean;
+  threatId: number; threatTime: number;
 }
 export function createBrain(): Brain {
   return { intent: emptyIntent(), reaction: 0, target: -1, aimError: 0, shootTimer: 0.3,
     hold: 0, jumpHold: 0, stuck: 0, lastX: 0, lastY: 0, navigation: 0, waypointX: 0, waypointY: 0, escape: 0,
-    planTime: 0, patrol: -1, travelled: 0, shots: 0, ready: false };
+    planTime: 0, patrol: -1, travelled: 0, shots: 0, ready: false, threatId: -1, threatTime: 0 };
 }
 const tuning = {
   easy: { reaction: 0.36, error: 0.25, delay: 1.9, dodge: 2.2, opening: 3.2, range: 8 },
@@ -152,22 +153,33 @@ export function think(w: World, f: Fighter): Intent {
   if (b.escape > 0) { i.moveX = f.wall ? -f.wall : (f.id % 2 ? 1 : -1); i.dash = f.dashCooldown <= 0; }
   i.jumpHeld = b.jumpHold > 0;
 
-  // Predict an actual intercept at reaction rate. Hard bots dash into the arrow for a catch;
-  // easier bots only react at close range, leaving a real window to hit them.
-  if (b.reaction >= settings.reaction - DT * 1.5 && f.dashCooldown <= 0) {
-    for (const a of w.arrows) {
-      if (a.stuck || (a.owner === f.id && a.age < 0.18)) continue;
-      const ax = delta(f.x, a.x, WIDTH), ay = delta(f.y, a.y, HEIGHT);
-      const vx = a.vx - f.vx, vy = a.vy - f.vy, speed2 = vx * vx + vy * vy;
-      const time = speed2 ? -(ax * vx + ay * vy) / speed2 : -1;
-      const miss = Math.hypot(ax + vx * time, ay + vy * time);
-      if (time > 0 && time < 0.24 && miss < 0.85 && Math.hypot(ax, ay) < settings.dodge) {
-        i.dash = true; i.moveX = Math.abs(ax) > 0.45 ? Math.sign(ax) : 0;
-        i.moveY = Math.abs(ay) > 0.65 ? Math.sign(ay) : 0;
-        b.hold = 0; break;
-      }
+  // A polling interval is not reaction latency: easy/normal must actually have seen
+  // this incoming arrow for 360/240 ms. A newly spawned close shot cannot be caught instantly.
+  let threat = -1;
+  for (const a of w.arrows) {
+    if (a.stuck || (a.owner === f.id && a.age < 0.18)) continue;
+    const ax = delta(f.x, a.x, WIDTH), ay = delta(f.y, a.y, HEIGHT);
+    const vx = a.vx - f.vx, vy = a.vy - f.vy, speed2 = vx * vx + vy * vy;
+    const time = speed2 ? -(ax * vx + ay * vy) / speed2 : -1;
+    if (time <= 0 || time >= 0.65 || Math.hypot(ax + vx * time, ay + vy * time) >= 0.85 || Math.hypot(ax, ay) >= 12) continue;
+    let visible = true;
+    if (a.kind !== 'bolt') for (let t = 0.1; t < 1; t += 0.1) {
+      if (solid(w.level, f.x + ax * t, f.y + ay * t)) { visible = false; break; }
     }
+    if (!visible) continue;
+    threat = a.id;
+    b.threatTime = b.threatId === threat ? b.threatTime + DT : 0;
+    b.threatId = threat;
+    const reacted = w.options.difficulty === 'hard'
+      ? b.reaction >= settings.reaction - DT * 1.5 : b.threatTime + 1e-9 >= settings.reaction;
+    if (reacted && f.dashCooldown <= 0 && time < 0.24 && Math.hypot(ax, ay) < settings.dodge) {
+      i.dash = true; i.moveX = Math.abs(ax) > 0.45 ? Math.sign(ax) : 0;
+      i.moveY = Math.abs(ay) > 0.65 ? Math.sign(ay) : 0;
+      b.hold = 0;
+    }
+    break;
   }
+  if (threat < 0) { b.threatId = -1; b.threatTime = 0; }
 
   if (!target) return i;
   // Hard bots take a clear drop onto a target rather than stopping to draw their bow.
