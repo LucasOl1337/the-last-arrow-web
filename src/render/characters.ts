@@ -38,10 +38,10 @@ function prepareTemplate(scene: THREE.Object3D) {
 }
 
 const SOURCES: Record<keyof CharacterKits, { model: string; anims: string[] }> = {
-  mizu: { model: 'mizu.glb', anims: ['mizu_anims.glb', 'mizu_run.glb'] },
-  storm: { model: 'storm.glb', anims: ['storm_anims.glb'] },
-  kaze: { model: 'kaze.glb', anims: ['kaze_anims.glb'] },
-  akane: { model: 'akane.glb', anims: ['akane_anims.glb'] },
+  mizu: { model: 'mizu.glb', anims: ['mizu_anims.glb', 'mizu_run.glb', 'mizu_extra.glb'] },
+  storm: { model: 'storm.glb', anims: ['storm_anims.glb', 'storm_extra.glb'] },
+  kaze: { model: 'kaze.glb', anims: ['kaze_anims.glb', 'kaze_extra.glb'] },
+  akane: { model: 'akane.glb', anims: ['akane_anims.glb', 'akane_extra.glb'] },
 };
 function buildKit(model: THREE.Object3D, sources: THREE.AnimationClip[]): ModelKit {
   prepareTemplate(model);
@@ -57,7 +57,7 @@ function buildKit(model: THREE.Object3D, sources: THREE.AnimationClip[]): ModelK
   const box = new THREE.Box3().setFromObject(model);
   return {
     template: model, height: box.max.y - box.min.y, floor: box.min.y,
-    clips: { idle: pick('idle'), run: pick('run'), jump: pick('jump'), shoot: pick('shoot'), fall: pick('fall'), victory: pick('victory_celebration', 'idle') },
+    clips: { idle: pick('idle'), run: pick('run'), jump: pick('jump'), shoot: pick('fire'), fall: pick('fall'), victory: pick('victory_celebration', 'idle') },
   };
 }
 let pending: Promise<CharacterKits> | null = null;

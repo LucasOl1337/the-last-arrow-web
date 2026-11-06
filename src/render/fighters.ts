@@ -39,8 +39,8 @@ const WINDOWS: Record<ClipName | 'death', { clip: ClipName; start: number; end: 
   jump: { clip: 'jump', start: 0.12, end: 0.3, mode: 'hold' },
   // The fall clip turns the body toward the camera; the descending half of a jump keeps the profile.
   fall: { clip: 'jump', start: 0.3, end: 0.38, mode: 'hold' },
-  // Shoot: crouch into the draw, then hold the drawn-string pose while charging.
-  shoot: { clip: 'shoot', start: 1.05, end: 2.1, mode: 'hold' },
+  // `fire` keeps a standing bow stance; hold the drawn string, then play its short release.
+  shoot: { clip: 'shoot', start: 0.02, end: 0.2, mode: 'hold' },
   victory: { clip: 'victory', start: 0, end: 5.6, mode: 'loop' },
   death: { clip: 'fall', start: 1.0, end: 2.3, mode: 'hold' },
 };
@@ -201,7 +201,10 @@ export class FightersView {
   /** Fixed-step events (called from the sim loop) that affect poses. */
   event(type: string, actor: number) {
     const v = this.views[actor]; if (!v) return;
-    if (type === 'shoot') v.releaseTime = 0.16;
+    if (type === 'shoot') {
+      v.releaseTime = 0.18;
+      if (v.rig && v.state === 'shoot') v.rig.actions.shoot.time = 0.2;
+    }
     if (type === 'dash') v.ghostClock = 0;
   }
   update(w: World, alpha: number, time: number, dt = 1 / 60) {
@@ -216,11 +219,8 @@ export class FightersView {
       v.releaseTime = Math.max(0, v.releaseTime - dt);
       const aiming = f.charging || v.releaseTime > 0;
       const face = aiming && f.aimX !== 0 ? Math.sign(f.aimX) : f.facing;
-      // Tripo's shoot clip draws toward local −Z, unlike the +X locomotion clips.
-      // Using the run yaw for shooting made leftward shots visibly point right.
-      const targetYaw = v.rig && aiming
-        ? (face > 0 ? -Math.PI / 2 + 0.18 : Math.PI / 2 - 0.18)
-        : (face > 0 ? -0.35 : -Math.PI + 0.35);
+      // Standing `fire` and locomotion both face +X: no quarter-turn at every draw.
+      const targetYaw = face > 0 ? -0.35 : -Math.PI + 0.35;
       const turn = Math.atan2(Math.sin(targetYaw - v.yaw), Math.cos(targetYaw - v.yaw));
       v.yaw += turn * Math.min(1, dt * 24);
       v.pivot.rotation.y = v.yaw;
@@ -252,10 +252,11 @@ export class FightersView {
     let speed = 1;
     if (v.state === 'run') speed = THREE.MathUtils.clamp(Math.abs(f.vx) / (RUN_CLIP_SPEED * VISUAL_HEIGHT / 0.98), 0.6, 2.4);
     if (v.state === 'death') speed = 1.8;
-    if (v.state === 'shoot' && !f.charging && v.releaseTime > 0) speed = 0; // release snap: hold the draw pose briefly
+    const releasing = v.state === 'shoot' && !f.charging && v.releaseTime > 0;
+    if (releasing) speed = 2;
     action.setEffectiveTimeScale(speed);
     rig.mixer.update(dt);
-    if (action.time >= win.end) {
+    if (!releasing && action.time >= win.end) {
       if (win.mode === 'loop') action.time = win.start + (action.time - win.end) % (win.end - win.start);
       else { action.time = win.end; action.setEffectiveTimeScale(0); }
     }
@@ -264,7 +265,7 @@ export class FightersView {
     v.aim += (THREE.MathUtils.clamp(aimTarget, -1.1, 1.1) - v.aim) * Math.min(1, dt * 18);
     if (Math.abs(v.aim) > 0.001) {
       v.pivot.updateWorldMatrix(true, false);
-      // Pitch in the arena's XY plane, not the model's local Z (shoot is authored toward −Z).
+      // Pitch in the arena's XY plane, independent of the model's three-quarter yaw.
       axis.set(0, 0, Math.sign(f.aimX || f.facing));
       for (const bone of [rig.spine1, rig.spine2]) {
         if (!bone?.parent) continue;
