@@ -128,7 +128,13 @@ export class Effects {
         for (let k = 0; k < 10; k++) this.dot(x, y, k % 2 ? c : 0xb8b0a0, (Math.random() - 0.5) * 5, Math.random() * 3, 0.25 + Math.random() * 0.25, 0.04 + Math.random() * 0.03, -10, 1.5);
         break;
       }
-      case 'catch': this.ring(x, y, 0x8affdd, 0.9, 0.25); for (let k = 0; k < 14; k++) { const a = k / 14 * Math.PI * 2; this.dot(x, y, 0x8affdd, Math.cos(a) * 3, Math.sin(a) * 3, 0.3, 0.06, 0, 3); } break;
+      case 'catch': {
+        // Shorter than a kill, no camera kick/full-screen flash. Reuses the bounded ring pool.
+        this.hitstop = Math.max(this.hitstop, 0.045);
+        this.ring(x, y, 0xe4fff5, 1.15, 0.32);
+        for (let k = 0; k < 14; k++) { const a = k / 14 * Math.PI * 2; this.dot(x, y, 0x8affdd, Math.cos(a) * 3, Math.sin(a) * 3, 0.3, 0.06, 0, 3); }
+        break;
+      }
       case 'pickup': for (let k = 0; k < 6; k++) this.dot(x, y, 0xfff0b0, (Math.random() - 0.5) * 1.5, 1 + Math.random() * 1.5, 0.4, 0.05, 0, 2); break;
       case 'shoot': if (e.kind === 'bolt') { this.kick(0.06); for (let k = 0; k < 10; k++) this.dot(x, y, 0x7ff5ff, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, 0.25, 0.06, 0, 4); } break;
       case 'chest-spawn': this.ring(x, y, 0xffe08a, 0.9, 0.4); for (let k = 0; k < 14; k++) this.dot(x + (Math.random() - 0.5) * 0.6, y - 0.3, 0xffe08a, (Math.random() - 0.5) * 1.2, 1 + Math.random() * 2.5, 0.6, 0.05, -1, 1); break;

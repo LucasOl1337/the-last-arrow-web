@@ -17,6 +17,9 @@ img.fighter-icon{width:34px;height:34px;object-fit:cover;border-radius:50%;borde
 /* Rodada 2: HUD legível */
 .fighter-label{position:static;transform:none;font-size:clamp(11px,1vw,16px);line-height:1.2;font-weight:800;letter-spacing:.02em;white-space:nowrap;color:var(--fighter);background:#061018dc;border-radius:4px;padding:2px 6px;text-shadow:0 2px 2px #000,1px 0 2px #000,-1px 0 2px #000;box-shadow:0 2px 6px #0008}
 .overhead{position:absolute;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none}
+.catch-label{font-size:clamp(10px,.85vw,14px);font-weight:900;line-height:1.2;letter-spacing:.05em;color:#dcfff0;background:#0a2c24f2;border:1px solid #8affdd;border-radius:3px;padding:2px 5px;box-shadow:0 0 9px #8affdd66;text-shadow:0 1px 2px #000}
+.wrap-direction{display:inline-block;margin-right:4px;color:#f4fff9;font-size:1.15em;line-height:.8}
+.wrap-direction[hidden],.catch-label[hidden]{display:none}
 .quiver-pips{display:flex;gap:2px;height:9px;opacity:0;transform:translateY(3px);transition:opacity .25s,transform .25s}
 .quiver-pips.shown{opacity:1;transform:none}
 .pip{width:3px;height:9px;border-radius:1px;background:linear-gradient(#fff 0 22%,var(--fighter) 22%);box-shadow:0 0 3px #000c}

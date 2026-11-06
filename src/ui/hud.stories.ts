@@ -19,6 +19,16 @@ const meta = { title: 'Arena/HUD real', render: () => {
 export default meta;
 type Story = StoryObj;
 export const BordasENomesCruzados: Story = {};
+export const WrapComDirecao: Story = { render: () => {
+  const host = document.createElement('main'); host.id = 'game'; host.style.background = '#244049';
+  const w = createWorld({ humans: 1, bots: 3 }); w.phase = 'playing'; w.roundTime = 6;
+  const poses = [[0.05,9], [31.95,9], [13,0.05], [19,17.95]];
+  w.fighters.forEach((f,i) => { f.x=poses[i][0]; f.y=poses[i][1]; });
+  const camera = new THREE.OrthographicCamera(-.9,32.9,18.7,-.7,.1,100);camera.position.z=40;camera.updateMatrixWorld();
+  const hud=new Hud();hud.reset(w);host.append(hud.element);
+  const resize = new ResizeObserver(()=>hud.update(w,false,camera,10));resize.observe(host);
+  requestAnimationFrame(()=>hud.update(w,false,camera,10));return host;
+} };
 export const HeadhunterLeve: Story = { render: () => {
   const host = document.createElement('main'); host.id = 'game'; host.style.background = '#244049';
   const w = createWorld({ humans: 1, bots: 3, mode: 'headhunter' }); w.phase = 'playing'; w.matchTime = w.roundTime = 26;

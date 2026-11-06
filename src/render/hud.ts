@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import type { ArrowKind, World } from '../sim/world.ts';
+import type { ArrowKind, SimEvent, World } from '../sim/world.ts';
 import { CHARACTERS } from '../sim/world.ts';
 import { asset, portrait } from '../paths.ts';
 import { VISUAL_HEIGHT } from './fighters.ts';
@@ -11,7 +11,13 @@ const AMMO_VISIBLE = 1.5;
 const LABEL_LIFT = VISUAL_HEIGHT - 0.55 + 0.16;
 const WIN_SCORE = 5;
 
-interface Overhead { root: HTMLElement; name: HTMLElement; pips: HTMLElement; quiver: string; changedAt: number }
+interface Overhead { root: HTMLElement; name: HTMLElement; pips: HTMLElement; quiver: string; changedAt: number;
+  catchLabel: HTMLElement; catchUntil: number; direction: HTMLElement }
+
+/** Direction of the clipped body, not of its already-clamped overhead label. */
+export function wrapDirection(x: number, y: number): string {
+  return `${y < VISUAL_HEIGHT - 0.55 ? '↑' : y > 18 - 0.55 ? '↓' : ''}${x < 0.5 ? '←' : x > 31.5 ? '→' : ''}`;
+}
 
 export class Hud {
   readonly element = document.createElement('div');
@@ -28,6 +34,7 @@ export class Hud {
   private roundKey = '';
   private fightUntil = 0;
   private lastPhase = '';
+  private feedbackRound = 0;
   private projected = new THREE.Vector3();
   /** Called when the HUD mute button is clicked; returns the new muted state. */
   onMute: (() => boolean) | null = null;
@@ -55,6 +62,7 @@ export class Hud {
   reset(w: World) {
     this.score.replaceChildren(); this.overheads.forEach(o => o.root.remove());
     this.signature = this.countKey = this.roundKey = this.lastPhase = ''; this.fightUntil = 0; this.roundCard.hidden = true;
+    this.feedbackRound = w.round;
     this.cards = w.fighters.map(f => {
       const c = CHARACTERS[f.character], card = document.createElement('div'); card.className = 'score-card'; card.style.setProperty('--fighter', c.color);
       card.innerHTML = `<img class="fighter-icon" src="${portrait(c.id)}" alt=""><div><b>${c.name}</b><small>${f.human ? `P${f.id + 1}` : 'BOT'} <span class="ammo"></span></small></div><strong class="points">0</strong>`;
@@ -64,10 +72,18 @@ export class Hud {
       const root = document.createElement('div'); root.className = 'overhead'; root.style.setProperty('--fighter', CHARACTERS[f.character].color);
       const pips = document.createElement('div'); pips.className = 'quiver-pips';
       const name = document.createElement('div'); name.className = 'fighter-label';
-      name.textContent = f.human ? `P${f.id + 1}` : CHARACTERS[f.character].name;
-      root.append(pips, name); this.element.append(root);
-      return { root, name, pips, quiver: '', changedAt: -Infinity };
+      const direction = document.createElement('span'); direction.className = 'wrap-direction'; direction.hidden = true;
+      direction.setAttribute('aria-hidden', 'true');
+      name.append(direction, document.createTextNode(f.human ? `P${f.id + 1}` : CHARACTERS[f.character].name));
+      const catchLabel = document.createElement('div'); catchLabel.className = 'catch-label'; catchLabel.hidden = true;
+      catchLabel.textContent = 'PEGOU!';
+      root.append(catchLabel, pips, name); this.element.append(root);
+      return { root, name, pips, quiver: '', changedAt: -Infinity, catchLabel, catchUntil: 0, direction };
     });
+  }
+  event(event: SimEvent, now = performance.now() / 1000) {
+    const overhead = this.overheads[event.actor];
+    if (event.type === 'catch' && overhead) overhead.catchUntil = now + 0.55;
   }
   private quiverOf(f: World['fighters'][number]): ArrowKind[] {
     const inv = f.inventory && f.inventory.length === f.ammo ? f.inventory : Array.from({ length: f.ammo }, () => 'normal' as ArrowKind);
@@ -135,10 +151,17 @@ export class Hud {
     this.renderCountdown(w, now);
     this.renderRoundCard(w);
     this.countdown.hidden = this.roundCard.hidden === false || paused;
+    if (w.round !== this.feedbackRound) {
+      this.feedbackRound = w.round; this.overheads.forEach(o => { o.catchUntil = 0; });
+    }
     const anchors: { overhead: Overhead; x: number; y: number }[] = [];
     w.fighters.forEach((f, n) => {
       const o = this.overheads[n]; o.root.hidden = !f.alive;
-      if (!f.alive) return;
+      if (!f.alive) { o.catchUntil = 0; return; }
+      o.catchLabel.hidden = now >= o.catchUntil;
+      const direction = wrapDirection(f.x, f.y);
+      if (o.direction.textContent !== direction) o.direction.textContent = direction;
+      o.direction.hidden = !direction;
       const quiver = this.quiverOf(f), sig = quiver.join(',');
       if (sig !== o.quiver) {
         // Round start shows the quiver too (empty → 3 arrows counts as a change).

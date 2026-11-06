@@ -1,5 +1,24 @@
 # Ficha da tela — The Last Arrow
 
+## Rodada 10 — catch e wrap (antes do código visual)
+
+1. **Quem usa:** P1 teclado contra3 bots, desktop1600×900/notebook1366×768/celular horizontal844×390.
+2. **Tarefas:** reconhecer que pegou uma flecha; seguir o arqueiro durante wrap; ler o saque do oponente.
+3. **Objeto:** combate real; feedback local no arqueiro, sem painel ou câmera nova.
+4. **Simultâneo:** flecha/corpo/nome/munição, mantendo placar e plataformas livres.
+5. **Medido:** baseline10 configurações com18s de teclado cada; labels presos à tela escondem o sentido de saída; catch só tem aro de250ms. Quatro personagens, cinco mapas, até4 labels.
+6. **Estado:** até2 polimentos: catch com pausa breve45ms+confirmação local550ms; seta no label apenas durante saída pela borda. Sem mexer em colisão, velocidade ou spawn.
+
+Galeria consultada: preservar formato conhecido, sem adensar. Stories reais `Arena/Juice real/Catch` e `Arena/HUD real/WrapComDirecao` antes da integração. Estados: catch ativo→expirado→reset, wrap em quatro bordas→interior→morte. Portão1366×768,900×1000,844×390; os nomes devem continuar inteiros e sem sobreposição. `prefers-reduced-motion` continua pulando hit-stop/flash de tela.
+
+### Crítica rodada10 — prints conferidos
+
+- **Antes:** aro de catch discreto junto dos pés; nomes presos à arena não explicavam de que lado o corpo saiu. Não havia problema de rolagem, portanto sem alterar câmera/menu.
+- **Depois:** “PEGOU!” por550ms confirma o catch sobre o próprio P1; aro claro usa pool existente. Print `catch-real.png` mostra o evento real após teclado, munição3→4. Pausa medida em frames33,4ms (alvo45ms discretizado pelo render); com movimento reduzido0ms. Sem flash de tela ou tremor novo.
+- Setas brancas no mesmo label, contrastantes com as cores dos personagens; `wrap-four-edges.png` deixa claro ↑Kaze e ↓Akane cortados. `wrap-keyboard-arrival.png` acompanha P1 no lado esquerdo após cruzar pela direita. Ao voltar ao interior/morrer, seta some. Elas sinalizam a borda da arena, não antecipam destino nem alteram wrap.
+- Tarefas sem rolar nas3 larguras; olho fica nos arqueiros e não num painel novo. Seis portões/stories aprovados, labels inteiros; folhas antes/depois abertas. Em844×390, “PEGOU!” é pequeno mas legível, sem novo botão. Brilho forte de Storm permanece, fora do escopo.
+- Ajuste após o primeiro print integrado: fixture capturava catch durante “LUTEM!” e ocultava o feedback. Corrigida a preparação da prova para aguardar os700ms do aviso real; não se removeu HUD do jogo para fabricar print.
+
 ## Rodada 9 — recuperação (antes do código de UI)
 
 1. **Quem usa:** jogador em sessão longa, desktop/notebook ou celular horizontal.

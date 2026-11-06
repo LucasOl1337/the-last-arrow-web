@@ -129,7 +129,7 @@ function frame(now: number) {
     const intents = controls.sample();
     if (frozen) controls.consumeEdges();
     if (!frozen && world.phase !== 'matchover') {
-      // Kill juice: 80 ms hitstop, then 0.3 s at 30% speed (skipped with reduced motion).
+      // Kill: 80 ms + 0.3 s slow-motion; catch: 45 ms only. Reduced motion skips both.
       const speed = timeScale * (reducedMotion ? 1 : fx.hitstop > 0 ? 0 : fx.slow > 0 ? 0.3 : 1);
       accumulator += elapsed * speed;
       let steps = 0;
@@ -137,7 +137,7 @@ function frame(now: number) {
       while (accumulator >= DT && steps++ < 240) {
         step(world, intents); controls.consumeEdges(); accumulator -= DT;
         if (world.round !== seenRound) { seenRound = world.round; fx.reset(); }
-        for (const event of world.events) { fx.event(event, world); audio.event(event, world); fighters.event(event.type, event.actor); record(event); }
+        for (const event of world.events) { fx.event(event, world); hud.event(event); audio.event(event, world); fighters.event(event.type, event.actor); record(event); }
         world.fighters.forEach((f, id) => { if (f.charging && !wasCharging[id]) audio.draw(); wasCharging[id] = f.charging; });
         if (matchEnded()) { accumulator = 0; break; }
       }
