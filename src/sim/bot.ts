@@ -17,6 +17,13 @@ export function createBrain(): Brain {
     hold: 0, jumpHold: 0, stuck: 0, lastX: 0, lastY: 0, navigation: 0, waypointX: 0, waypointY: 0, escape: 0,
     planTime: 0, patrol: -1, travelled: 0, shots: 0, ready: false, threatId: -1, threatTime: 0, drawX: 1, drawY: 0 };
 }
+// Character, not spawn slot: the same opponent keeps its habits between rounds.
+const styles = [
+  { route: 'roam', chestRange: 6 },    // Mizu: balanced wanderer
+  { route: 'press', chestRange: 3 },   // Storm: closes on opponents
+  { route: 'high', chestRange: 4 },    // Kaze: takes the higher flank
+  { route: 'supply', chestRange: 12 }, // Akane: hunts treasure
+] as const;
 const tuning = {
   easy: { reaction: 0.36, error: 0.25, delay: 1.9, dodge: 2.2, opening: 3.2, range: 8, draw: 0.44 },
   normal: { reaction: 0.24, error: 0.13, delay: 1.45, dodge: 3.2, opening: 2.6, range: 10, draw: 0.28 },
@@ -72,7 +79,7 @@ function safeBombShot(w: World, f: Fighter, aimX: number, aimY: number): boolean
   return true;
 }
 export function think(w: World, f: Fighter): Intent {
-  const b = f.brain, i = b.intent, settings = tuning[w.options.difficulty];
+  const b = f.brain, i = b.intent, settings = tuning[w.options.difficulty], style = styles[f.character];
   clearIntent(i);
   if (w.phase !== 'playing' || !f.alive) { b.target = -1; b.hold = 0; f.charging = false; return i; }
   const targetable = (target?: Fighter): target is Fighter => !!target && target !== f && target.alive && target.invulnerable <= 0;
@@ -107,6 +114,14 @@ export function think(w: World, f: Fighter): Intent {
     const from = platformAt(w.level, f.x, f.y);
     const candidates = from.links.filter(id => id !== b.patrol);
     b.patrol = candidates.length ? candidates[Math.floor(random(w) * candidates.length)] : from.id;
+    if (target && style.route !== 'roam' && style.route !== 'supply' && candidates.length) {
+      const score = (id: number) => {
+        const p = w.level.platforms[id], x = (p.left + p.right) / 2;
+        const approach = Math.abs(delta(x, target.x, WIDTH)) + Math.abs(delta(p.y - 0.55, target.y, HEIGHT));
+        return style.route === 'high' ? p.y * 2 + approach * 0.2 : approach;
+      };
+      b.patrol = candidates.reduce((best, id) => score(id) < score(best) ? id : best);
+    }
     b.planTime = 1.4 + random(w) * 1.1; b.navigation = 0;
   }
   const patrol = w.level.platforms[b.patrol];
@@ -118,7 +133,8 @@ export function think(w: World, f: Fighter): Intent {
     const distance = (x: number, y: number) => Math.abs(delta(f.x, x, WIDTH)) + Math.abs(delta(f.y, y, HEIGHT));
     return !best || distance(c.x, c.y) < distance(best.x, best.y) ? c : best;
   }, undefined);
-  if (chest) { goalX = chest.x; goalY = chest.y; }
+  const seekChest = !!chest && (f.ammo === 0 || Math.hypot(delta(f.x, chest.x, WIDTH), delta(f.y, chest.y, HEIGHT)) <= style.chestRange);
+  if (seekChest) { goalX = chest.x; goalY = chest.y; }
   else if (f.ammo === 0) {
     let best = Infinity;
     for (const a of w.arrows) if (a.stuck) {
@@ -135,8 +151,14 @@ export function think(w: World, f: Fighter): Intent {
       const next = nextPlatform(w.level, from.id, to.id);
       // Descend via an actual edge, not by pressing down into a solid tile.
       if (next.y > from.y && f.grounded) {
-        const right = delta(f.x, next.left + 0.5, WIDTH) >= 0;
-        b.waypointX = wrap(right ? from.right + 0.7 : from.left - 0.7, WIDTH);
+        // Edge platforms can be one continuous ledge through the wrap seam.
+        // Choose its nearest physical exit; aiming toward the platform below flips
+        // direction at the seam and makes unarmed bots oscillate without descending.
+        let left = from.left, right = from.right;
+        for (let n = 0; n < WIDTH && solid(w.level, left - 0.01, from.y); n++) left--;
+        for (let n = 0; n < WIDTH && solid(w.level, right + 0.01, from.y); n++) right++;
+        left = wrap(left - 0.7, WIDTH); right = wrap(right + 0.7, WIDTH);
+        b.waypointX = Math.abs(delta(f.x, left, WIDTH)) < Math.abs(delta(f.x, right, WIDTH)) ? left : right;
         b.waypointY = next.y - 0.55;
       } else { b.waypointX = (next.left + next.right) / 2; b.waypointY = next.y - 0.55; }
     }
@@ -144,7 +166,7 @@ export function think(w: World, f: Fighter): Intent {
   const dx = delta(f.x, b.waypointX, WIDTH), dy = b.waypointY - f.y;
   i.moveX = Math.abs(dx) > 0.25 ? Math.sign(dx) : Math.sign(goalDX);
   // Don't keep jumping above a chest on a lower platform; descend via the waypoint edge.
-  if (f.grounded && ((dy < -0.8 && Math.abs(dx) < 7) || (!chest && Math.abs(goalDX) < 2.2 && Math.abs(goalDY) < 1))) {
+  if (f.grounded && ((dy < -0.8 && Math.abs(dx) < 7) || (!seekChest && Math.abs(goalDX) < 2.2 && Math.abs(goalDY) < 1))) {
     i.jump = true; b.jumpHold = 0.55;
   }
   if (f.wall && b.jumpHold < 0.15) { i.jump = true; b.jumpHold = 0.48; }

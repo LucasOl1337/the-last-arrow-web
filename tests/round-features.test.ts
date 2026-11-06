@@ -177,7 +177,8 @@ test('normal bot repositions before its opening shot and prefers a nearby chest 
     step(w); assert.ok(!w.events.some(e => e.type === 'shoot'));
   }
   const f = w.fighters[0];
-  Object.assign(f, { x: 6.5, y: 4.45, grounded: true });
+  // The chest fixture requires a living bot; changed routes can kill slot0 during the opening.
+  Object.assign(f, { x: 6.5, y: 4.45, grounded: true, alive: true });
   w.chests = [{ id: 1, x: 7.5, y: 4.5, reward: ['bolt'] }];
   f.brain.navigation = 0;
   const i = think(w, f);
