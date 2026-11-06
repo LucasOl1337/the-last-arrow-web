@@ -1,15 +1,17 @@
-import { DT, resetRound } from './world.ts';
+import { DT, COUNTDOWN_SECONDS, resetRound } from './world.ts';
 import type { World, Fighter } from './world.ts';
 import { delta, WIDTH, HEIGHT } from './level.ts';
+import { quiver } from './inventory.ts';
 export function kill(w: World, victim: Fighter, killer: number): void {
   if (!victim.alive || victim.invulnerable > 0) return;
   victim.alive = false; victim.charging = false;
   if (killer !== victim.id && w.fighters[killer]) w.fighters[killer].kills++;
   w.events.push({ type: 'kill', x: victim.x, y: victim.y, actor: killer, target: victim.id });
   // Dead fighters drop their quiver; zero-ammo survivors can still finish a round.
-  for (let n = 0; n < victim.ammo; n++) w.arrows.push({ id: w.nextArrowId++, owner: victim.id,
-    x: victim.x + (n - 1) * 0.22, y: victim.y + 0.4, vx: 0, vy: 0, angle: 0.5 + n * 0.3, stuck: true, age: 0 });
-  victim.ammo = 0;
+  const inventory = quiver(victim);
+  for (let n = 0; n < inventory.length; n++) w.arrows.push({ id: w.nextArrowId++, owner: victim.id,
+    x: victim.x + (n - 1) * 0.22, y: victim.y + 0.4, vx: 0, vy: 0, angle: 0.5 + n * 0.3, stuck: true, age: 0, kind: inventory[n] });
+  inventory.length = 0; victim.ammo = 0;
 }
 export function checkStomps(w: World): void {
   for (const a of w.fighters) for (const b of w.fighters) {
@@ -23,8 +25,9 @@ export function checkStomps(w: World): void {
 export function stepRules(w: World): void {
   if (w.phase === 'matchover') return;
   if (w.phase === 'countdown') {
-    w.phaseTime -= DT;
-    if (w.phaseTime <= 0) w.phase = 'playing';
+    w.phaseTime = Math.max(0, w.phaseTime - DT);
+    w.countdown = Math.max(0, Math.min(3, Math.ceil((w.phaseTime - 1e-9) / (COUNTDOWN_SECONDS / 3))));
+    if (w.phaseTime <= 1e-9) { w.phaseTime = 0; w.countdown = 0; w.phase = 'playing'; }
     return;
   }
   if (w.phase === 'roundover') {

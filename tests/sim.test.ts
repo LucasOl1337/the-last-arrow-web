@@ -11,6 +11,7 @@ import type { World } from '../src/sim/world.ts';
 function arena(): World {
   const w = createWorld({ humans: 2, bots: 0, seed: 42 });
   w.phase = 'playing';
+  for (const f of w.fighters) f.invulnerable = 0;
   w.level = { ...w.level, rows: Array(18).fill('.'.repeat(32)) };
   Object.assign(w.fighters[0], { x: 8, y: 8, prevX: 8, prevY: 8 });
   Object.assign(w.fighters[1], { x: 20, y: 8, prevX: 20, prevY: 8 });

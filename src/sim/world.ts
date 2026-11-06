@@ -7,8 +7,11 @@ import { stepArrows, updateBow } from './arrows.ts';
 import { stepRules, checkStomps } from './rules.ts';
 import { think, createBrain } from './bot.ts';
 import type { Brain } from './bot.ts';
+import { stepChests, CHEST_INTERVAL } from './treasure.ts';
 
 export const DT = 1 / 120;
+export const COUNTDOWN_SECONDS = 1.2;
+export const SPAWN_PROTECTION = 1;
 export const CHARACTERS = [
   { id: 'mizu', name: 'Mizu', color: '#6497e0', cloth: '#20375d', accent: '#d7b977' },
   { id: 'stormdragon', name: 'Stormdragon', color: '#71e4f3', cloth: '#35465c', accent: '#a7f8ff' },
@@ -16,6 +19,8 @@ export const CHARACTERS = [
   { id: 'akane', name: 'Akane', color: '#f38d87', cloth: '#8c3644', accent: '#f4cb99' },
 ] as const;
 export type Difficulty = 'easy' | 'normal' | 'hard';
+export type ArrowKind = 'normal' | 'bolt' | 'bomb';
+export interface Chest { id: number; x: number; y: number; reward: ArrowKind[] }
 export interface MatchOptions {
   humans?: number; bots?: number; map?: string; difficulty?: Difficulty; characters?: string[]; seed?: number;
 }
@@ -26,20 +31,29 @@ export interface Fighter {
   dashTime: number; dashCooldown: number; invulnerable: number; wallLock: number;
   charging: boolean; charge: number; shotCooldown: number; score: number; kills: number;
   intent: Intent; brain: Brain;
+  /** FIFO quiver. Optional for older consumers; ammo remains its numeric mirror. */
+  inventory?: ArrowKind[];
 }
 export interface Arrow {
   id: number; owner: number; x: number; y: number; vx: number; vy: number;
   angle: number; stuck: boolean; age: number;
+  kind?: ArrowKind;
+  /** A piercing bolt damages each fighter at most once. */
+  hitTargets?: number[];
 }
 export interface SimEvent {
-  type: 'jump' | 'dash' | 'shoot' | 'impact' | 'catch' | 'pickup' | 'kill' | 'round' | 'victory';
+  type: 'jump' | 'dash' | 'shoot' | 'impact' | 'catch' | 'pickup' | 'kill' | 'round' | 'victory' | 'chest-spawn' | 'chest-open' | 'explosion';
   x: number; y: number; actor: number; target?: number;
+  kind?: ArrowKind; radius?: number; chestId?: number; reward?: ArrowKind[];
 }
 export interface World {
   level: Level; options: Required<MatchOptions>; fighters: Fighter[]; arrows: Arrow[];
   events: SimEvent[]; phase: 'countdown' | 'playing' | 'roundover' | 'matchover';
   phaseTime: number; roundTime: number; tick: number; round: number; winner: number | null;
   nextArrowId: number; rng: number;
+  /** UI digit: 3, 2, 1 during the 1.2 s freeze; 0 otherwise. */
+  countdown?: number;
+  chests?: Chest[]; chestTimer?: number; nextChestId?: number;
 }
 export function random(w: World): number {
   let n = w.rng; n ^= n << 13; n ^= n >>> 17; n ^= n << 5;
@@ -56,8 +70,8 @@ export function createWorld(opts: MatchOptions = {}): World {
   };
   const w: World = {
     level: LEVELS.find(l => l.id === options.map)!, options, fighters: [], arrows: [], events: [],
-    phase: 'countdown', phaseTime: 1.2, roundTime: 0, tick: 0, round: 0, winner: null,
-    nextArrowId: 1, rng: options.seed || 1,
+    phase: 'countdown', phaseTime: COUNTDOWN_SECONDS, roundTime: 0, tick: 0, round: 0, winner: null,
+    nextArrowId: 1, rng: options.seed || 1, nextChestId: 1,
   };
   for (let id = 0; id < humans + bots; id++) {
     w.fighters.push({
@@ -72,14 +86,17 @@ export function createWorld(opts: MatchOptions = {}): World {
   return w;
 }
 export function resetRound(w: World): void {
-  w.round++; w.roundTime = 0; w.phase = 'countdown'; w.phaseTime = 1.2; w.winner = null; w.arrows.length = 0;
+  w.round++; w.roundTime = 0; w.phase = 'countdown'; w.phaseTime = COUNTDOWN_SECONDS;
+  w.countdown = 3; w.winner = null; w.arrows.length = 0;
+  w.chests = []; w.chestTimer = CHEST_INTERVAL;
   for (const f of w.fighters) {
     const spawn = w.level.spawns[(f.id + w.round - 1) % 4];
     Object.assign(f, {
       x: spawn.x, y: spawn.y, prevX: spawn.x, prevY: spawn.y, vx: 0, vy: 0, alive: true,
       ammo: 3, grounded: false, wall: 0, coyote: 0, jumpBuffer: 0, dashTime: 0, dashCooldown: 0,
-      invulnerable: 0, wallLock: 0, charging: false, charge: 0, shotCooldown: 0,
-      aimX: f.facing, aimY: 0, brain: createBrain(),
+      invulnerable: SPAWN_PROTECTION, wallLock: 0, charging: false, charge: 0, shotCooldown: 0,
+      aimX: f.facing, aimY: 0, intent: emptyIntent(), brain: createBrain(),
+      inventory: ['normal', 'normal', 'normal'],
     });
   }
 }
@@ -96,13 +113,16 @@ export function step(w: World, intents?: readonly Intent[]): void {
   }
   stepArrows(w);
   checkStomps(w);
+  stepChests(w);
   stepRules(w);
 }
 export function snapshot(w: World) {
   return {
-    tick: w.tick, phase: w.phase, round: w.round, roundTime: w.roundTime, winner: w.winner,
+    tick: w.tick, phase: w.phase, countdown: w.countdown ?? 0, round: w.round, roundTime: w.roundTime, winner: w.winner,
+    chests: (w.chests ?? []).map(c => ({ ...c, reward: [...c.reward] })), chestTimer: w.chestTimer,
     map: w.level.id, seed: w.options.seed,
-    fighters: w.fighters.map(f => ({ id: f.id, name: CHARACTERS[f.character].name, human: f.human, x: f.x, y: f.y, vx: f.vx, vy: f.vy, alive: f.alive, ammo: f.ammo, score: f.score, kills: f.kills, grounded: f.grounded, invulnerable: f.invulnerable })),
-    arrows: w.arrows.map(a => ({ ...a })),
+    fighters: w.fighters.map(f => ({ id: f.id, name: CHARACTERS[f.character].name, human: f.human, x: f.x, y: f.y, vx: f.vx, vy: f.vy, alive: f.alive, ammo: f.ammo, score: f.score, kills: f.kills, grounded: f.grounded, invulnerable: f.invulnerable, inventory: f.inventory ? [...f.inventory] : undefined })),
+    arrows: w.arrows.map(a => ({ ...a, hitTargets: a.hitTargets ? [...a.hitTargets] : undefined })),
+    events: w.events.map(e => ({ ...e, reward: e.reward ? [...e.reward] : undefined })),
   };
 }

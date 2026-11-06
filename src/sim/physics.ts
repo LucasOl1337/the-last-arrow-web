@@ -26,7 +26,7 @@ export function moveFighter(w: World, f: Fighter, i: Intent): void {
   if (i.dash && f.dashCooldown <= 0) {
     const dx = mx || (my ? 0 : f.facing), dy = my, length = Math.hypot(dx, dy);
     f.vx = dx / length * 21; f.vy = dy / length * 21;
-    f.dashTime = 0.15; f.invulnerable = 0.15; f.dashCooldown = 0.6;
+    f.dashTime = 0.15; f.invulnerable = Math.max(f.invulnerable, 0.15); f.dashCooldown = 0.6;
     w.events.push({ type: 'dash', x: f.x, y: f.y, actor: f.id });
   }
   if (f.dashTime > 0) f.dashTime = Math.max(0, f.dashTime - DT);
