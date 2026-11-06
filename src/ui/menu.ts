@@ -4,7 +4,7 @@ import { LEVELS, themeOf } from '../sim/level.ts';
 import { asset, portrait } from '../paths.ts';
 import { victorySummary } from './match-copy.ts';
 export interface MenuActions { start: (opts: MatchOptions) => void; resume: () => void; rematch: () => void; home: () => void; mute: () => boolean }
-export type Screen = 'menu' | 'controls' | 'pause' | 'victory' | 'error';
+export type Screen = 'menu' | 'controls' | 'pause' | 'victory' | 'error' | 'recovering';
 export interface VictoryStats { kills: number; catches: number; stomps: number; score: number; mode?: MatchOptions['mode'] }
 /** Menu thumbnails reuse the arena backgrounds. */
 const MAP_THUMBS: Record<string, string> = { moss: 'bg/ruins.jpg', totem: 'bg/templo.jpg', canopy: 'bg/copas.jpg' };
@@ -124,7 +124,7 @@ export class Menu {
   }
   private renderOverlay() {
     const panel = document.createElement('div'); panel.className = 'overlay-panel'; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true');
-    panel.setAttribute('aria-label', this.screen === 'controls' ? 'Controles' : this.screen === 'pause' ? 'Partida pausada' : this.screen === 'error' ? 'Erro gráfico' : 'Vitória');
+    panel.setAttribute('aria-label', this.screen === 'controls' ? 'Controles' : this.screen === 'pause' ? 'Partida pausada' : this.screen === 'error' || this.screen === 'recovering' ? 'Erro gráfico' : 'Vitória');
     if (this.screen === 'controls') {
       panel.innerHTML = `<p class="eyebrow">CADA FLECHA CONTA</p><h2>Como jogar</h2><table><thead><tr><th>Ação</th><th>Jogador 1</th><th>Jogador 2</th></tr></thead><tbody><tr><td>Mover / mirar</td><td>W A S D</td><td>Setas</td></tr><tr><td>Segurar / soltar tiro</td><td>J</td><td>Numpad 1 / ,</td></tr><tr><td>Pular</td><td>K / Espaço</td><td>Numpad 2 / .</td></tr><tr><td>Esquivar / pegar flecha</td><td>L</td><td>Numpad 3 / /</td></tr></tbody></table><p>Controle: direcional mira, A pula, X/RT atira, B/RB esquiva, Start pausa.</p><p>Segure pulo para subir mais; baixo acelera a queda. Pule contra a parede para escalar.</p><p>Flecha ou pisão mata. Esquive contra flechas para pegá-las; recolha as cravadas. As quatro bordas se conectam.</p><p>Versus: primeiro a cinco vitórias; round empata após 90 segundos.</p><p>Headhunter: mais abates em dois minutos; reaparece após 1,5 segundo. Placar igual empata.</p><p class="muted">No celular: tela deitada, stick move e mira. Segure e solte Atirar; Dash pega flechas.</p>`;
       panel.append(this.button('Voltar', () => this.show(this.returnScreen), true));
@@ -140,6 +140,9 @@ export class Menu {
       panel.innerHTML = `<img class="victory-logo" src="${asset('ui/logo.png')}" alt="" aria-hidden="true"><div class="victory-row">${winner ? `<img class="victory-portrait" src="${portrait(winner.id)}" alt="">` : ''}<div><p class="eyebrow">A ÚLTIMA FLECHA TEM DONO</p><h2 class="winner"></h2><p>${victorySummary(s?.mode, s?.score ?? 0, !!winner)}</p>${s && winner ? `<div class="victory-stats">${stat(s.kills, s.kills === 1 ? 'abate' : 'abates')}${stat(s.catches, s.catches === 1 ? 'flecha pega' : 'flechas pegas')}${s.stomps ? stat(s.stomps, s.stomps === 1 ? 'pisão' : 'pisões') : ''}</div>` : ''}</div></div>`;
       panel.querySelector('.winner')!.textContent = winner ? `${winner.name} venceu` : 'Empate';
       panel.append(this.button('Revanche  →', this.actions.rematch, true), this.button('Escolher outra arena', this.actions.home));
+    } else if (this.screen === 'recovering') {
+      panel.innerHTML = '<h2>Imagem interrompida</h2><p>O placar está salvo nesta partida. Ao recuperar a imagem, você poderá continuar.</p>';
+      panel.append(this.button('Recarregar se não voltar', () => location.reload()));
     } else {
       panel.innerHTML = '<h2>Não foi possível abrir a arena</h2><p>O jogo precisa de WebGL 2. Ative a aceleração gráfica ou tente um navegador atualizado.</p>';
       panel.append(this.button('Tentar novamente', () => location.reload(), true));

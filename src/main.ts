@@ -12,6 +12,8 @@ import { Controls } from './ui/controls.ts';
 import { TouchControls } from './ui/touch.ts';
 import { AudioEngine } from './audio.ts';
 import { AutoQuality } from './render/quality.ts';
+import { ResourceNotice } from './ui/resource-notice.ts';
+import { LEVELS } from './sim/level.ts';
 
 const params = new URLSearchParams(location.search);
 const seed = Number(params.get('seed') ?? '1');
@@ -19,7 +21,8 @@ const app = document.querySelector<HTMLDivElement>('#app')!;
 const game = document.createElement('main'); game.id = 'game'; game.setAttribute('aria-label', 'Arena de combate'); game.hidden = true;
 const canvas = document.createElement('canvas'); canvas.setAttribute('aria-label', 'The Last Arrow — arena 3D'); game.append(canvas); app.append(game);
 const flash = document.createElement('div'); flash.className = 'flash'; game.append(flash);
-const audio = new AudioEngine(), hud = new Hud(); game.append(hud.element);
+const notice = new ResourceNotice(); game.append(notice.element);
+const audio = new AudioEngine(() => notice.set('audio', 'Áudio incompleto: alguns efeitos sem som')), hud = new Hud(); game.append(hud.element);
 /** Per-fighter match stats for the victory screen (catches and stomps come from sim events). */
 let stats: { kills: number; catches: number; stomps: number }[] = [];
 let wasCharging: boolean[] = [];
@@ -30,7 +33,7 @@ let arena: ArenaScene | null = null, fighters: FightersView, arrows: ArrowsView,
 let lastTime = performance.now(), shownVictory = false, seenRound = 0;
 let frames = 0, measuredSeconds = 0, frameMsTotal = 0, maxFrameMs = 0;
 const quality = new AutoQuality();
-let sampledFrame = false;
+let sampledFrame = false, contextLost = false;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const menu = new Menu({
   start: opts => startMatch(opts), resume: () => setPaused(false), rematch: () => startMatch(world.options),
@@ -57,7 +60,7 @@ portraitTouch.addEventListener('change', () => {
   for (const f of world.fighters) if (f.human) { f.charging = false; f.charge = 0; }
 });
 function setPaused(value: boolean) {
-  if (!running) return;
+  if (!running || contextLost) return;
   paused = value; accumulator = 0; controls.reset(); controls.active = !paused && !portraitTouch.matches; audio.setPaused(paused || portraitTouch.matches);
   // Resetting input is not releasing the bow. Cancel human draws on pause/blur
   // so resuming cannot spend a flecha without a fresh shooting gesture.
@@ -67,11 +70,27 @@ function setPaused(value: boolean) {
 function startMatch(opts: MatchOptions = {}) {
   try {
     if (!arena) {
-      arena = new ArenaScene(canvas); fighters = new FightersView(arena.arena); arrows = new ArrowsView(arena.arena); fx = new Effects(arena.arena); chests = new ChestsView(arena.arena);
+      arena = new ArenaScene(canvas, () => notice.set('textures', 'Texturas indisponíveis: cenário simplificado'));
+      fighters = new FightersView(arena.arena, () => notice.set('models', 'Modelos incompletos: visual alternativo'));
+      arrows = new ArrowsView(arena.arena); fx = new Effects(arena.arena); chests = new ChestsView(arena.arena);
       fighters.onLand = (x, y, strength) => fx.land(x, y, strength);
       new ResizeObserver(() => { if (!game.hidden) arena!.resize(game.clientWidth, game.clientHeight); }).observe(game);
-      canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); running = false; controls.active = false; menu.show('error'); });
+      canvas.addEventListener('webglcontextlost', event => {
+        event.preventDefault(); contextLost = true; accumulator = 0; controls.reset(); controls.active = false; audio.setPaused(true);
+        for (const f of world.fighters) if (f.human) { f.charging = false; f.charge = 0; }
+        if (running) menu.show('recovering');
+      });
+      // Three restores its resources first (its handler was installed by the constructor).
+      canvas.addEventListener('webglcontextrestored', () => {
+        contextLost = false; lastTime = performance.now(); sampledFrame = false; accumulator = 0;
+        if (!running) return;
+        arena!.resize(game.clientWidth, game.clientHeight);
+        if (matchEnded()) { shownVictory = false; menu.hide(); }
+        else setPaused(true); // explicit Continue: no surprise shot or jump after recovery
+      });
     }
+    if (contextLost) { menu.show('recovering'); return; }
+    if (opts.map && !LEVELS.some(level => level.id === opts.map)) notice.set('map', 'Arena inválida: jogando em Musgo');
     world = createWorld({ ...opts, seed: opts.seed ?? seed });
     arena.setLevel(world.level); fighters.reset(world); hud.reset(world); fx.reset(); chests.reset();
     stats = world.fighters.map(() => ({ kills: 0, catches: 0, stomps: 0 })); wasCharging = world.fighters.map(() => false);
@@ -99,13 +118,13 @@ function matchEnded() { return world.phase === 'matchover'; }
 function frame(now: number) {
   const realElapsed = (now - lastTime) / 1000;
   const elapsed = Math.min(realElapsed, 0.05); lastTime = now;
-  const frozen = paused || portraitTouch.matches;
+  const frozen = paused || portraitTouch.matches || document.hidden || contextLost;
   const sampleActive = running && !frozen && !document.hidden && timeScale === 1 && world.phase !== 'matchover';
   // Models/initial compilation load before this window; measure the first two seconds of ready gameplay.
   if (quality.sample(now, sampleActive && !!fighters?.usingModels && world.phase === 'playing') && arena) {
     arena.setLowQuality(); fx.setLowQuality(); hud.setLowQuality(true);
   }
-  if (running && arena) {
+  if (running && arena && !contextLost && !document.hidden) {
     const start = performance.now();
     const intents = controls.sample();
     if (frozen) controls.consumeEdges();
@@ -151,7 +170,7 @@ window.__tla = {
   diagnostics: () => ({ frames, fps: measuredSeconds ? frames / measuredSeconds : 0, averageFrameWorkMs: frames ? frameMsTotal / frames : 0, maxFrameWorkMs: maxFrameMs,
     quality: { ...quality.inspect(), bloom: arena?.bloomEnabled ?? true, pixelRatio: arena?.renderer.getPixelRatio() ?? 1, particles: fx?.particleBudget },
     drawCalls: arena?.renderer.info.render.calls ?? 0, triangles: arena?.renderer.info.render.triangles ?? 0,
-    geometries: arena?.renderer.info.memory.geometries ?? 0, textures: arena?.renderer.info.memory.textures ?? 0,
+    geometries: arena?.renderer.info.memory.geometries ?? 0, textures: arena?.renderer.info.memory.textures ?? 0, programs: arena?.renderer.info.programs?.length ?? 0,
     models: fighters?.usingModels ?? false, modelError: fighters?.loadError ? String(fighters.loadError) : null,
     audioFailures: audio.failures, renderer: arena?.renderer.getContext().getParameter(arena.renderer.getContext().RENDERER) ?? null }),
 };
@@ -164,7 +183,7 @@ declare global {
       setTimeScale: (value: number) => void; startMatch: (opts?: MatchOptions) => void;
       state: () => ReturnType<typeof snapshot> & { paused: boolean; timeScale: number };
       visuals: () => ReturnType<FightersView['inspect']>;
-      diagnostics: () => { frames: number; fps: number; averageFrameWorkMs: number; maxFrameWorkMs: number; quality: ReturnType<AutoQuality['inspect']> & { bloom: boolean; pixelRatio: number; particles?: Effects['particleBudget'] }; drawCalls: number; triangles: number; geometries: number; textures: number; models: boolean; modelError: string | null; audioFailures: string[]; renderer: unknown };
+      diagnostics: () => { frames: number; fps: number; averageFrameWorkMs: number; maxFrameWorkMs: number; quality: ReturnType<AutoQuality['inspect']> & { bloom: boolean; pixelRatio: number; particles?: Effects['particleBudget'] }; drawCalls: number; triangles: number; geometries: number; textures: number; programs: number; models: boolean; modelError: string | null; audioFailures: string[]; renderer: unknown };
     };
   }
 }

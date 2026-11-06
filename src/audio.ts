@@ -26,6 +26,7 @@ export class AudioEngine {
   muted = false;
   suspended = false;
   failures: string[] = [];
+  constructor(private onFailure: () => void = () => {}) {}
   /** Music only starts after a real gesture (unlock is called from pointer/key handlers). */
   async unlock() {
     this.context ??= new AudioContext();
@@ -49,7 +50,7 @@ export class AudioEngine {
             for (const value of buffer.getChannelData(channel)) peak = Math.max(peak, Math.abs(value));
           this.sampleLevels.set(key as Sound, peak > 0 ? Math.min(32, 0.65 / peak) : 1);
         }
-      } catch { this.failures.push(file); }
+      } catch { this.failures.push(file); this.onFailure(); }
     }));
     if (!this.music && this.buffers.has('music')) {
       this.music = this.context.createBufferSource(); this.music.buffer = this.buffers.get('music')!; this.music.loop = true;

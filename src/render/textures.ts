@@ -171,7 +171,7 @@ export const ray = () => make('ray', 64, 256, (g, w, h) => {
 });
 
 /** Blurred, slightly darkened copy of a background image so painted platforms read as far scenery. */
-export function blurredBackground(url: string, blurPx: number, onReady?: () => void): THREE.Texture {
+export function blurredBackground(url: string, blurPx: number, onReady?: () => void, onError?: () => void): THREE.Texture {
   const canvas = document.createElement('canvas'); canvas.width = 1536; canvas.height = 864;
   const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace;
   const image = new Image(); image.decoding = 'async';
@@ -181,6 +181,10 @@ export function blurredBackground(url: string, blurPx: number, onReady?: () => v
     // Overscan avoids the transparent rim that blur leaves at the edges.
     g.drawImage(image, -blurPx * 2, -blurPx * 2, canvas.width + blurPx * 4, canvas.height + blurPx * 4);
     texture.needsUpdate = true; onReady?.();
+  };
+  image.onerror = () => {
+    const g = canvas.getContext('2d')!; g.fillStyle = '#17302d'; g.fillRect(0, 0, canvas.width, canvas.height);
+    texture.needsUpdate = true; onError?.();
   };
   image.src = url;
   return texture;

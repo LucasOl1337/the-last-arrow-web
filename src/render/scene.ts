@@ -39,7 +39,7 @@ export class ArenaScene {
   private theme: Theme = themeFor('moss');
   /** Bloom can be turned off by the frame-time governor (or ?bloom=0). */
   bloomEnabled = new URLSearchParams(location.search).get('bloom') !== '0';
-  constructor(readonly canvas: HTMLCanvasElement) {
+  constructor(readonly canvas: HTMLCanvasElement, private onAssetError: () => void = () => {}) {
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'high-performance' });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -56,7 +56,12 @@ export class ArenaScene {
     this.sun.shadow.bias = -0.0006; this.sun.shadow.normalBias = 0.03; this.sun.shadow.radius = 3;
     this.sun.target.position.set(16, 9, 0);
     this.scene.add(this.atmosphere, this.arena);
-    this.stone = new THREE.TextureLoader().load(asset('tex/stone.jpg'));
+    this.stone = new THREE.TextureLoader().load(asset('tex/stone.jpg'), undefined, undefined, () => {
+      // A white texel preserves the theme tint instead of sampling an incomplete black texture.
+      const fallback = document.createElement('canvas'); fallback.width = fallback.height = 1;
+      const g = fallback.getContext('2d')!; g.fillStyle = '#fff'; g.fillRect(0, 0, 1, 1);
+      this.stone.image = fallback; this.stone.needsUpdate = true; this.onAssetError();
+    });
     this.stone.colorSpace = THREE.SRGBColorSpace; this.stone.wrapS = this.stone.wrapT = THREE.RepeatWrapping; this.stone.anisotropy = 4;
     this.veil = new THREE.Mesh(new THREE.PlaneGeometry(90, 50), new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false }));
     this.veil.position.set(16, 9, -6); this.veil.renderOrder = -1; this.atmosphere.add(this.veil);
@@ -69,7 +74,7 @@ export class ArenaScene {
   private background(file: string, blur: number) {
     const key = `${file}:${blur}`;
     let texture = this.bgCache.get(key);
-    if (!texture) { texture = blurredBackground(asset(file), blur); this.bgCache.set(key, texture); }
+    if (!texture) { texture = blurredBackground(asset(file), blur, undefined, this.onAssetError); this.bgCache.set(key, texture); }
     return texture;
   }
   private applyTheme(theme: Theme) {
@@ -125,6 +130,7 @@ export class ArenaScene {
     this.resize(this.canvas.clientWidth, this.canvas.clientHeight);
   }
   resize(width: number, height: number) {
+    if (width <= 0 || height <= 0) return; // hidden/minimized containers must not poison the camera matrix
     if (this.lowQuality) this.renderer.setPixelRatio(lowPixelRatio(devicePixelRatio, width, height));
     this.renderer.setSize(width, height, false); this.camera.aspect = width / height;
     this.baseZ = Math.max(19.4, 33.8 / this.camera.aspect) / (2 * Math.tan(THREE.MathUtils.degToRad(15)));

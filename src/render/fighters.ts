@@ -83,9 +83,12 @@ export class FightersView {
   onLand: ((x: number, y: number, strength: number) => void) | null = null;
   loadError: unknown = null;
   private selfLight = SELF_LIGHT.moss;
-  constructor(private scene: THREE.Group) {
-    loadCharacterKits().then(kits => { this.kits = kits; if (this.world) this.reset(this.world); })
-      .catch(error => { this.loadError = error; console.warn('Personagens 3D indisponíveis; usando bonecos procedurais.', error); });
+  constructor(private scene: THREE.Group, onFallback: () => void = () => {}) {
+    loadCharacterKits().then(kits => {
+      this.kits = kits;
+      if (Object.values(kits).some(kit => !kit)) onFallback();
+      if (this.world) this.reset(this.world);
+    }).catch(error => { this.loadError = error; onFallback(); console.warn('Personagens 3D indisponíveis; usando bonecos procedurais.', error); });
   }
   get usingModels() { return this.views.length > 0 && this.views.every(v => v.rig !== null); }
   /** Read-only visual probes for the bench: validate the actual skinned hand, not just the intended yaw. */
