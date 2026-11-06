@@ -15,6 +15,7 @@ import { AutoQuality } from './render/quality.ts';
 import { ResourceNotice } from './ui/resource-notice.ts';
 import { LEVELS } from './sim/level.ts';
 import { OnlineClient } from './net/client.ts';
+import { joinSnapshot } from './net/interpolation.ts';
 import { OnlinePanel } from './ui/online.ts';
 import { emptyIntent } from './sim/input.ts';
 import type { ServerMessage } from './net/protocol.ts';
@@ -42,7 +43,7 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let online: OnlineClient | null = null;
 let pendingState: Extract<ServerMessage, {type:'state'}> | null = null;
 let onlineEvents: (typeof world.events) = [];
-let onlineReady = false, onlineStartedAt = 0, networkStateAt = 0;
+let onlineReady = false, onlineStartedAt = 0, networkStateAt = 0, networkFrameMs = 1000/30;
 let cameraClose = true;
 const cameraButton = document.createElement('button');cameraButton.className='camera-toggle';game.append(cameraButton);
 const updateCameraButton = () => {cameraButton.textContent = cameraClose ? 'Câmera: próxima · C' : 'Câmera: ampla · C';cameraButton.setAttribute('aria-pressed',String(cameraClose));};
@@ -163,9 +164,8 @@ function frame(now: number) {
     if (frozen) controls.consumeEdges();
     if (online && pendingState) {
       const state=pendingState;pendingState=null;
-      const previous=world;world=state.world;networkStateAt=now;
-      // Interpolate render positions over the next network interval; simulation remains server-owned.
-      for(const f of world.fighters) {const old=previous.fighters[f.id];f.prevX=old?.x??f.x;f.prevY=old?.y??f.y;}
+      const previous=world;world=state.world;
+      networkFrameMs=joinSnapshot(previous,world,(now-networkStateAt)/networkFrameMs);networkStateAt=now;
       if(world.round!==seenRound){seenRound=world.round;fx.reset();}
       for(const event of onlineEvents){fx.event(event,world);hud.event(event);audio.event(event,world);fighters.event(event.type,event.actor);record(event);}
       onlineEvents=[];
@@ -190,7 +190,7 @@ function frame(now: number) {
     }
     // Test hook timeScale 0 freezes the sim only; poses keep animating so frozen states can be inspected.
     const animDt = frozen && !online ? 0 : elapsed * (timeScale || 1) * (!reducedMotion && fx.slow > 0 ? 0.3 : 1) * (!reducedMotion && fx.hitstop > 0 ? 0 : 1);
-    fighters.update(world, online ? Math.min(1,(now-networkStateAt)/(1000/30)) : frozen || world.phase !== 'playing' ? 1 : accumulator / DT, now / 1000, animDt);
+    fighters.update(world, online ? Math.min(1,(now-networkStateAt)/networkFrameMs) : frozen || world.phase !== 'playing' ? 1 : accumulator / DT, now / 1000, animDt);
     arrows.update(world, now / 1000); chests.update(world, now / 1000); fx.update(frozen ? 0 : elapsed, frozen ? 0 : elapsed * timeScale, world);
     flash.style.opacity = reducedMotion ? '0' : String(fx.flash * 0.7);
     arena.closeCamera=cameraClose;
