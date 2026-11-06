@@ -122,6 +122,7 @@ window.__tla = {
   setTimeScale(value: number) { if (!Number.isFinite(value) || value < 0 || value > 24) throw new RangeError('Escala deve estar entre 0 e 24'); timeScale = value; accumulator = 0; },
   startMatch,
   state: () => ({ ...snapshot(world), paused, timeScale }),
+  visuals: () => fighters?.inspect() ?? [],
   diagnostics: () => ({ frames, fps: measuredSeconds ? frames / measuredSeconds : 0, averageFrameWorkMs: frames ? frameMsTotal / frames : 0, maxFrameWorkMs: maxFrameMs,
     drawCalls: arena?.renderer.info.render.calls ?? 0, triangles: arena?.renderer.info.render.triangles ?? 0,
     geometries: arena?.renderer.info.memory.geometries ?? 0, textures: arena?.renderer.info.memory.textures ?? 0,
@@ -136,6 +137,7 @@ declare global {
       readonly world: ReturnType<typeof createWorld>;
       setTimeScale: (value: number) => void; startMatch: (opts?: MatchOptions) => void;
       state: () => ReturnType<typeof snapshot> & { paused: boolean; timeScale: number };
+      visuals: () => ReturnType<FightersView['inspect']>;
       diagnostics: () => { frames: number; fps: number; averageFrameWorkMs: number; maxFrameWorkMs: number; drawCalls: number; triangles: number; geometries: number; textures: number; models: boolean; modelError: string | null; audioFailures: string[]; renderer: unknown };
     };
   }

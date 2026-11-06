@@ -87,6 +87,17 @@ export class FightersView {
       .catch(error => { this.loadError = error; console.warn('Personagens 3D indisponíveis; usando bonecos procedurais.', error); });
   }
   get usingModels() { return this.views.length > 0 && this.views.every(v => v.rig !== null); }
+  /** Read-only visual probes for the bench: validate the actual skinned hand, not just the intended yaw. */
+  inspect() {
+    return this.views.map(v => {
+      v.root.updateWorldMatrix(true, true);
+      const hand = v.rig?.bowHand?.getWorldPosition(new THREE.Vector3());
+      const shoulder = v.rig?.model.getObjectByName('mixamorigLeftShoulder')?.getWorldPosition(new THREE.Vector3());
+      return { state: v.state, yaw: v.yaw, feet: v.root.position.toArray(),
+        bowDirection: hand && shoulder ? hand.sub(shoulder).toArray() : null,
+        nock: v.nock.visible ? v.nock.position.toArray() : null };
+    });
+  }
   reset(w: World) {
     this.world = w; this.selfLight = SELF_LIGHT[w.level.id] ?? 0.22;
     for (const v of this.views) this.dispose(v);
@@ -202,10 +213,15 @@ export class FightersView {
       const feet = HEIGHT - (y + HALF_H);
       v.root.position.set(x, feet, 0.55);
       v.releaseTime = Math.max(0, v.releaseTime - dt);
-      // Facing: +X at yaw≈0, turning through the camera so the face shows during the turn.
-      const face = f.charging && f.aimX !== 0 ? Math.sign(f.aimX) : f.facing;
-      const targetYaw = face > 0 ? -0.35 : -Math.PI + 0.35;
-      v.yaw += (targetYaw - v.yaw) * Math.min(1, dt * 24);
+      const aiming = f.charging || v.releaseTime > 0;
+      const face = aiming && f.aimX !== 0 ? Math.sign(f.aimX) : f.facing;
+      // Tripo's shoot clip draws toward local −Z, unlike the +X locomotion clips.
+      // Using the run yaw for shooting made leftward shots visibly point right.
+      const targetYaw = v.rig && aiming
+        ? (face > 0 ? -Math.PI / 2 + 0.18 : Math.PI / 2 - 0.18)
+        : (face > 0 ? -0.35 : -Math.PI + 0.35);
+      const turn = Math.atan2(Math.sin(targetYaw - v.yaw), Math.cos(targetYaw - v.yaw));
+      v.yaw += turn * Math.min(1, dt * 24);
       v.pivot.rotation.y = v.yaw;
       // Landing dust.
       if (f.alive && f.grounded && !v.wasGrounded && v.lastVy > 6) this.onLand?.(x, y + HALF_H, Math.min(1, v.lastVy / 19));
@@ -247,7 +263,8 @@ export class FightersView {
     v.aim += (THREE.MathUtils.clamp(aimTarget, -1.1, 1.1) - v.aim) * Math.min(1, dt * 18);
     if (Math.abs(v.aim) > 0.001) {
       v.pivot.updateWorldMatrix(true, false);
-      v.pivot.getWorldQuaternion(tmpQ); axis.set(0, 0, 1).applyQuaternion(tmpQ);
+      // Pitch in the arena's XY plane, not the model's local Z (shoot is authored toward −Z).
+      axis.set(0, 0, Math.sign(f.aimX || f.facing));
       for (const bone of [rig.spine1, rig.spine2]) {
         if (!bone?.parent) continue;
         bone.parent.updateWorldMatrix(true, false);

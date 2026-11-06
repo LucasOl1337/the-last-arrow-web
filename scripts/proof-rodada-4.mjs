@@ -89,6 +89,20 @@ try {
       await page.screenshot({ path: `${out}/mira-close.png`, clip });
     }
   }
+  // Exact regression from totem seed 3: Akane aims left but the imported clip points right.
+  // Hold this real shot direction for the full draw clip; check the actual skinned bow hand.
+  await page.evaluate(() => {
+    window.__tla.startMatch({ humans: 0, bots: 4, map: 'totem', seed: 3 }); window.__tla.setTimeScale(0);
+    const w = window.__tla.world; w.phase = 'playing'; w.countdown = 0;
+    const f = w.fighters[3];
+    Object.assign(f, { x: 18, prevX: 18, y: 15.45, prevY: 15.45, grounded: true, vx: 0, vy: 0, invulnerable: 0, charging: true, charge: .5, aimX: -1, aimY: 0, facing: -1 });
+  });
+  await delay(1500);
+  report.aimRegression = await page.evaluate(() => window.__tla.visuals()[3]);
+  await shot('mira-regressao');
+  const ar = await page.locator('.overhead').nth(3).boundingBox();
+  await page.screenshot({ path: `${out}/mira-regressao-close.png`, clip: { x: Math.max(0, Math.min(1120, ar.x + ar.width / 2 - 240)), y: Math.max(0, Math.min(540, ar.y - 30)), width: 480, height: 360 } });
+  assert.ok(report.aimRegression.bowDirection[0] < -.15, `left shot must extend left: ${report.aimRegression.bowDirection}`);
   // First real death, not a fabricated kill: inspect the dissolve and visible flying arrows.
   await page.evaluate(() => window.__tla.startMatch({ humans: 0, bots: 4, map: 'canopy', seed: 21 }));
   report.kill = await page.evaluate(() => new Promise(resolve => {
