@@ -56,3 +56,8 @@ Outro agente edita `src/sim/` e `tests/` ao mesmo tempo (rodada de gameplay: cou
 ## Atualização (07:57): Kaze e Akane têm modelo próprio
 `public/assets/models/kaze.glb` + `kaze_anims.glb` e `akane.glb` + `akane_anims.glb` (mesmo formato da Storm: malha rig Mixamo meshopt + clipes run, idle, jump, shoot, fall). Use-os em vez de tingir mizu/storm.
 Retratos para o menu/HUD/vitória: `public/assets/ui/portrait_{mizu,storm,kaze,akane}.jpg`; logo com fundo transparente `public/assets/ui/logo.png` (use no menu no lugar do título em texto e na tela de vitória).
+
+## Observação do regente (08:10, build intermediário capturado)
+- O fundo pintado (ruins/canopy/templo/copas.jpg) NÃO aparece: só preto com névoa. Os fundos são a cara do jogo — precisam aparecer nítidos, cobrindo a tela toda.
+- Personagens pequenos demais (≈1 tile). Devem ter ~1.6–1.8 tiles de altura visual e ser o elemento mais legível da tela.
+- Tiles com pedra + musgo + cipós ficaram ótimos; manter.
