@@ -86,6 +86,26 @@ Galeria consultada. Stories canônicas para configuração, resultado headhunter
 - **Antes/depois/prova:** `evidence/rodada-7/antes/`, `story-*.png`, `cpu4-4k-antes.png`, `cpu4-4k-leve.png`, `cpu4-leve-1600.png`; todos os prints vistos diretamente ou nas folhas `conferencia-*.jpg`. `story-report.json` e `report.json` guardam os portões; `quality-report.json` mede 13,44→59,88 FPS após raster cap, CPU4 real por CDP.
 - **Limite de ambiente:** Chromium com janela apresentada pelo Xvnc permanece ~30–36 FPS, inclusive em Vulkan e modo leve; mudar backend não resolveu. Medição oficial usa render isolado com GPU real, como rodadas4–6, na bancada tla. Não é prova de 60FPS da transmissão VNC.
 
+## Rodada 8 — ficha antes do layout
+
+1. **Quem usa:** pessoa chegando pelo link frio, desktop/teclado ou celular touch 844×390, 932×430 e 390×844.
+2. **Tarefas:** começar P1+3 bots; mover/mirar e soltar flecha com dois dedos; pausar/retomar ou girar sem disparo acidental.
+3. **Objeto principal:** arena 16:9 com quatro arqueiros; controles não podem esconder suas plataformas.
+4. **Simultâneo:** ação, munição/placar, stick e três botões; dica curta só no countdown; som/pausa alcançáveis sem teclado.
+5. **Medido:** quatro cartões, três ações touch 64px ocupando 138×138px DENTRO da arena; portrait mostra arena de 390×219px e nomes de 8px; menu deitado já abre com um toque.
+6. **Estado:** toque é cancelado em pausa/blur/rotação; portrait interrompe o relógio e pede girar; retoma sem consumir munição. Configuração e desktop preservados.
+
+Galeria consultada nesta rodada: objeto visível sem rolar, uma ação principal, nada abaixo da dobra. Mudança prevista: faixas laterais touch fora da arena; retrato mostra aviso em vez de combate ilegível. Stories canônicas `Arena/Toque real` e countdown do HUD, inclusive cancelamento e retrato. Exceção ao portão de área em retrato: objeto é aviso de girar; a arena não é jogável nessa orientação.
+
+### Rodada 8 — crítica depois dos prints (06/11, 12:05 Brasília)
+
+- **Tarefa 1 sem rolar:** sim; Começar visível nos três viewports mobile e nos dois de siTela. Padrão continua P1+3 bots, um toque entra; o segundo gesto segura/solta Atirar. Link frio local com cache desativado → tiro em 1,75–2,22s (inclui 350ms de prova congelada no portrait), não benchmark de rede móvel.
+- **Olho/objeto:** arena ocupa 80,9% em844×390 e82,0% em932×430. Botões64px ficam nas faixas externas; teste geométrico confirma que não interceptam o combate. Sem alterar hitbox/câmera/regras. Pausa/som têm44px. Portrait mostra instrução de girar e preserva tick, não tenta mostrar HUD8px.
+- **Ajuste depois de olhar:** nome Stormdragon cobria a ponta da dica; countdown ganhou camada própria, novo print conferido. Primeira story ficava à esquerda e cortava botões por falta do shell/viewport: story agora usa o #app de produção e meta viewport, não CSS especial para passar prova.
+- **Antes/depois:** `evidence/rodada-8/antes/` versus `jogo-844x390.png`, `jogo-932x430.png`, `portrait-390x844.png`, `countdown-*.png`. Menu portrait aberto em tamanho original; miniaturas/seletores continuam compactos e parte de seus rótulos é truncada em390px, mas começar não depende de alterá-los. Não alego redesenho completo do menu.
+- **Provas:** story real `Arena/Toque real/Countdown`, menu canônico em1366×768,900×1000,844×390,932×430,390×844; gates em `story-report.json`/`mobile-report.json`. Portrait tem exceção explícita de área para arena escondida (26%); aviso, não jogo vertical, é a entrega. Desktop teclado preservado e seus dois gates passaram. Todos os PNGs abertos diretamente ou em `conferencia-*.jpg`; folhas também vistas.
+- **Limites:** toque em Chromium emulado (hasTouch/isMobile + CDP), não Safari/aparelho físico. Partidas iniciadas por toque, pilotadas ~3s em tempo real e encerradas a24× com P1 humano sem novo input; não alegar partida inteira pilotada. GLBs carregam de forma assíncrona: primeiro frame do countdown ainda pode exibir o boneco provisório; todos carregados antes do primeiro tiro medido.
+
 ## Regras e catálogo
 
 - Uma ação principal: entrar na arena. Configuração compacta, título sobre a arte fornecida; sem painel administrativo.
