@@ -20,12 +20,12 @@ test('two remote players share authoritative world, full rooms reject, disconnec
  const a=client(url),b=client(url),c=client(url);
  try {
    await Promise.all([a,b,c].map(p=>new Promise<void>(r=>p.ws.once('open',r))));
-   a.send({type:'join',map:'totem',mode:'headhunter'});const joined=await a.wait('joined');assert.equal(joined.player,0);await a.wait('waiting');
+   a.send({type:'join',map:'totem',mode:'headhunter',characters:['akane','kaze']});const joined=await a.wait('joined');assert.equal(joined.player,0);await a.wait('waiting');
    b.send({type:'join',room:joined.room});assert.equal((await b.wait('joined')).player,1);
    await Promise.all([a.wait('start'),b.wait('start')]);
    c.send({type:'join',room:joined.room});assert.match((await c.wait('error')).message,/cheia/);
    const first=await a.wait('state');assert.equal(first.world.fighters.length,2);
-   assert.equal(first.world.options.map,'totem');assert.equal(first.world.options.mode,'headhunter');
+   assert.equal(first.world.options.map,'totem');assert.equal(first.world.options.mode,'headhunter');assert.deepEqual(first.world.options.characters.slice(0,2),['akane','kaze']);
    const r=app.rooms.get(joined.room)!;
    await new Promise(r=>setTimeout(r,60));assert.equal(r.world.tick,0,'wait until both assets are ready');
    a.send({type:'ready'});b.send({type:'ready'});r.world.phase='playing';r.world.fighters.forEach(f=>f.invulnerable=10);

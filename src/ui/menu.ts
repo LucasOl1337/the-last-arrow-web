@@ -41,7 +41,7 @@ export class Menu {
     this.element.querySelector<HTMLElement>('button, select')?.focus({ preventScroll: true });
   }
   hide() { this.element.hidden = true; }
-  selectedOptions() { return {map:this.options.map,mode:this.options.mode}; }
+  selectedOptions() { return {map:this.options.map,mode:this.options.mode,characters:[...this.options.characters!]}; }
   setMuted(muted: boolean) {
     this.muted = muted;
     this.element.querySelectorAll<HTMLButtonElement>('[data-sound]').forEach(button => {

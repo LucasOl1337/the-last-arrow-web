@@ -7,7 +7,7 @@ export class OnlineClient {
   private timeout: ReturnType<typeof setTimeout>;
   player = 0;
   room = '';
-  constructor(room: string, onMessage: (m: ServerMessage)=>void, options: {map?:string;mode?:string}={}) {
+  constructor(room: string, onMessage: (m: ServerMessage)=>void, options: {map?:string;mode?:string;characters?:string[]}={}) {
     const url = new URL('ws',location.href);url.pathname='/ws';url.search='';url.protocol=location.protocol==='https:'?'wss:':'ws:';
     // Local proof proxies /ws through the preview's separate API port.
     if(location.hostname==='127.0.0.1') url.port='8890';
