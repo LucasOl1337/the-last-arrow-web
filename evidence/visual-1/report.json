@@ -1,0 +1,678 @@
+{
+  "owner": "tla-visual-1",
+  "viewport": "1600x900",
+  "errors": [],
+  "warnings": [],
+  "maps": {
+    "moss": {
+      "shots": [
+        "evidence/visual-1/moss-1.png",
+        "evidence/visual-1/moss-2.png",
+        "evidence/visual-1/moss-3.png",
+        "evidence/visual-1/moss-4.png"
+      ],
+      "states": [
+        {
+          "tick": 253,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 11.72,
+              "y": 14.22,
+              "vx": 7.8,
+              "vy": 6.4,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 1.72,
+              "y": 15.45,
+              "vx": 7.8,
+              "vy": 0,
+              "grounded": true,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 16.29,
+              "y": 12.2,
+              "vx": 6.1,
+              "vy": -13.8,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 26.05,
+              "y": 3.08,
+              "vx": 0.5,
+              "vy": -13.6,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            }
+          ]
+        },
+        {
+          "tick": 387,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 13.57,
+              "y": 2.45,
+              "vx": 4.9,
+              "vy": 0,
+              "grounded": true,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 7.5,
+              "y": 14.16,
+              "vx": 7.8,
+              "vy": 6.1,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 15.55,
+              "y": 12.23,
+              "vx": 3,
+              "vy": 13.7,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 23.29,
+              "y": 1.52,
+              "vx": -7.8,
+              "vy": 4.9,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            }
+          ]
+        },
+        {
+          "tick": 506,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 21.67,
+              "y": 17.58,
+              "vx": 7.8,
+              "vy": -7.6,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 10.64,
+              "y": 14.33,
+              "vx": 7.8,
+              "vy": 6.9,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 20.08,
+              "y": 14.35,
+              "vx": 3.5,
+              "vy": 19,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 21.42,
+              "y": 3.6,
+              "vx": 7.8,
+              "vy": -4.8,
+              "grounded": false,
+              "charging": false,
+              "alive": false,
+              "facing": 1
+            }
+          ]
+        },
+        {
+          "tick": 646,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 23.75,
+              "y": 0.65,
+              "vx": 7.8,
+              "vy": 8.3,
+              "grounded": false,
+              "charging": false,
+              "alive": false,
+              "facing": 1
+            },
+            {
+              "x": 19.72,
+              "y": 2.58,
+              "vx": 6.5,
+              "vy": 3.9,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 22.18,
+              "y": 5.62,
+              "vx": 4.8,
+              "vy": 8.5,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 21.42,
+              "y": 3.6,
+              "vx": 7.8,
+              "vy": -4.8,
+              "grounded": false,
+              "charging": false,
+              "alive": false,
+              "facing": 1
+            }
+          ]
+        }
+      ],
+      "performance": {
+        "frames": 360,
+        "fps": 59.836447044744126,
+        "averageFrameWorkMs": 1.2477777767512532,
+        "maxFrameWorkMs": 40,
+        "drawCalls": 56,
+        "triangles": 259678,
+        "geometries": 46,
+        "textures": 45,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    "totem": {
+      "shots": [
+        "evidence/visual-1/totem-1.png",
+        "evidence/visual-1/totem-2.png",
+        "evidence/visual-1/totem-3.png",
+        "evidence/visual-1/totem-4.png"
+      ],
+      "states": [
+        {
+          "tick": 254,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 29.95,
+              "y": 12.35,
+              "vx": -6.9,
+              "vy": 16.1,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 0.53,
+              "y": 12.45,
+              "vx": 7.8,
+              "vy": 0,
+              "grounded": true,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 8.41,
+              "y": 12.05,
+              "vx": -10,
+              "vy": -15.7,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 24.3,
+              "y": 4.28,
+              "vx": 7.8,
+              "vy": -0.8,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            }
+          ]
+        },
+        {
+          "tick": 390,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 29.58,
+              "y": 9.82,
+              "vx": -7.8,
+              "vy": 5.1,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 6.51,
+              "y": 12.66,
+              "vx": -7.8,
+              "vy": -9.6,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 11.76,
+              "y": 15.45,
+              "vx": 7.8,
+              "vy": 0,
+              "grounded": true,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 28.28,
+              "y": 9.63,
+              "vx": 7.8,
+              "vy": 16.9,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            }
+          ]
+        },
+        {
+          "tick": 492,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 0.02,
+              "y": 10.71,
+              "vx": 5.6,
+              "vy": 16.4,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 1.4,
+              "y": 9.5,
+              "vx": 3,
+              "vy": -9,
+              "grounded": false,
+              "charging": false,
+              "alive": false,
+              "facing": 1
+            },
+            {
+              "x": 7.38,
+              "y": 12.82,
+              "vx": -7.8,
+              "vy": -10.1,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 29.12,
+              "y": 11.63,
+              "vx": 7.8,
+              "vy": 19,
+              "grounded": false,
+              "charging": false,
+              "alive": false,
+              "facing": 1
+            }
+          ]
+        },
+        {
+          "tick": 656,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 3.98,
+              "y": 17.66,
+              "vx": -7.8,
+              "vy": 19,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 1.4,
+              "y": 9.5,
+              "vx": 3,
+              "vy": -9,
+              "grounded": false,
+              "charging": false,
+              "alive": false,
+              "facing": 1
+            },
+            {
+              "x": 30.45,
+              "y": 9.88,
+              "vx": 0,
+              "vy": 7.9,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 29.12,
+              "y": 11.63,
+              "vx": 7.8,
+              "vy": 19,
+              "grounded": false,
+              "charging": false,
+              "alive": false,
+              "facing": 1
+            }
+          ]
+        }
+      ],
+      "performance": {
+        "frames": 360,
+        "fps": 59.835452505609354,
+        "averageFrameWorkMs": 1.5855555559198062,
+        "maxFrameWorkMs": 44.60000002384186,
+        "drawCalls": 73,
+        "triangles": 201703,
+        "geometries": 52,
+        "textures": 59,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    "canopy": {
+      "shots": [
+        "evidence/visual-1/canopy-1.png",
+        "evidence/visual-1/canopy-2.png",
+        "evidence/visual-1/canopy-3.png",
+        "evidence/visual-1/canopy-4.png"
+      ],
+      "states": [
+        {
+          "tick": 257,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 11.99,
+              "y": 6.43,
+              "vx": 10,
+              "vy": -14.4,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 22.65,
+              "y": 2.65,
+              "vx": -7.8,
+              "vy": -9.8,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 17.35,
+              "y": 1.14,
+              "vx": -10,
+              "vy": -15.4,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 15.82,
+              "y": 10.5,
+              "vx": -7.8,
+              "vy": 3.8,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            }
+          ]
+        },
+        {
+          "tick": 393,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 15.89,
+              "y": 5.45,
+              "vx": 7.8,
+              "vy": 0,
+              "grounded": true,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 23.08,
+              "y": 1.48,
+              "vx": -10,
+              "vy": -7.6,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 19.83,
+              "y": 1.45,
+              "vx": -5.7,
+              "vy": 0,
+              "grounded": true,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 15.82,
+              "y": 3.76,
+              "vx": 7.8,
+              "vy": 0.3,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            }
+          ]
+        },
+        {
+          "tick": 514,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 17.32,
+              "y": 5.45,
+              "vx": 7.8,
+              "vy": 0,
+              "grounded": true,
+              "charging": false,
+              "alive": false,
+              "facing": 1
+            },
+            {
+              "x": 20.35,
+              "y": 4.41,
+              "vx": -2.6,
+              "vy": -4.4,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": -1
+            },
+            {
+              "x": 17.28,
+              "y": 5.45,
+              "vx": 7.8,
+              "vy": 0,
+              "grounded": true,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 19.59,
+              "y": 10.39,
+              "vx": 1.7,
+              "vy": 19,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            }
+          ]
+        },
+        {
+          "tick": 662,
+          "phase": "playing",
+          "round": 1,
+          "fighters": [
+            {
+              "x": 17.32,
+              "y": 5.45,
+              "vx": 7.8,
+              "vy": 0,
+              "grounded": true,
+              "charging": false,
+              "alive": false,
+              "facing": 1
+            },
+            {
+              "x": 18.51,
+              "y": 5.61,
+              "vx": -7.8,
+              "vy": 9.1,
+              "grounded": false,
+              "charging": false,
+              "alive": false,
+              "facing": -1
+            },
+            {
+              "x": 11.71,
+              "y": 6.93,
+              "vx": -3,
+              "vy": 12,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            },
+            {
+              "x": 13.67,
+              "y": 8.58,
+              "vx": -7.4,
+              "vy": -9.3,
+              "grounded": false,
+              "charging": false,
+              "alive": true,
+              "facing": 1
+            }
+          ]
+        }
+      ],
+      "performance": {
+        "frames": 360,
+        "fps": 59.670815998408635,
+        "averageFrameWorkMs": 1.3155555557873515,
+        "maxFrameWorkMs": 39.5,
+        "drawCalls": 84,
+        "triangles": 189504,
+        "geometries": 58,
+        "textures": 69,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  },
+  "pagesAtEnd": 0,
+  "juice-kill": {
+    "tick": 363,
+    "ms": 2971.600000023842
+  },
+  "juice-dash": {
+    "tick": 1595,
+    "ms": 13723.699999988079
+  },
+  "stateDistribution": {
+    "run": 105,
+    "jump": 100,
+    "fall": 230,
+    "shoot": 15,
+    "idle": 0
+  },
+  "fallback": {
+    "pageErrors": [],
+    "diagnostics": {
+      "frames": 139,
+      "fps": 59.0668458222336,
+      "averageFrameWorkMs": 1.558992803954392,
+      "maxFrameWorkMs": 59.5,
+      "drawCalls": 182,
+      "triangles": 36012,
+      "geometries": 35,
+      "textures": 29,
+      "models": false,
+      "modelError": "Error: Nenhum modelo 3D carregou",
+      "audioFailures": [],
+      "renderer": "WebKit WebGL"
+    },
+    "tick": 276
+  }
+}
