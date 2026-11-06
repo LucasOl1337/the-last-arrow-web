@@ -1,7 +1,7 @@
 import { CHARACTERS } from '../sim/world.ts';
 import type { MatchOptions } from '../sim/world.ts';
 import { LEVELS } from '../sim/level.ts';
-import { asset } from '../paths.ts';
+import { asset, portrait } from '../paths.ts';
 export interface MenuActions { start: (opts: MatchOptions) => void; resume: () => void; rematch: () => void; home: () => void; mute: () => boolean }
 export type Screen = 'menu' | 'controls' | 'pause' | 'victory' | 'error';
 export class Menu {
@@ -35,7 +35,7 @@ export class Menu {
     const button = document.createElement('button'); button.type = 'button'; button.textContent = label; button.className = primary ? 'primary' : 'secondary'; button.onclick = action; return button;
   }
   private renderMenu() {
-    this.element.innerHTML = `<div class="menu-art" aria-hidden="true"></div><div class="menu-content"><header><p class="eyebrow">UMA ARENA. UMA ÚLTIMA CHANCE.</p><h1>The Last<br><em>Arrow</em><span class="title-arrow">➶</span></h1><p class="tagline">Três flechas. Um acerto. Nenhuma segunda vida.</p></header><form class="match-config" aria-label="Configurar partida"><h2>Entre na arena</h2><div class="fields"></div><div class="menu-actions"></div></form><footer class="menu-foot">PvP local · 2–4 arqueiros · Primeiro a 5 vitórias</footer></div>`;
+    this.element.innerHTML = `<div class="menu-art" aria-hidden="true"></div><div class="menu-content"><header><p class="eyebrow">UMA ARENA. UMA ÚLTIMA CHANCE.</p><h1 class="logo-title"><img class="logo" src="${asset('ui/logo.png')}" alt="The Last Arrow" width="1100" height="457"></h1><p class="tagline">Três flechas. Um acerto. Nenhuma segunda vida.</p></header><form class="match-config" aria-label="Configurar partida"><h2>Entre na arena</h2><div class="fields"></div><div class="menu-actions"></div></form><footer class="menu-foot">PvP local · 2–4 arqueiros · Primeiro a 5 vitórias</footer></div>`;
     const fields = this.element.querySelector('.fields')!;
     const select = (name: string, label: string, values: { value: string; label: string }[], value: string, change: (value: string) => void) => {
       const field = document.createElement('label'); field.htmlFor = name; field.textContent = label;
@@ -75,7 +75,9 @@ export class Menu {
       panel.innerHTML = '<p class="eyebrow">RESPIRE. MIRE DE NOVO.</p><h2>Partida pausada</h2><p>O combate espera por você.</p>';
       panel.append(this.button('Continuar', this.actions.resume, true), this.button('Controles', () => { this.returnScreen = 'pause'; this.show('controls'); }), this.soundButton(), this.button('Voltar ao menu', this.actions.home));
     } else if (this.screen === 'victory') {
-      panel.innerHTML = '<p class="eyebrow">A ÚLTIMA FLECHA TEM DONO</p><h2 class="winner"></h2><p>Cinco vitórias. A arena é sua.</p>';
+      const winner = CHARACTERS.find(c => c.name === this.winner);
+      panel.classList.add('victory-panel');
+      panel.innerHTML = `<img class="victory-logo" src="${asset('ui/logo.png')}" alt="" aria-hidden="true"><div class="victory-row">${winner ? `<img class="victory-portrait" src="${portrait(winner.id)}" alt="" style="--fighter:${winner.color}">` : ''}<div><p class="eyebrow">A ÚLTIMA FLECHA TEM DONO</p><h2 class="winner"></h2><p>Cinco vitórias. A arena é sua.</p></div></div>`;
       panel.querySelector('.winner')!.textContent = `${this.winner} venceu`;
       panel.append(this.button('Revanche  →', this.actions.rematch, true), this.button('Escolher outra arena', this.actions.home));
     } else {

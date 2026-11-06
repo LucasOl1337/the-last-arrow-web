@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import type { World } from '../sim/world.ts';
 import { CHARACTERS } from '../sim/world.ts';
+import { portrait } from '../paths.ts';
 export class Hud {
   readonly element = document.createElement('div');
   private score = document.createElement('div');
@@ -18,7 +19,7 @@ export class Hud {
     this.score.replaceChildren(); this.labels.forEach(l => l.remove()); this.signature = '';
     this.cards = w.fighters.map(f => {
       const c = CHARACTERS[f.character], card = document.createElement('div'); card.className = 'score-card'; card.style.setProperty('--fighter', c.color);
-      card.innerHTML = `<span class="fighter-icon">${c.name[0]}</span><div><b>${c.name}</b><small>${f.human ? `P${f.id + 1}` : 'BOT'} <span class="ammo"></span></small></div><strong class="points">0</strong>`;
+      card.innerHTML = `<img class="fighter-icon" src="${portrait(c.id)}" alt=""><div><b>${c.name}</b><small>${f.human ? `P${f.id + 1}` : 'BOT'} <span class="ammo"></span></small></div><strong class="points">0</strong>`;
       this.score.append(card); return card;
     });
     this.labels = w.fighters.map(f => {

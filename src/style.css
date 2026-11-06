@@ -6,3 +6,10 @@
 @media(max-width:950px){.menu-art{background-position:65% center}.menu-content{max-width:700px}.menu-content header,.match-config{max-width:540px}.scoreboard{gap:6px}.score-card{min-width:120px;padding:5px 8px}.score-card b{font-size:11px}.fighter-icon{width:22px;height:25px}.points{font-size:21px}}
 @media(max-width:600px){.menu-layer{padding:24px 18px;align-items:start}.menu-content{padding:20px 0}.menu-art{background-image:linear-gradient(90deg,#07171df5,#07171dbb),var(--key-art)}.eyebrow{font-size:8px;letter-spacing:.18em}h1{font-size:64px}.tagline{font-size:12px;line-height:1.6;margin-bottom:24px}.fields{gap:14px 10px}select{font-size:12px}.menu-actions{grid-template-columns:1fr 1fr}.menu-actions .primary{grid-column:1/-1}.menu-foot{line-height:1.6}.overlay-panel{padding:23px 18px;align-self:center}.overlay-panel h2{font-size:30px}.overlay-panel table{font-size:10px}.overlay-panel td,.overlay-panel th{padding:10px 3px}.scoreboard{gap:4px;width:97%}.score-card{min-width:0;flex:1;padding:4px;gap:4px}.score-card b{font-size:8px}.score-card small{font-size:7px}.fighter-icon{display:none}.points{font-size:16px}.ammo{font-size:9px;letter-spacing:0}.arena-footer{font-size:7px;letter-spacing:0}.fighter-label{font-size:7px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.logo-title{margin:0 0 0 -10px;line-height:0}.logo{width:min(480px,92%);height:auto;filter:drop-shadow(0 6px 22px #000a)}
+img.fighter-icon{width:34px;height:34px;object-fit:cover;border-radius:50%;border:2px solid var(--fighter);padding:0;background:#0b1c22}
+.score-card.eliminated img.fighter-icon{filter:grayscale(1) brightness(.6)}
+.victory-panel{text-align:left}.victory-logo{display:block;width:220px;max-width:60%;margin:-12px 0 10px}
+.victory-row{display:flex;gap:22px;align-items:center}.victory-portrait{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--fighter);box-shadow:0 0 30px var(--fighter);flex:none}
+@media(max-width:600px){.logo{width:88%}.victory-row{gap:12px}.victory-portrait{width:72px;height:72px}img.fighter-icon{display:none}}
