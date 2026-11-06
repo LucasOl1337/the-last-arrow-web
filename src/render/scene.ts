@@ -10,6 +10,7 @@ import type { Theme } from './themes.ts';
 import { buildTerrain } from './terrain.ts';
 import type { TerrainBuild } from './terrain.ts';
 import { blurredBackground, mist, ray } from './textures.ts';
+import { lowPixelRatio } from './quality.ts';
 
 /** Peak camera push-in during the kill slow-motion. */
 const ZOOM = 0.05;
@@ -27,6 +28,7 @@ export class ArenaScene {
   private rays: THREE.Mesh[] = [];
   private stone: THREE.Texture;
   private baseZ = 38;
+  private lowQuality = false;
   private hemi = new THREE.HemisphereLight();
   private sun = new THREE.DirectionalLight();
   private rim = new THREE.DirectionalLight();
@@ -119,11 +121,11 @@ export class ArenaScene {
     this.arena.add(this.terrain.group);
   }
   setLowQuality() {
-    this.bloomEnabled = false;
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5) * 0.7);
+    this.bloomEnabled = false; this.lowQuality = true;
     this.resize(this.canvas.clientWidth, this.canvas.clientHeight);
   }
   resize(width: number, height: number) {
+    if (this.lowQuality) this.renderer.setPixelRatio(lowPixelRatio(devicePixelRatio, width, height));
     this.renderer.setSize(width, height, false); this.camera.aspect = width / height;
     this.baseZ = Math.max(19.4, 33.8 / this.camera.aspect) / (2 * Math.tan(THREE.MathUtils.degToRad(15)));
     this.camera.position.z = this.baseZ; this.camera.updateProjectionMatrix();

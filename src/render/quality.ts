@@ -1,4 +1,8 @@
 export type QualityLevel = 'normal' | 'low';
+/** Low quality caps actual raster size too: 4K/HiDPI must not remain a 4K buffer. */
+export function lowPixelRatio(dpr: number, width: number, height: number): number {
+  return Math.min(Math.min(dpr, 1.5) * 0.7, 1280 / Math.max(1, width), 720 / Math.max(1, height));
+}
 /** One real-time, visible/unpaused 2 s window per match; never a simulation-clock FPS. */
 export class AutoQuality {
   level: QualityLevel = 'normal';

@@ -1,6 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { AutoQuality } from '../src/render/quality.ts';
+import { AutoQuality, lowPixelRatio } from '../src/render/quality.ts';
+
+test('4K HiDPI low quality caps the raster at 1280x720 instead of keeping a 4032x2268 buffer', () => {
+  const ratio = lowPixelRatio(2, 3840, 2160);
+  assert.equal(3840 * ratio, 1280); assert.equal(2160 * ratio, 720);
+  assert.equal(lowPixelRatio(1, 1600, 900), .7);
+});
 
 test('40 FPS for two real seconds reduces quality exactly once and keeps it on rematch', () => {
   const q = new AutoQuality(); q.begin(); q.sample(0, true);
