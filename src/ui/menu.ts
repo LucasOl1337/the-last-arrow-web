@@ -1,12 +1,13 @@
 import { CHARACTERS } from '../sim/world.ts';
 import type { MatchOptions } from '../sim/world.ts';
-import { LEVELS } from '../sim/level.ts';
+import { LEVELS, themeOf } from '../sim/level.ts';
 import { asset, portrait } from '../paths.ts';
 export interface MenuActions { start: (opts: MatchOptions) => void; resume: () => void; rematch: () => void; home: () => void; mute: () => boolean }
 export type Screen = 'menu' | 'controls' | 'pause' | 'victory' | 'error';
 export interface VictoryStats { kills: number; catches: number; stomps: number; score: number }
 /** Menu thumbnails reuse the arena backgrounds. */
 const MAP_THUMBS: Record<string, string> = { moss: 'bg/ruins.jpg', totem: 'bg/templo.jpg', canopy: 'bg/copas.jpg' };
+const MAP_LABELS: Record<string, string> = { moss: 'Musgo', totem: 'Totem', canopy: 'Copas', falls: 'Cachoeira', roots: 'Raízes' };
 const DIFFICULTIES = [{ value: 'easy', label: 'Fácil', hint: 'aprendendo' }, { value: 'normal', label: 'Normal', hint: 'duelo justo' }, { value: 'hard', label: 'Difícil', hint: 'sem piedade' }] as const;
 export class Menu {
   readonly element = document.createElement('section');
@@ -94,7 +95,7 @@ export class Menu {
     group('character1', humans ? 'Seu arqueiro · P1' : 'Arqueiro 1', false, portraits, this.options.characters![0], v => { this.options.characters![0] = v; });
     group('character2', humans === 2 ? 'Arqueiro · P2' : 'Arqueiro rival', false, portraits, this.options.characters![1], v => { this.options.characters![1] = v; });
     group('map', 'Arena', false, LEVELS.map(l => ({ value: l.id, label: l.name,
-      html: `<img src="${asset(MAP_THUMBS[l.id] ?? 'bg/key.jpg')}" alt="" width="96" height="54" loading="lazy"><span>${l.name.replace(/^(Ruínas do|Templo do|Copas d[ao]s?) /, '')}</span>` })), this.options.map!, v => { this.options.map = v; });
+      html: `<img src="${asset(MAP_THUMBS[themeOf(l.id)])}" alt="" width="96" height="54"><span>${MAP_LABELS[l.id]}</span>` })), this.options.map!, v => { this.options.map = v; });
     group('difficulty', 'Bots', false, DIFFICULTIES.map(d => ({ value: d.value, label: `${d.label} · ${d.hint}`, html: `<b>${d.label}</b><small>${d.hint}</small>` })), this.options.difficulty!, v => { this.options.difficulty = v as MatchOptions['difficulty']; });
     if (matchMedia('(pointer: coarse)').matches) {
       const note = document.createElement('p'); note.className = 'touch-note'; note.textContent = 'Melhor com teclado ou controle. No toque: stick à esquerda, botões à direita.';

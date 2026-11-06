@@ -16,6 +16,9 @@ await proof('menu-story', async ({ page, report, base, shot }) => {
     await page.locator('#map img').evaluateAll(imgs => Promise.all(imgs.map(img => img.decode())));
     report.screens[width] = await checkScreen(page, '.menu-content');
     await shot(`menu-story-${width}`);
+    const thumbs = await page.locator('#map img').evaluateAll(imgs => imgs.map(img => ({ src: img.src, loaded: img.complete && img.naturalWidth > 0 })));
+    assert.ok(thumbs.every(t => t.loaded));
+    assert.ok(thumbs[3].src.endsWith('/bg/templo.jpg') && thumbs[4].src.endsWith('/bg/ruins.jpg'));
     assert.ok(report.screens[width].passou, `${width}: menu gate`);
     await page.locator('#map [data-value="falls"]').click();
     await page.keyboard.press('ArrowRight');
