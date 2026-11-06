@@ -101,7 +101,7 @@ window.__tla = {
     models: fighters?.usingModels ?? false, modelError: fighters?.loadError ? String(fighters.loadError) : null,
     audioFailures: audio.failures, renderer: arena?.renderer.getContext().getParameter(arena.renderer.getContext().RENDERER) ?? null }),
 };
-if (params.get('autoplay') === 'bots4') startMatch({ humans: 0, bots: 4, seed });
+if (params.get('autoplay') === 'bots4') startMatch({ humans: 0, bots: 4, seed, map: params.get('map') ?? undefined });
 requestAnimationFrame(frame);
 declare global {
   interface Window {
