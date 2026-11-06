@@ -73,7 +73,8 @@ function frame(now: number) {
         if (world.winner !== null && world.fighters[world.winner].score >= 5) { accumulator = 0; break; }
       }
     }
-    const animDt = paused ? 0 : elapsed * timeScale * (!reducedMotion && fx.slow > 0 ? 0.3 : 1) * (!reducedMotion && fx.hitstop > 0 ? 0 : 1);
+    // Test hook timeScale 0 freezes the sim only; poses keep animating so frozen states can be inspected.
+    const animDt = paused ? 0 : elapsed * (timeScale || 1) * (!reducedMotion && fx.slow > 0 ? 0.3 : 1) * (!reducedMotion && fx.hitstop > 0 ? 0 : 1);
     fighters.update(world, paused || world.phase !== 'playing' ? 1 : accumulator / DT, now / 1000, animDt);
     arrows.update(world, now / 1000); chests.update(world, now / 1000); fx.update(paused ? 0 : elapsed, paused ? 0 : elapsed * timeScale, world);
     flash.style.opacity = reducedMotion ? '0' : String(fx.flash * 0.7);

@@ -47,6 +47,24 @@ try {
     await page.waitForFunction(() => window.__tla.diagnostics().frames >= 360, undefined, { timeout: 30000 });
     entry.performance = await page.evaluate(() => window.__tla.diagnostics());
   }
+  // Close-up pose sheet: freeze the sim and pose fighters through the test hook (render only reads state).
+  await page.evaluate(() => {
+    window.__tla.startMatch({ humans: 0, bots: 4, map: 'moss', seed: 3 });
+    window.__tla.setTimeScale(0);
+    const w = window.__tla.world; w.phase = 'playing';
+    const ground = 15.45; // standing on the bottom-left floor (row 16)
+    const pose = (f, o) => Object.assign(f, { prevX: o.x, prevY: o.y, vx: 0, vy: 0, grounded: true, charging: false, alive: true, invulnerable: 0, dashTime: 0, ...o });
+    pose(w.fighters[0], { x: 3, y: ground, facing: 1, aimX: 0.7071, aimY: -0.7071, charging: true, charge: 0.5 });
+    pose(w.fighters[1], { x: 6.5, y: ground, facing: -1, aimX: -1, aimY: 0, vx: -7.8 });
+    pose(w.fighters[2], { x: 25, y: ground, facing: -1, aimX: -1, aimY: 0, charging: true, charge: 0.4 });
+    pose(w.fighters[3], { x: 28.5, y: ground - 1.6, facing: 1, aimX: 1, aimY: 0, grounded: false, vy: -8 });
+  });
+  await delay(900);
+  await page.screenshot({ path: `${out}/poses.png` });
+  await page.evaluate(() => { const f = window.__tla.world.fighters[1]; f.alive = false; });
+  await delay(350);
+  await page.screenshot({ path: `${out}/death.png` });
+  await page.evaluate(() => window.__tla.setTimeScale(1));
   report.stateDistribution = await page.evaluate(async () => {
     // Sample poses for 6 s of real play to prove run/jump/fall/shoot all occur.
     window.__tla.startMatch({ humans: 0, bots: 4, map: 'moss', seed: 11 });
