@@ -1,0 +1,1307 @@
+{
+  "owner": "tla-rodada-4",
+  "pid": 49291,
+  "viewport": "1600x900",
+  "errors": [],
+  "maps": {
+    "moss": {
+      "play": {
+        "fps": 60.03816069448551,
+        "maxGap": 16.80000000000109,
+        "kills": 3,
+        "shots": 10,
+        "clippedLabels": [],
+        "labelOverlaps": [],
+        "scoreboardOverlaps": [],
+        "penetrations": [],
+        "timeline": [
+          {
+            "tick": 421,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 15.745833333332925,
+                "y": 2.4499999999999993,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 1,
+                "x": 8.395208333332988,
+                "y": 13.552222222222227,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 2,
+                "x": 17.557777777777673,
+                "y": 10.81666666666667,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 3,
+                "x": 21.08180555555549,
+                "y": 4.222555555555573,
+                "alive": true,
+                "ammo": 3
+              }
+            ],
+            "arrows": 0
+          },
+          {
+            "tick": 514,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 22.194999999999354,
+                "y": 17.612222222222215,
+                "alive": true,
+                "ammo": 2
+              },
+              {
+                "id": 1,
+                "x": 11.158680555555094,
+                "y": 14.872222222222234,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 2,
+                "x": 20.439444444444263,
+                "y": 15.661666666666669,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 3,
+                "x": 21.419444444444366,
+                "y": 3.6000000000000014,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 3
+          },
+          {
+            "tick": 608,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 23.7549999999993,
+                "y": 0.652222222222214,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 1,
+                "x": 17.26868055555488,
+                "y": 2.4499999999999993,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 2,
+                "x": 23.0823611111108,
+                "y": 4.449999999999999,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 3,
+                "x": 21.419444444444366,
+                "y": 3.6000000000000014,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 4
+          },
+          {
+            "tick": 728,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 23.7549999999993,
+                "y": 0.652222222222214,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 1,
+                "x": 20.054166666665893,
+                "y": 4.400500000000001,
+                "alive": true,
+                "ammo": 2
+              },
+              {
+                "id": 2,
+                "x": 22.556704549963385,
+                "y": 0.4012032858880943,
+                "alive": true,
+                "ammo": 6
+              },
+              {
+                "id": 3,
+                "x": 21.419444444444366,
+                "y": 3.6000000000000014,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 2
+          },
+          {
+            "tick": 1181,
+            "round": 2,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 25.235694444444476,
+                "y": 13.81666666666667,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 1,
+                "x": 10.094166666666695,
+                "y": 7.449999999999999,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 2,
+                "x": 18.094166666666695,
+                "y": 7.449999999999999,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 3,
+                "x": 6.764305555555524,
+                "y": 13.81666666666667,
+                "alive": true,
+                "ammo": 3
+              }
+            ],
+            "arrows": 0
+          },
+          {
+            "tick": 1301,
+            "round": 2,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 23.711666666666773,
+                "y": 13.972222222222221,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 1,
+                "x": 7.488819444444502,
+                "y": 10.22572222222222,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 2,
+                "x": 15.38472222222228,
+                "y": 11.10799999999999,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 3,
+                "x": 8.288333333333227,
+                "y": 13.972222222222221,
+                "alive": true,
+                "ammo": 3
+              }
+            ],
+            "arrows": 0
+          },
+          {
+            "tick": 1421,
+            "round": 2,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 18.855763888889157,
+                "y": 2.4499999999999993,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 1,
+                "x": 7.189097222222259,
+                "y": 8.318055555555553,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 2,
+                "x": 16.850833333333384,
+                "y": 5.739722222222241,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 3,
+                "x": 13.139374999999717,
+                "y": 2.4499999999999993,
+                "alive": true,
+                "ammo": 3
+              }
+            ],
+            "arrows": 0
+          }
+        ],
+        "state": {
+          "tick": 1423,
+          "phase": "playing",
+          "countdown": 0,
+          "round": 2,
+          "roundTime": 2.308333333333328,
+          "winner": null,
+          "mode": "versus",
+          "matchTime": 7.65000000000017,
+          "chests": [],
+          "chestTimer": 9.691666666666798,
+          "map": "moss",
+          "seed": 3,
+          "fighters": [
+            {
+              "id": 0,
+              "name": "Mizu",
+              "human": false,
+              "x": 18.725763888889162,
+              "y": 2.4499999999999993,
+              "vx": -7.8,
+              "vy": 0,
+              "alive": true,
+              "respawnAt": null,
+              "ammo": 3,
+              "score": 0,
+              "kills": 1,
+              "grounded": true,
+              "invulnerable": 0,
+              "inventory": [
+                "normal",
+                "normal",
+                "normal"
+              ]
+            },
+            {
+              "id": 1,
+              "name": "Stormdragon",
+              "human": false,
+              "x": 7.106041666666698,
+              "y": 8.220833333333331,
+              "vx": -5.200000000000002,
+              "vy": -5.699999999999982,
+              "alive": true,
+              "respawnAt": null,
+              "ammo": 3,
+              "score": 0,
+              "kills": 0,
+              "grounded": false,
+              "invulnerable": 0,
+              "inventory": [
+                "normal",
+                "normal",
+                "normal"
+              ]
+            },
+            {
+              "id": 2,
+              "name": "Kaze",
+              "human": false,
+              "x": 16.883888888888933,
+              "y": 5.635833333333352,
+              "vx": 1.7666666666666624,
+              "vy": -6.0999999999999766,
+              "alive": true,
+              "respawnAt": null,
+              "ammo": 3,
+              "score": 1,
+              "kills": 2,
+              "grounded": false,
+              "invulnerable": 0,
+              "inventory": [
+                "normal",
+                "normal",
+                "normal"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "Akane",
+              "human": false,
+              "x": 13.269374999999712,
+              "y": 2.4499999999999993,
+              "vx": 7.8,
+              "vy": 0,
+              "alive": true,
+              "respawnAt": null,
+              "ammo": 3,
+              "score": 0,
+              "kills": 0,
+              "grounded": true,
+              "invulnerable": 0,
+              "inventory": [
+                "normal",
+                "normal",
+                "normal"
+              ]
+            }
+          ],
+          "arrows": [],
+          "events": [],
+          "paused": false,
+          "timeScale": 1
+        }
+      },
+      "performance": {
+        "frames": 751,
+        "fps": 59.922284547072216,
+        "averageFrameWorkMs": 0.7250332889424888,
+        "maxFrameWorkMs": 33.5999999998603,
+        "drawCalls": 62,
+        "triangles": 372966,
+        "geometries": 47,
+        "textures": 44,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      },
+      "aim": {
+        "id": 1,
+        "x": 8.040138888888748,
+        "y": 7.27222222222224,
+        "aimX": 0.7071067811865475,
+        "aimY": -0.7071067811865475,
+        "tick": 1736
+      }
+    },
+    "totem": {
+      "play": {
+        "fps": 60.03816069448496,
+        "maxGap": 16.80000000000109,
+        "kills": 3,
+        "shots": 16,
+        "clippedLabels": [],
+        "labelOverlaps": [],
+        "scoreboardOverlaps": [],
+        "penetrations": [],
+        "timeline": [
+          {
+            "tick": 406,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 28.538472222222353,
+                "y": 10.438166666666664,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 1,
+                "x": 5.471944444444176,
+                "y": 11.681666666666679,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 2,
+                "x": 12.560694444444337,
+                "y": 15.450000000000003,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 3,
+                "x": 29.124444444444322,
+                "y": 11.630500000000012,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 3
+          },
+          {
+            "tick": 493,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 0.07555555555538263,
+                "y": 10.847333333333331,
+                "alive": true,
+                "ammo": 2
+              },
+              {
+                "id": 1,
+                "x": 1.3986111111109594,
+                "y": 9.502222222222223,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 7.319722222222296,
+                "y": 12.734722222222224,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 3,
+                "x": 29.124444444444322,
+                "y": 11.630500000000012,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 6
+          },
+          {
+            "tick": 609,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 6.831388888888625,
+                "y": 11.796666666666678,
+                "alive": true,
+                "ammo": 2
+              },
+              {
+                "id": 1,
+                "x": 1.3986111111109594,
+                "y": 9.502222222222223,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 31.779722222222546,
+                "y": 11.67166666666666,
+                "alive": true,
+                "ammo": 2
+              },
+              {
+                "id": 3,
+                "x": 29.124444444444322,
+                "y": 11.630500000000012,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 7
+          },
+          {
+            "tick": 729,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 31.233055555555524,
+                "y": 5.449999999999999,
+                "alive": true,
+                "ammo": 2
+              },
+              {
+                "id": 1,
+                "x": 1.3986111111109594,
+                "y": 9.502222222222223,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 26.778333333333777,
+                "y": 12.79,
+                "alive": true,
+                "ammo": 5
+              },
+              {
+                "id": 3,
+                "x": 29.124444444444322,
+                "y": 11.630500000000012,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 4
+          },
+          {
+            "tick": 849,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 30.90805555555555,
+                "y": 12.45,
+                "alive": true,
+                "ammo": 1
+              },
+              {
+                "id": 1,
+                "x": 1.3986111111109594,
+                "y": 9.502222222222223,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 29.581666666666578,
+                "y": 16.087333333333333,
+                "alive": true,
+                "ammo": 4
+              },
+              {
+                "id": 3,
+                "x": 29.124444444444322,
+                "y": 11.630500000000012,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 6
+          },
+          {
+            "tick": 969,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 3.3200000000000003,
+                "y": 5.44944444444446,
+                "alive": true,
+                "ammo": 4
+              },
+              {
+                "id": 1,
+                "x": 1.3986111111109594,
+                "y": 9.502222222222223,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 31.57249999999982,
+                "y": 15.536444444444449,
+                "alive": true,
+                "ammo": 4
+              },
+              {
+                "id": 3,
+                "x": 29.124444444444322,
+                "y": 11.630500000000012,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 3
+          },
+          {
+            "tick": 1089,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 7.303055555555403,
+                "y": 8.45,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 1,
+                "x": 1.3986111111109594,
+                "y": 9.502222222222223,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 5.8311805555553065,
+                "y": 4.133555555555553,
+                "alive": true,
+                "ammo": 4
+              },
+              {
+                "id": 3,
+                "x": 29.124444444444322,
+                "y": 11.630500000000012,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 4
+          },
+          {
+            "tick": 1209,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 9.799513888888924,
+                "y": 5.449999999999999,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 1,
+                "x": 1.3986111111109594,
+                "y": 9.502222222222223,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 0.2545833333332297,
+                "y": 4.994166666666679,
+                "alive": true,
+                "ammo": 5
+              },
+              {
+                "id": 3,
+                "x": 29.124444444444322,
+                "y": 11.630500000000012,
+                "alive": false,
+                "ammo": 0
+              }
+            ],
+            "arrows": 3
+          }
+        ],
+        "state": {
+          "tick": 1425,
+          "phase": "roundover",
+          "countdown": 0,
+          "round": 1,
+          "roundTime": 9.375000000000108,
+          "winner": 2,
+          "mode": "versus",
+          "matchTime": 9.375000000000108,
+          "chests": [],
+          "chestTimer": 2.6250000000000333,
+          "map": "totem",
+          "seed": 3,
+          "fighters": [
+            {
+              "id": 0,
+              "name": "Mizu",
+              "human": false,
+              "x": 5.495347222222293,
+              "y": 5.463333333333331,
+              "vx": -7.8,
+              "vy": 10.93333333333334,
+              "alive": false,
+              "respawnAt": null,
+              "ammo": 0,
+              "score": 0,
+              "kills": 2,
+              "grounded": false,
+              "invulnerable": 0,
+              "inventory": []
+            },
+            {
+              "id": 1,
+              "name": "Stormdragon",
+              "human": false,
+              "x": 1.3986111111109594,
+              "y": 9.502222222222223,
+              "vx": 3.0333333333333368,
+              "vy": -9.033333333333312,
+              "alive": false,
+              "respawnAt": null,
+              "ammo": 0,
+              "score": 0,
+              "kills": 0,
+              "grounded": false,
+              "invulnerable": 0,
+              "inventory": []
+            },
+            {
+              "id": 2,
+              "name": "Kaze",
+              "human": false,
+              "x": 2.967708333333171,
+              "y": 1.6946111111111222,
+              "vx": -3.3306690738754696e-15,
+              "vy": -2.7933333333333135,
+              "alive": true,
+              "respawnAt": null,
+              "ammo": 4,
+              "score": 1,
+              "kills": 1,
+              "grounded": false,
+              "invulnerable": 0,
+              "inventory": [
+                "normal",
+                "normal",
+                "normal",
+                "normal"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "Akane",
+              "human": false,
+              "x": 29.124444444444322,
+              "y": 11.630500000000012,
+              "vx": 7.8,
+              "vy": 19,
+              "alive": false,
+              "respawnAt": null,
+              "ammo": 0,
+              "score": 0,
+              "kills": 0,
+              "grounded": false,
+              "invulnerable": 0,
+              "inventory": []
+            }
+          ],
+          "arrows": [
+            {
+              "id": 8,
+              "owner": 2,
+              "x": 13.09555555555616,
+              "y": 13.790347222222234,
+              "vx": 0,
+              "vy": 0,
+              "angle": 2.938976844646591,
+              "stuck": true,
+              "age": 6.225000000000099,
+              "kind": "normal"
+            },
+            {
+              "id": 9,
+              "owner": 2,
+              "x": 27.38500000000046,
+              "y": 7.603375000001485,
+              "vx": 0,
+              "vy": 41.71250000000071,
+              "angle": 1.5707963267948966,
+              "stuck": false,
+              "age": 4.15833333333333,
+              "kind": "normal"
+            },
+            {
+              "id": 10,
+              "owner": 0,
+              "x": 27.82055555555563,
+              "y": 4.153159722222945,
+              "vx": 0,
+              "vy": -5.112499999999839,
+              "angle": -1.5707963267948966,
+              "stuck": false,
+              "age": 3.9749999999999885,
+              "kind": "normal"
+            },
+            {
+              "id": 14,
+              "owner": 0,
+              "x": 5.275347222222293,
+              "y": 5.8633333333333315,
+              "vx": 0,
+              "vy": 0,
+              "angle": 0.5,
+              "stuck": true,
+              "age": 0,
+              "kind": "normal"
+            },
+            {
+              "id": 15,
+              "owner": 0,
+              "x": 5.495347222222293,
+              "y": 5.8633333333333315,
+              "vx": 0,
+              "vy": 0,
+              "angle": 0.8,
+              "stuck": true,
+              "age": 0,
+              "kind": "normal"
+            },
+            {
+              "id": 16,
+              "owner": 0,
+              "x": 5.7153472222222925,
+              "y": 5.8633333333333315,
+              "vx": 0,
+              "vy": 0,
+              "angle": 1.1,
+              "stuck": true,
+              "age": 0,
+              "kind": "normal"
+            }
+          ],
+          "events": [],
+          "paused": false,
+          "timeScale": 1
+        }
+      },
+      "performance": {
+        "frames": 751,
+        "fps": 59.92276267075214,
+        "averageFrameWorkMs": 0.7953395472660278,
+        "maxFrameWorkMs": 35.300000000046566,
+        "drawCalls": 70,
+        "triangles": 115324,
+        "geometries": 49,
+        "textures": 45,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      },
+      "aim": {
+        "id": 3,
+        "x": 14.860833333333318,
+        "y": 8.266666666666683,
+        "aimX": -1,
+        "aimY": 0,
+        "tick": 1959
+      }
+    },
+    "canopy": {
+      "play": {
+        "fps": 60.047758450148365,
+        "maxGap": 16.80000000000109,
+        "kills": 3,
+        "shots": 17,
+        "clippedLabels": [],
+        "labelOverlaps": [],
+        "scoreboardOverlaps": [],
+        "penetrations": [],
+        "timeline": [
+          {
+            "tick": 415,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 17.324374999999705,
+                "y": 5.449999999999999,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 1,
+                "x": 22.078125000000014,
+                "y": 1.2680555555555557,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 2,
+                "x": 18.41736111111109,
+                "y": 1.4499999999999993,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 3,
+                "x": 17.249166666666582,
+                "y": 4.372944444444457,
+                "alive": true,
+                "ammo": 3
+              }
+            ],
+            "arrows": 3
+          },
+          {
+            "tick": 517,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 17.324374999999705,
+                "y": 5.449999999999999,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 1,
+                "x": 20.305555555555628,
+                "y": 4.330833333333334,
+                "alive": true,
+                "ammo": 3
+              },
+              {
+                "id": 2,
+                "x": 17.431527777777816,
+                "y": 5.449999999999999,
+                "alive": true,
+                "ammo": 6
+              },
+              {
+                "id": 3,
+                "x": 19.654166666666484,
+                "y": 10.861277777777772,
+                "alive": true,
+                "ammo": 3
+              }
+            ],
+            "arrows": 0
+          },
+          {
+            "tick": 611,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 17.324374999999705,
+                "y": 5.449999999999999,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 1,
+                "x": 18.507222222222325,
+                "y": 5.607277777777789,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 14.787638888888978,
+                "y": 5.449999999999999,
+                "alive": true,
+                "ammo": 6
+              },
+              {
+                "id": 3,
+                "x": 16.981874999999917,
+                "y": 10.367500000000014,
+                "alive": true,
+                "ammo": 3
+              }
+            ],
+            "arrows": 2
+          },
+          {
+            "tick": 731,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 17.324374999999705,
+                "y": 5.449999999999999,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 1,
+                "x": 18.507222222222325,
+                "y": 5.607277777777789,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 12.049444444444617,
+                "y": 12.552222222222227,
+                "alive": true,
+                "ammo": 6
+              },
+              {
+                "id": 3,
+                "x": 11.161597222222227,
+                "y": 3.796666666666681,
+                "alive": true,
+                "ammo": 2
+              }
+            ],
+            "arrows": 3
+          },
+          {
+            "tick": 851,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 17.324374999999705,
+                "y": 5.449999999999999,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 1,
+                "x": 18.507222222222325,
+                "y": 5.607277777777789,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 10.839722222222449,
+                "y": 12.81305555555555,
+                "alive": true,
+                "ammo": 5
+              },
+              {
+                "id": 3,
+                "x": 10.151111111111078,
+                "y": 4.7793333333333266,
+                "alive": true,
+                "ammo": 2
+              }
+            ],
+            "arrows": 4
+          },
+          {
+            "tick": 971,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 17.324374999999705,
+                "y": 5.449999999999999,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 1,
+                "x": 18.507222222222325,
+                "y": 5.607277777777789,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 12.148402777777974,
+                "y": 11.81666666666667,
+                "alive": true,
+                "ammo": 6
+              },
+              {
+                "id": 3,
+                "x": 12.618263888888805,
+                "y": 8.5775,
+                "alive": true,
+                "ammo": 1
+              }
+            ],
+            "arrows": 4
+          },
+          {
+            "tick": 1091,
+            "round": 1,
+            "fighters": [
+              {
+                "id": 0,
+                "x": 17.324374999999705,
+                "y": 5.449999999999999,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 1,
+                "x": 18.507222222222325,
+                "y": 5.607277777777789,
+                "alive": false,
+                "ammo": 0
+              },
+              {
+                "id": 2,
+                "x": 13.034375000000153,
+                "y": 12.42161111111109,
+                "alive": true,
+                "ammo": 5
+              },
+              {
+                "id": 3,
+                "x": 15.818263888888723,
+                "y": 8.81666666666667,
+                "alive": true,
+                "ammo": 2
+              }
+            ],
+            "arrows": 4
+          }
+        ],
+        "state": {
+          "tick": 1425,
+          "phase": "countdown",
+          "countdown": 2,
+          "round": 2,
+          "roundTime": 0,
+          "winner": null,
+          "mode": "versus",
+          "matchTime": 8.441666666666828,
+          "chests": [],
+          "chestTimer": 12,
+          "map": "canopy",
+          "seed": 3,
+          "fighters": [
+            {
+              "id": 0,
+              "name": "Mizu",
+              "human": false,
+              "x": 27,
+              "y": 3.44,
+              "vx": 0,
+              "vy": 0,
+              "alive": true,
+              "respawnAt": null,
+              "ammo": 3,
+              "score": 0,
+              "kills": 0,
+              "grounded": false,
+              "invulnerable": 1,
+              "inventory": [
+                "normal",
+                "normal",
+                "normal"
+              ]
+            },
+            {
+              "id": 1,
+              "name": "Stormdragon",
+              "human": false,
+              "x": 11,
+              "y": 14.44,
+              "vx": 0,
+              "vy": 0,
+              "alive": true,
+              "respawnAt": null,
+              "ammo": 3,
+              "score": 0,
+              "kills": 0,
+              "grounded": false,
+              "invulnerable": 1,
+              "inventory": [
+                "normal",
+                "normal",
+                "normal"
+              ]
+            },
+            {
+              "id": 2,
+              "name": "Kaze",
+              "human": false,
+              "x": 21,
+              "y": 14.44,
+              "vx": 0,
+              "vy": 0,
+              "alive": true,
+              "respawnAt": null,
+              "ammo": 3,
+              "score": 0,
+              "kills": 1,
+              "grounded": false,
+              "invulnerable": 1,
+              "inventory": [
+                "normal",
+                "normal",
+                "normal"
+              ]
+            },
+            {
+              "id": 3,
+              "name": "Akane",
+              "human": false,
+              "x": 5,
+              "y": 3.44,
+              "vx": 0,
+              "vy": 0,
+              "alive": true,
+              "respawnAt": null,
+              "ammo": 3,
+              "score": 1,
+              "kills": 2,
+              "grounded": false,
+              "invulnerable": 1,
+              "inventory": [
+                "normal",
+                "normal",
+                "normal"
+              ]
+            }
+          ],
+          "arrows": [],
+          "events": [],
+          "paused": false,
+          "timeScale": 1
+        }
+      },
+      "performance": {
+        "frames": 752,
+        "fps": 59.92270608390787,
+        "averageFrameWorkMs": 0.6961436170231343,
+        "maxFrameWorkMs": 33,
+        "drawCalls": 103,
+        "triangles": 361080,
+        "geometries": 64,
+        "textures": 40,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      },
+      "aim": {
+        "id": 0,
+        "x": 9.136805555556016,
+        "y": 6.504000000000005,
+        "aimX": 0.7071067811865475,
+        "aimY": 0.7071067811865475,
+        "tick": 1897
+      }
+    }
+  },
+  "screens": {
+    "1366x768": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 0,
+        "principal_fracao": 0.999,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 768,
+        "largura": 1366,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    },
+    "900x1000": {
+      "medidas": {
+        "principal_achado": true,
+        "principal_topo": 247,
+        "principal_fracao": 0.506,
+        "editores": 0,
+        "editor_altura": null,
+        "salvar_visiveis": 0,
+        "inputs_vazios_em_branco": [],
+        "ajudas_longas": [],
+        "rolagem_horizontal": false,
+        "altura_pagina": 1000,
+        "largura": 900,
+        "rolagens_ate_principal": 0
+      },
+      "falhas": [],
+      "passou": true
+    }
+  },
+  "pagesAtStart": 0,
+  "pagesAtEnd": 0,
+  "kill": {
+    "id": 3,
+    "x": 19.938333333333105,
+    "y": 1.4499999999999993,
+    "tick": 665,
+    "phase": "playing"
+  }
+}

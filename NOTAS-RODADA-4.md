@@ -9,9 +9,9 @@
 
 ## Jogar → achar → corrigir
 
-Primeiro autoplay (bots4, seed 3, 10 s/mapa) teve 3 mortes em cada mapa, tiros/recuperação de flechas e avanço de round, sem penetração de hitbox. Achados a corrigir:
+Primeiro autoplay (bots4, seed 3, 10 s/mapa) teve 3 mortes em cada mapa, tiros/recuperação de flechas e avanço de round, sem penetração de hitbox. Achados:
 
-1. **HUD recortado/sobreposto:** nomes no salto/wrap saem da tela (moss tick 349: Akane y=−30,6 px; totem tick 488: Mizu excede direita), e dois nomes se cruzam (moss tick 668). Print `01-legibilidade/moss-jogo.png` mostra corte; `canopy-jogo.png` mostra nome sobre placar.
+1. **HUD recortado/sobreposto:** nomes no salto/wrap saem da tela (moss tick 349: Akane y=−30,6 px; totem tick 488: Mizu excede direita), e dois nomes se cruzam (moss tick 668). Print `01-legibilidade/moss-jogo.png` mostra corte; `canopy-jogo.png` mostra nome sobre placar. **Corrigido:** layout limita nomes à arena e procura a faixa livre mais próxima, evitando placar/rodapé/outros nomes. Segunda prova em `02-hud/`: zero cortes, sobreposições e erros nos 3 mapas; FPS 60,04 / 60,04 / 60,05. Todos os PNGs abertos. Story de regressão `Arena/HUD real/BordasENomesCruzados`, build e check Storybook passaram.
 2. **Mira visual aponta ao lado oposto:** no close do Templo, Akane tem `aimX=-1`, mas o arco/modelo aponta à direita. Os pontos aparecem à esquerda (lado correto). Confirmar orientação local dos GLBs antes de corrigir.
 
 Sem push/publicação, sem fuzz, sem suíte inteira. `src/sim` intocado, portanto `npm test` não executado.

@@ -120,6 +120,7 @@ export class Hud {
     this.renderCountdown(w, now);
     this.renderRoundCard(w);
     this.countdown.hidden = this.roundCard.hidden === false || paused;
+    const anchors: { overhead: Overhead; x: number; y: number }[] = [];
     w.fighters.forEach((f, n) => {
       const o = this.overheads[n]; o.root.hidden = !f.alive;
       if (!f.alive) return;
@@ -132,7 +133,31 @@ export class Hud {
       }
       o.pips.classList.toggle('shown', now - o.changedAt < AMMO_VISIBLE || f.charging);
       this.projected.set(f.x, 18 - f.y + LABEL_LIFT, 0.6).project(camera);
-      o.root.style.left = `${(this.projected.x + 1) * 50}%`; o.root.style.top = `${(1 - this.projected.y) * 50}%`;
+      anchors.push({ overhead: o, x: (this.projected.x + 1) * 0.5, y: (1 - this.projected.y) * 0.5 });
     });
+    this.placeOverheads(anchors);
+  }
+  private placeOverheads(anchors: { overhead: Overhead; x: number; y: number }[]) {
+    // Read dimensions together, then write together (no per-player layout thrashing).
+    const area = this.element.getBoundingClientRect(), gap = 5;
+    if (!area.width || !area.height) return;
+    const rect = (el: HTMLElement) => {
+      const r = el.getBoundingClientRect();
+      return { x: r.left - area.left, y: r.top - area.top, width: r.width, height: r.height };
+    };
+    const blocked = [rect(this.score), rect(this.footer), rect(this.muteButton)];
+    const measured = anchors.map(a => ({ ...a, width: a.overhead.root.offsetWidth, height: a.overhead.root.offsetHeight }));
+    for (const a of measured) {
+      const clampY = (y: number) => THREE.MathUtils.clamp(y, gap, area.height - a.height - gap);
+      const x = THREE.MathUtils.clamp(a.x * area.width - a.width / 2, gap, area.width - a.width - gap);
+      const idealY = clampY(a.y * area.height - a.height);
+      const relevant = blocked.filter(b => x < b.x + b.width + gap && x + a.width + gap > b.x);
+      // Candidate lanes immediately above/below occupied rects, nearest the actual head first.
+      const candidates = [idealY, gap, ...relevant.flatMap(b => [b.y - a.height - gap, b.y + b.height + gap])]
+        .map(clampY).sort((a, b) => Math.abs(a - idealY) - Math.abs(b - idealY));
+      const y = candidates.find(y => relevant.every(b => y + a.height + gap <= b.y || y >= b.y + b.height + gap)) ?? idealY;
+      a.overhead.root.style.left = `${x}px`; a.overhead.root.style.top = `${y}px`;
+      blocked.push({ x, y, width: a.width, height: a.height });
+    }
   }
 }

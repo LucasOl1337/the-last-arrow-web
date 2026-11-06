@@ -39,7 +39,7 @@ try {
     entry.play = await page.evaluate(() => new Promise(resolve => {
       const api = window.__tla, start = performance.now();
       let frames = 0, previous = start, maxGap = 0, kills = 0, shots = 0, lastAlive = api.world.fighters.map(f => f.alive), arrows = api.world.nextArrowId;
-      const observations = { clippedLabels: [], labelOverlaps: [], penetrations: [], timeline: [] };
+      const observations = { clippedLabels: [], labelOverlaps: [], scoreboardOverlaps: [], penetrations: [], timeline: [] };
       function tick(now) {
         const w = api.world; frames++; maxGap = Math.max(maxGap, now - previous); previous = now;
         w.fighters.forEach((f, i) => { if (!f.alive && lastAlive[i]) kills++; lastAlive[i] = f.alive; });
@@ -49,6 +49,9 @@ try {
           const labels = [...document.querySelectorAll('.overhead')].filter(el => !el.hidden).map(el => ({ text: el.textContent, r: el.getBoundingClientRect() }));
           for (const { text, r } of labels) if ((r.left < area.left || r.right > area.right || r.top < area.top || r.bottom > area.bottom) && observations.clippedLabels.length < 8)
             observations.clippedLabels.push({ text, tick: w.tick, x: r.x, y: r.y, width: r.width, height: r.height });
+          const score = document.querySelector('.scoreboard').getBoundingClientRect();
+          for (const { text, r } of labels) if (r.left < score.right && r.right > score.left && r.top < score.bottom && r.bottom > score.top && observations.scoreboardOverlaps.length < 8)
+            observations.scoreboardOverlaps.push({ tick: w.tick, text });
           for (let a = 0; a < labels.length; a++) for (let b = a + 1; b < labels.length; b++) {
             const x = labels[a].r, y = labels[b].r;
             if (x.left < y.right && x.right > y.left && x.top < y.bottom && x.bottom > y.top && observations.labelOverlaps.length < 8)
@@ -110,6 +113,9 @@ try {
     assert.ok(e.play.fps >= 58, `${map}: measured ${e.play.fps.toFixed(2)} fps`);
     assert.ok(e.performance.fps >= 58, `${map}: diagnostic ${e.performance.fps.toFixed(2)} fps`);
     assert.deepEqual(e.play.penetrations, [], `${map}: actual hitbox penetrated solid tile`);
+    assert.deepEqual(e.play.clippedLabels, [], `${map}: clipped overhead`);
+    assert.deepEqual(e.play.labelOverlaps, [], `${map}: overlapping overheads`);
+    assert.deepEqual(e.play.scoreboardOverlaps, [], `${map}: overhead over scoreboard`);
   }
   assert.deepEqual(report.errors, []);
   await page.close(); await event('close'); report.pagesAtEnd = context.pages().length;
