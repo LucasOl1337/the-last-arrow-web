@@ -51,7 +51,14 @@ try {
 } catch(e){report.failure=String(e.stack);throw e;}
 finally{
  if(ownedTarget)await send('Target.closeTarget',{targetId:ownedTarget});
- if(socket){report.remainingPages=(await send('Target.getTargets')).targetInfos.filter(t=>t.type==='page').map(t=>t.targetId);socket.close();}
- server.kill();await event('close');report.pagesAtEnd=0;await writeFile(`${out}/visibility-report.json`,JSON.stringify(report,null,2));
+ if(socket){
+  // closeTarget acknowledges the request before destruction appears in getTargets.
+  for(let n=0;n<30;n++){
+   report.remainingPages=(await send('Target.getTargets')).targetInfos.filter(t=>t.type==='page').map(t=>t.targetId);
+   if(!report.remainingPages.includes(ownedTarget))break;await delay(100);
+  }
+  socket.close();
+ }
+ server.kill();await event('close');report.pagesAtEnd=report.remainingPages?.includes(ownedTarget)?1:0;await writeFile(`${out}/visibility-report.json`,JSON.stringify(report,null,2));
 }
 console.log(JSON.stringify(report));
