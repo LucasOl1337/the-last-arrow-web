@@ -10,14 +10,12 @@ import { ProceduralPuppet } from './puppet.ts';
 import { blob, softDot } from './textures.ts';
 import { themeForLevel } from './themes.ts';
 import { ARROW_SPEED, ARROW_GRAVITY, BOLT_GRAVITY } from '../sim/arrows.ts';
+import { runTimeScale } from './animation.ts';
 
 /** Visual height of a fighter in tiles (hitbox is 0.64×1.10; feet stay on the hitbox base, the body grows up). */
 export const VISUAL_HEIGHT = 2.4;
 const VISUAL_WIDTH = 1.18;
 const HALF_H = 0.55;
-const RUN_SPEED = 7.8;
-/** Model-space speed of the run clip at timeScale 1 (root travel / duration ≈ 1.95 units/s). */
-const RUN_CLIP_SPEED = 1.95;
 const FADE = 0.12;
 const GHOSTS = 3;
 /** Each character has its own GLB; tint only applies when falling back to a sibling model. */
@@ -50,7 +48,7 @@ interface Rig {
   model: THREE.Object3D; mixer: THREE.AnimationMixer; actions: Record<ClipName, THREE.AnimationAction>;
   uniforms: CharacterUniforms[]; outlines: THREE.Material[]; spine1?: THREE.Object3D; spine2?: THREE.Object3D; bowHand?: THREE.Object3D;
   ghosts: { model: THREE.Object3D; bones: THREE.Object3D[]; material: THREE.MeshBasicMaterial; life: number }[];
-  bones: THREE.Object3D[];
+  bones: THREE.Object3D[]; runSpeed: number;
 }
 interface View {
   root: THREE.Group; pivot: THREE.Group; character: number; rig: Rig | null; puppet: ProceduralPuppet | null;
@@ -143,7 +141,7 @@ export class FightersView {
       const gb: THREE.Object3D[] = []; ghost.traverse(o => { if ((o as THREE.Bone).isBone) gb.push(o); });
       return { model: ghost, bones: gb, material, life: 0 };
     });
-    return { model, mixer, actions, uniforms, ghosts, bones, outlines,
+    return { model, mixer, actions, uniforms, ghosts, bones, outlines, runSpeed: kit.runSpeed,
       spine1: model.getObjectByName('mixamorigSpine1'), spine2: model.getObjectByName('mixamorigSpine2'), bowHand: model.getObjectByName('mixamorigLeftHand') };
   }
   private build(f: Fighter): View {
@@ -250,7 +248,7 @@ export class FightersView {
     v.stateTime += dt;
     const win = WINDOWS[v.state], action = rig.actions[win.clip];
     let speed = 1;
-    if (v.state === 'run') speed = THREE.MathUtils.clamp(Math.abs(f.vx) / (RUN_CLIP_SPEED * VISUAL_HEIGHT / 0.98), 0.6, 2.4);
+    if (v.state === 'run') speed = runTimeScale(f.vx, rig.runSpeed, rig.model.scale.x);
     if (v.state === 'death') speed = 1.8;
     const releasing = v.state === 'shoot' && !f.charging && v.releaseTime > 0;
     if (releasing) speed = 2;

@@ -3,10 +3,11 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { asset } from '../paths.ts';
+import { rootSpeed } from './animation.ts';
 
 /** Clip names used by the renderer. Each model gets every one (Storm has no victory: idle stands in). */
 export type ClipName = 'idle' | 'run' | 'jump' | 'shoot' | 'fall' | 'victory';
-export interface ModelKit { template: THREE.Object3D; clips: Record<ClipName, THREE.AnimationClip>; height: number; floor: number }
+export interface ModelKit { template: THREE.Object3D; clips: Record<ClipName, THREE.AnimationClip>; height: number; floor: number; runSpeed: number }
 /** One kit per character id; null when that model failed (renderer picks a fallback). */
 export type CharacterKits = Record<'mizu' | 'storm' | 'kaze' | 'akane', ModelKit | null>;
 
@@ -56,7 +57,7 @@ function buildKit(model: THREE.Object3D, sources: THREE.AnimationClip[]): ModelK
   };
   const box = new THREE.Box3().setFromObject(model);
   return {
-    template: model, height: box.max.y - box.min.y, floor: box.min.y,
+    template: model, height: box.max.y - box.min.y, floor: box.min.y, runSpeed: rootSpeed(find('run')!),
     clips: { idle: pick('idle'), run: pick('run'), jump: pick('jump'), shoot: pick('fire'), fall: pick('fall'), victory: pick('victory_celebration', 'idle') },
   };
 }
