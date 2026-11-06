@@ -20,3 +20,6 @@ Arquivos: `src/render/*`, `src/ui/*`, `src/style.css`, `src/main.ts`. Não mexer
 
 Feito quando: build passa; captura headless (use `?autoplay=bots4&map=moss|totem|canopy`) mostrando personagens grandes e
 legíveis em todos os mapas, a 60 fps; você abriu e conferiu os prints em `evidence/rodada-2/`; commits pequenos; sem push; NOTAS-RODADA-2.md curto.
+
+## Atualização (08:45): clipes extras
+`public/assets/models/{mizu,storm,kaze,akane}_extra.glb` (só esqueleto): `fire` (tiro em pé — teste se lê melhor que o `shoot` ajoelhado; se sim, use-o para mirar/soltar), `hurt` (use no início da morte) e `victory_celebration` (storm, kaze, akane; mizu já tinha). Carregue junto com os demais clipes.
