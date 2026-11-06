@@ -1,0 +1,70 @@
+[
+  {
+    "name": "mizu",
+    "before": {
+      "bytes": 2665604,
+      "width": 4096,
+      "height": 4096
+    },
+    "after": {
+      "bytes": 1108992,
+      "width": 2048,
+      "height": 2048
+    },
+    "geometryAndRigHash": "600d3cc43882a9429599a96c5028ded2c4126dcc02afe716d8e0ff388f452cf7",
+    "meshBytesUnchanged": true,
+    "rgbaMipBytesBefore": 89478485.33333333,
+    "rgbaMipBytesAfter": 22369621.333333332
+  },
+  {
+    "name": "storm",
+    "before": {
+      "bytes": 3220064,
+      "width": 4096,
+      "height": 4096
+    },
+    "after": {
+      "bytes": 1338820,
+      "width": 2048,
+      "height": 2048
+    },
+    "geometryAndRigHash": "8a33f859b55ebc4edcf61223c4b055c177954b1c1a6b76ae4a0136ed79cdd3b9",
+    "meshBytesUnchanged": true,
+    "rgbaMipBytesBefore": 89478485.33333333,
+    "rgbaMipBytesAfter": 22369621.333333332
+  },
+  {
+    "name": "kaze",
+    "before": {
+      "bytes": 2503876,
+      "width": 4096,
+      "height": 4096
+    },
+    "after": {
+      "bytes": 1071908,
+      "width": 2048,
+      "height": 2048
+    },
+    "geometryAndRigHash": "067337ed1126f0984b8feac86a0a41c81219bd966a1a179e9316d74422bd4634",
+    "meshBytesUnchanged": true,
+    "rgbaMipBytesBefore": 89478485.33333333,
+    "rgbaMipBytesAfter": 22369621.333333332
+  },
+  {
+    "name": "akane",
+    "before": {
+      "bytes": 3547440,
+      "width": 4096,
+      "height": 4096
+    },
+    "after": {
+      "bytes": 1525428,
+      "width": 2048,
+      "height": 2048
+    },
+    "geometryAndRigHash": "c33045fe60ebc003543de2369edcb87cf9ae465a6324a832db1681964bfafdf7",
+    "meshBytesUnchanged": true,
+    "rgbaMipBytesBefore": 89478485.33333333,
+    "rgbaMipBytesAfter": 22369621.333333332
+  }
+]
