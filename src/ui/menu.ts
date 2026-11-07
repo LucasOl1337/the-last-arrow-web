@@ -4,6 +4,7 @@ import { LEVELS, themeOf } from '../sim/level.ts';
 import { asset, portrait } from '../paths.ts';
 import { victorySummary } from './match-copy.ts';
 import { controlSettings } from './control-settings.ts';
+import { gamepadHelp, gamepadStatus } from './gamepad-menu.ts';
 export interface MenuActions { start: (opts: MatchOptions) => void; resume: () => void; rematch: () => void; home: () => void; mute: () => boolean; online?: () => void }
 export type Screen = 'menu' | 'controls' | 'pause' | 'victory' | 'error' | 'recovering';
 export interface VictoryStats { kills: number; catches: number; stomps: number; score: number; mode?: MatchOptions['mode'] }
@@ -43,6 +44,20 @@ export class Menu {
     this.element.querySelector<HTMLElement>('button, select')?.focus({ preventScroll: true });
   }
   hide() { this.element.hidden = true; }
+  back() {
+    if (this.screen === 'controls') this.show(this.returnScreen);
+    else if (this.screen === 'pause') this.actions.resume();
+    else if (this.screen === 'victory') this.actions.home();
+  }
+  updateGamepads(slots: readonly (number | null)[], unsupported: number) {
+    let status = this.element.querySelector<HTMLElement>('.gamepad-status');
+    if (!status) {
+      status = document.createElement('p'); status.className = 'gamepad-status'; status.setAttribute('role', 'status');
+      (this.element.querySelector('.menu-content header,.overlay-panel') ?? this.element).append(status);
+    }
+    const text = gamepadStatus(slots, unsupported);
+    if (status.textContent !== text) status.textContent = text;
+  }
   selectedOptions() { return {map:this.options.map,mode:this.options.mode,characters:[...this.options.characters!]}; }
   setMuted(muted: boolean) {
     this.muted = muted;
@@ -115,12 +130,16 @@ export class Menu {
     actions.append(this.soundButton());
     if (this.actions.online) { const online = this.button('Jogar online', this.actions.online); online.style.gridColumn = '1 / -1'; actions.append(online); }
     this.element.querySelector('form')!.onsubmit = e => { e.preventDefault(); this.actions.start({ ...this.options, characters: [...this.options.characters!] }); };
+    this.element.querySelector('.menu-foot')!.append(gamepadHelp());
     this.updateRuleCopy();
   }
   private updateRuleCopy() {
     const headhunter = this.options.mode === 'headhunter';
     this.element.querySelector('.tagline')!.textContent = headhunter ? 'Dois minutos. Cada abate conta. Volte à luta.' : 'Três flechas. Um acerto. Nenhuma segunda vida.';
-    this.element.querySelector('.menu-foot')!.textContent = `PvP local · 2–4 arqueiros · ${headhunter ? 'Mais abates em 2 minutos · reaparece em 1,5s' : 'Primeiro a 5 vitórias'}`;
+    const foot=this.element.querySelector('.menu-foot')!;
+    const copy=`PvP local · 2–4 arqueiros · ${headhunter ? 'Mais abates em 2 minutos · reaparece em 1,5s' : 'Primeiro a 5 vitórias'}`;
+    if (foot.firstChild?.nodeType === Node.TEXT_NODE) foot.firstChild.textContent=copy;
+    else foot.prepend(document.createTextNode(copy));
   }
   private soundButton() {
     const button = this.button(this.muted ? 'Som desligado' : 'Som ligado', () => this.setMuted(this.actions.mute()));
@@ -134,8 +153,8 @@ export class Menu {
       panel.classList.add('controls-panel');
       panel.innerHTML = '<p class="eyebrow">TECLADO E MOUSE · P1</p><h2>Controles</h2>';
       panel.append(controlSettings());
-      const details=document.createElement('details');details.innerHTML='<summary>Habilidades, P2 e outros dispositivos</summary><p>Mizu · Refluxo: esquiva e deixa uma guarda que absorve uma flecha inimiga. Recarga: 1,8 s.</p><p>Stormy Dragon · Rajada: esquiva e repele inimigos e flechas próximos, sem dano direto. Recarga: 2,4 s.</p><p>P2 local: setas movem/miram; numpad 1 atira, 2 pula, 3 esquiva (ou vírgula, ponto e barra).</p><p>Controle: direcional mira, A pula, X/RT atira, B/RB esquiva, Start abre menu.</p><p>Celular: deitado, stick move/mira, botões atiram, pulam e esquivam.</p><p>Segure pulo para subir mais. Baixo acelera a queda; nos layouts com mouse, S agacha no chão e anda devagar.</p><p>Flecha ou pisão mata. A esquiva pega flechas; recolha as cravadas. As quatro bordas se conectam.</p><p>Versus: cinco vitórias, empate de round em 90 s. Headhunter: mais abates em dois minutos, reaparece em 1,5 s.</p>';
-      panel.append(details,this.button('Voltar', () => this.show(this.returnScreen), true));
+      const details=document.createElement('details');details.innerHTML='<summary>Habilidades, P2 e outros dispositivos</summary><p>Mizu · Refluxo: esquiva e deixa uma guarda que absorve uma flecha inimiga. Recarga: 1,8 s.</p><p>Stormy Dragon · Rajada: esquiva e repele inimigos e flechas próximos, sem dano direto. Recarga: 2,4 s.</p><p>P2 local: setas movem/miram; numpad 1 atira, 2 pula, 3 esquiva (ou vírgula, ponto e barra).</p><p>Celular: deitado, stick move/mira, botões atiram, pulam e esquivam.</p><p>Segure pulo para subir mais. Baixo acelera a queda; nos layouts com mouse, S agacha no chão e anda devagar.</p><p>Flecha ou pisão mata. A esquiva pega flechas; recolha as cravadas. As quatro bordas se conectam.</p><p>Versus: cinco vitórias, empate de round em 90 s. Headhunter: mais abates em dois minutos, reaparece em 1,5 s.</p>';
+      panel.append(gamepadHelp(),details,this.button('Voltar', () => this.show(this.returnScreen), true));
     } else if (this.screen === 'pause') {
       panel.innerHTML = this.online ? '<p class="eyebrow">DUELO ONLINE</p><h2>O duelo continua</h2><p>Seu arqueiro fica parado, mas a partida não pausa para o outro jogador.</p>' : '<p class="eyebrow">RESPIRE. MIRE DE NOVO.</p><h2>Partida pausada</h2><p>O combate espera por você.</p>';
       panel.append(this.button('Continuar', this.actions.resume, true), this.button('Controles', () => { this.returnScreen = 'pause'; this.show('controls'); }), this.soundButton(), this.button('Voltar ao menu', this.actions.home));

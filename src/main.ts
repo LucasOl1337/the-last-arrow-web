@@ -9,6 +9,7 @@ import { ChestsView } from './render/chests.ts';
 import { Hud } from './render/hud.ts';
 import { Menu } from './ui/menu.ts';
 import { Controls } from './ui/controls.ts';
+import { navigateGamepad } from './ui/gamepad-menu.ts';
 import { TouchControls } from './ui/touch.ts';
 import { AudioEngine } from './audio.ts';
 import { AutoQuality } from './render/quality.ts';
@@ -68,7 +69,13 @@ function connectOnline(room: string) {
   },menu.selectedOptions());
 }
 if(params.has('room')) {menu.hide();onlinePanel.show('Convite recebido. Toque em Entrar na sala.');} 
-const controls = new Controls(() => { if (running && world.phase !== 'matchover') setPaused(!paused); }, () => { if (running && world.phase !== 'matchover') setPaused(true); });
+const controls = new Controls(() => { if (running && world.phase !== 'matchover') { if (paused && !menu.element.hidden) menu.back(); else setPaused(!paused); } }, () => { if (running && world.phase !== 'matchover') setPaused(true); });
+controls.onMenu = action => {
+  const panel = !onlinePanel.element.hidden ? onlinePanel.element : !menu.element.hidden ? menu.element : null;
+  if (!panel) return;
+  if (action === 'back') { if (panel === onlinePanel.element) home(); else menu.back(); }
+  else navigateGamepad(panel, action);
+};
 controls.attachPointer(canvas,(x,y)=>{
   if(!arena)return null;const point=arena.pointerOnArena(x,y),f=world.fighters[online?.player??0];if(!point||!f)return null;
   const dx=point.x-f.x,dy=point.y-f.y,length=Math.hypot(dx,dy);return length>.001?{x:dx/length,y:dy/length}:null;
@@ -157,6 +164,8 @@ window.addEventListener('pointerdown', () => { void audio.unlock().catch(() => {
 window.addEventListener('keydown', () => { void audio.unlock().catch(() => {}); }, { once: true });
 function matchEnded() { return world.phase === 'matchover'; }
 function frame(now: number) {
+  controls.pollGamepads(now);
+  if (!menu.element.hidden) menu.updateGamepads(controls.gamepads.slots, controls.gamepads.unsupported);
   const realElapsed = (now - lastTime) / 1000;
   const elapsed = Math.min(realElapsed, 0.05); lastTime = now;
   const frozen = paused || portraitTouch.matches || document.hidden || contextLost;
