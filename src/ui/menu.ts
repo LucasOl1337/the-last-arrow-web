@@ -15,7 +15,7 @@ export class Menu {
   readonly element = document.createElement('section');
   private screen: Screen = 'menu';
   private returnScreen: Screen = 'menu';
-  private options: MatchOptions = { humans: 1, bots: 3, map: 'moss', difficulty: 'normal', characters: ['mizu', 'stormdragon', 'kaze', 'akane'] };
+  private options: MatchOptions = { humans: 1, bots: 3, map: 'moss', difficulty: 'normal', characters: ['mizu', 'stormdragon', 'mizu', 'stormdragon'] };
   private winner: string | null = 'Mizu';
   private stats: VictoryStats | null = null;
   private muted = false;
@@ -25,8 +25,9 @@ export class Menu {
     // Injected from TS so the URL follows BASE_URL (GitHub Pages subpath) instead of a root-absolute CSS url.
     document.documentElement.style.setProperty('--key-art', `url('${new URL(asset('bg/key.jpg'), document.baseURI).href}')`);
     this.element.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && this.screen === 'controls') { event.preventDefault();event.stopPropagation();this.show(this.returnScreen);return; }
       if (event.key !== 'Tab') return;
-      const items = this.element.querySelectorAll<HTMLElement>('button:not([tabindex="-1"]), select');
+      const items = [...this.element.querySelectorAll<HTMLElement>('button:not([tabindex="-1"]):not(:disabled):not([hidden]), select')].filter(item=>item.getClientRects().length);
       const first = items[0], last = items[items.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
@@ -97,8 +98,8 @@ export class Menu {
       });
       row.append(...buttons); field.append(title, row); fields.append(field); select(value);
     };
-    const portraits = CHARACTERS.map(c => ({ value: c.id, label: c.name, style: `--fighter:${c.color}`,
-      html: `<img src="${portrait(c.id)}" alt="" width="56" height="56"><span>${c.name === 'Stormdragon' ? 'Storm' : c.name}</span>` }));
+    const portraits = CHARACTERS.map(c => ({ value: c.id, label: c.id === 'stormdragon' ? 'Stormy Dragon' : c.name, style: `--fighter:${c.color}`,
+      html: `<img src="${portrait(c.id)}" alt="" width="56" height="56"><span>${c.id === 'stormdragon' ? 'Stormy Dragon' : c.name}</span>` }));
     group('character1', humans ? 'Seu arqueiro · P1' : 'Arqueiro 1', false, portraits, this.options.characters![0], v => { this.options.characters![0] = v; });
     group('character2', humans === 2 ? 'Arqueiro · P2' : 'Arqueiro rival', false, portraits, this.options.characters![1], v => { this.options.characters![1] = v; });
     group('map', 'Arena', false, LEVELS.map(l => ({ value: l.id, label: l.name,
@@ -131,7 +132,7 @@ export class Menu {
     panel.setAttribute('aria-label', this.screen === 'controls' ? 'Controles' : this.screen === 'pause' ? (this.online ? 'Duelo em andamento' : 'Partida pausada') : this.screen === 'error' || this.screen === 'recovering' ? 'Erro gráfico' : 'Vitória');
     if (this.screen === 'controls') {
       panel.classList.add('controls-panel');
-      panel.innerHTML = '<p class="eyebrow">CADA FLECHA CONTA</p><h2>Seu jeito de jogar</h2>';
+      panel.innerHTML = '<p class="eyebrow">TECLADO E MOUSE · P1</p><h2>Controles</h2>';
       panel.append(controlSettings());
       const details=document.createElement('details');details.innerHTML='<summary>P2 local, controle, celular e regras</summary><p>P2 local: setas movem/miram; numpad 1 atira, 2 pula, 3 esquiva (ou vírgula, ponto e barra).</p><p>Controle: direcional mira, A pula, X/RT atira, B/RB esquiva, Start abre menu.</p><p>Celular: deitado, stick move/mira, botões atiram, pulam e esquivam.</p><p>Segure pulo para subir mais. Baixo acelera a queda; nos layouts com mouse, S agacha no chão e anda devagar.</p><p>Flecha ou pisão mata. A esquiva pega flechas; recolha as cravadas. As quatro bordas se conectam.</p><p>Versus: cinco vitórias, empate de round em 90 s. Headhunter: mais abates em dois minutos, reaparece em 1,5 s.</p>';
       panel.append(details,this.button('Voltar', () => this.show(this.returnScreen), true));

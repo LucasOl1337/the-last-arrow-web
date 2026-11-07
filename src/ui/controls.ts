@@ -1,7 +1,7 @@
 import { emptyIntent, clearIntent } from '../sim/input.ts';
 import type { Intent } from '../sim/input.ts';
 import type { TouchControls } from './touch.ts';
-import { readLayout, layoutById, layoutKeys, LOCAL_P2 } from './control-layouts.ts';
+import { readLayout, layoutKeys, LOCAL_P2 } from './control-layouts.ts';
 export class Controls {
   private down = new Set<string>();
   private pressed = new Set<string>();
@@ -23,15 +23,22 @@ export class Controls {
     this.aimAt=aimAt;
     const position=(e:PointerEvent)=>{if(e.pointerType==='mouse')this.pointer={x:e.clientX,y:e.clientY};};
     canvas.addEventListener('pointermove',position);
-    canvas.addEventListener('pointerdown',e=>{if(!this.active||!this.layout.mouse||e.pointerType!=='mouse'||e.button!==0)return;e.preventDefault();position(e);this.mouseHeld=true;this.mousePressed=true;});
-    window.addEventListener('pointerup',e=>{if(e.button===0)this.mouseHeld=false;});
-    window.addEventListener('pointercancel',()=>{this.mouseHeld=false;this.mousePressed=false;});
+    canvas.addEventListener('pointerdown',e=>{
+      if(!this.active||e.pointerType!=='mouse')return;
+      const code=`Mouse${e.button}`;position(e);
+      if((this.layout.pause??[]).includes(code)){e.preventDefault();this.onPause();return;}
+      if(!layoutKeys(this.layout).includes(code))return;
+      e.preventDefault();if(!this.down.has(code))this.pressed.add(code);this.down.add(code);this.mouseHeld=true;
+    });
+    canvas.addEventListener('contextmenu',e=>{if(this.active)e.preventDefault();});
+    window.addEventListener('pointerup',e=>{this.down.delete(`Mouse${e.button}`);this.mouseHeld=[...this.down].some(k=>k.startsWith('Mouse'));});
+    window.addEventListener('pointercancel',()=>{for(const code of this.down)if(code.startsWith('Mouse'))this.down.delete(code);this.mouseHeld=false;});
     canvas.addEventListener('pointerleave',()=>{if(!this.mouseHeld)this.pointer=null;});
   }
   constructor(private onPause: () => void, private onBlur: () => void) {
-    window.addEventListener('tla-layout-change',e=>{this.layout=layoutById((e as CustomEvent<string>).detail);this.reset();});
+    window.addEventListener('tla-layout-change',()=>{this.layout=readLayout();this.reset();});
     window.addEventListener('keydown', e => {
-      if (e.code === 'Escape' && !e.repeat) { this.onPause(); return; }
+      if ((e.code === 'Escape' || (this.layout.pause??[]).includes(e.code)) && !e.repeat && !(e.target as HTMLElement)?.closest('input,select,textarea')) { e.preventDefault();this.onPause(); return; }
       if (!this.active || (e.target as HTMLElement)?.closest('input,select,textarea') || ![...layoutKeys(this.layout),...layoutKeys(LOCAL_P2)].includes(e.code)) return;
       e.preventDefault(); if (!this.down.has(e.code)) this.pressed.add(e.code); this.down.add(e.code);
     });
@@ -75,7 +82,6 @@ export class Controls {
     if(this.active&&this.layout.mouse&&this.pointer) {
       const aim=this.aimAt?.(this.pointer.x,this.pointer.y);
       if(aim){this.frames[0].aimX=aim.x;this.frames[0].aimY=aim.y;}
-      this.frames[0].shoot ||= this.mousePressed;this.frames[0].shootHeld ||= this.mouseHeld;
     }
     const t = this.touch?.state;
     if (t && this.active) {
