@@ -26,7 +26,7 @@ export class Controls {
     canvas.addEventListener('pointerdown',e=>{
       if(!this.active||e.pointerType!=='mouse')return;
       const code=`Mouse${e.button}`;position(e);
-      if((this.layout.pause??[]).includes(code)){e.preventDefault();this.onPause();return;}
+      if(this.utility(code)){e.preventDefault();return;}
       if(!layoutKeys(this.layout).includes(code))return;
       e.preventDefault();if(!this.down.has(code))this.pressed.add(code);this.down.add(code);this.mouseHeld=true;
     });
@@ -35,10 +35,18 @@ export class Controls {
     window.addEventListener('pointercancel',()=>{for(const code of this.down)if(code.startsWith('Mouse'))this.down.delete(code);this.mouseHeld=false;});
     canvas.addEventListener('pointerleave',()=>{if(!this.mouseHeld)this.pointer=null;});
   }
+  private utility(code:string) {
+    if(code==='Escape'||(this.layout.pause??[]).includes(code)){this.onPause();return true;}
+    if(!this.active)return false;
+    for(const action of ['camera','mute'] as const)if((this.layout[action]??[]).includes(code)) {
+      window.dispatchEvent(new CustomEvent('tla-control-action',{detail:action}));return true;
+    }
+    return false;
+  }
   constructor(private onPause: () => void, private onBlur: () => void) {
     window.addEventListener('tla-layout-change',()=>{this.layout=readLayout();this.reset();});
     window.addEventListener('keydown', e => {
-      if ((e.code === 'Escape' || (this.layout.pause??[]).includes(e.code)) && !e.repeat && !(e.target as HTMLElement)?.closest('input,select,textarea')) { e.preventDefault();this.onPause(); return; }
+      if (!e.repeat && !(e.target as HTMLElement)?.closest('input,select,textarea') && this.utility(e.code)) { e.preventDefault();return; }
       if (!this.active || (e.target as HTMLElement)?.closest('input,select,textarea') || ![...layoutKeys(this.layout),...layoutKeys(LOCAL_P2)].includes(e.code)) return;
       e.preventDefault(); if (!this.down.has(e.code)) this.pressed.add(e.code); this.down.add(e.code);
     });
