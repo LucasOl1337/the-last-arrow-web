@@ -45,9 +45,13 @@ try {
   const room=new URL(await page.getByRole('textbox',{name:'Link do convite'}).inputValue()).searchParams.get('room');
   const wsUrl=label==='public'?'wss://arrow.symbiose.si/ws':'ws://127.0.0.1:8890/ws';
   peer=new WebSocket(wsUrl,{origin:new URL(base).origin});let received=0;
-  peer.on('message',v=>{const m=JSON.parse(v);if(m.type==='start')peer.send(JSON.stringify({type:'ready'}));if(m.type==='state')received++;});
+  let resolvePlaying;const peerPlaying=new Promise(resolve=>{resolvePlaying=resolve;});
+  peer.on('message',v=>{const m=JSON.parse(v);if(m.type==='start')peer.send(JSON.stringify({type:'ready'}));if(m.type==='state'){received++;if(m.world.phase==='playing')resolvePlaying();}});
   await new Promise((r,j)=>{peer.once('open',r);peer.once('error',j);});peer.send(JSON.stringify({type:'join',room}));
-  await page.waitForFunction(()=>window.__tla.diagnostics().models&&window.__tla.world.phase==='playing'&&window.__tla.state().online);
+  // The previous offline world is still 'playing' while the network handshake is in flight.
+  // Wait for this room's authoritative playing event and visible canvas, not that stale world.
+  let deadline;try{await Promise.race([peerPlaying,new Promise((_,reject)=>{deadline=setTimeout(()=>reject(new Error('peer did not enter playing')),30000);})]);}finally{clearTimeout(deadline);}
+  await page.waitForFunction(()=>!document.querySelector('#game').hidden&&window.__tla.diagnostics().models&&window.__tla.world.phase==='playing'&&window.__tla.state().online);
   assert.equal(await page.evaluate(()=>window.__tla.state().cameraClose),true);
   await page.keyboard.press('b');await page.waitForFunction(()=>!window.__tla.state().cameraClose);
   await page.keyboard.press('b');await page.waitForFunction(()=>window.__tla.state().cameraClose);
