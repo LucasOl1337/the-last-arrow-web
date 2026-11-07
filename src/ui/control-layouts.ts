@@ -4,6 +4,8 @@ export interface KeyLayout {
   jump: string[]; shoot: string[]; dash: string[]; crouch: string[];
   summary: string;
   pause?: string[];
+  camera?: string[];
+  mute?: string[];
   customized?: boolean;
 }
 export const CONTROL_LAYOUTS: readonly KeyLayout[] = [
@@ -19,7 +21,7 @@ export function layoutById(id: string | null | undefined): KeyLayout { return CO
 export const BINDING_STORAGE = 'tla-control-bindings-v1';
 export const ACTIONS = [
   ['left','Ir à esquerda'], ['right','Ir à direita'], ['up','Mirar para cima'], ['down','Mirar para baixo / cair'],
-  ['jump','Pular'], ['shoot','Atirar'], ['dash','Habilidade / esquiva'], ['crouch','Agachar'], ['pause','Pausar / menu'],
+  ['jump','Pular'], ['shoot','Atirar'], ['dash','Habilidade / esquiva'], ['crouch','Agachar'], ['pause','Pausar / menu'], ['camera','Alternar câmera'], ['mute','Ligar / desligar som'],
 ] as const;
 export type BindingAction = typeof ACTIONS[number][0];
 export function bindingLabel(code: string) {
@@ -36,7 +38,8 @@ export function bindingConflict(layout: KeyLayout, action: BindingAction, code: 
 function effectiveLayout(id: string | null): KeyLayout {
   const preset=layoutById(id);
   const layout: KeyLayout={...preset,pause:['Escape']};
-  for(const [action] of ACTIONS) layout[action]=[...(preset[action]??(action==='shoot'&&preset.mouse?['Mouse0']:action==='pause'?['Escape']:[]))];
+  const defaults: Partial<Record<BindingAction,string[]>>={pause:['Escape'],camera:['KeyC'],mute:['KeyM']};
+  for(const [action] of ACTIONS) layout[action]=[...(preset[action]??defaults[action]??[])];
   // Old presets encode mouse shooting outside shoot[]. Keep it explicit in the effective bindings.
   if(preset.mouse && !preset.shoot.length) layout.shoot=['Mouse0'];
   return layout;
@@ -72,5 +75,5 @@ export function restoreLayout() {
   catch {return 'Não foi possível restaurar neste navegador.';}
   announce();return null;
 }
-export function layoutKeys(layout: KeyLayout) {return [...layout.left,...layout.right,...layout.up,...layout.down,...layout.jump,...layout.shoot,...layout.dash,...layout.crouch,...(layout.pause??[])];}
+export function layoutKeys(layout: KeyLayout) {return [...layout.left,...layout.right,...layout.up,...layout.down,...layout.jump,...layout.shoot,...layout.dash,...layout.crouch,...(layout.pause??[]),...(layout.camera??[]),...(layout.mute??[])];}
 export function layoutHint(layout: KeyLayout) {return (layout.customized ? `Personalizado · ${['left','right','jump','shoot','dash'].map(action=>(layout[action as BindingAction]??[]).map(bindingLabel).join('/')).join(' · ')}` : layout.summary)+(layout.mouse?' · Mouse mira':'');}

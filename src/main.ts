@@ -46,7 +46,7 @@ let onlineEvents: (typeof world.events) = [];
 let onlineReady = false, onlineStartedAt = 0, networkStateAt = 0, networkFrameMs = 1000/30;
 let cameraClose = true;
 const cameraButton = document.createElement('button');cameraButton.className='camera-toggle';game.append(cameraButton);
-const updateCameraButton = () => {cameraButton.textContent = cameraClose ? 'Câmera: próxima · C' : 'Câmera: ampla · C';cameraButton.setAttribute('aria-pressed',String(cameraClose));};
+const updateCameraButton = () => {cameraButton.textContent = cameraClose ? 'Câmera: próxima' : 'Câmera: ampla';cameraButton.setAttribute('aria-pressed',String(cameraClose));};
 cameraButton.onclick = () => {cameraClose=!cameraClose;updateCameraButton();};updateCameraButton();
 function home() { online?.close();online=null;pendingState=null;onlineEvents=[];onlinePanel.hide();running=false;paused=false;controls.active=false;controls.reset();audio.setPaused(true);game.hidden=true;menu.show('menu'); }
 const menu = new Menu({
@@ -75,11 +75,12 @@ controls.attachPointer(canvas,(x,y)=>{
 });
 const updatePointerCursor=()=>canvas.classList.toggle('mouse-aim',controls.layout.mouse);
 window.addEventListener('tla-layout-change',updatePointerCursor);updatePointerCursor();
-window.addEventListener('keydown', event => {
-  if (event.code === 'KeyC' && !event.repeat && !game.hidden && !(event.target as HTMLElement)?.closest('input,textarea,select')) cameraButton.click();
-  if (event.code !== 'KeyM' || event.repeat || event.ctrlKey || event.metaKey || event.altKey) return;
-  if ((event.target as HTMLElement | null)?.closest?.('input, select, textarea')) return;
-  if (!game.hidden) toggleMute();
+// Utilities share the same persisted input map as combat. Do not retain hard-coded C/M listeners.
+window.addEventListener('tla-control-action', event => {
+  if(game.hidden)return;
+  const action=(event as CustomEvent<string>).detail;
+  if(action==='camera')cameraButton.click();
+  if(action==='mute')toggleMute();
 });
 // Touch layer only on coarse pointers (phones/tablets); keyboard and gamepad keep working alongside.
 const portraitTouch = matchMedia('(pointer: coarse) and (orientation: portrait)');
