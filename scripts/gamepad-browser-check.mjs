@@ -3,11 +3,16 @@ import { chromium } from 'playwright-core';
 import { writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
-const out = '/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/evidencias/gamepad';
+const out = process.env.TLA_OUT || '/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/evidencias/gamepad';
 const browser = await chromium.connectOverCDP('http://127.0.0.1:19085');
 const context = browser.contexts()[0];
 // Only the page registered by bench_web for this mission.
-const page = context.pages().find(p => p.url().includes('127.0.0.1:6138') || p.url().includes('127.0.0.1:5138'));
+let page;
+for (const candidate of context.pages()) {
+  const session = await context.newCDPSession(candidate);
+  const { targetInfo } = await session.send('Target.getTargetInfo'); await session.detach();
+  if (targetInfo.targetId === process.env.TLA_TAB) page = candidate;
+}
 assert.ok(page, 'mission page missing');
 const results = [];
 const errors = []; page.on('pageerror', e => errors.push(String(e)));
@@ -55,17 +60,21 @@ try {
       assert.deepEqual(errors,[]);writeFileSync(`${out}/menu-browser-results.json`,JSON.stringify({simulated:true,hardwareVerified:false,menuConfiguredTwoHumans:true,gamepadConfirmBackControls:true,gamepadConfirmBackOnline:true,errors},null,2));
       break proof;
     }
-    // Choose one bot through the same real select; no 3D until heavy slot is held.
-    await page.evaluate(()=>{document.querySelector('#bots').value='1';document.querySelector('#bots').dispatchEvent(new Event('change')); document.querySelector('.menu-actions .primary').focus();window.setSimPad(3,[0]);});
+    // Two humans, no bot interference; no 3D until heavy slot is held.
+    await page.evaluate(()=>{document.querySelector('#bots').value='0';document.querySelector('#bots').dispatchEvent(new Event('change')); document.querySelector('.menu-actions .primary').focus();window.setSimPad(3,[0]);});
     await page.waitForFunction(()=>window.__tla?.world.options.humans===2 && !document.querySelector('#game').hidden);
     await page.evaluate(()=>{window.setSimPad(3);window.setSimPad(6);});
     await page.waitForFunction(()=>window.__tla?.diagnostics().models);
-    await page.waitForTimeout(500);
+    await page.waitForFunction(()=>window.__tla.world.phase==='playing' && window.__tla.world.fighters.slice(0,2).every(f=>f.grounded));
     const initial = await page.evaluate(()=>window.__tla.state());
     // P1/P2 isolated directions sampled using actual Controls, not physics test injection.
     await page.evaluate(()=>{window.setSimPad(3,[],[-1,0]);window.setSimPad(6,[],[1,0]);});
     await page.waitForTimeout(180);
-    const moved=await page.evaluate(()=>window.__tla.state()); results.push({case:'two simulated pads started two-human match through real menu',humans:initial.options?.humans,initial:initial.fighters.map(f=>({x:f.x,y:f.y})),moved:moved.fighters.map(f=>({x:f.x,y:f.y}))});
+    const moved=await page.evaluate(()=>window.__tla.state());
+    assert.ok(moved.fighters[0].x<initial.fighters[0].x, 'P1 must move left after countdown');
+    assert.ok(moved.fighters[1].x>initial.fighters[1].x, 'P2 must independently move right');
+    assert.equal(await page.evaluate(()=>window.__tla.world.options.humans),2);
+    results.push({case:'two simulated pads started and independently moved two humans',initial:initial.fighters.map(f=>({x:f.x,y:f.y})),moved:moved.fighters.map(f=>({x:f.x,y:f.y}))});
     await page.evaluate(()=>{window.setSimPad(3,[9]);window.setSimPad(6);});
     await page.waitForFunction(()=>window.__tla.state().paused);
     await page.evaluate(()=>window.setSimPad(3)); await page.waitForTimeout(80);
@@ -84,9 +93,13 @@ try {
     await page.evaluate(()=>window.setSimPad(8)); await page.waitForTimeout(80);
     await page.evaluate(()=>window.setSimPad(8,[1])); await page.waitForFunction(()=>!window.__tla.state().paused);
     await page.evaluate(()=>window.setSimPad(8)); await page.waitForTimeout(80);
-    await page.evaluate(()=>{window.setSimPad(8,[],[1,0]);window.dispatchEvent(new Event('blur'));});
-    await page.waitForFunction(()=>window.__tla.state().paused);
-    results.push({case:'blur pauses, cancelled held state',paused:true});
+    await page.evaluate(()=>window.setSimPad(8,[2]));
+    await page.waitForFunction(()=>window.__tla.world.fighters[0].charging);
+    const blurAmmo=await page.evaluate(()=>window.__tla.world.fighters[0].ammo);
+    await page.evaluate(()=>{window.setSimPad(8,[2],[1,0]);window.dispatchEvent(new Event('blur'));});
+    await page.waitForFunction(()=>window.__tla.state().paused && !window.__tla.world.fighters[0].charging);
+    assert.equal(await page.evaluate(()=>window.__tla.world.fighters[0].ammo),blurAmmo);
+    results.push({case:'blur pauses and cancels held draw without spending ammo',paused:true,ammo:blurAmmo});
     await page.evaluate(()=>window.dispatchEvent(new Event('focus')));
     // Pointer and persisted keyboard bindings remain available after gamepad.
     await page.getByRole('button',{name:'Controles',exact:true}).click();
