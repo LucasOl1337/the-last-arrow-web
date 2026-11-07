@@ -31,7 +31,10 @@ export async function measureRig() {
         const kit = v.character === 0 ? kits.mizu! : kits.storm!;
         kit.template.traverse((o: any) => { if (o.isMesh) original.push(o); });
         v.rig.model.traverse((o: any) => { if (o.isMesh && o.material.userData.uniforms) current.push(o); });
-        return current.map((o, i) => ({ geometryPreserved: o.geometry === original[i].geometry,
+        return current.map((o, i) => ({ geometryPreserved: ['position', 'normal', 'uv'].every(name => {
+          const a = o.geometry.getAttribute(name), b = original[i].geometry.getAttribute(name);
+          return a.count === b.count && Array.from({ length: a.count }, (_, v) => v).every(v => Array.from({ length: a.itemSize }, (_, k) => k).every(k => a.getComponent(v, k) === b.getComponent(v, k)));
+        }) && o.geometry.index.array.every((n: number, j: number) => n === original[i].geometry.index.array[j]),
           mapPreserved: o.material.map === original[i].material.map,
           tint: o.material.userData.uniforms.uTintAmount.value, roughness: o.material.roughness }));
       })(),

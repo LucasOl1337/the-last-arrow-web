@@ -4,10 +4,11 @@ import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.j
 import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { asset } from '../paths.ts';
 import { rootSpeed } from './animation.ts';
+import { bindStormOrnament } from './storm-ornament.ts';
 
 /** Clip names used by the renderer. Each model gets every one (Storm has no victory: idle stands in). */
 export type ClipName = 'idle' | 'run' | 'jump' | 'shoot' | 'fall' | 'victory';
-export interface ModelKit { template: THREE.Object3D; clips: Record<ClipName, THREE.AnimationClip>; height: number; floor: number; runSpeed: number }
+export interface ModelKit { template: THREE.Object3D; clips: Record<ClipName, THREE.AnimationClip>; height: number; floor: number; runSpeed: number; sourceSha256?: string }
 /** One kit per character id; null when that model failed (renderer picks a fallback). */
 export type CharacterKits = Record<'mizu' | 'storm' | 'kaze' | 'akane', ModelKit | null>;
 
@@ -70,8 +71,18 @@ export function loadCharacterKits(): Promise<CharacterKits> {
     const names: (keyof CharacterKits)[] = ['mizu', 'storm'];
     const results = await Promise.allSettled(names.map(async name => {
       const src = SOURCES[name];
-      const [model, ...anims] = await Promise.all([src.model, ...src.anims].map(load));
-      return buildKit(model.scene, anims.flatMap(a => a.animations));
+      // Hash the exact same bytes we parse, rather than trusting a file name or
+      // fetching an unverified second copy. Other character loading is unchanged.
+      const stormSource = name === 'storm' ? await fetch(asset(`models/${src.model}`)).then(r => {
+        if (!r.ok) throw new Error(`Modelo Storm HTTP ${r.status}`);
+        return r.arrayBuffer();
+      }) : undefined;
+      const modelLoad = stormSource ? loader.parseAsync(stormSource, asset('models/')) : load(src.model);
+      const [model, ...anims] = await Promise.all([modelLoad, ...src.anims.map(load)]);
+      const kit = buildKit(model.scene, anims.flatMap(a => a.animations));
+      // In a non-secure legacy context, keep the original asset, never guess.
+      if (stormSource && globalThis.crypto?.subtle) kit.sourceSha256 = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', stormSource)), b => b.toString(16).padStart(2, '0')).join('');
+      return kit;
     }));
     // Keep legacy fallback keys for older renderer consumers without loading retired models.
     const kits: CharacterKits = { mizu: null, storm: null, kaze: null, akane: null };
@@ -88,6 +99,7 @@ export function loadCharacterKits(): Promise<CharacterKits> {
 /** Independent skinned copy (own skeleton). Material is cloned so tint/opacity stay per fighter. */
 export function instantiate(kit: ModelKit, tint?: THREE.ColorRepresentation): THREE.Object3D {
   const copy = cloneSkinned(kit.template);
+  bindStormOrnament(copy, kit.sourceSha256);
   copy.traverse(obj => {
     const mesh = obj as THREE.Mesh;
     if (!mesh.isMesh) return;

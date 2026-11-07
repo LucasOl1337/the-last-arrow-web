@@ -21,19 +21,45 @@ const meta = { title: 'Arena/Bow sockets', render: () => {
   const markers = new THREE.Group(); arena.arena.add(markers);
   const legend = document.createElement('aside');
   legend.style.cssText = 'position:absolute;left:12px;top:12px;padding:8px;color:white;background:#101820dd;font:14px sans-serif;pointer-events:none'; host.append(legend);
-  const controls = { character: 0, mode: 'rest', angle: 0, time: 0, markerVertices: [] as number[], ready: false,
+  const controls = { character: 0, mode: 'rest', angle: 0, time: 0, markerVertices: [] as number[], ready: false, skinBefore: false,
+    /** A/B only: use the untouched cached kit geometry without changing pose/material. */
+    compareSkin(before: boolean) {
+      this.skinBefore = before;
+      let source: THREE.BufferGeometry | undefined;
+      (fighters as any).kits.storm.template.traverse((o: any) => { if (o.isSkinnedMesh) source = o.geometry; });
+      this.views()[1].rig.model.traverse((o: any) => {
+        if (!o.isSkinnedMesh) return;
+        o.userData.correctedSkin ??= o.geometry;
+        o.geometry = before ? source : o.userData.correctedSkin;
+      });
+      this.draw();
+    },
     views() { return (fighters as any).views; },
     rendererInfo() { const gl = arena.renderer.getContext(), ext = gl.getExtension('WEBGL_debug_renderer_info'); return ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER); },
     mesh() { let found: THREE.SkinnedMesh | undefined; this.views()[this.character].rig.model.traverse((o: any) => { if (o.isSkinnedMesh && o.material.userData.uniforms) found = o; }); return found!; },
     pose(character: number, mode = 'rest', angle = 0) {
       if (character !== this.character) this.markerVertices = [];
       this.character = character; this.mode = mode; this.angle = angle;
+      this.compareSkin(false);
+      world.fighters.forEach(f => Object.assign(f, { crouching: false, grounded: true, vy: 0, aimX: 1, aimY: 0, facing: 1 }));
       if (mode === 'rest') {
         for (const v of this.views()) { v.rig.mixer.stopAllAction(); v.rig.pitchBase.clear(); v.rig.model.traverse((o: any) => { if (o.isSkinnedMesh) o.skeleton.pose(); }); v.pivot.rotation.set(0, 0, 0); }
       } else {
         fighters.reset(world);
-        world.fighters.forEach(f => Object.assign(f, { charging: mode === 'hold', charge: .35 }));
+        world.fighters.forEach(f => Object.assign(f, { charging: true, charge: .35 }));
         for (let i = 0; i < 120; i++) fighters.update(world, 1, i / 60, 1 / 60);
+        if (mode === 'hold10s') for (let i = 0; i < 600; i++) fighters.update(world, 1, 2 + i / 60, 1 / 60);
+        if (mode === 'inverted') {
+          world.fighters.forEach(f => Object.assign(f, { aimX: -Math.SQRT1_2, aimY: -Math.SQRT1_2, facing: -1 }));
+          for (let i = 0; i < 120; i++) fighters.update(world, 1, 2 + i / 60, 1 / 60);
+        }
+        if (mode === 'crouch' || mode === 'jump') {
+          world.fighters.forEach(f => Object.assign(f, { crouching: mode === 'crouch', grounded: mode !== 'jump', vy: mode === 'jump' ? -5 : 0 }));
+          fighters.update(world, 1, 3, 1 / 60);
+        }
+        if (mode === 'release') {
+          world.fighters.forEach(f => { f.charging = false; fighters.event('shoot', f.id); }); fighters.update(world, 1, 3, 1 / 60);
+        }
       }
       this.draw();
     },
@@ -78,8 +104,8 @@ const meta = { title: 'Arena/Bow sockets', render: () => {
     },
     draw() {
       if (!fighters.usingModels) return;
-      this.views().forEach((v: any, i: number) => { v.root.visible = i === this.character; v.shadow.visible = false; v.backdrop.visible = false; v.nock.visible = this.mode === 'hold' && i === this.character; for (const d of v.aimDots) d.visible = false; v.aimPoint.visible = false; });
-      legend.textContent = `${this.character === 0 ? 'Mizu: arco guardado nas costas' : 'Stormy: fragmento superior separado do grip'} · ${this.mode} · ${this.markerVertices.length ? `landmarks: ${this.markerVertices.join(', ')} (não sockets funcionais)` : 'asset limpo'}`;
+      this.views().forEach((v: any, i: number) => { v.root.visible = i === this.character; v.shadow.visible = false; v.backdrop.visible = false; v.nock.visible = !['rest', 'release'].includes(this.mode) && i === this.character; for (const d of v.aimDots) d.visible = false; v.aimPoint.visible = false; });
+      legend.textContent = `${this.character === 0 ? 'Mizu: arco guardado nas costas' : 'Stormy: fragmento superior separado do grip'} · ${this.mode} · ${this.skinBefore ? 'ANTES: Middle3' : 'ATUAL: skin por instância'} · ${this.markerVertices.length ? `landmarks: ${this.markerVertices.join(', ')} (não sockets funcionais)` : 'asset limpo'}`;
       const v = this.views()[this.character], center = new THREE.Vector3(v.root.position.x, v.root.position.y + 1.2, .55);
       // Inspect from front (+X in normalized GLB), then orbit around Y; no game camera mutation.
       camera.position.copy(center).add(new THREE.Vector3(Math.cos(this.angle) * 5.4, .1, Math.sin(this.angle) * 5.4)); camera.lookAt(center);

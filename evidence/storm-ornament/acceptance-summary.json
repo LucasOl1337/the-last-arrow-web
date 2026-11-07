@@ -1,0 +1,76 @@
+{
+  "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+  "errors": [],
+  "cpuGpuHoldMax": 1.0752554413787197e-14,
+  "restErrorTiles": 3.3111068097342454e-07,
+  "outsideVertexMaxError": 0,
+  "handRelativeMaxError": 4.757794677615861e-15,
+  "pixels": {
+    "rest": {
+      "changedBoundsExcludingLegend": [
+        951,
+        95,
+        980,
+        149
+      ],
+      "changedPixelsExcludingLegend": 4
+    },
+    "hold": {
+      "changedBoundsExcludingLegend": [
+        315,
+        311,
+        607,
+        390
+      ],
+      "changedPixelsExcludingLegend": 9491,
+      "faceAndHeadIdentical": true
+    },
+    "hold10s": {
+      "changedBoundsExcludingLegend": [
+        313,
+        335,
+        608,
+        405
+      ],
+      "changedPixelsExcludingLegend": 9195,
+      "faceAndHeadIdentical": true
+    },
+    "release": {
+      "changedBoundsExcludingLegend": [
+        316,
+        310,
+        607,
+        391
+      ],
+      "changedPixelsExcludingLegend": 9490,
+      "faceAndHeadIdentical": true
+    },
+    "inverted": {
+      "changedBoundsExcludingLegend": [
+        695,
+        284,
+        743,
+        328
+      ],
+      "changedPixelsExcludingLegend": 966
+    },
+    "crouch": {
+      "changedBoundsExcludingLegend": [
+        316,
+        502,
+        608,
+        553
+      ],
+      "changedPixelsExcludingLegend": 5422
+    },
+    "jump": {
+      "changedBoundsExcludingLegend": [
+        298,
+        288,
+        608,
+        380
+      ],
+      "changedPixelsExcludingLegend": 8758
+    }
+  }
+}

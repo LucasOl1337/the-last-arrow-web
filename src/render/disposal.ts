@@ -1,8 +1,10 @@
 import * as THREE from 'three';
+import { disposeStormOrnament } from './storm-ornament.ts';
 
 /** Each cloned rig owns its skeletons; outlines may share one with the body.
- * Geometry and albedo textures belong to the cached GLB template, not the clone. */
+ * Geometry and textures belong to the kit, except the guarded Storm skin clone. */
 export function disposeSkeletons(root: THREE.Object3D) {
+  disposeStormOrnament(root);
   const skeletons = new Set<THREE.Skeleton>();
   root.traverse(object => {
     const mesh = object as THREE.SkinnedMesh;

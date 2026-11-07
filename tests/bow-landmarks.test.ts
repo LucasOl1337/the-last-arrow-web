@@ -38,12 +38,12 @@ test('verified bow landmarks keep exact asset/triangle/skin provenance and follo
     assert.deepEqual(Array.from(geometry.getAttribute('position').array),vertices);
     assert.deepEqual(Array.from(geometry.index.array),indices);
   }
-  // Exact discovered mismatch: upper Storm ornament follows middle fingertip,
-  // while Mizu's lower stowed bow follows the thigh, not the bow hand.
+  // The verified Storm fragment now follows the hand; Mizu's unchanged stowed
+  // bow still follows the thigh. Raw source weights remain in the manifest.
   const checkBone = (i: number, vertex: number, expected: string) => {
     let mesh: any; views[i].rig.model.traverse((o: any) => { if(o.isSkinnedMesh&&o.material.userData.uniforms)mesh=o; });
     const joint = mesh.geometry.getAttribute('skinIndex').getX(vertex);
     assert.equal(mesh.skeleton.bones[joint].name,expected);
   };
-  checkBone(0,1563,'mixamorigRightUpLeg'); checkBone(1,19287,'mixamorigLeftHandMiddle3');
+  checkBone(0,1563,'mixamorigRightUpLeg'); checkBone(1,19287,'mixamorigLeftHand');
 });
