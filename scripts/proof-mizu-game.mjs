@@ -11,7 +11,7 @@ const browser=await chromium.connectOverCDP(webSocketDebuggerUrl);let page,peer;
 const distance=(a,b)=>Math.hypot(...a.map((x,i)=>x-b[i]));
 try{
  for(const p of browser.contexts()[0].pages()){const s=await p.context().newCDPSession(p);const {targetInfo}=await s.send('Target.getTargetInfo');await s.detach();if(targetInfo.targetId===tab)page=p;}
- assert.ok(page);page.on('pageerror',e=>report.errors.push(e.message));await page.setViewportSize({width:1366,height:768});await page.goto(url);
+ assert.ok(page);page.on('pageerror',e=>report.errors.push(e.message));await page.setViewportSize({width:1366,height:768});await page.goto(url);await page.bringToFront();
  if(expected){report.version=await page.evaluate(()=>fetch('/version.json',{cache:'no-store'}).then(r=>r.json()));assert.equal(report.version.revision,expected);}
  await page.evaluate(()=>window.__tla.startMatch({humans:2,bots:0,map:'totem',seed:42,characters:['mizu','stormdragon']}));
  await page.waitForFunction(()=>window.__tla.diagnostics().models&&window.__tla.world.phase==='playing'&&!document.querySelector('.countdown').textContent.trim());
