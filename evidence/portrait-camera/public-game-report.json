@@ -1,0 +1,83 @@
+{
+  "base": "https://arrow.symbiose.si/",
+  "tests": [
+    "all five presets retained; B camera rebind persists across reload; C no longer toggles; near/wide indicator parity",
+    "production mouse input retains right/up world direction after camera toggles",
+    "real online match: two fighters, loaded models, authoritative peer snapshots and rebound near/wide toggle"
+  ],
+  "errors": [],
+  "ownTabsAtEnd": 1,
+  "version": {
+    "revision": "83aff6bfb2631290efbe4d58514d1a148419113e"
+  },
+  "presets": 5,
+  "viewport": {
+    "width": 360,
+    "height": 800,
+    "canvas": {
+      "x": 0,
+      "y": 224,
+      "width": 360,
+      "height": 360,
+      "top": 224,
+      "right": 360,
+      "bottom": 584,
+      "left": 0
+    },
+    "overflow": false,
+    "labels": [
+      {
+        "text": "PEGOU!P1",
+        "direction": "",
+        "rect": {
+          "x": 32.625,
+          "y": 449.234375,
+          "width": 24.46875,
+          "height": 28.1875,
+          "top": 449.234375,
+          "right": 57.09375,
+          "bottom": 477.421875,
+          "left": 32.625
+        }
+      },
+      {
+        "text": "PEGOU!→Stormy Dragon",
+        "direction": "→",
+        "rect": {
+          "x": 227,
+          "y": 441.234375,
+          "width": 127.921875,
+          "height": 36.390625,
+          "top": 441.234375,
+          "right": 354.921875,
+          "bottom": 477.625,
+          "left": 227
+        }
+      }
+    ]
+  },
+  "aim": {
+    "x": 0.7324346981184275,
+    "y": -0.6808372881916559
+  },
+  "online": {
+    "state": {
+      "room": "A067EF23",
+      "player": 0
+    },
+    "models": true,
+    "labels": [
+      {
+        "hidden": false,
+        "direction": "",
+        "text": "PEGOU!P1"
+      },
+      {
+        "hidden": false,
+        "direction": "→",
+        "text": "PEGOU!→P2"
+      }
+    ],
+    "peerSnapshots": 40
+  }
+}

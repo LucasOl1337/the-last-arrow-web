@@ -1,0 +1,37 @@
+✔ aim preview ends on the actual simulated flight, independent of charge (1.701568ms)
+✔ normal preview stops before walls; bolt preview passes and world seams stop both (0.238561ms)
+✔ close framing makes fighters 28% larger; wide preserves the arena (0.755154ms)
+✔ wrap targets clamp at the physical arena edges (0.163881ms)
+✔ vertical wrap snaps even though clamped camera displacement is under five tiles (0.241431ms)
+✔ ordinary follow eases; viewport, death and respawn reframe atomically (0.155321ms)
+✔ background drift is continuous, bounded and uses no shake state (0.150521ms)
+✔ fixed x2/x30 duel: camera-clipped rival is right, even away from the map seam (1.689139ms)
+✔ horizontal wrap reverses the camera-edge signal, not the player identity (0.242382ms)
+✔ vertical clipping and corner combine directions from the visual body bounds (0.128121ms)
+✔ legacy preset migrates mouse shot explicitly and keeps five presets (4.441133ms)
+✔ single-action binding persists across reads and restores the active preset only (2.642093ms)
+✔ conflict is explicit and atomic, including P2 and reserved escape (1.817099ms)
+✔ down/crouch intentional pairing is retained, every other action can have keyboard or mouse binding (0.329412ms)
+✔ camera and sound bindings are editable and protected from combat conflicts (2.863995ms)
+✔ corrupt stored binding falls back safely without taking P2 controls (0.252032ms)
+✔ mouse aim is continuous and independent from strafing (1.74808ms)
+✔ crouch preserves feet, reduces body and restores height on release (0.201501ms)
+✔ low ceiling blocks standing until the fighter leaves the gap (0.323121ms)
+✔ arrow at standing head passes over crouched fighter (0.473913ms)
+✔ network validates optional pointer axes and crouch, legacy still accepted (0.861394ms)
+✔ opening menu cancels drawn arrow without spending ammo (0.215701ms)
+✔ ergonomic presets are alternatives without jump/skill conflicts (0.801374ms)
+✔ input cannot inject speed, coordinates or malformed axes (1.061965ms)
+✔ two remote players share authoritative world, full rooms reject, disconnect closes room (428.58497ms)
+✔ 360x800 square close canvas is real combat area >=40%, without stretching (1.203457ms)
+✔ square near wrap/respawn reset atomically; wide still includes all32x18 (0.192021ms)
+✔ two active models with archived null keys do not report fallback; missing active still does (0.474533ms)
+✔ HUD derives ready/active/cooldown and spent ward from actual fighter state (0.470262ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 672.533953
