@@ -1,0 +1,186 @@
+[
+  {
+    "name": "idle",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "draw",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "east",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "hold10s",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "north-east-turn1",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "north-east",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "north-turn1",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "north",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "inverted-turn1",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "inverted",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "west-turn1",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "west",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "south-west-turn1",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "south-west",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "south-turn1",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "south",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "south-east-turn1",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "south-east",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "crouch",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "jump",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "release1",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "release5",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  },
+  {
+    "name": "release-ended",
+    "segments": [
+      [],
+      []
+    ],
+    "headHits": []
+  }
+]

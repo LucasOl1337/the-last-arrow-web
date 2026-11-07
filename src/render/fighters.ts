@@ -12,6 +12,8 @@ import { blob, softDot } from './textures.ts';
 import { themeForLevel } from './themes.ts';
 import { clipWindow, runTimeScale } from './animation.ts';
 import { disposeSkeletons } from './disposal.ts';
+import { EquippedMizuBow } from './equipped-mizu-bow.ts';
+import { MizuArmIK } from './mizu-arm-ik.ts';
 import { aimGuide } from './aim-guide.ts';
 import { skillVisual } from './skill-visual.ts';
 import type { SkillVisualState } from './skill-visual.ts';
@@ -53,18 +55,21 @@ interface Rig {
   model: THREE.Object3D; mixer: THREE.AnimationMixer; actions: Record<State, THREE.AnimationAction>;
   uniforms: CharacterUniforms[]; outlines: THREE.Material[]; spine1?: THREE.Object3D; spine2?: THREE.Object3D; bowHand?: THREE.Object3D;
   ghosts: { model: THREE.Object3D; bones: THREE.Object3D[]; material: THREE.MeshBasicMaterial; life: number }[];
-  bones: THREE.Object3D[]; runSpeed: number;
+  bones: THREE.Object3D[]; runSpeed: number; armIK?: MizuArmIK;
+  bowForearm?: THREE.Object3D; palmIndex?: THREE.Object3D; palmPinky?: THREE.Object3D;
   aimLegs: Record<'idle' | 'run' | 'jump' | 'fall', THREE.AnimationAction>;
   pitchBase: Map<THREE.Object3D, THREE.Quaternion>;
 }
 interface View {
   root: THREE.Group; pivot: THREE.Group; character: number; rig: Rig | null; puppet: ProceduralPuppet | null;
+  equippedBow: EquippedMizuBow | null;
   state: State; stateTime: number; yaw: number; aim: number; deathAt: number; ghostClock: number;
   wasGrounded: boolean; lastVy: number; releaseTime: number; landingTime: number;
   shadow: THREE.Mesh; halo: THREE.Mesh; backdrop: THREE.Sprite; aimDots: THREE.Mesh[]; aimPoint: THREE.Mesh; skillRing: THREE.Mesh; aimFade: number; nock: THREE.Group;
 }
 
 const tmpV = new THREE.Vector3(), tmpQ = new THREE.Quaternion(), tmpQ2 = new THREE.Quaternion(), tmpQ3 = new THREE.Quaternion(), axis = new THREE.Vector3();
+const bowForearmWorld = new THREE.Vector3(), palmWidthWorld = new THREE.Vector3(), palmIndexWorld = new THREE.Vector3();
 const dotGeometry = new THREE.PlaneGeometry(1, 1);
 const haloGeometry = new THREE.RingGeometry(0.62, 0.7, 32);
 const skillGeometry = new THREE.RingGeometry(.96, 1, 48);
@@ -117,6 +122,14 @@ export class FightersView {
         }),
         bowDirection: hand && shoulder ? hand.clone().sub(shoulder).toArray() : null,
         bowHand: hand?.toArray() ?? null,
+        equippedBow: v.equippedBow ? {
+          provenance: v.equippedBow.root.userData.provenance,
+          grip: v.equippedBow.grip.getWorldPosition(new THREE.Vector3()).toArray(),
+          upper: v.equippedBow.upperTip.getWorldPosition(new THREE.Vector3()).toArray(),
+          lower: v.equippedBow.lowerTip.getWorldPosition(new THREE.Vector3()).toArray(),
+          nock: v.equippedBow.nock.getWorldPosition(new THREE.Vector3()).toArray(),
+          visible: v.equippedBow.root.visible,
+        } : null,
         releaseTime: v.releaseTime,
         // Geometry endpoints: shaft starts at .12 - .62/2; cone tip is .48 + .12/2.
         nockTail: v.nock.visible ? v.nock.localToWorld(new THREE.Vector3(-.19, 0, 0)).toArray() : null,
@@ -131,6 +144,7 @@ export class FightersView {
   }
   private dispose(v: View) {
     this.scene.remove(v.root, v.shadow, v.nock, v.aimPoint, v.skillRing, ...v.aimDots);
+    v.equippedBow?.dispose();
     v.puppet?.dispose();
     if (v.rig) {
       v.rig.mixer.stopAllAction(); v.rig.mixer.uncacheRoot(v.rig.model);
@@ -186,7 +200,9 @@ export class FightersView {
       return { model: ghost, bones: gb, material, life: 0 };
     });
     return { model, mixer, actions, uniforms, ghosts, bones, outlines, aimLegs, pitchBase: new Map(), runSpeed: kit.runSpeed,
-      spine1: model.getObjectByName('mixamorigSpine1'), spine2: model.getObjectByName('mixamorigSpine2'), bowHand: model.getObjectByName('mixamorigLeftHand') };
+      armIK: character === 0 ? new MizuArmIK(model) : undefined,
+      spine1: model.getObjectByName('mixamorigSpine1'), spine2: model.getObjectByName('mixamorigSpine2'), bowHand: model.getObjectByName('mixamorigLeftHand'),
+      bowForearm: model.getObjectByName('mixamorigLeftForeArm'), palmIndex: model.getObjectByName('mixamorigLeftHandIndex1'), palmPinky: model.getObjectByName('mixamorigLeftHandPinky1') };
   }
   private build(f: Fighter): View {
     const color = CHARACTERS[f.character].color;
@@ -222,7 +238,9 @@ export class FightersView {
     const skillRing = new THREE.Mesh(skillGeometry, new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false }));
     skillRing.visible = false; skillRing.renderOrder = 2; this.scene.add(skillRing);
     const nock = nockedArrow(color); nock.visible = false; this.scene.add(nock);
-    const view: View = { root, pivot, character: f.character, rig, puppet, state: 'idle', stateTime: 0, yaw: f.facing > 0 ? -0.35 : -Math.PI + 0.35,
+    const equippedBow = f.character === 0 && rig?.bowHand && rig.bowForearm && rig.palmIndex && rig.palmPinky ? new EquippedMizuBow() : null;
+    if (equippedBow) this.scene.add(equippedBow.root);
+    const view: View = { root, pivot, character: f.character, rig, puppet, equippedBow, state: 'idle', stateTime: 0, yaw: f.facing > 0 ? -0.35 : -Math.PI + 0.35,
       aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, landingTime: 0, shadow, halo, backdrop, aimDots, aimPoint, skillRing, aimFade: 0, nock };
     if (rig) this.play(view, 'idle', 0);
     return view;
@@ -335,6 +353,7 @@ export class FightersView {
       legs.setEffectiveWeight(1);
       legs.setEffectiveTimeScale(name === 'run' ? runTimeScale(f.vx, rig.runSpeed, rig.model.scale.x) : 1);
     }
+    rig.armIK?.restore();
     rig.mixer.update(dt);
     for (const bone of [rig.spine1, rig.spine2]) if (bone) {
       const rotation = rig.pitchBase.get(bone) ?? new THREE.Quaternion();
@@ -356,6 +375,7 @@ export class FightersView {
         bone.quaternion.premultiply(tmpQ2.invert().multiply(tmpQ3)).normalize();
       }
     }
+    if (f.alive) rig.armIK?.apply(f.aimX,f.aimY,v.equippedBow?.pull(f.charging,f.charge,v.releaseTime) ?? 0);
     // Death: dissolve to the character colour + fake ragdoll topple.
     const dissolve = f.alive ? 0 : THREE.MathUtils.clamp((dying - 0.18) / 0.6, 0, 1);
     v.root.rotation.z = f.alive ? 0 : -Math.min(dying * 2.2, 0.9) * (f.facing > 0 ? 1 : -1);
@@ -384,6 +404,14 @@ export class FightersView {
   }
   private updateAim(v: View, f: Fighter, w: World, x: number, y: number, feet: number, dt: number) {
     const charging = f.alive && f.charging;
+    if (v.equippedBow && v.rig?.bowHand) {
+      v.rig.bowHand.getWorldPosition(tmpV);
+      v.rig.bowForearm!.getWorldPosition(bowForearmWorld);
+      v.rig.palmPinky!.getWorldPosition(palmWidthWorld);
+      v.rig.palmIndex!.getWorldPosition(palmIndexWorld);
+      palmWidthWorld.sub(tmpV); palmIndexWorld.sub(tmpV); palmWidthWorld.crossVectors(palmIndexWorld,palmWidthWorld);
+      v.equippedBow.update(tmpV, f.aimX, f.aimY, charging, f.charge, v.releaseTime, f.alive, bowForearmWorld, palmWidthWorld);
+    }
     v.nock.visible = charging;
     v.aimFade = charging ? Math.min(1, v.aimFade + dt * 18) : Math.max(0, v.aimFade - dt * 14);
     v.aimPoint.visible = charging;

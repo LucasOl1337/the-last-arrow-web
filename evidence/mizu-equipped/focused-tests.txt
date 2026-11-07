@@ -1,0 +1,33 @@
+✔ aim preview ends on the actual simulated flight, independent of charge (1.606029ms)
+✔ normal preview stops before walls; bolt preview passes and world seams stop both (0.23998ms)
+✔ long pointer hold has bounded draw state; release emits one shot and clears draw (5.400848ms)
+✔ holding pointer aim does not change strafe, crouch feet, or jump physics (0.78514ms)
+✔ cancelled hold clears state without an arrow and permits a fresh draw (0.20565ms)
+✔ actual Mizu/Storm rig: idle, draw, 10s hold, diagonal, turn, crouch, jump, release and short tap (8180.941947ms)
+✔ character rim preserves the baked texture and limits steady self-light (1.12698ms)
+✔ fallback tint and transient hit/dissolve effects remain independent per fighter (0.41536ms)
+✔ authored Mizu bow: grip/tips/string/nock across eight aims and exact rig neighbors (9896.090694ms)
+✔ SIMULATED actual Controls retains keyboard rebind, mouse hold and independent P2 without input alias (6.329998ms)
+✔ SIMULATED actual Controls polls title menu, keeps edges until online send, cancels on disconnect/blur (1.186239ms)
+✔ SIMULATED standard snapshots: TowerFall A jump, X/B shoot, all shoulders dodge; RT never shoots (1.579909ms)
+✔ SIMULATED deadzone, analogue strength and D-pad override (0.25267ms)
+✔ SIMULATED sparse physical indices map once, retain P2 on disconnect and cancel drawn shot (0.2645ms)
+✔ SIMULATED blur/reset requires neutral stick and buttons, including held Start (0.20467ms)
+✔ SIMULATED menu edges, direction repeat and deduplication across two pads (0.58962ms)
+✔ SIMULATED unknown mappings are not guessed from manufacturer id (0.15926ms)
+✔ SIMULATED disconnect cancellation reaches the unchanged sim without firing or spending an arrow (3.866029ms)
+✔ SIMULATED local P2 input never aliases outgoing online P1 intent (0.24384ms)
+✔ arm IK preserves links, torso and simulation; all fixed neighbors clear body and head (8622.899063ms)
+✔ both Mizu string segments clear the head in all eight aims and pose neighbors (7829.175727ms)
+✔ Mizu equipped string must not cross head in the exact inverted diagonal (1524.69097ms)
+✔ cadence uses each authored stride and actual horizontal model scale, with no low-speed floor (0.78141ms)
+✔ airborne clip windows have exact interpolated boundaries and independent mixer actions (1.3799ms)
+✔ Storm606: rest invariant, isolated skin clone and hand-relative stability in real production poses (5114.275963ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10045.817583

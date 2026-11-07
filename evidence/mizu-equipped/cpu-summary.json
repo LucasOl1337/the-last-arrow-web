@@ -1,0 +1,22 @@
+{
+  "time_brasilia": "2026-11-07T18:56:02.412274-03:00",
+  "tests_pass": 25,
+  "tests_fail": 0,
+  "states": 23,
+  "string_hits": 0,
+  "physics_equal": {
+    "expectedSpawn": true,
+    "spawned": true,
+    "renderedProjectiles": true,
+    "projectileNextStep": true
+  },
+  "gates_sha256": {
+    "tests/mizu-string-clearance.test.ts": "4f6e732f0f9da051e5e7425d53d286c658ca9025c01fe59a4764bf784cd69acd",
+    "tests/mizu-clearance-neighbors.test.ts": "b8d6dfbd54d42fb008abc135c398ffc11a47f4cdd1c399b52edf0fea278dd507"
+  },
+  "draw_hand_skin_nock_tolerance": ".005 tile \u00b11e-5 in23states",
+  "pose_changed": true,
+  "gpu_renderer": "NVIDIA RTX4070TiSUPER",
+  "gpu_story_accepted": true,
+  "local_public_accepted": false
+}
