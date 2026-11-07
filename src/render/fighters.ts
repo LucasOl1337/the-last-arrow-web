@@ -27,9 +27,9 @@ const LOOKS: { kit: keyof CharacterKits; fallback: keyof CharacterKits; tint: nu
   { kit: 'kaze', fallback: 'mizu', tint: 0x4f9a52, rim: 0x55ff6a },
   { kit: 'akane', fallback: 'storm', tint: 0xc4413f, rim: 0xff3b30 },
 ];
-const RIM_STRENGTH = 1.4;
-/** Lift the baked cloth without washing out the face or turning the whole body neon. */
-const SELF_LIGHT: Record<string, number> = { moss: 0.48, totem: 0.65, canopy: 0.55 };
+const RIM_STRENGTH = 0.24;
+/** Small albedo lift only; the silhouette outline already separates fighters from scenery. */
+const SELF_LIGHT: Record<string, number> = { moss: 0.12, totem: 0.16, canopy: 0.14 };
 const AIM_DOTS = 5;
 /** Clip windows (seconds). `hold` stops at `end`; `loop` wraps inside the window. */
 const WINDOWS: Record<ClipName | 'land' | 'death', { clip: ClipName; start: number; end: number; mode: 'loop' | 'hold' }> = {
@@ -308,7 +308,7 @@ export class FightersView {
     const dissolve = f.alive ? 0 : THREE.MathUtils.clamp((dying - 0.18) / 0.6, 0, 1);
     v.root.rotation.z = f.alive ? 0 : -Math.min(dying * 2.2, 0.9) * (f.facing > 0 ? 1 : -1);
     const flash = f.alive ? 0 : Math.max(0, 1 - dying * 9);
-    const protect = f.alive && f.invulnerable > 0 ? 0.35 + Math.sin(performance.now() * 0.02) * 0.25 : 0;
+    const protect = f.alive && f.invulnerable > 0 ? 0.08 + Math.sin(performance.now() * 0.02) * 0.04 : 0;
     for (const u of rig.uniforms) { u.uDissolve.value = dissolve; u.uFlash.value = flash; u.uRimStrength.value = RIM_STRENGTH + protect; }
     for (const m of rig.outlines) m.visible = f.alive;
     // Dash afterimages: snapshot the pose into a pooled ghost every 30 ms while dashing.

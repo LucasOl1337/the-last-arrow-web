@@ -11,12 +11,12 @@ export interface CharacterUniforms {
 
 export function patchCharacterMaterial(material: THREE.MeshStandardMaterial, rim: THREE.ColorRepresentation, tint?: THREE.ColorRepresentation): CharacterUniforms {
   const u: CharacterUniforms = {
-    uRim: { value: new THREE.Color(rim) }, uRimStrength: { value: 0.55 },
+    uRim: { value: new THREE.Color(rim) }, uRimStrength: { value: 0.24 },
     uTint: { value: new THREE.Color(tint ?? 0xffffff) }, uTintAmount: { value: tint === undefined ? 0 : 1 },
-    uFlash: { value: 0 }, uDissolve: { value: 0 }, uEdge: { value: new THREE.Color(rim) }, uSelf: { value: 0.22 },
+    uFlash: { value: 0 }, uDissolve: { value: 0 }, uEdge: { value: new THREE.Color(rim) }, uSelf: { value: 0.12 },
   };
   material.userData.uniforms = u;
-  material.customProgramCacheKey = () => 'tla-character';
+  material.customProgramCacheKey = () => 'tla-character-texture-rim-v2';
   material.onBeforeCompile = shader => {
     Object.assign(shader.uniforms, u);
     shader.fragmentShader = shader.fragmentShader
@@ -39,9 +39,10 @@ float tlaNoise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0
   if (tlaN < uDissolve) discard;
 #endif`)
       .replace('#include <opaque_fragment>', `
-  float tlaFres = pow(1.0 - clamp(dot(normal, normalize(vViewPosition)), 0.0, 1.0), 2.2);
+  float tlaFres = pow(1.0 - clamp(dot(normal, normalize(vViewPosition)), 0.0, 1.0), 3.5);
   outgoingLight += diffuseColor.rgb * uSelf;
-  outgoingLight += uRim * tlaFres * uRimStrength;
+  // Preserve the baked art: a narrow albedo-modulated rim, not a neon paint layer.
+  outgoingLight += uRim * diffuseColor.rgb * tlaFres * uRimStrength;
   outgoingLight = mix(outgoingLight, vec3(1.0), uFlash);
 #ifdef USE_MAP
   outgoingLight += uEdge * 4.0 * smoothstep(uDissolve + 0.08, uDissolve, tlaN) * step(0.001, uDissolve);
