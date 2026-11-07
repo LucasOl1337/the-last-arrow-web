@@ -9,11 +9,11 @@ import { stepChests } from '../src/sim/treasure.ts';
 import { measureMaps, sightline } from '../scripts/measure-map-combat.mjs';
 
 const CASES = [
-  { map:'moss', open:5, shot:[0,3], jump:[9.5,7.45,16,12.45], wrapX:16 },
-  { map:'totem', open:6, shot:[0,2], jump:[11,12.45,16,10.45], wrapX:2 },
-  { map:'canopy', open:5, shot:[1,3], jump:[8,11.45,16,10.45], wrapX:4 },
-  { map:'falls', open:5, shot:[0,3], jump:[6,12.45,16,10.45], wrapX:4 },
-  { map:'roots', open:4, shot:[0,3], jump:[11,7.45,16,12.45], wrapX:4 },
+  { map:'moss', open:5, shot:[0,3], jump:[8.5,15.45,13,12.45], wrapX:16 },
+  { map:'totem', open:6, shot:[0,2], jump:[11,12.45,14.5,10.45], wrapX:2 },
+  { map:'canopy', open:5, shot:[1,3], jump:[8,11.45,14.5,10.45], wrapX:4 },
+  { map:'falls', open:5, shot:[0,3], jump:[10,14.45,7,12.45], wrapX:4 },
+  { map:'roots', open:4, shot:[0,3], jump:[9,14.45,14.5,12.45], wrapX:4 },
 ] as const;
 
 for (const c of CASES) {
@@ -67,15 +67,23 @@ for (const c of CASES) {
 
   test(`${c.map}: fixed jump, horizontal seam and vertical drop use the real collision solver`,()=>{
     const w=createWorld({map:c.map,humans:2,bots:0}),f=w.fighters[0];
-    const [x,y]=c.jump;Object.assign(f,{x,y,vx:0,vy:0,grounded:true,wall:0});
+    const [x,y,targetX,targetY]=c.jump;Object.assign(f,{x,y,vx:0,vy:0,grounded:true,wall:0});
     const startY=f.y;let climbed=false,landed=false;
-    for(let tick=0;tick<1.5/DT;tick++) {
-      moveFighter(w,f,{...emptyIntent(),jump:tick===0,jumpHeld:true});
+    for(let tick=0;tick<2/DT;tick++) {
+      moveFighter(w,f,{...emptyIntent(),moveX:Math.abs(targetX-f.x)>.12?Math.sign(targetX-f.x):0,jump:tick===0,jumpHeld:true});
       if(f.y<startY-2)climbed=true;
       if(climbed&&f.grounded){landed=true;break;}
       assert.equal(solid(w.level,f.x,f.y),false);
     }
     assert.ok(climbed);assert.ok(landed);
+    assert.ok(Math.abs(f.y-targetY)<.01,'jump must land on the specified neighboring ledge, not return to origin');
+    assert.ok(Math.abs(f.x-targetX)<.8);
+    // Open a chest and recover a stuck arrow where the real jump landed, without teleporting.
+    w.phase='playing';w.chestTimer=12;f.ammo=0;f.inventory=[];
+    w.chests=[{id:1,x:targetX,y:targetY,reward:['normal']}];stepChests(w);
+    assert.equal(w.chests.length,0);assert.equal(f.ammo,1);
+    w.arrows=[{id:1,owner:1,x:targetX,y:targetY,vx:0,vy:0,angle:0,stuck:true,age:1,kind:'normal'}];stepArrows(w);
+    assert.equal(w.arrows.length,0);assert.equal(f.ammo,2);
     // Both ends of row zero are empty in every arena; x wraps without collision.
     Object.assign(f,{x:31.9,y:1,vx:7.8,vy:0,grounded:false,wall:0});
     for(let i=0;i<5;i++)moveFighter(w,f,{...emptyIntent(),moveX:1});

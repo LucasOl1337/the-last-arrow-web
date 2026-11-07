@@ -1,4 +1,4 @@
-✔ five 32x18 maps have safe distinct spawns and connected platform paths (0.816445ms)
+✔ five 32x18 maps have safe distinct spawns and connected platform paths (1.046376ms)
 ℹ tests 1
 ℹ suites 0
 ℹ pass 1
@@ -6,4 +6,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 109.73736
+ℹ duration_ms 126.425313

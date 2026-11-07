@@ -1,0 +1,1020 @@
+{
+  "owner": "tla-mapas-sol",
+  "pid": 3202977,
+  "baseline": "11f933a",
+  "candidate": "f144f7ce85bf2b82d97e9b1e2315e6b398e54d2c",
+  "screens": [
+    {
+      "kind": "baseline",
+      "id": "moss",
+      "path": "/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/anexos/mapas-baseline-moss.png",
+      "view": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "tick": 0,
+        "phase": "playing",
+        "countdown": 3,
+        "round": 1,
+        "roundTime": 0,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0,
+        "chests": [],
+        "chestTimer": 12,
+        "map": "moss",
+        "seed": 42,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 5,
+            "y": 15.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": true,
+            "x": 27,
+            "y": 15.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0,
+        "online": null,
+        "cameraClose": false
+      },
+      "diagnostics": {
+        "frames": 0,
+        "fps": 0,
+        "averageFrameWorkMs": 0,
+        "maxFrameWorkMs": 0,
+        "quality": {
+          "level": "normal",
+          "detectedFps": null,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": false,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 57,
+        "triangles": 203995,
+        "geometries": 34,
+        "textures": 33,
+        "programs": 33,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "baseline",
+      "id": "totem",
+      "path": "/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/anexos/mapas-baseline-totem.png",
+      "view": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "tick": 0,
+        "phase": "playing",
+        "countdown": 3,
+        "round": 1,
+        "roundTime": 0,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0,
+        "chests": [],
+        "chestTimer": 12,
+        "map": "totem",
+        "seed": 42,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 2,
+            "y": 12.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": true,
+            "x": 30,
+            "y": 12.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0,
+        "online": null,
+        "cameraClose": false
+      },
+      "diagnostics": {
+        "frames": 0,
+        "fps": 0,
+        "averageFrameWorkMs": 0,
+        "maxFrameWorkMs": 0,
+        "quality": {
+          "level": "normal",
+          "detectedFps": null,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": false,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 76,
+        "triangles": 201807,
+        "geometries": 39,
+        "textures": 36,
+        "programs": 45,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "baseline",
+      "id": "canopy",
+      "path": "/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/anexos/mapas-baseline-canopy.png",
+      "view": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "tick": 0,
+        "phase": "playing",
+        "countdown": 3,
+        "round": 1,
+        "roundTime": 0,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0,
+        "chests": [],
+        "chestTimer": 12,
+        "map": "canopy",
+        "seed": 42,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 5,
+            "y": 3.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": true,
+            "x": 27,
+            "y": 3.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0,
+        "online": null,
+        "cameraClose": false
+      },
+      "diagnostics": {
+        "frames": 0,
+        "fps": 0,
+        "averageFrameWorkMs": 0,
+        "maxFrameWorkMs": 0,
+        "quality": {
+          "level": "normal",
+          "detectedFps": null,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": false,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 89,
+        "triangles": 191595,
+        "geometries": 51,
+        "textures": 38,
+        "programs": 43,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "baseline",
+      "id": "falls",
+      "path": "/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/anexos/mapas-baseline-falls.png",
+      "view": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "tick": 0,
+        "phase": "playing",
+        "countdown": 3,
+        "round": 1,
+        "roundTime": 0,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0,
+        "chests": [],
+        "chestTimer": 12,
+        "map": "falls",
+        "seed": 42,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 4,
+            "y": 2.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": true,
+            "x": 28,
+            "y": 2.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0,
+        "online": null,
+        "cameraClose": false
+      },
+      "diagnostics": {
+        "frames": 0,
+        "fps": 0,
+        "averageFrameWorkMs": 0,
+        "maxFrameWorkMs": 0,
+        "quality": {
+          "level": "normal",
+          "detectedFps": null,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": false,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 76,
+        "triangles": 196025,
+        "geometries": 39,
+        "textures": 38,
+        "programs": 45,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "baseline",
+      "id": "roots",
+      "path": "/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/anexos/mapas-baseline-roots.png",
+      "view": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "tick": 0,
+        "phase": "playing",
+        "countdown": 3,
+        "round": 1,
+        "roundTime": 0,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0,
+        "chests": [],
+        "chestTimer": 12,
+        "map": "roots",
+        "seed": 42,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 4,
+            "y": 5.4399999999999995,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": true,
+            "x": 28,
+            "y": 5.4399999999999995,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0,
+        "online": null,
+        "cameraClose": false
+      },
+      "diagnostics": {
+        "frames": 0,
+        "fps": 0,
+        "averageFrameWorkMs": 0,
+        "maxFrameWorkMs": 0,
+        "quality": {
+          "level": "normal",
+          "detectedFps": null,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": false,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 57,
+        "triangles": 200261,
+        "geometries": 34,
+        "textures": 38,
+        "programs": 40,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "after",
+      "id": "moss",
+      "path": "/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/anexos/mapas-after-moss.png",
+      "view": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "tick": 0,
+        "phase": "playing",
+        "countdown": 3,
+        "round": 1,
+        "roundTime": 0,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0,
+        "chests": [],
+        "chestTimer": 12,
+        "map": "moss",
+        "seed": 42,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 6.5,
+            "y": 4.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": true,
+            "x": 25.5,
+            "y": 4.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0,
+        "online": null,
+        "cameraClose": false
+      },
+      "diagnostics": {
+        "frames": 0,
+        "fps": 0,
+        "averageFrameWorkMs": 0,
+        "maxFrameWorkMs": 0,
+        "quality": {
+          "level": "normal",
+          "detectedFps": null,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": false,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 57,
+        "triangles": 196979,
+        "geometries": 34,
+        "textures": 38,
+        "programs": 40,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "after",
+      "id": "totem",
+      "path": "/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/anexos/mapas-after-totem.png",
+      "view": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "tick": 0,
+        "phase": "playing",
+        "countdown": 3,
+        "round": 1,
+        "roundTime": 0,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0,
+        "chests": [],
+        "chestTimer": 12,
+        "map": "totem",
+        "seed": 42,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 2,
+            "y": 12.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": true,
+            "x": 30,
+            "y": 12.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0,
+        "online": null,
+        "cameraClose": false
+      },
+      "diagnostics": {
+        "frames": 0,
+        "fps": 0,
+        "averageFrameWorkMs": 0,
+        "maxFrameWorkMs": 0,
+        "quality": {
+          "level": "normal",
+          "detectedFps": null,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": false,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 76,
+        "triangles": 202033,
+        "geometries": 39,
+        "textures": 38,
+        "programs": 45,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "after",
+      "id": "canopy",
+      "path": "/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/anexos/mapas-after-canopy.png",
+      "view": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "tick": 0,
+        "phase": "playing",
+        "countdown": 3,
+        "round": 1,
+        "roundTime": 0,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0,
+        "chests": [],
+        "chestTimer": 12,
+        "map": "canopy",
+        "seed": 42,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 4,
+            "y": 3.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": true,
+            "x": 27,
+            "y": 5.4399999999999995,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0,
+        "online": null,
+        "cameraClose": false
+      },
+      "diagnostics": {
+        "frames": 0,
+        "fps": 0,
+        "averageFrameWorkMs": 0,
+        "maxFrameWorkMs": 0,
+        "quality": {
+          "level": "normal",
+          "detectedFps": null,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": false,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 86,
+        "triangles": 189539,
+        "geometries": 48,
+        "textures": 38,
+        "programs": 43,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "after",
+      "id": "falls",
+      "path": "/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/anexos/mapas-after-falls.png",
+      "view": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "tick": 0,
+        "phase": "playing",
+        "countdown": 3,
+        "round": 1,
+        "roundTime": 0,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0,
+        "chests": [],
+        "chestTimer": 12,
+        "map": "falls",
+        "seed": 42,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 6.5,
+            "y": 2.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": true,
+            "x": 25.5,
+            "y": 2.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0,
+        "online": null,
+        "cameraClose": false
+      },
+      "diagnostics": {
+        "frames": 0,
+        "fps": 0,
+        "averageFrameWorkMs": 0,
+        "maxFrameWorkMs": 0,
+        "quality": {
+          "level": "normal",
+          "detectedFps": null,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": false,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 73,
+        "triangles": 194425,
+        "geometries": 36,
+        "textures": 38,
+        "programs": 45,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "kind": "after",
+      "id": "roots",
+      "path": "/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/anexos/mapas-after-roots.png",
+      "view": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "tick": 0,
+        "phase": "playing",
+        "countdown": 3,
+        "round": 1,
+        "roundTime": 0,
+        "winner": null,
+        "mode": "versus",
+        "matchTime": 0,
+        "chests": [],
+        "chestTimer": 12,
+        "map": "roots",
+        "seed": 42,
+        "fighters": [
+          {
+            "id": 0,
+            "name": "Mizu",
+            "human": true,
+            "x": 4,
+            "y": 5.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          },
+          {
+            "id": 1,
+            "name": "Stormdragon",
+            "human": true,
+            "x": 28,
+            "y": 5.44,
+            "vx": 0,
+            "vy": 0,
+            "alive": true,
+            "respawnAt": null,
+            "ammo": 3,
+            "score": 0,
+            "kills": 0,
+            "grounded": false,
+            "invulnerable": 1,
+            "inventory": [
+              "normal",
+              "normal",
+              "normal"
+            ]
+          }
+        ],
+        "arrows": [],
+        "events": [],
+        "paused": false,
+        "timeScale": 0,
+        "online": null,
+        "cameraClose": false
+      },
+      "diagnostics": {
+        "frames": 0,
+        "fps": 0,
+        "averageFrameWorkMs": 0,
+        "maxFrameWorkMs": 0,
+        "quality": {
+          "level": "normal",
+          "detectedFps": null,
+          "sampleSeconds": 0,
+          "sampleFrames": 0,
+          "decided": false,
+          "bloom": true,
+          "pixelRatio": 1,
+          "particles": {
+            "dots": 500,
+            "leaves": 160
+          }
+        },
+        "drawCalls": 57,
+        "triangles": 195441,
+        "geometries": 34,
+        "textures": 38,
+        "programs": 40,
+        "models": true,
+        "modelError": null,
+        "audioFailures": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  ],
+  "errors": [],
+  "ownPagesAtEnd": 0
+}
