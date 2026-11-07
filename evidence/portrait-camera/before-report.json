@@ -1,0 +1,953 @@
+{
+  "mode": "before",
+  "cases": [
+    {
+      "width": 1366,
+      "height": 768,
+      "close": true,
+      "metrics": {
+        "canvas": {
+          "x": 0.328125,
+          "y": 0,
+          "width": 1365.328125,
+          "height": 767.984375,
+          "top": 0,
+          "right": 1365.65625,
+          "bottom": 767.984375,
+          "left": 0.328125
+        },
+        "arenaProjectedFraction": 0.9994878091714393,
+        "scaleRatio": 1.0002607349721377,
+        "camera": [
+          13.468933105468748,
+          7.578124999999999,
+          28.281947526107896
+        ],
+        "aspect": 1.77734375,
+        "bodies": [
+          {
+            "head": {
+              "x": 89.09736980803103,
+              "y": 548.5218737799481
+            },
+            "feet": {
+              "x": 89.09736980803103,
+              "y": 672.7684805282277
+            },
+            "heightPx": 124.24660674827953,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "fontPx": 13.66,
+              "inside": true
+            },
+            "overlaps": []
+          },
+          {
+            "head": {
+              "x": 1539.0190619526886,
+              "y": 548.5218737799481
+            },
+            "feet": {
+              "x": 1539.0190619526886,
+              "y": 672.7684805282277
+            },
+            "heightPx": 124.24660674827953,
+            "fullyVisible": false,
+            "marker": {
+              "text": "→",
+              "visible": true,
+              "fontPx": 13.66,
+              "inside": true
+            },
+            "overlaps": []
+          }
+        ],
+        "located": 2,
+        "hud": [
+          {
+            "class": "scoreboard",
+            "rect": {
+              "x": 501.7109375,
+              "y": 11.515625,
+              "width": 362.546875,
+              "height": 69,
+              "top": 11.515625,
+              "right": 864.2578125,
+              "bottom": 80.515625,
+              "left": 501.7109375
+            },
+            "font": 16,
+            "visible": true
+          },
+          {
+            "class": "arena-footer",
+            "rect": {
+              "x": 0.328125,
+              "y": 746.78125,
+              "width": 1365.328125,
+              "height": 12,
+              "top": 746.78125,
+              "right": 1365.65625,
+              "bottom": 758.78125,
+              "left": 0.328125
+            },
+            "font": 10,
+            "visible": true
+          },
+          {
+            "class": "mute-toggle",
+            "rect": {
+              "x": 1293.90625,
+              "y": 738.3125,
+              "width": 58.109375,
+              "height": 22,
+              "top": 738.3125,
+              "right": 1352.015625,
+              "bottom": 760.3125,
+              "left": 1293.90625
+            },
+            "font": 11,
+            "visible": true
+          },
+          {
+            "class": "camera-toggle",
+            "rect": {
+              "x": 13.96875,
+              "y": 732.3125,
+              "width": 106.375,
+              "height": 28,
+              "top": 732.3125,
+              "right": 120.34375,
+              "bottom": 760.3125,
+              "left": 13.96875
+            },
+            "font": 11,
+            "visible": true
+          }
+        ],
+        "hudOverlaps": [
+          [
+            "arena-footer",
+            "mute-toggle"
+          ],
+          [
+            "arena-footer",
+            "camera-toggle"
+          ]
+        ]
+      },
+      "areaPass": true,
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 0,
+          "principal_fracao": 0.999,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 768,
+          "largura": 1366,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      }
+    },
+    {
+      "width": 1366,
+      "height": 768,
+      "close": false,
+      "metrics": {
+        "canvas": {
+          "x": 0.328125,
+          "y": 0,
+          "width": 1365.328125,
+          "height": 767.984375,
+          "top": 0,
+          "right": 1365.65625,
+          "bottom": 767.984375,
+          "left": 0.328125
+        },
+        "arenaProjectedFraction": 0.8899013746853796,
+        "scaleRatio": 1.0002607349721326,
+        "camera": [
+          16,
+          9,
+          36.20089283341811
+        ],
+        "aspect": 1.77734375,
+        "bodies": [
+          {
+            "head": {
+              "x": 119.28924349351979,
+              "y": 569.1605892240655
+            },
+            "feet": {
+              "x": 119.28924349351979,
+              "y": 665.7701901235779
+            },
+            "heightPx": 96.60960089951243,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "fontPx": 13.66,
+              "inside": true
+            },
+            "overlaps": []
+          },
+          {
+            "head": {
+              "x": 1246.6951315064803,
+              "y": 569.1605892240655
+            },
+            "feet": {
+              "x": 1246.6951315064803,
+              "y": 665.7701901235779
+            },
+            "heightPx": 96.60960089951243,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "fontPx": 13.66,
+              "inside": true
+            },
+            "overlaps": []
+          }
+        ],
+        "located": 2,
+        "hud": [
+          {
+            "class": "scoreboard",
+            "rect": {
+              "x": 501.7109375,
+              "y": 11.515625,
+              "width": 362.546875,
+              "height": 69,
+              "top": 11.515625,
+              "right": 864.2578125,
+              "bottom": 80.515625,
+              "left": 501.7109375
+            },
+            "font": 16,
+            "visible": true
+          },
+          {
+            "class": "arena-footer",
+            "rect": {
+              "x": 0.328125,
+              "y": 746.78125,
+              "width": 1365.328125,
+              "height": 12,
+              "top": 746.78125,
+              "right": 1365.65625,
+              "bottom": 758.78125,
+              "left": 0.328125
+            },
+            "font": 10,
+            "visible": true
+          },
+          {
+            "class": "mute-toggle",
+            "rect": {
+              "x": 1293.90625,
+              "y": 738.3125,
+              "width": 58.109375,
+              "height": 22,
+              "top": 738.3125,
+              "right": 1352.015625,
+              "bottom": 760.3125,
+              "left": 1293.90625
+            },
+            "font": 11,
+            "visible": true
+          },
+          {
+            "class": "camera-toggle",
+            "rect": {
+              "x": 13.96875,
+              "y": 732.3125,
+              "width": 96.609375,
+              "height": 28,
+              "top": 732.3125,
+              "right": 110.578125,
+              "bottom": 760.3125,
+              "left": 13.96875
+            },
+            "font": 11,
+            "visible": true
+          }
+        ],
+        "hudOverlaps": [
+          [
+            "arena-footer",
+            "mute-toggle"
+          ],
+          [
+            "arena-footer",
+            "camera-toggle"
+          ]
+        ]
+      },
+      "areaPass": true,
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 0,
+          "principal_fracao": 0.999,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 768,
+          "largura": 1366,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      }
+    },
+    {
+      "width": 900,
+      "height": 1000,
+      "close": true,
+      "metrics": {
+        "canvas": {
+          "x": 0,
+          "y": 246.875,
+          "width": 900,
+          "height": 506.25,
+          "top": 246.875,
+          "right": 900,
+          "bottom": 753.125,
+          "left": 0
+        },
+        "arenaProjectedFraction": 0.50625,
+        "scaleRatio": 0.9995061728395068,
+        "camera": [
+          13.478878458498022,
+          7.578124999999999,
+          28.281947526107896
+        ],
+        "aspect": 1.7786561264822134,
+        "bodies": [
+          {
+            "head": {
+              "x": 58.46473435813937,
+              "y": 608.4568337464207
+            },
+            "feet": {
+              "x": 58.46473435813937,
+              "y": 690.3593394664315
+            },
+            "heightPx": 81.90250572001082,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "fontPx": 11,
+              "inside": true
+            },
+            "overlaps": []
+          },
+          {
+            "head": {
+              "x": 1013.5221014701675,
+              "y": 608.4568337464207
+            },
+            "feet": {
+              "x": 1013.5221014701675,
+              "y": 690.3593394664315
+            },
+            "heightPx": 81.90250572001082,
+            "fullyVisible": false,
+            "marker": {
+              "text": "→",
+              "visible": true,
+              "fontPx": 12,
+              "inside": true
+            },
+            "overlaps": []
+          }
+        ],
+        "located": 2,
+        "hud": [
+          {
+            "class": "scoreboard",
+            "rect": {
+              "x": 286.1171875,
+              "y": 254.46875,
+              "width": 327.765625,
+              "height": 64,
+              "top": 254.46875,
+              "right": 613.8828125,
+              "bottom": 318.46875,
+              "left": 286.1171875
+            },
+            "font": 16,
+            "visible": true
+          },
+          {
+            "class": "arena-footer",
+            "rect": {
+              "x": 0,
+              "y": 735.0625,
+              "width": 900,
+              "height": 12,
+              "top": 735.0625,
+              "right": 900,
+              "bottom": 747.0625,
+              "left": 0
+            },
+            "font": 10,
+            "visible": true
+          },
+          {
+            "class": "mute-toggle",
+            "rect": {
+              "x": 832.890625,
+              "y": 726.0625,
+              "width": 58.109375,
+              "height": 22,
+              "top": 726.0625,
+              "right": 891,
+              "bottom": 748.0625,
+              "left": 832.890625
+            },
+            "font": 11,
+            "visible": true
+          },
+          {
+            "class": "camera-toggle",
+            "rect": {
+              "x": 9,
+              "y": 720.0625,
+              "width": 106.375,
+              "height": 28,
+              "top": 720.0625,
+              "right": 115.375,
+              "bottom": 748.0625,
+              "left": 9
+            },
+            "font": 11,
+            "visible": true
+          }
+        ],
+        "hudOverlaps": [
+          [
+            "arena-footer",
+            "mute-toggle"
+          ],
+          [
+            "arena-footer",
+            "camera-toggle"
+          ]
+        ]
+      },
+      "areaPass": true,
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 247,
+          "principal_fracao": 0.506,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 1000,
+          "largura": 900,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      }
+    },
+    {
+      "width": 900,
+      "height": 1000,
+      "close": false,
+      "metrics": {
+        "canvas": {
+          "x": 0,
+          "y": 246.875,
+          "width": 900,
+          "height": 506.25,
+          "top": 246.875,
+          "right": 900,
+          "bottom": 753.125,
+          "left": 0
+        },
+        "arenaProjectedFraction": 0.4504108577958805,
+        "scaleRatio": 0.9995061728395054,
+        "camera": [
+          16,
+          9,
+          36.20089283341811
+        ],
+        "aspect": 1.7786561264822134,
+        "bodies": [
+          {
+            "head": {
+              "x": 78.69122349649254,
+              "y": 622.0617325356498
+            },
+            "feet": {
+              "x": 78.69122349649254,
+              "y": 685.7461147281626
+            },
+            "heightPx": 63.684382192512885,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "fontPx": 11,
+              "inside": true
+            },
+            "overlaps": []
+          },
+          {
+            "head": {
+              "x": 821.3087765035075,
+              "y": 622.0617325356498
+            },
+            "feet": {
+              "x": 821.3087765035075,
+              "y": 685.7461147281626
+            },
+            "heightPx": 63.684382192512885,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "fontPx": 11,
+              "inside": true
+            },
+            "overlaps": []
+          }
+        ],
+        "located": 2,
+        "hud": [
+          {
+            "class": "scoreboard",
+            "rect": {
+              "x": 286.1171875,
+              "y": 254.46875,
+              "width": 327.765625,
+              "height": 64,
+              "top": 254.46875,
+              "right": 613.8828125,
+              "bottom": 318.46875,
+              "left": 286.1171875
+            },
+            "font": 16,
+            "visible": true
+          },
+          {
+            "class": "arena-footer",
+            "rect": {
+              "x": 0,
+              "y": 735.0625,
+              "width": 900,
+              "height": 12,
+              "top": 735.0625,
+              "right": 900,
+              "bottom": 747.0625,
+              "left": 0
+            },
+            "font": 10,
+            "visible": true
+          },
+          {
+            "class": "mute-toggle",
+            "rect": {
+              "x": 832.890625,
+              "y": 726.0625,
+              "width": 58.109375,
+              "height": 22,
+              "top": 726.0625,
+              "right": 891,
+              "bottom": 748.0625,
+              "left": 832.890625
+            },
+            "font": 11,
+            "visible": true
+          },
+          {
+            "class": "camera-toggle",
+            "rect": {
+              "x": 9,
+              "y": 720.0625,
+              "width": 96.609375,
+              "height": 28,
+              "top": 720.0625,
+              "right": 105.609375,
+              "bottom": 748.0625,
+              "left": 9
+            },
+            "font": 11,
+            "visible": true
+          }
+        ],
+        "hudOverlaps": [
+          [
+            "arena-footer",
+            "mute-toggle"
+          ],
+          [
+            "arena-footer",
+            "camera-toggle"
+          ]
+        ]
+      },
+      "areaPass": true,
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 247,
+          "principal_fracao": 0.506,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 1000,
+          "largura": 900,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      }
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "close": true,
+      "metrics": {
+        "canvas": {
+          "x": 0,
+          "y": 298.75,
+          "width": 360,
+          "height": 202.5,
+          "top": 298.75,
+          "right": 360,
+          "bottom": 501.25,
+          "left": 0
+        },
+        "arenaProjectedFraction": 0.253125,
+        "scaleRatio": 1.0024691358024702,
+        "camera": [
+          13.439039408866995,
+          7.578124999999999,
+          28.281947526107896
+        ],
+        "aspect": 1.7733990147783252,
+        "bodies": [
+          {
+            "head": {
+              "x": 23.466785106929823,
+              "y": 443.38273349856826
+            },
+            "feet": {
+              "x": 23.466785106929823,
+              "y": 476.1437357865726
+            },
+            "heightPx": 32.76100228800436,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "fontPx": 11,
+              "inside": true
+            },
+            "overlaps": []
+          },
+          {
+            "head": {
+              "x": 406.6222110431782,
+              "y": 443.38273349856826
+            },
+            "feet": {
+              "x": 406.6222110431782,
+              "y": 476.1437357865726
+            },
+            "heightPx": 32.76100228800436,
+            "fullyVisible": false,
+            "marker": {
+              "text": "→",
+              "visible": true,
+              "fontPx": 12,
+              "inside": true
+            },
+            "overlaps": []
+          }
+        ],
+        "located": 2,
+        "hud": [
+          {
+            "class": "scoreboard",
+            "rect": {
+              "x": 7.203125,
+              "y": 301.78125,
+              "width": 345.59375,
+              "height": 50,
+              "top": 301.78125,
+              "right": 352.796875,
+              "bottom": 351.78125,
+              "left": 7.203125
+            },
+            "font": 16,
+            "visible": true
+          },
+          {
+            "class": "arena-footer",
+            "rect": {
+              "x": 0,
+              "y": 489.828125,
+              "width": 360,
+              "height": 9,
+              "top": 489.828125,
+              "right": 360,
+              "bottom": 498.828125,
+              "left": 0
+            },
+            "font": 7,
+            "visible": true
+          },
+          {
+            "class": "mute-toggle",
+            "rect": {
+              "x": 298.296875,
+              "y": 477.234375,
+              "width": 58.109375,
+              "height": 22,
+              "top": 477.234375,
+              "right": 356.40625,
+              "bottom": 499.234375,
+              "left": 298.296875
+            },
+            "font": 11,
+            "visible": true
+          },
+          {
+            "class": "camera-toggle",
+            "rect": {
+              "x": 3.59375,
+              "y": 471.234375,
+              "width": 106.375,
+              "height": 28,
+              "top": 471.234375,
+              "right": 109.96875,
+              "bottom": 499.234375,
+              "left": 3.59375
+            },
+            "font": 11,
+            "visible": true
+          }
+        ],
+        "hudOverlaps": [
+          [
+            "arena-footer",
+            "mute-toggle"
+          ],
+          [
+            "arena-footer",
+            "camera-toggle"
+          ]
+        ]
+      },
+      "areaPass": false,
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 299,
+          "principal_fracao": 0.253,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 800,
+          "largura": 360,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [
+          "b. objeto principal ocupa 25% da janela (mínimo 40%)"
+        ],
+        "passou": false
+      }
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "close": false,
+      "metrics": {
+        "canvas": {
+          "x": 0,
+          "y": 298.75,
+          "width": 360,
+          "height": 202.5,
+          "top": 298.75,
+          "right": 360,
+          "bottom": 501.25,
+          "left": 0
+        },
+        "arenaProjectedFraction": 0.22587303392431757,
+        "scaleRatio": 1.0024691358024707,
+        "camera": [
+          16,
+          9,
+          36.20089283341811
+        ],
+        "aspect": 1.7733990147783252,
+        "bodies": [
+          {
+            "head": {
+              "x": 31.036202311833993,
+              "y": 448.8246930142599
+            },
+            "feet": {
+              "x": 31.036202311833993,
+              "y": 474.29844589126503
+            },
+            "heightPx": 25.473752877005154,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "fontPx": 11,
+              "inside": true
+            },
+            "overlaps": []
+          },
+          {
+            "head": {
+              "x": 328.96379768816604,
+              "y": 448.8246930142599
+            },
+            "feet": {
+              "x": 328.96379768816604,
+              "y": 474.29844589126503
+            },
+            "heightPx": 25.473752877005154,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "fontPx": 11,
+              "inside": true
+            },
+            "overlaps": []
+          }
+        ],
+        "located": 2,
+        "hud": [
+          {
+            "class": "scoreboard",
+            "rect": {
+              "x": 7.203125,
+              "y": 301.78125,
+              "width": 345.59375,
+              "height": 50,
+              "top": 301.78125,
+              "right": 352.796875,
+              "bottom": 351.78125,
+              "left": 7.203125
+            },
+            "font": 16,
+            "visible": true
+          },
+          {
+            "class": "arena-footer",
+            "rect": {
+              "x": 0,
+              "y": 489.828125,
+              "width": 360,
+              "height": 9,
+              "top": 489.828125,
+              "right": 360,
+              "bottom": 498.828125,
+              "left": 0
+            },
+            "font": 7,
+            "visible": true
+          },
+          {
+            "class": "mute-toggle",
+            "rect": {
+              "x": 298.296875,
+              "y": 477.234375,
+              "width": 58.109375,
+              "height": 22,
+              "top": 477.234375,
+              "right": 356.40625,
+              "bottom": 499.234375,
+              "left": 298.296875
+            },
+            "font": 11,
+            "visible": true
+          },
+          {
+            "class": "camera-toggle",
+            "rect": {
+              "x": 3.59375,
+              "y": 471.234375,
+              "width": 96.609375,
+              "height": 28,
+              "top": 471.234375,
+              "right": 100.203125,
+              "bottom": 499.234375,
+              "left": 3.59375
+            },
+            "font": 11,
+            "visible": true
+          }
+        ],
+        "hudOverlaps": [
+          [
+            "arena-footer",
+            "mute-toggle"
+          ],
+          [
+            "arena-footer",
+            "camera-toggle"
+          ]
+        ]
+      },
+      "areaPass": false,
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 299,
+          "principal_fracao": 0.253,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 800,
+          "largura": 360,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [
+          "b. objeto principal ocupa 25% da janela (mínimo 40%)"
+        ],
+        "passou": false
+      }
+    }
+  ],
+  "errors": [],
+  "ownTabsAtEnd": 1
+}

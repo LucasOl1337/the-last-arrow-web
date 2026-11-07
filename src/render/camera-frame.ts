@@ -2,7 +2,11 @@
 export const CLOSE_CAMERA_SCALE = 1.28;
 export function cameraFrame(aspect: number, close: boolean, target?: { x: number; y: number }) {
   aspect = Number.isFinite(aspect) && aspect > 0 ? aspect : 16 / 9;
-  const height = Math.max(19.4, 33.8 / aspect) / (close ? CLOSE_CAMERA_SCALE : 1);
+  // Compact near views fit the combat height, not the full arena width. Wide
+  // remains an honest whole-arena overview; do not stretch art to fill a portrait.
+  const height = close && aspect <= 1
+    ? 19.4 / CLOSE_CAMERA_SCALE
+    : Math.max(19.4, 33.8 / aspect) / (close ? CLOSE_CAMERA_SCALE : 1);
   const width = height * aspect;
   const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
   return { height, width,

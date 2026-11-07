@@ -141,7 +141,12 @@ export class ArenaScene {
   }
   setLowQuality() {
     this.bloomEnabled = false; this.lowQuality = true;
-    this.resize(this.canvas.clientWidth, this.canvas.clientHeight);
+    this.resizeToCanvas();
+  }
+  /** Preserve CSS subpixel dimensions so projection and pointer use the exact same viewport. */
+  resizeToCanvas() {
+    const rect = this.canvas.getBoundingClientRect();
+    this.resize(rect.width, rect.height);
   }
   resize(width: number, height: number) {
     if (width <= 0 || height <= 0) return; // hidden/minimized containers must not poison the camera matrix

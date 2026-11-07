@@ -1,0 +1,23 @@
+{
+  "portrait": {
+    "coarse": true,
+    "canvas": "hidden",
+    "notice": "flex",
+    "text": "↻Gire o celularJogue com a tela deitada.A partida espera por você."
+  },
+  "landscape": {
+    "notice": "none",
+    "canvas": {
+      "x": 80,
+      "y": 0,
+      "width": 640,
+      "height": 360,
+      "top": 0,
+      "right": 720,
+      "bottom": 360,
+      "left": 80
+    },
+    "stick": "block",
+    "buttons": "flex"
+  }
+}

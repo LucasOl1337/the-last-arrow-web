@@ -199,11 +199,15 @@ export class Hud {
     const cameraButton = this.element.parentElement?.querySelector<HTMLElement>('.camera-toggle');
     if (cameraButton) blocked.push(rect(cameraButton));
     if (!this.qualityNotice.hidden) blocked.push(rect(this.qualityNotice));
+    // Portrait HUD rails live outside the canvas. Project and clamp labels to
+    // the rendered viewport, not the larger HUD container that includes those rails.
+    const canvas = this.element.parentElement?.querySelector('canvas');
+    const view = canvas ? rect(canvas) : { x: 0, y: 0, width: area.width, height: area.height };
     const measured = anchors.map(a => ({ ...a, width: a.overhead.root.offsetWidth, height: a.overhead.root.offsetHeight }));
     for (const a of measured) {
-      const clampY = (y: number) => THREE.MathUtils.clamp(y, gap, area.height - a.height - gap);
-      const x = THREE.MathUtils.clamp(a.x * area.width - a.width / 2, gap, area.width - a.width - gap);
-      const idealY = clampY(a.y * area.height - a.height);
+      const clampY = (y: number) => THREE.MathUtils.clamp(y, view.y + gap, view.y + view.height - a.height - gap);
+      const x = THREE.MathUtils.clamp(view.x + a.x * view.width - a.width / 2, view.x + gap, view.x + view.width - a.width - gap);
+      const idealY = clampY(view.y + a.y * view.height - a.height);
       const relevant = blocked.filter(b => x < b.x + b.width + gap && x + a.width + gap > b.x);
       // Candidate lanes immediately above/below occupied rects, nearest the actual head first.
       const candidates = [idealY, gap, ...relevant.flatMap(b => [b.y - a.height - gap, b.y + b.height + gap])]

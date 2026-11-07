@@ -5,12 +5,13 @@ import assert from 'node:assert/strict';
 const out=process.env.TLA_EVIDENCE??'/home/lol/.hermes/despachos/1107-082604-melhorias-do-last-arrow/camera-evidencias';
 const base=process.env.TLA_URL??'http://127.0.0.1:5190/the-last-arrow-web/';
 const label=base.startsWith('https')?'public':'local';
+const [viewportWidth,viewportHeight]=(process.env.TLA_VIEWPORT??'1366x768').split('x').map(Number);
 const browser=await chromium.connectOverCDP(process.env.TLA_CDP??'http://127.0.0.1:19080');
 let page,peer;const report={base,tests:[],errors:[],ownTabsAtEnd:null};
 try {
   for(const p of browser.contexts()[0].pages()){const s=await p.context().newCDPSession(p);const {targetInfo}=await s.send('Target.getTargetInfo');await s.detach();if(targetInfo.targetId===process.env.TLA_TAB)page=p;}
   assert.ok(page);await appendFile(`${out}/web-events.ndjson`,JSON.stringify({pid:process.pid,mission:'camera-continua',tab:process.env.TLA_TAB,action:'attach-game',label})+'\n');
-  page.on('pageerror',e=>report.errors.push(e.message));await page.setViewportSize({width:1366,height:768});await page.goto(base);
+  page.on('pageerror',e=>report.errors.push(e.message));await page.setViewportSize({width:viewportWidth,height:viewportHeight});await page.goto(base);
   if(label==='public') {
     report.version=await page.evaluate(()=>fetch('/version.json',{cache:'no-store'}).then(r=>r.json()));
     if(process.env.TLA_EXPECTED_SHA)assert.equal(report.version.revision,process.env.TLA_EXPECTED_SHA);
@@ -27,6 +28,8 @@ try {
   await page.evaluate(()=>{window.__tla.setTimeScale(0);window.__tla.world.fighters.forEach((f,i)=>Object.assign(f,{x:i?30:2,prevX:i?30:2,y:15.45,prevY:15.45,invulnerable:100,grounded:true}));});
   await page.waitForFunction(()=>document.querySelectorAll('.overhead')[1]?.dataset.direction==='→');
   await page.waitForFunction(()=>!document.querySelector('.countdown').textContent.trim());
+  report.viewport=await page.evaluate(()=>({width:innerWidth,height:innerHeight,canvas:document.querySelector('#game canvas').getBoundingClientRect().toJSON(),overflow:document.documentElement.scrollWidth>innerWidth,labels:[...document.querySelectorAll('.overhead')].map(e=>({text:e.textContent,direction:e.dataset.direction,rect:e.getBoundingClientRect().toJSON()}))}));
+  assert.equal(report.viewport.overflow,false);
   await page.screenshot({path:`${out}/${label}-game-close.png`});
   await page.keyboard.press('b');await page.waitForFunction(()=>!window.__tla.state().cameraClose);
   await page.waitForFunction(()=>document.querySelectorAll('.overhead')[1]?.dataset.direction==='');
