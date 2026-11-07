@@ -11,7 +11,8 @@ import { buildTerrain } from './terrain.ts';
 import type { TerrainBuild } from './terrain.ts';
 import { blurredBackground, mist, ray } from './textures.ts';
 import { lowPixelRatio } from './quality.ts';
-import { cameraFrame } from './camera-frame.ts';
+import { cameraFrame, followCamera, backgroundMotion } from './camera-frame.ts';
+import type { CameraFollow } from './camera-frame.ts';
 
 /** Peak camera push-in during the kill slow-motion. */
 const ZOOM = 0.05;
@@ -29,6 +30,8 @@ export class ArenaScene {
   private rays: THREE.Mesh[] = [];
   private stone: THREE.Texture;
   private baseZ = 38;
+  private followState: CameraFollow | undefined;
+  private backgroundOffset = new THREE.Vector2();
   closeCamera = false;
   cameraTarget: { x: number; y: number } | undefined;
   private lowQuality = false;
@@ -123,6 +126,7 @@ export class ArenaScene {
     this.bloom.strength = theme.bloom.strength; this.bloom.threshold = theme.bloom.threshold; this.bloom.radius = theme.bloom.radius;
   }
   setLevel(level: Level) {
+    this.followState = undefined; this.backgroundOffset.set(0, 0);
     this.terrain?.dispose(); if (this.terrain) this.arena.remove(this.terrain.group);
     this.applyTheme(themeForLevel(level));
     this.terrain = buildTerrain(level, this.theme, this.stone);
@@ -144,7 +148,8 @@ export class ArenaScene {
     if (this.lowQuality) this.renderer.setPixelRatio(lowPixelRatio(devicePixelRatio, width, height));
     this.renderer.setSize(width, height, false); this.camera.aspect = width / height;
     this.baseZ = Math.max(19.4, 33.8 / this.camera.aspect) / (2 * Math.tan(THREE.MathUtils.degToRad(15)));
-    this.camera.position.z = this.baseZ; this.camera.updateProjectionMatrix();
+    // draw() applies the close/wide distance atomically with the new framing.
+    this.followState = undefined; this.camera.updateProjectionMatrix();
     const ratio = this.renderer.getPixelRatio();
     this.composer.setPixelRatio(ratio); this.composer.setSize(width, height);
     // Bloom at half resolution is visually identical here and much cheaper.
@@ -159,17 +164,20 @@ export class ArenaScene {
     const k = ZOOM * zoom;
     const frame = cameraFrame(this.camera.aspect, this.closeCamera, this.cameraTarget);
     const fx = focus ? THREE.MathUtils.clamp(focus.x - frame.x, -16, 16) * k : 0, fy = focus ? THREE.MathUtils.clamp(focus.y - frame.y, -9, 9) * k : 0;
-    // Exponential, time-based follow; snap at wrap so the player never crosses an invisible camera gap.
+    // Track the raw target, not clamped frame displacement: vertical wraps can move the frame <5 tiles.
     const dt = Math.min(.05, Math.max(0, time - (this.camera.userData.lastTime ?? time)));
     this.camera.userData.lastTime = time;
-    const weight = 1 - Math.exp(-dt * 14);
-    const follow = (current: number, target: number) => Math.abs(current - target) > 5 ? target : THREE.MathUtils.lerp(current, target, weight);
+    this.followState = followCamera(this.followState, this.camera.aspect, this.closeCamera, this.cameraTarget, dt);
     const z = this.closeCamera ? frame.height / (2 * Math.tan(THREE.MathUtils.degToRad(15))) : this.baseZ;
-    this.camera.position.set(follow(this.camera.position.x, frame.x) + sx + fx, follow(this.camera.position.y, frame.y) + sy + fy, z * (1 - k));
-    // Parallax: far layers move less than the camera sway (+ a slow idle drift).
+    this.camera.position.set(this.followState.x + sx + fx, this.followState.y + sy + fy, z * (1 - k));
+    // Slow, bounded parallax follows clean camera motion, not shake/impact. Ease seams/respawns too.
+    const bgWeight = 1 - Math.exp(-dt * 2);
+    this.backgroundOffset.x += (this.followState.x - 16 - this.backgroundOffset.x) * bgWeight;
+    this.backgroundOffset.y += (this.followState.y - 9 - this.backgroundOffset.y) * bgWeight;
     for (const l of this.layers) {
-      l.mesh.position.x = l.baseX + Math.sin(time * 0.11) * l.parallax * 3 + sx * (1 - l.parallax);
-      l.mesh.position.y = l.baseY + Math.cos(time * 0.09) * l.parallax * 1.2 + sy * (1 - l.parallax);
+      const offset = backgroundMotion(l.parallax, 16 + this.backgroundOffset.x, 9 + this.backgroundOffset.y, time);
+      l.mesh.position.x = l.baseX + offset.x;
+      l.mesh.position.y = l.baseY + offset.y;
     }
     for (const m of this.mists) (m.material as THREE.MeshBasicMaterial).map!.offset.x = time * m.userData.speed;
     for (const r of this.rays) (r.material as THREE.MeshBasicMaterial).opacity = r.userData.base * (0.65 + 0.35 * Math.sin(time * 0.5 + r.userData.phase));
