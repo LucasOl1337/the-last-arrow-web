@@ -113,7 +113,7 @@ function startMatch(opts: MatchOptions = {}) {
       fighters = new FightersView(arena.arena, () => notice.set('models', 'Modelos incompletos: visual alternativo'));
       arrows = new ArrowsView(arena.arena); fx = new Effects(arena.arena); chests = new ChestsView(arena.arena);
       fighters.onLand = (x, y, strength) => fx.land(x, y, strength);
-      new ResizeObserver(() => { if (!game.hidden) arena!.resize(game.clientWidth, game.clientHeight); }).observe(game);
+      new ResizeObserver(() => { if (!game.hidden) arena!.resizeToCanvas(); }).observe(canvas);
       canvas.addEventListener('webglcontextlost', event => {
         event.preventDefault(); contextLost = true; accumulator = 0; controls.reset(); controls.active = false; audio.setPaused(true);
         for (const f of world.fighters) if (f.human) { f.charging = false; f.charge = 0; }
@@ -123,7 +123,7 @@ function startMatch(opts: MatchOptions = {}) {
       canvas.addEventListener('webglcontextrestored', () => {
         contextLost = false; lastTime = performance.now(); sampledFrame = false; accumulator = 0;
         if (!running) return;
-        arena!.resize(game.clientWidth, game.clientHeight);
+        arena!.resizeToCanvas();
         if (matchEnded()) { shownVictory = false; menu.hide(); }
         else setPaused(true); // explicit Continue: no surprise shot or jump after recovery
       });
@@ -139,7 +139,7 @@ function startMatch(opts: MatchOptions = {}) {
     frames = measuredSeconds = frameMsTotal = maxFrameMs = 0;
     sampledFrame = false; quality.begin(); hud.setLowQuality(quality.level === 'low');
     controls.reset(); controls.active = !portraitTouch.matches; menu.hide(); game.hidden = false;
-    arena.resize(game.clientWidth, game.clientHeight); audio.setPaused(portraitTouch.matches); void audio.unlock().catch(() => {});
+    arena.resizeToCanvas(); audio.setPaused(portraitTouch.matches); void audio.unlock().catch(() => {});
   } catch (error) { console.error(error); running = false; menu.show('error'); }
 }
 /** Kill cause comes from the sim, including stomps across the wrap seam. */

@@ -1,0 +1,165 @@
+{
+  "mode": "after",
+  "cases": [
+    {
+      "width": 1366,
+      "height": 768,
+      "close": true,
+      "metrics": {
+        "canvas": {
+          "x": 0.328125,
+          "y": 0,
+          "width": 1365.328125,
+          "height": 767.984375,
+          "top": 0,
+          "right": 1365.65625,
+          "bottom": 767.984375,
+          "left": 0.328125
+        },
+        "arenaProjectedFraction": 0.9994878091714393,
+        "scaleRatio": 1.0002607349721377,
+        "camera": [
+          13.468933105468748,
+          7.578124999999999,
+          28.281947526107896
+        ],
+        "aspect": 1.77734375,
+        "bodies": [
+          {
+            "head": {
+              "x": 89.09736980803103,
+              "y": 548.5218737799481
+            },
+            "feet": {
+              "x": 89.09736980803103,
+              "y": 672.7684805282277
+            },
+            "heightPx": 124.24660674827953,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "fontPx": 13.66,
+              "inside": true
+            },
+            "overlaps": []
+          },
+          {
+            "head": {
+              "x": 1539.0190619526886,
+              "y": 548.5218737799481
+            },
+            "feet": {
+              "x": 1539.0190619526886,
+              "y": 672.7684805282277
+            },
+            "heightPx": 124.24660674827953,
+            "fullyVisible": false,
+            "marker": {
+              "text": "→",
+              "visible": true,
+              "fontPx": 13.66,
+              "inside": true
+            },
+            "overlaps": []
+          }
+        ],
+        "located": 2,
+        "hud": [
+          {
+            "class": "scoreboard",
+            "rect": {
+              "x": 501.7109375,
+              "y": 11.515625,
+              "width": 362.546875,
+              "height": 69,
+              "top": 11.515625,
+              "right": 864.2578125,
+              "bottom": 80.515625,
+              "left": 501.7109375
+            },
+            "font": 16,
+            "visible": true
+          },
+          {
+            "class": "arena-footer",
+            "rect": {
+              "x": 0.328125,
+              "y": 746.78125,
+              "width": 1365.328125,
+              "height": 12,
+              "top": 746.78125,
+              "right": 1365.65625,
+              "bottom": 758.78125,
+              "left": 0.328125
+            },
+            "font": 10,
+            "visible": true
+          },
+          {
+            "class": "mute-toggle",
+            "rect": {
+              "x": 1293.90625,
+              "y": 738.3125,
+              "width": 58.109375,
+              "height": 22,
+              "top": 738.3125,
+              "right": 1352.015625,
+              "bottom": 760.3125,
+              "left": 1293.90625
+            },
+            "font": 11,
+            "visible": true
+          },
+          {
+            "class": "camera-toggle",
+            "rect": {
+              "x": 13.96875,
+              "y": 732.3125,
+              "width": 106.375,
+              "height": 28,
+              "top": 732.3125,
+              "right": 120.34375,
+              "bottom": 760.3125,
+              "left": 13.96875
+            },
+            "font": 11,
+            "visible": true
+          }
+        ],
+        "hudOverlaps": [
+          [
+            "arena-footer",
+            "mute-toggle"
+          ],
+          [
+            "arena-footer",
+            "camera-toggle"
+          ]
+        ]
+      },
+      "areaPass": true,
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 0,
+          "principal_fracao": 0.999,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 768,
+          "largura": 1366,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      }
+    }
+  ],
+  "errors": [],
+  "ownTabsAtEnd": 1,
+  "failure": "AssertionError [ERR_ASSERTION]: no anisotropic art stretching\n    at file:///home/lol/Projects/the-last-arrow-web-wt/sol-camera-continua/scripts/proof-portrait-camera.mjs:44:44"
+}
