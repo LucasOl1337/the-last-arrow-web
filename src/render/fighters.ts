@@ -115,7 +115,12 @@ export class FightersView {
           const p = v.rig?.model.getObjectByName(name)?.getWorldPosition(new THREE.Vector3());
           return p ? p.y - v.root.position.y : null;
         }),
-        bowDirection: hand && shoulder ? hand.sub(shoulder).toArray() : null,
+        bowDirection: hand && shoulder ? hand.clone().sub(shoulder).toArray() : null,
+        bowHand: hand?.toArray() ?? null,
+        releaseTime: v.releaseTime,
+        // Geometry endpoints: shaft starts at .12 - .62/2; cone tip is .48 + .12/2.
+        nockTail: v.nock.visible ? v.nock.localToWorld(new THREE.Vector3(-.19, 0, 0)).toArray() : null,
+        nockTip: v.nock.visible ? v.nock.localToWorld(new THREE.Vector3(.54, 0, 0)).toArray() : null,
         nock: v.nock.visible ? v.nock.position.toArray() : null };
     });
   }
@@ -244,7 +249,13 @@ export class FightersView {
     const v = this.views[actor]; if (!v) return;
     if (type === 'shoot') {
       v.releaseTime = 0.18;
-      if (v.rig && v.state === 'shoot') { v.rig.actions.shoot.paused = false; v.rig.actions.shoot.time = 0.18; }
+      if (v.rig) {
+        // A short tap can start AND release between rendered frames. Enter the
+        // shoot action now, otherwise play() below resets the release back to draw.
+        if (v.state !== 'shoot') this.play(v, 'shoot');
+        v.rig.actions.shoot.paused = false;
+        v.rig.actions.shoot.time = WINDOWS.shoot.end - WINDOWS.shoot.start;
+      }
     }
     if (type === 'dash') v.ghostClock = 0;
   }
@@ -378,11 +389,13 @@ export class FightersView {
     v.aimPoint.visible = charging;
     if (!charging) { for (const d of v.aimDots) d.visible = false; return; }
     const angle = Math.atan2(-f.aimY, f.aimX), pull = Math.min(1, f.charge / 0.35);
-    // Nock on the bow hand; the arc starts at the arrow tip and follows the arrow's real speed and gravity.
+    // The shaft passes through the animated hand in all three axes. A fixed
+    // arena Z detached it from the baked bow, especially during a direction turn.
+    // Keep the arrow in the simulation's aim plane; don't inherit wrist roll.
     if (v.rig?.bowHand) v.rig.bowHand.getWorldPosition(tmpV);
-    else tmpV.set(x + Math.sign(f.aimX || f.facing) * 0.35, feet + VISUAL_HEIGHT * 0.5, 0.6);
+    else tmpV.set(x + Math.sign(f.aimX || f.facing) * 0.35, feet + VISUAL_HEIGHT * 0.5, 0.78);
     const dx = f.aimX, dy = -f.aimY;
-    v.nock.position.set(tmpV.x - dx * 0.14 * pull, tmpV.y - dy * 0.14 * pull, 0.78);
+    v.nock.position.set(tmpV.x - dx * 0.14 * pull, tmpV.y - dy * 0.14 * pull, tmpV.z);
     v.nock.rotation.set(0, 0, angle);
     // Start at the simulated projectile origin, not the decorative (taller) bow hand.
     const guide = aimGuide(w.level, x, y, f.aimX, f.aimY, f.inventory?.[0] === 'bolt');
