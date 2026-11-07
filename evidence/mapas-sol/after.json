@@ -1,0 +1,307 @@
+[
+  {
+    "id": "moss",
+    "platforms": 10,
+    "solids": 48,
+    "spawns": [
+      {
+        "x": 6.5,
+        "y": 4.44
+      },
+      {
+        "x": 25.5,
+        "y": 4.44
+      },
+      {
+        "x": 22.5,
+        "y": 7.44
+      },
+      {
+        "x": 9.5,
+        "y": 7.44
+      }
+    ],
+    "sightlines": [
+      {
+        "from": 0,
+        "to": 1,
+        "clear": true,
+        "distance": 13
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "clear": false,
+        "distance": 16.278820596099706
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "clear": true,
+        "distance": 4.242640687119286
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "clear": true,
+        "distance": 4.242640687119286
+      },
+      {
+        "from": 1,
+        "to": 3,
+        "clear": true,
+        "distance": 16.278820596099706
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "clear": true,
+        "distance": 13
+      }
+    ]
+  },
+  {
+    "id": "totem",
+    "platforms": 15,
+    "solids": 68,
+    "spawns": [
+      {
+        "x": 2,
+        "y": 12.44
+      },
+      {
+        "x": 30,
+        "y": 12.44
+      },
+      {
+        "x": 11,
+        "y": 12.44
+      },
+      {
+        "x": 21,
+        "y": 12.44
+      }
+    ],
+    "sightlines": [
+      {
+        "from": 0,
+        "to": 1,
+        "clear": true,
+        "distance": 4
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "clear": true,
+        "distance": 9
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "clear": true,
+        "distance": 13
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "clear": true,
+        "distance": 13
+      },
+      {
+        "from": 1,
+        "to": 3,
+        "clear": true,
+        "distance": 9
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "clear": true,
+        "distance": 10
+      }
+    ]
+  },
+  {
+    "id": "canopy",
+    "platforms": 11,
+    "solids": 44,
+    "spawns": [
+      {
+        "x": 4,
+        "y": 3.44
+      },
+      {
+        "x": 27,
+        "y": 5.4399999999999995
+      },
+      {
+        "x": 11,
+        "y": 5.4399999999999995
+      },
+      {
+        "x": 19,
+        "y": 7.4399999999999995
+      }
+    ],
+    "sightlines": [
+      {
+        "from": 0,
+        "to": 1,
+        "clear": true,
+        "distance": 9.219544457292889
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "clear": false,
+        "distance": 7.280109889280519
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "clear": true,
+        "distance": 15.524174696260024
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "clear": true,
+        "distance": 16
+      },
+      {
+        "from": 1,
+        "to": 3,
+        "clear": true,
+        "distance": 8.246211251235321
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "clear": true,
+        "distance": 8.246211251235321
+      }
+    ]
+  },
+  {
+    "id": "falls",
+    "platforms": 11,
+    "solids": 42,
+    "spawns": [
+      {
+        "x": 6.5,
+        "y": 2.44
+      },
+      {
+        "x": 25.5,
+        "y": 2.44
+      },
+      {
+        "x": 22.5,
+        "y": 5.44
+      },
+      {
+        "x": 9.5,
+        "y": 5.44
+      }
+    ],
+    "sightlines": [
+      {
+        "from": 0,
+        "to": 1,
+        "clear": true,
+        "distance": 13
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "clear": false,
+        "distance": 16.278820596099706
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "clear": true,
+        "distance": 4.242640687119286
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "clear": true,
+        "distance": 4.242640687119286
+      },
+      {
+        "from": 1,
+        "to": 3,
+        "clear": true,
+        "distance": 16.278820596099706
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "clear": true,
+        "distance": 13
+      }
+    ]
+  },
+  {
+    "id": "roots",
+    "platforms": 10,
+    "solids": 44,
+    "spawns": [
+      {
+        "x": 4,
+        "y": 5.44
+      },
+      {
+        "x": 28,
+        "y": 5.44
+      },
+      {
+        "x": 20.5,
+        "y": 7.44
+      },
+      {
+        "x": 11.5,
+        "y": 7.44
+      }
+    ],
+    "sightlines": [
+      {
+        "from": 0,
+        "to": 1,
+        "clear": true,
+        "distance": 8
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "clear": false,
+        "distance": 15.628499608087782
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "clear": true,
+        "distance": 7.762087348130012
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "clear": true,
+        "distance": 7.762087348130012
+      },
+      {
+        "from": 1,
+        "to": 3,
+        "clear": false,
+        "distance": 15.628499608087782
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "clear": true,
+        "distance": 9
+      }
+    ]
+  }
+]

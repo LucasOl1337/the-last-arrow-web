@@ -1,0 +1,11 @@
+✔ Templo do Totem / fácil / seed 42: bots finish by combat, not timeout (19.359398ms)
+✔ Copas Altas / difícil / seed 42: bots traverse, catch and replenish ammunition (41.276731ms)
+✔ five 32x18 maps have safe distinct spawns and connected platform paths (0.899965ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 128.586743

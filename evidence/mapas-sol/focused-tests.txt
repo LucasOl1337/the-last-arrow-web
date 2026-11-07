@@ -1,0 +1,32 @@
+✔ moss: explicit spawn sightlines and body-sized safe spawns (2.799466ms)
+✔ moss: normal arrow reaches the fixed firing-angle target, not just an unobstructed ray (0.918136ms)
+✔ moss: every pickup surface has headroom and a directed route from each spawn (0.788155ms)
+✔ moss: fixed jump, horizontal seam and vertical drop use the real collision solver (1.028516ms)
+✔ totem: explicit spawn sightlines and body-sized safe spawns (1.438519ms)
+✔ totem: normal arrow reaches the fixed firing-angle target, not just an unobstructed ray (0.319052ms)
+✔ totem: every pickup surface has headroom and a directed route from each spawn (0.490083ms)
+✔ totem: fixed jump, horizontal seam and vertical drop use the real collision solver (0.548324ms)
+✔ canopy: explicit spawn sightlines and body-sized safe spawns (0.469773ms)
+✔ canopy: normal arrow reaches the fixed firing-angle target, not just an unobstructed ray (0.220461ms)
+✔ canopy: every pickup surface has headroom and a directed route from each spawn (0.973125ms)
+✔ canopy: fixed jump, horizontal seam and vertical drop use the real collision solver (0.510263ms)
+✔ falls: explicit spawn sightlines and body-sized safe spawns (0.409252ms)
+✔ falls: normal arrow reaches the fixed firing-angle target, not just an unobstructed ray (0.292962ms)
+✔ falls: every pickup surface has headroom and a directed route from each spawn (0.258252ms)
+✔ falls: fixed jump, horizontal seam and vertical drop use the real collision solver (0.635554ms)
+✔ roots: explicit spawn sightlines and body-sized safe spawns (0.629713ms)
+✔ roots: normal arrow reaches the fixed firing-angle target, not just an unobstructed ray (0.11363ms)
+✔ roots: every pickup surface has headroom and a directed route from each spawn (0.233412ms)
+✔ roots: fixed jump, horizontal seam and vertical drop use the real collision solver (0.825415ms)
+✔ arena silhouettes differ structurally, not only by name/theme (0.160871ms)
+✔ Templo do Totem / fácil / seed 42: bots finish by combat, not timeout (20.467303ms)
+✔ Copas Altas / difícil / seed 42: bots traverse, catch and replenish ammunition (86.750323ms)
+✔ 90-second draw does not award points, then restarts with three arrows (0.455573ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 212.748881
