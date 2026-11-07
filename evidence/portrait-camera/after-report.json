@@ -173,7 +173,7 @@
           "bottom": 767.984375,
           "left": 0.328125
         },
-        "arenaProjectedFraction": 0.8896694067573998,
+        "arenaProjectedFraction": 0.8604227257396494,
         "scaleRatio": 1,
         "camera": [
           16,
@@ -487,7 +487,7 @@
           "bottom": 753.125,
           "left": 0
         },
-        "arenaProjectedFraction": 0.4506333928046731,
+        "arenaProjectedFraction": 0.43581942820703595,
         "scaleRatio": 0.9999999999999979,
         "camera": [
           16,
@@ -792,7 +792,7 @@
           "bottom": 584,
           "left": 0
         },
-        "arenaProjectedFraction": 0.23126186696046452,
+        "arenaProjectedFraction": 0.22688281222646262,
         "scaleRatio": 1.0000000000000027,
         "camera": [
           16,
