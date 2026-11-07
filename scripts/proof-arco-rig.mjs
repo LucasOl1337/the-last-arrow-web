@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
-const bench = process.env.ARCO_RIG_BENCH ?? 'arrow-arco-rig', mission = 'arco-rig-1107';
+const bench = process.env.ARCO_RIG_BENCH ?? 'arrow-arco-rig', mission = process.env.ARCO_RIG_MISSION ?? 'arco-rig-1107';
 const [beforeURL, afterURL, out] = process.argv.slice(2);
 assert.ok(beforeURL && afterURL && out, 'before URL, after URL, output directory required');
 const cli = (...args) => JSON.parse(execFileSync('agent-bench', args, { encoding: 'utf8' }));
@@ -19,21 +19,25 @@ const report = { kind: 'actual WebGL/GLB render; screenshots still require human
 let browser;
 try {
   report.hygieneBefore = web('hygiene');
-  assert.equal(report.hygieneBefore.own_tabs.length, 0, 'reconcile any previous run before restarting');
-  const owned = web('open', '--url', beforeURL);
+  const owned = process.env.TLA_TAB ? { tab: process.env.TLA_TAB } : null;
+  if (owned) {
+    assert.ok(report.hygieneBefore.own_tabs.some(t => (t.tab ?? t) === owned.tab), 'reused tab must belong to this mission');
+    web('navigate', '--tab', owned.tab, '--url', beforeURL);
+  } else assert.equal(report.hygieneBefore.own_tabs.length, 0, 'reconcile any previous run before restarting');
+  const target = owned ?? web('open', '--url', beforeURL);
   browser = await chromium.connectOverCDP(endpoint.webSocketDebuggerUrl ?? `http://127.0.0.1:${endpoint.port}`);
   // Resolve by registered target ID, never by guessed URL or another mission's page.
   let page;
   for (const candidate of browser.contexts()[0].pages()) {
     const cdp = await candidate.context().newCDPSession(candidate);
     const { targetInfo } = await cdp.send('Target.getTargetInfo'); await cdp.detach();
-    if (targetInfo.targetId === owned.tab) { page = candidate; break; }
+    if (targetInfo.targetId === target.tab) { page = candidate; break; }
   }
   assert.ok(page, 'registered target must exist');
   page.on('pageerror', e => report.errors.push(String(e)));
   for (const [revision, url] of [['before', beforeURL], ['after', afterURL]]) {
     await page.setViewportSize({ width: 1366, height: 768 });
-    if (revision === 'after') web('navigate', '--tab', owned.tab, '--url', url);
+    if (revision === 'after') web('navigate', '--tab', target.tab, '--url', url);
     await page.waitForURL(url);
     await page.waitForSelector('main[data-models=true]');
     const samples = report[revision];
@@ -108,6 +112,6 @@ try {
   assert.deepEqual(report.errors, []); report.mechanicalPassed = true;
 } finally {
   // The mission registry owns lifecycle; closing the connection never closes others.
-  try { report.finish = web('finish'); report.hygieneAfter = web('hygiene'); }
+  try { report.finish = process.env.TLA_KEEP_TAB ? { retainedForNextProof: process.env.TLA_TAB } : web('finish'); report.hygieneAfter = web('hygiene'); }
   finally { await browser?.close(); await writeFile(`${out}/render-report.json`, JSON.stringify(report, null, 2)); }
 }

@@ -50,10 +50,10 @@ try {
   assert.deepEqual(report.errors, []);
 } catch(e) { report.failure=e.stack; throw e; }
 finally {
-  if (page && !page.isClosed()) await page.close();
-  report.ownTabsAtEnd=0;
+  if (page && !page.isClosed() && !process.env.TLA_KEEP_TAB) await page.close();
+  report.ownTabsAtEnd=page && !page.isClosed() ? 1 : 0;
   await writeFile(`${out}/${mode}-report.json`, JSON.stringify(report,null,2));
-  await appendFile(`${out}/web-events.ndjson`, JSON.stringify({ pid:process.pid,mission:'camera-continua',tab:process.env.TLA_TAB,action:'close',mode })+'\n');
+  await appendFile(`${out}/web-events.ndjson`, JSON.stringify({ pid:process.pid,mission:'camera-continua',tab:process.env.TLA_TAB,action:report.ownTabsAtEnd ? 'retain-next-proof' : 'close',mode })+'\n');
   await browser.close();
 }
 console.log(JSON.stringify(report.cases.map(c=>({size:[c.width,c.height],close:c.close,located:c.metrics.located,gate:c.gate.passou,bodies:c.metrics.bodies})),null,2));

@@ -11,7 +11,11 @@ try {
   for(const p of browser.contexts()[0].pages()){const s=await p.context().newCDPSession(p);const {targetInfo}=await s.send('Target.getTargetInfo');await s.detach();if(targetInfo.targetId===process.env.TLA_TAB)page=p;}
   assert.ok(page);await appendFile(`${out}/web-events.ndjson`,JSON.stringify({pid:process.pid,mission:'camera-continua',tab:process.env.TLA_TAB,action:'attach-game',label})+'\n');
   page.on('pageerror',e=>report.errors.push(e.message));await page.setViewportSize({width:1366,height:768});await page.goto(base);
-  if(label==='public')report.version=await page.evaluate(()=>fetch('/version.json',{cache:'no-store'}).then(r=>r.json()));
+  if(label==='public') {
+    report.version=await page.evaluate(()=>fetch('/version.json',{cache:'no-store'}).then(r=>r.json()));
+    if(process.env.TLA_EXPECTED_SHA)assert.equal(report.version.revision,process.env.TLA_EXPECTED_SHA);
+    await page.screenshot({path:`${out}/public-menu.png`});
+  }
   await page.getByRole('button',{name:'Controles',exact:true}).click();
   const select=page.getByRole('combobox',{name:'Layout de controles'});report.presets=await select.locator('option').count();assert.equal(report.presets,5);
   await select.selectOption('mouse-space');const binding=page.locator('[data-action=camera]');
@@ -22,6 +26,7 @@ try {
   await page.waitForFunction(()=>window.__tla.diagnostics().models&&window.__tla.world.phase==='playing');
   await page.evaluate(()=>{window.__tla.setTimeScale(0);window.__tla.world.fighters.forEach((f,i)=>Object.assign(f,{x:i?30:2,prevX:i?30:2,y:15.45,prevY:15.45,invulnerable:100,grounded:true}));});
   await page.waitForFunction(()=>document.querySelectorAll('.overhead')[1]?.dataset.direction==='→');
+  await page.waitForFunction(()=>!document.querySelector('.countdown').textContent.trim());
   await page.screenshot({path:`${out}/${label}-game-close.png`});
   await page.keyboard.press('b');await page.waitForFunction(()=>!window.__tla.state().cameraClose);
   await page.waitForFunction(()=>document.querySelectorAll('.overhead')[1]?.dataset.direction==='');
@@ -48,8 +53,9 @@ try {
   await page.keyboard.press('b');await page.waitForFunction(()=>window.__tla.state().cameraClose);
   report.online=await page.evaluate(()=>({state:window.__tla.state().online,models:window.__tla.diagnostics().models,labels:[...document.querySelectorAll('.overhead')].map(l=>({hidden:l.hidden,direction:l.dataset.direction,text:l.textContent}))}));
   assert.ok(received>0);report.online.peerSnapshots=received;report.tests.push('real online match: two fighters, loaded models, authoritative peer snapshots and rebound near/wide toggle');
+  await page.waitForFunction(()=>!document.querySelector('.countdown').textContent.trim());
   await page.screenshot({path:`${out}/${label}-online.png`});
   assert.deepEqual(report.errors,[]);
 }catch(e){report.failure=e.stack;throw e;}
-finally{peer?.terminate();if(page&&!page.isClosed())await page.close();report.ownTabsAtEnd=0;await writeFile(`${out}/${label}-game-report.json`,JSON.stringify(report,null,2));await appendFile(`${out}/web-events.ndjson`,JSON.stringify({pid:process.pid,mission:'camera-continua',tab:process.env.TLA_TAB,action:'close-game',label})+'\n');await browser.close();}
+finally{peer?.terminate();if(page&&!page.isClosed()&&!process.env.TLA_KEEP_TAB)await page.close();report.ownTabsAtEnd=page&&!page.isClosed()?1:0;await writeFile(`${out}/${label}-game-report.json`,JSON.stringify(report,null,2));await appendFile(`${out}/web-events.ndjson`,JSON.stringify({pid:process.pid,mission:'camera-continua',tab:process.env.TLA_TAB,action:report.ownTabsAtEnd?'retain-next-proof':'close-game',label})+'\n');await browser.close();}
 console.log(JSON.stringify(report,null,2));

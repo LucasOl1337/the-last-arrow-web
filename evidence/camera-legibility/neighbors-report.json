@@ -1,0 +1,324 @@
+{
+  "errors": [],
+  "ownTabsAtEnd": 1,
+  "motion": {
+    "start": {
+      "camera": [
+        13.468933105468748,
+        7.578124999999999,
+        28.281947526107896
+      ],
+      "markers": [
+        {
+          "direction": "←",
+          "visible": true,
+          "text": "PEGOU!←P1"
+        },
+        {
+          "direction": "→",
+          "visible": true,
+          "text": "PEGOU!→Stormy Dragon"
+        }
+      ]
+    },
+    "wrappedX": {
+      "camera": [
+        18.53106689453125,
+        7.578124999999999,
+        28.281947526107896
+      ],
+      "markers": [
+        {
+          "direction": "→",
+          "visible": true,
+          "text": "PEGOU!→P1"
+        },
+        {
+          "direction": "",
+          "visible": true,
+          "text": "PEGOU!Stormy Dragon"
+        }
+      ]
+    },
+    "rivalLeft": {
+      "camera": [
+        18.53106689453125,
+        7.578124999999999,
+        28.281947526107896
+      ],
+      "markers": [
+        {
+          "direction": "→",
+          "visible": true,
+          "text": "PEGOU!→P1"
+        },
+        {
+          "direction": "←",
+          "visible": true,
+          "text": "PEGOU!←Stormy Dragon"
+        }
+      ]
+    },
+    "top": {
+      "camera": [
+        16,
+        10.421875,
+        28.281947526107896
+      ],
+      "markers": [
+        {
+          "direction": "↑",
+          "visible": true,
+          "text": "PEGOU!↑P1"
+        },
+        {
+          "direction": "↓←",
+          "visible": true,
+          "text": "PEGOU!↓←Stormy Dragon"
+        }
+      ]
+    },
+    "bottom": {
+      "camera": [
+        16,
+        7.578124999999999,
+        28.281947526107896
+      ],
+      "markers": [
+        {
+          "direction": "↓",
+          "visible": true,
+          "text": "PEGOU!↓P1"
+        },
+        {
+          "direction": "←",
+          "visible": true,
+          "text": "PEGOU!←Stormy Dragon"
+        }
+      ]
+    },
+    "death": {
+      "camera": [
+        16,
+        9,
+        28.281947526107896
+      ],
+      "markers": [
+        {
+          "direction": "↓",
+          "visible": false,
+          "text": "PEGOU!↓P1"
+        },
+        {
+          "direction": "←",
+          "visible": true,
+          "text": "PEGOU!←Stormy Dragon"
+        }
+      ]
+    },
+    "respawn": {
+      "camera": [
+        13.468933105468748,
+        7.578124999999999,
+        28.281947526107896
+      ],
+      "markers": [
+        {
+          "direction": "",
+          "visible": true,
+          "text": "PEGOU!P1"
+        },
+        {
+          "direction": "",
+          "visible": true,
+          "text": "PEGOU!Stormy Dragon"
+        }
+      ]
+    },
+    "rivalRight": {
+      "camera": [
+        13.468933105468748,
+        7.578124999999999,
+        28.281947526107896
+      ],
+      "markers": [
+        {
+          "direction": "",
+          "visible": true,
+          "text": "PEGOU!P1"
+        },
+        {
+          "direction": "→",
+          "visible": true,
+          "text": "PEGOU!→Stormy Dragon"
+        }
+      ]
+    },
+    "rivalDead": {
+      "camera": [
+        13.468933105468748,
+        7.578124999999999,
+        28.281947526107896
+      ],
+      "markers": [
+        {
+          "direction": "",
+          "visible": true,
+          "text": "PEGOU!P1"
+        },
+        {
+          "direction": "→",
+          "visible": false,
+          "text": "PEGOU!→Stormy Dragon"
+        }
+      ]
+    },
+    "rivalRespawn": {
+      "camera": [
+        13.468933105468748,
+        7.578124999999999,
+        28.281947526107896
+      ],
+      "markers": [
+        {
+          "direction": "",
+          "visible": true,
+          "text": "PEGOU!P1"
+        },
+        {
+          "direction": "→",
+          "visible": true,
+          "text": "PEGOU!→Stormy Dragon"
+        }
+      ]
+    }
+  },
+  "projection": [
+    {
+      "width": 1366,
+      "height": 768,
+      "close": true,
+      "actual": {
+        "x": 22.000000000000025,
+        "y": 9.99999999999999
+      },
+      "expected": {
+        "x": 22,
+        "y": 10
+      },
+      "error": 2.7056661287843684e-14,
+      "aspect": 1.7778071656731298,
+      "overlaps": [],
+      "camera": [
+        13.472444927366686,
+        7.578124999999999,
+        28.281947526107896
+      ]
+    },
+    {
+      "width": 1366,
+      "height": 768,
+      "close": false,
+      "actual": {
+        "x": 21.99999999999995,
+        "y": 9.999999999999991
+      },
+      "expected": {
+        "x": 22,
+        "y": 10
+      },
+      "error": 5.0524784901028475e-14,
+      "aspect": 1.7778071656731298,
+      "overlaps": [],
+      "camera": [
+        16,
+        9,
+        36.20089283341811
+      ]
+    },
+    {
+      "width": 900,
+      "height": 1000,
+      "close": true,
+      "actual": {
+        "x": 22.000000000000036,
+        "y": 9.99999999999999
+      },
+      "expected": {
+        "x": 22,
+        "y": 10
+      },
+      "error": 3.709141974507642e-14,
+      "aspect": 1.7777777777777777,
+      "overlaps": [],
+      "camera": [
+        13.47222222222222,
+        7.578124999999999,
+        28.281947526107896
+      ]
+    },
+    {
+      "width": 900,
+      "height": 1000,
+      "close": false,
+      "actual": {
+        "x": 21.99999999999995,
+        "y": 9.999999999999991
+      },
+      "expected": {
+        "x": 22,
+        "y": 10
+      },
+      "error": 5.0524784901028475e-14,
+      "aspect": 1.7777777777777777,
+      "overlaps": [],
+      "camera": [
+        16,
+        9,
+        36.20089283341811
+      ]
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "close": true,
+      "actual": {
+        "x": 22.000000000000036,
+        "y": 9.99999999999999
+      },
+      "expected": {
+        "x": 22,
+        "y": 10
+      },
+      "error": 3.709141974507642e-14,
+      "aspect": 1.7777777777777777,
+      "overlaps": [],
+      "camera": [
+        13.47222222222222,
+        7.578124999999999,
+        28.281947526107896
+      ]
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "close": false,
+      "actual": {
+        "x": 21.99999999999995,
+        "y": 9.999999999999991
+      },
+      "expected": {
+        "x": 22,
+        "y": 10
+      },
+      "error": 5.0524784901028475e-14,
+      "aspect": 1.7777777777777777,
+      "overlaps": [],
+      "camera": [
+        16,
+        9,
+        36.20089283341811
+      ]
+    }
+  ]
+}

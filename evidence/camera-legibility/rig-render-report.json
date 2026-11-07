@@ -1,0 +1,1462 @@
+{
+  "kind": "actual WebGL/GLB render; screenshots still require human/agent visual critique",
+  "bench": "arrow-camera",
+  "mission": "camera-continua",
+  "errors": [],
+  "before": {
+    "idle": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "idle",
+          "visible": false,
+          "hand": [
+            13.203056643594334,
+            3.1015974262400388,
+            0.16624859519356008
+          ],
+          "tip": [
+            0.54,
+            0,
+            0
+          ],
+          "axisError": 3.106049772599058,
+          "animationTime": 0.49999999999999994,
+          "pitch": [
+            0,
+            0
+          ]
+        },
+        {
+          "character": 1,
+          "state": "idle",
+          "visible": false,
+          "hand": [
+            19.293714556898,
+            3.207585982069472,
+            0.20496507774988965
+          ],
+          "tip": [
+            0.54,
+            0,
+            0
+          ],
+          "axisError": 3.214127955677184,
+          "animationTime": 0.49999999999999994,
+          "pitch": [
+            2.9802322387695312e-8,
+            0
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "draw": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.332559329401706,
+            3.155670211202781,
+            0.10820616248025937
+          ],
+          "tip": [
+            13.872559329401707,
+            3.155670211202781,
+            0.78
+          ],
+          "axisError": 0.6717938375197406,
+          "animationTime": 0.016666666666666666,
+          "pitch": [
+            0,
+            0
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.422593945757043,
+            3.2611909352697004,
+            0.13793669448058646
+          ],
+          "tip": [
+            19.962593945757042,
+            3.2611909352697004,
+            0.78
+          ],
+          "axisError": 0.6420633055194136,
+          "animationTime": 0.016666666666666666,
+          "pitch": [
+            0,
+            0
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "hold": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.652916243875703,
+            3.4273122858307095,
+            0.7837332207463255
+          ],
+          "tip": [
+            14.052916243875703,
+            3.4273122858307095,
+            0.78
+          ],
+          "axisError": 0.0037332207463254274,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0,
+            0
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.747454174729445,
+            3.5372920492092583,
+            0.7796883024146897
+          ],
+          "tip": [
+            20.147454174729443,
+            3.5372920492092583,
+            0.78
+          ],
+          "axisError": 0.0003116975853103554,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0,
+            0
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "hold10s": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.679266180397372,
+            3.372371394944731,
+            0.7800376289786743
+          ],
+          "tip": [
+            14.079266180397372,
+            3.372371394944731,
+            0.78
+          ],
+          "axisError": 0.000037628978674320024,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            2.9802322387695312e-8,
+            0
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.775129885442098,
+            3.480169672487439,
+            0.7756918662228709
+          ],
+          "tip": [
+            20.175129885442097,
+            3.480169672487439,
+            0.78
+          ],
+          "axisError": 0.004308133777129131,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0,
+            2.9802322387695312e-8
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "diagonal": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.553153228911732,
+            3.746452807525711,
+            0.756950530956255
+          ],
+          "tip": [
+            13.83599594138635,
+            4.02929552000033,
+            0.78
+          ],
+          "axisError": 0.023049469043745052,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.3926990816987221
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.690132590414937,
+            3.881079472568366,
+            0.7532271593451728
+          ],
+          "tip": [
+            19.972975302889555,
+            4.163922185042985,
+            0.78
+          ],
+          "axisError": 0.026772840654827216,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.3926990816987232
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "diagonal10s": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.512795721781318,
+            3.7284592283038394,
+            0.8081217761268608
+          ],
+          "tip": [
+            13.795638434255936,
+            4.011301940778458,
+            0.78
+          ],
+          "axisError": 0.028121776126860728,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.3926990816987232
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.655909605676737,
+            3.863830572741127,
+            0.8031438376317449
+          ],
+          "tip": [
+            19.938752318151355,
+            4.146673285215746,
+            0.78
+          ],
+          "axisError": 0.02314383763174488,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872547,
+            0.39269908169872436
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "turn-first-frame": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.12974870500241,
+            3.430118054018784,
+            1.233178943388932
+          ],
+          "tip": [
+            12.846905992527791,
+            3.712960766493403,
+            0.78
+          ],
+          "axisError": 0.4531789433889319,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872547,
+            0.3926990816987221
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.12682583313281,
+            3.5217684589416165,
+            1.3155592940019214
+          ],
+          "tip": [
+            18.84398312065819,
+            3.8046111714162354,
+            0.78
+          ],
+          "axisError": 0.5355592940019215,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.39269908169872436
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "turned": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            12.487865487161866,
+            3.781993582348045,
+            0.7810309682820066
+          ],
+          "tip": [
+            12.205022774687247,
+            4.064836294822664,
+            0.78
+          ],
+          "axisError": 0.0010309682820065502,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872547,
+            0.3926990816987232
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            18.361211279669238,
+            3.895334580905303,
+            0.8489330862244445
+          ],
+          "tip": [
+            18.07836856719462,
+            4.178177293379922,
+            0.78
+          ],
+          "axisError": 0.0689330862244445,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872547,
+            0.39269908169872664
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "crouch": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            12.48693829851203,
+            3.283653127503908,
+            0.774074303325226
+          ],
+          "tip": [
+            12.204095586037411,
+            3.5664958399785274,
+            0.78
+          ],
+          "axisError": 0.00592569667477405,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.3926990816987232,
+            0.3926990816987221
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            18.359833999460335,
+            3.349443544645268,
+            0.8424767067590522
+          ],
+          "tip": [
+            18.076991286985717,
+            3.632286257119887,
+            0.78
+          ],
+          "axisError": 0.062476706759052154,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.3926990816987232,
+            0.3926990816987232
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "jump": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            12.342035615958142,
+            3.893978509345443,
+            0.7658445244451202
+          ],
+          "tip": [
+            12.059192903483524,
+            4.176821221820062,
+            0.78
+          ],
+          "axisError": 0.014155475554879835,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.3926990816987232
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            18.209918457803848,
+            4.031171507768768,
+            0.8353382660321582
+          ],
+          "tip": [
+            17.92707574532923,
+            4.314014220243387,
+            0.78
+          ],
+          "axisError": 0.05533826603215818,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.39269908169872547
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "pre-release": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            12.526573001676844,
+            3.8076248725790762,
+            0.7921503361186141
+          ],
+          "tip": [
+            12.243730289202226,
+            4.090467585053696,
+            0.78
+          ],
+          "axisError": 0.012150336118614049,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.3926990816987221,
+            0.3926990816987221
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            18.40576129170276,
+            3.922242926544805,
+            0.8562689558676335
+          ],
+          "tip": [
+            18.12291857922814,
+            4.2050856390194244,
+            0.78
+          ],
+          "axisError": 0.07626895586763349,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.3926990816987232,
+            0.3926990816987221
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "viewport": [
+      {
+        "size": {
+          "width": 1366,
+          "height": 768
+        },
+        "gate": {
+          "area": 1,
+          "top": 0,
+          "overflow": false
+        }
+      },
+      {
+        "size": {
+          "width": 900,
+          "height": 1000
+        },
+        "gate": {
+          "area": 1,
+          "top": 0,
+          "overflow": false
+        }
+      },
+      {
+        "size": {
+          "width": 360,
+          "height": 800
+        },
+        "gate": {
+          "area": 1,
+          "top": 0,
+          "overflow": false
+        }
+      }
+    ],
+    "release": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": false,
+          "hand": [
+            12.529271589061542,
+            3.8050583267554665,
+            0.7916053319048285
+          ],
+          "tip": [
+            12.243730289202226,
+            4.090467585053696,
+            0.78
+          ],
+          "axisError": 0.011605707479863392,
+          "animationTime": 0.21333333333333332,
+          "pitch": [
+            0.39269908169872436,
+            0.3926990816987232
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": false,
+          "hand": [
+            18.4084036878685,
+            3.9194989306669057,
+            0.8556917561295465
+          ],
+          "tip": [
+            18.12291857922814,
+            4.2050856390194244,
+            0.78
+          ],
+          "axisError": 0.0756917902234152,
+          "animationTime": 0.21333333333333332,
+          "pitch": [
+            0.3926990816987232,
+            0.39269908169872436
+          ]
+        }
+      ],
+      "arrows": [
+        {
+          "id": 1,
+          "owner": 0,
+          "x": 12.84443650813896,
+          "y": 15.29443650813896,
+          "vx": -16.263455967290593,
+          "vy": -16.263455967290593,
+          "angle": -2.356194490192345,
+          "stuck": false,
+          "age": 0,
+          "kind": "normal"
+        },
+        {
+          "id": 2,
+          "owner": 1,
+          "x": 18.84443650813896,
+          "y": 15.29443650813896,
+          "vx": -16.263455967290593,
+          "vy": -16.263455967290593,
+          "angle": -2.356194490192345,
+          "stuck": false,
+          "age": 0,
+          "kind": "normal"
+        }
+      ]
+    },
+    "projectile": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": false,
+          "hand": [
+            12.531457284886326,
+            3.7998008071715437,
+            0.7909789725914861
+          ],
+          "tip": [
+            12.243730289202226,
+            4.090467585053696,
+            0.78
+          ],
+          "axisError": 0.01117403234515614,
+          "animationTime": 0.24666666666666665,
+          "pitch": [
+            0.3926990816987232,
+            0.39269908169872436
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": false,
+          "hand": [
+            18.410518207471124,
+            3.9139851553779406,
+            0.855034676721532
+          ],
+          "tip": [
+            18.12291857922814,
+            4.2050856390194244,
+            0.78
+          ],
+          "axisError": 0.0750755000314045,
+          "animationTime": 0.24666666666666665,
+          "pitch": [
+            0.3926990816987221,
+            0.39269908169872436
+          ]
+        }
+      ],
+      "arrows": [
+        {
+          "id": 1,
+          "owner": 0,
+          "x": 12.708907708411537,
+          "y": 15.15922020841154,
+          "vx": -16.263455967290593,
+          "vy": -16.22595596729059,
+          "angle": -2.3573487118637826,
+          "stuck": false,
+          "age": 0.008333333333333333,
+          "kind": "normal"
+        },
+        {
+          "id": 2,
+          "owner": 1,
+          "x": 18.708907708411537,
+          "y": 15.15922020841154,
+          "vx": -16.263455967290593,
+          "vy": -16.22595596729059,
+          "angle": -2.3573487118637826,
+          "stuck": false,
+          "age": 0.008333333333333333,
+          "kind": "normal"
+        }
+      ]
+    }
+  },
+  "after": {
+    "idle": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "idle",
+          "visible": false,
+          "hand": [
+            13.203056643594334,
+            3.1015974262400388,
+            0.16624859519356008
+          ],
+          "tip": [
+            0.54,
+            0,
+            0
+          ],
+          "axisError": 3.106049772599058,
+          "animationTime": 0.49999999999999994,
+          "pitch": [
+            0,
+            0
+          ]
+        },
+        {
+          "character": 1,
+          "state": "idle",
+          "visible": false,
+          "hand": [
+            19.293714556898,
+            3.207585982069472,
+            0.20496507774988965
+          ],
+          "tip": [
+            0.54,
+            0,
+            0
+          ],
+          "axisError": 3.214127955677184,
+          "animationTime": 0.49999999999999994,
+          "pitch": [
+            2.9802322387695312e-8,
+            0
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "draw": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.332559329401706,
+            3.155670211202781,
+            0.10820616248025937
+          ],
+          "tip": [
+            13.872559329401707,
+            3.155670211202781,
+            0.10820616248025937
+          ],
+          "axisError": 0,
+          "animationTime": 0.016666666666666666,
+          "pitch": [
+            0,
+            0
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.422593945757043,
+            3.2611909352697004,
+            0.13793669448058646
+          ],
+          "tip": [
+            19.962593945757042,
+            3.2611909352697004,
+            0.13793669448058646
+          ],
+          "axisError": 0,
+          "animationTime": 0.016666666666666666,
+          "pitch": [
+            0,
+            0
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "hold": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.652916243875703,
+            3.4273122858307095,
+            0.7837332207463255
+          ],
+          "tip": [
+            14.052916243875703,
+            3.4273122858307095,
+            0.7837332207463255
+          ],
+          "axisError": 0,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0,
+            0
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.747454174729445,
+            3.5372920492092583,
+            0.7796883024146897
+          ],
+          "tip": [
+            20.147454174729443,
+            3.5372920492092583,
+            0.7796883024146897
+          ],
+          "axisError": 0,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0,
+            0
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "hold10s": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.679266180397372,
+            3.372371394944731,
+            0.7800376289786743
+          ],
+          "tip": [
+            14.079266180397372,
+            3.372371394944731,
+            0.7800376289786743
+          ],
+          "axisError": 0,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0,
+            0
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.775129885442098,
+            3.480169672487439,
+            0.7756918662228707
+          ],
+          "tip": [
+            20.175129885442097,
+            3.480169672487439,
+            0.7756918662228707
+          ],
+          "axisError": 0,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0,
+            0
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "diagonal": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.553153228911732,
+            3.746452807525711,
+            0.7569505309562551
+          ],
+          "tip": [
+            13.83599594138635,
+            4.02929552000033,
+            0.7569505309562551
+          ],
+          "axisError": 9.71445146547012e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.3926990816987221,
+            0.3926990816987221
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.690132590414937,
+            3.881079472568366,
+            0.7532271593451728
+          ],
+          "tip": [
+            19.972975302889555,
+            4.163922185042985,
+            0.7532271593451728
+          ],
+          "axisError": 1.3877787807814457e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.3926990816987209
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "diagonal10s": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.512795721781318,
+            3.7284592283038394,
+            0.8081217761268608
+          ],
+          "tip": [
+            13.795638434255936,
+            4.011301940778458,
+            0.8081217761268608
+          ],
+          "axisError": 8.049116928532385e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.3926990816987221,
+            0.3926990816987232
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.655909605676737,
+            3.863830572741127,
+            0.8031438376317449
+          ],
+          "tip": [
+            19.938752318151355,
+            4.146673285215746,
+            0.8031438376317449
+          ],
+          "axisError": 1.3877787807814457e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872547,
+            0.3926990816987221
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "turn-first-frame": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            13.12974870500241,
+            3.430118054018784,
+            1.233178943388932
+          ],
+          "tip": [
+            12.846905992527791,
+            3.712960766493403,
+            1.233178943388932
+          ],
+          "axisError": 8.049116928532385e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872547,
+            0.3926990816987221
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            19.12682583313281,
+            3.5217684589416165,
+            1.3155592940019214
+          ],
+          "tip": [
+            18.84398312065819,
+            3.8046111714162354,
+            1.3155592940019214
+          ],
+          "axisError": 1.3877787807814457e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.39269908169872436
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "turned": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            12.487865487161866,
+            3.781993582348045,
+            0.7810309682820066
+          ],
+          "tip": [
+            12.205022774687247,
+            4.064836294822664,
+            0.7810309682820066
+          ],
+          "axisError": 8.049116928532385e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872547,
+            0.3926990816987232
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            18.361211279669238,
+            3.895334580905303,
+            0.8489330862244445
+          ],
+          "tip": [
+            18.07836856719462,
+            4.178177293379922,
+            0.8489330862244445
+          ],
+          "axisError": 1.3877787807814457e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872547,
+            0.39269908169872664
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "crouch": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            12.48693829851203,
+            3.283653127503908,
+            0.774074303325226
+          ],
+          "tip": [
+            12.204095586037411,
+            3.5664958399785274,
+            0.774074303325226
+          ],
+          "axisError": 9.71445146547012e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.3926990816987232,
+            0.3926990816987221
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            18.359833999460335,
+            3.349443544645268,
+            0.8424767067590522
+          ],
+          "tip": [
+            18.076991286985717,
+            3.632286257119887,
+            0.8424767067590522
+          ],
+          "axisError": 1.3877787807814457e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.3926990816987232,
+            0.3926990816987232
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "jump": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            12.342035615958142,
+            3.893978509345443,
+            0.7658445244451202
+          ],
+          "tip": [
+            12.059192903483524,
+            4.176821221820062,
+            0.7658445244451202
+          ],
+          "axisError": 9.71445146547012e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.3926990816987232
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            18.209918457803848,
+            4.031171507768768,
+            0.8353382660321582
+          ],
+          "tip": [
+            17.92707574532923,
+            4.314014220243387,
+            0.8353382660321582
+          ],
+          "axisError": 2.7755575615628914e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.39269908169872547
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "pre-release": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            12.526573001676844,
+            3.8076248725790767,
+            0.7921503361186144
+          ],
+          "tip": [
+            12.243730289202226,
+            4.090467585053696,
+            0.7921503361186144
+          ],
+          "axisError": 8.049116928532385e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.39269908169872436,
+            0.3926990816987209
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": true,
+          "hand": [
+            18.40576129170276,
+            3.922242926544805,
+            0.8562689558676335
+          ],
+          "tip": [
+            18.12291857922814,
+            4.2050856390194244,
+            0.8562689558676335
+          ],
+          "axisError": 2.7755575615628914e-16,
+          "animationTime": 0.18000000000000002,
+          "pitch": [
+            0.3926990816987232,
+            0.39269908169872547
+          ]
+        }
+      ],
+      "arrows": []
+    },
+    "viewport": [
+      {
+        "size": {
+          "width": 1366,
+          "height": 768
+        },
+        "gate": {
+          "area": 1,
+          "top": 0,
+          "overflow": false
+        }
+      },
+      {
+        "size": {
+          "width": 900,
+          "height": 1000
+        },
+        "gate": {
+          "area": 1,
+          "top": 0,
+          "overflow": false
+        }
+      },
+      {
+        "size": {
+          "width": 360,
+          "height": 800
+        },
+        "gate": {
+          "area": 1,
+          "top": 0,
+          "overflow": false
+        }
+      }
+    ],
+    "release": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": false,
+          "hand": [
+            12.529271589061542,
+            3.8050583267554665,
+            0.7916053319048286
+          ],
+          "tip": [
+            12.243730289202226,
+            4.090467585053696,
+            0.7921503361186141
+          ],
+          "axisError": 0.000552944011606066,
+          "animationTime": 0.21333333333333335,
+          "pitch": [
+            0.39269908169872436,
+            0.3926990816987232
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": false,
+          "hand": [
+            18.4084036878685,
+            3.9194989306669057,
+            0.8556917561295464
+          ],
+          "tip": [
+            18.12291857922814,
+            4.2050856390194244,
+            0.8562689558676335
+          ],
+          "axisError": 0.000581653495135477,
+          "animationTime": 0.21333333333333335,
+          "pitch": [
+            0.39269908169872436,
+            0.39269908169872436
+          ]
+        }
+      ],
+      "arrows": [
+        {
+          "id": 1,
+          "owner": 0,
+          "x": 12.84443650813896,
+          "y": 15.29443650813896,
+          "vx": -16.263455967290593,
+          "vy": -16.263455967290593,
+          "angle": -2.356194490192345,
+          "stuck": false,
+          "age": 0,
+          "kind": "normal"
+        },
+        {
+          "id": 2,
+          "owner": 1,
+          "x": 18.84443650813896,
+          "y": 15.29443650813896,
+          "vx": -16.263455967290593,
+          "vy": -16.263455967290593,
+          "angle": -2.356194490192345,
+          "stuck": false,
+          "age": 0,
+          "kind": "normal"
+        }
+      ]
+    },
+    "projectile": {
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL 4.5.0)",
+      "views": [
+        {
+          "character": 0,
+          "state": "shoot",
+          "visible": false,
+          "hand": [
+            12.531457284886326,
+            3.7998008071715437,
+            0.7909789725914861
+          ],
+          "tip": [
+            12.243730289202226,
+            4.090467585053696,
+            0.7921503361186141
+          ],
+          "axisError": 0.0023860536873002783,
+          "animationTime": 0.24666666666666667,
+          "pitch": [
+            0.3926990816987232,
+            0.39269908169872436
+          ]
+        },
+        {
+          "character": 1,
+          "state": "shoot",
+          "visible": false,
+          "hand": [
+            18.410518207471124,
+            3.9139851553779406,
+            0.8550346767215322
+          ],
+          "tip": [
+            18.12291857922814,
+            4.2050856390194244,
+            0.8562689558676335
+          ],
+          "axisError": 0.002766123509734298,
+          "animationTime": 0.24666666666666667,
+          "pitch": [
+            0.3926990816987221,
+            0.39269908169872436
+          ]
+        }
+      ],
+      "arrows": [
+        {
+          "id": 1,
+          "owner": 0,
+          "x": 12.708907708411537,
+          "y": 15.15922020841154,
+          "vx": -16.263455967290593,
+          "vy": -16.22595596729059,
+          "angle": -2.3573487118637826,
+          "stuck": false,
+          "age": 0.008333333333333333,
+          "kind": "normal"
+        },
+        {
+          "id": 2,
+          "owner": 1,
+          "x": 18.708907708411537,
+          "y": 15.15922020841154,
+          "vx": -16.263455967290593,
+          "vy": -16.22595596729059,
+          "angle": -2.3573487118637826,
+          "stuck": false,
+          "age": 0.008333333333333333,
+          "kind": "normal"
+        }
+      ]
+    }
+  },
+  "hygieneBefore": {
+    "pages": 3,
+    "blank": 1,
+    "own_tabs": [
+      "9DF55DF91BDF86C142B530D3D3211C72"
+    ],
+    "outside_web_registry": [
+      "13263F7DB8054B8936BED3DA5FDEC01C",
+      "3AB4FEAC294904C43D4F0B6DB12493FA"
+    ],
+    "mission_limit": 2,
+    "browser_limit": 12,
+    "next": "Close finished owned tabs; finish at mission end. Unknown owners require investigation, never automatic deletion.",
+    "elapsed_ms": 38
+  },
+  "mechanicalPassed": true,
+  "finish": {
+    "retainedForNextProof": "9DF55DF91BDF86C142B530D3D3211C72"
+  },
+  "hygieneAfter": {
+    "pages": 3,
+    "blank": 1,
+    "own_tabs": [
+      "9DF55DF91BDF86C142B530D3D3211C72"
+    ],
+    "outside_web_registry": [
+      "13263F7DB8054B8936BED3DA5FDEC01C",
+      "3AB4FEAC294904C43D4F0B6DB12493FA"
+    ],
+    "mission_limit": 2,
+    "browser_limit": 12,
+    "next": "Close finished owned tabs; finish at mission end. Unknown owners require investigation, never automatic deletion.",
+    "elapsed_ms": 43
+  }
+}
