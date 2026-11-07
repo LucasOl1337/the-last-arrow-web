@@ -1,0 +1,12 @@
+✔ actual Mizu/Storm rig: idle, draw, 10s hold, diagonal, turn, crouch, jump, release and short tap (222.326283ms)
+✔ verified bow landmarks keep exact asset/triangle/skin provenance and follow posed mesh without mutations (187.312351ms)
+✔ character rim preserves the baked texture and limits steady self-light (0.821857ms)
+✔ fallback tint and transient hit/dissolve effects remain independent per fighter (0.271012ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 311.827859

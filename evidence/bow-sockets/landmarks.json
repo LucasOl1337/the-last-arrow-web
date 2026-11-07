@@ -1,0 +1,1154 @@
+{
+  "base": "fb9f16ccd768d14b26b08389620b505c81e76044",
+  "runtime": "83aff6b",
+  "provenance": [
+    {
+      "character": "mizu",
+      "source": "public/assets/models/mizu.glb",
+      "sha256": "50ea717daab340296cd5d8afb9f411aac21b6f92f36487538019187c0ad5daea",
+      "mesh": "tripo_node_99956f04-9eb1-4d92-b8ff-a02935577b82",
+      "primitive": 0,
+      "status": "stowed-back-bow-not-a-handheld-weapon",
+      "points": [
+        {
+          "name": "upper-back-bow-end",
+          "vertex": 18219,
+          "triangle": 27690,
+          "triangleVertices": [
+            18219,
+            18220,
+            18221
+          ],
+          "incidentTriangles": [
+            27685,
+            27689,
+            27690,
+            27691
+          ],
+          "triangleBounds": {
+            "min": [
+              -0.09223939607598186,
+              0.9254759663474884,
+              -0.265716538805284
+            ],
+            "max": [
+              -0.08741762021124584,
+              0.943237195365846,
+              -0.2524719103694324
+            ]
+          },
+          "uv": [
+            0.0615234375,
+            0.049072265625
+          ],
+          "uvArea": 0.00001564621925354004,
+          "weights": [
+            {
+              "bone": "mixamorigLeftShoulder",
+              "weight": 0.41568627450980394
+            },
+            {
+              "bone": "mixamorigSpine1",
+              "weight": 0.20784313725490197
+            },
+            {
+              "bone": "mixamorigSpine2",
+              "weight": 0.20392156862745098
+            },
+            {
+              "bone": "mixamorigLeftArm",
+              "weight": 0.17254901960784313
+            }
+          ]
+        },
+        {
+          "name": "lower-back-bow-end",
+          "vertex": 1563,
+          "triangle": 2607,
+          "triangleVertices": [
+            1563,
+            1560,
+            1562
+          ],
+          "incidentTriangles": [
+            2606,
+            2607,
+            2609,
+            2612,
+            2615,
+            2617,
+            2618
+          ],
+          "triangleBounds": {
+            "min": [
+              -0.0908124857945791,
+              0.30725100743791384,
+              0.11492141455254579
+            ],
+            "max": [
+              -0.09065990208813496,
+              0.3196106261192291,
+              0.11986526172604542
+            ]
+          },
+          "uv": [
+            0.886962890625,
+            0.8701171875
+          ],
+          "uvArea": 0.000008046627044677734,
+          "weights": [
+            {
+              "bone": "mixamorigRightUpLeg",
+              "weight": 0.9764705882352941
+            },
+            {
+              "bone": "mixamorigSpine1",
+              "weight": 0.023529411764705882
+            }
+          ]
+        },
+        {
+          "name": "bow-quiver-crossing-surface",
+          "vertex": 8991,
+          "triangle": 13602,
+          "triangleVertices": [
+            8991,
+            8990,
+            8992
+          ],
+          "incidentTriangles": [
+            13601,
+            13602
+          ],
+          "triangleBounds": {
+            "min": [
+              -0.09458159689157328,
+              0.5922851172176048,
+              -0.05648421172626238
+            ],
+            "max": [
+              -0.093391412825741,
+              0.6143187893486326,
+              -0.036556238334091856
+            ]
+          },
+          "uv": [
+            0.5126953125,
+            0.9521484375
+          ],
+          "uvArea": 0.000025480985641479492,
+          "weights": [
+            {
+              "bone": "mixamorigSpine1",
+              "weight": 0.4666666666666667
+            },
+            {
+              "bone": "mixamorigSpine2",
+              "weight": 0.23921568627450981
+            },
+            {
+              "bone": "mixamorigRightShoulder",
+              "weight": 0.1607843137254902
+            },
+            {
+              "bone": "mixamorigSpine",
+              "weight": 0.13333333333333333
+            }
+          ]
+        },
+        {
+          "name": "upper-authored-string-surface",
+          "vertex": 16821,
+          "triangle": 25391,
+          "triangleVertices": [
+            16819,
+            16820,
+            16821
+          ],
+          "incidentTriangles": [
+            25391,
+            25394,
+            25395,
+            25399,
+            25400,
+            25401
+          ],
+          "triangleBounds": {
+            "min": [
+              -0.0879974432623237,
+              0.7937010719257181,
+              -0.1695861670802465
+            ],
+            "max": [
+              -0.0848159856917063,
+              0.8147581972299,
+              -0.1549987629868939
+            ]
+          },
+          "uv": [
+            0.02880859375,
+            0.868408203125
+          ],
+          "uvArea": 0.000019818544387817383,
+          "weights": [
+            {
+              "bone": "mixamorigLeftShoulder",
+              "weight": 0.5490196078431373
+            },
+            {
+              "bone": "mixamorigSpine2",
+              "weight": 0.19215686274509805
+            },
+            {
+              "bone": "mixamorigSpine1",
+              "weight": 0.17254901960784313
+            },
+            {
+              "bone": "mixamorigRightShoulder",
+              "weight": 0.08627450980392157
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "character": "storm",
+      "source": "public/assets/models/storm.glb",
+      "sha256": "e80a656100b91cfc024b9bf62c136b12cdfe06b6fb77af5bf06c7bac434b1f4f",
+      "mesh": "tripo_node_c3539ae2-3081-4955-a42b-33878f231512",
+      "primitive": 0,
+      "status": "disconnected-upper-ornament-and-fused-lower-grip-no-complete-bow",
+      "points": [
+        {
+          "name": "upper-ornament-horn",
+          "vertex": 18817,
+          "triangle": 28085,
+          "triangleVertices": [
+            18817,
+            18825,
+            18818
+          ],
+          "incidentTriangles": [
+            28074,
+            28075,
+            28080,
+            28083,
+            28085
+          ],
+          "triangleBounds": {
+            "min": [
+              0.03912354154827525,
+              0.9531856612360082,
+              -0.30105586503252313
+            ],
+            "max": [
+              0.04238510673961831,
+              0.9754634896068288,
+              -0.2933959577955753
+            ]
+          },
+          "uv": [
+            0.955078125,
+            0.996337890625
+          ],
+          "uvArea": 0.000006705522537231445,
+          "weights": [
+            {
+              "bone": "mixamorigLeftHandMiddle3",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "name": "upper-ornament-bottom",
+          "vertex": 19287,
+          "triangle": 28739,
+          "triangleVertices": [
+            19287,
+            19281,
+            19273
+          ],
+          "incidentTriangles": [
+            28739,
+            28740,
+            28742,
+            28747,
+            28748
+          ],
+          "triangleBounds": {
+            "min": [
+              0.038043974804531235,
+              0.8191524787734283,
+              -0.3729552463216845
+            ],
+            "max": [
+              0.04299163645255585,
+              0.8305660518870684,
+              -0.3581237074628139
+            ]
+          },
+          "uv": [
+            0.99267578125,
+            0.115234375
+          ],
+          "uvArea": 0.0000064373016357421875,
+          "weights": [
+            {
+              "bone": "mixamorigLeftHandMiddle3",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "name": "lower-grip-end",
+          "vertex": 19351,
+          "triangle": 28834,
+          "triangleVertices": [
+            19349,
+            19351,
+            19352
+          ],
+          "incidentTriangles": [
+            28833,
+            28834,
+            28835,
+            28836
+          ],
+          "triangleBounds": {
+            "min": [
+              0.045799231723001044,
+              0.6070554444608196,
+              -0.3830566033077317
+            ],
+            "max": [
+              0.05697629219205821,
+              0.6160886454845362,
+              -0.37509151551109243
+            ]
+          },
+          "uv": [
+            0.018798828125,
+            0.128173828125
+          ],
+          "uvArea": 0.000005692243576049805,
+          "weights": [
+            {
+              "bone": "mixamorigLeftHandRing1",
+              "weight": 0.6901960784313725
+            },
+            {
+              "bone": "mixamorigLeftHand",
+              "weight": 0.19215686274509805
+            },
+            {
+              "bone": "mixamorigLeftHandPinky1",
+              "weight": 0.06274509803921569
+            },
+            {
+              "bone": "mixamorigLeftHandThumb2",
+              "weight": 0.054901960784313725
+            }
+          ]
+        },
+        {
+          "name": "lower-grip-surface",
+          "vertex": 19362,
+          "triangle": 28848,
+          "triangleVertices": [
+            19362,
+            19357,
+            19363
+          ],
+          "incidentTriangles": [
+            28846,
+            28847,
+            28848,
+            28849,
+            28850,
+            28851
+          ],
+          "triangleBounds": {
+            "min": [
+              0.04508206830648459,
+              0.6317746775740416,
+              -0.3851012815017941
+            ],
+            "max": [
+              0.04697034291347176,
+              0.6463010424810983,
+              -0.3768920536724182
+            ]
+          },
+          "uv": [
+            0.010009765625,
+            0.131103515625
+          ],
+          "uvArea": 0.000007569789886474609,
+          "weights": [
+            {
+              "bone": "mixamorigLeftHandRing1",
+              "weight": 0.6941176470588235
+            },
+            {
+              "bone": "mixamorigLeftHand",
+              "weight": 0.18823529411764706
+            },
+            {
+              "bone": "mixamorigLeftHandPinky1",
+              "weight": 0.06274509803921569
+            },
+            {
+              "bone": "mixamorigLeftHandThumb2",
+              "weight": 0.054901960784313725
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cases": {
+    "rest": [
+      {
+        "character": "mizu",
+        "hand": [
+          -0.011912283887518933,
+          1.6078795488556603,
+          -0.9712931170524416
+        ],
+        "points": [
+          {
+            "name": "upper-back-bow-end",
+            "vertex": 18219,
+            "triangle": 27690,
+            "world": [
+              -0.25220000182867963,
+              2.291810943795282,
+              -0.7665927236484307
+            ]
+          },
+          {
+            "name": "lower-back-bow-end",
+            "vertex": 1563,
+            "triangle": 2607,
+            "world": [
+              -0.26155399125672113,
+              0.7627682674471653,
+              0.3315485012091185
+            ]
+          },
+          {
+            "name": "bow-quiver-crossing-surface",
+            "vertex": 8991,
+            "triangle": 13602,
+            "world": [
+              -0.2700727178959811,
+              1.448087968778381,
+              -0.10546481764692991
+            ]
+          },
+          {
+            "name": "upper-authored-string-surface",
+            "vertex": 16821,
+            "triangle": 25391,
+            "world": [
+              -0.2446942812542706,
+              1.9436669800081043,
+              -0.4568564875659426
+            ]
+          }
+        ],
+        "upperLowerDistance": 1.882544329609178,
+        "crossingToHand": 0.9175177397753526
+      },
+      {
+        "character": "storm",
+        "hand": [
+          0.054592027324353,
+          1.6913992322815437,
+          -0.9732064245778799
+        ],
+        "points": [
+          {
+            "name": "upper-ornament-horn",
+            "vertex": 18817,
+            "triangle": 28085,
+            "world": [
+              0.11313174933430607,
+              2.3904267532950474,
+              -0.8483996243558634
+            ]
+          },
+          {
+            "name": "upper-ornament-bottom",
+            "vertex": 19287,
+            "triangle": 28739,
+            "world": [
+              0.11001001573326696,
+              2.0078268405632365,
+              -1.0726333140040745
+            ]
+          },
+          {
+            "name": "lower-grip-end",
+            "vertex": 19351,
+            "triangle": 28834,
+            "world": [
+              0.13631837227756355,
+              1.4876228259129016,
+              -1.0846349187960127
+            ]
+          },
+          {
+            "name": "lower-grip-surface",
+            "vertex": 19362,
+            "triangle": 28848,
+            "world": [
+              0.1303617476661216,
+              1.5526857484394858,
+              -1.089841452352864
+            ]
+          }
+        ],
+        "upperLowerDistance": 0.4434785068256583,
+        "crossingToHand": 0.2462119586365568
+      }
+    ],
+    "idle": [
+      {
+        "character": "mizu",
+        "hand": [
+          13.203056643594334,
+          3.1015974262400388,
+          0.16624859519356008
+        ],
+        "points": [
+          {
+            "name": "upper-back-bow-end",
+            "vertex": 18219,
+            "triangle": 27690,
+            "world": [
+              13.030540955860493,
+              4.058800246742848,
+              -0.4186042278213865
+            ]
+          },
+          {
+            "name": "lower-back-bow-end",
+            "vertex": 1563,
+            "triangle": 2607,
+            "world": [
+              12.781150391033028,
+              2.6976139029515718,
+              0.8254134540062772
+            ]
+          },
+          {
+            "name": "bow-quiver-crossing-surface",
+            "vertex": 8991,
+            "triangle": 13602,
+            "world": [
+              12.783745395352033,
+              3.4489383120890995,
+              0.34370300384209135
+            ]
+          },
+          {
+            "name": "upper-authored-string-surface",
+            "vertex": 16821,
+            "triangle": 25391,
+            "world": [
+              12.932937271932168,
+              3.8990658432698897,
+              -0.010592672806727266
+            ]
+          }
+        ],
+        "upperLowerDistance": 1.8608073272235088,
+        "crossingToHand": 0.5726758952791063
+      },
+      {
+        "character": "storm",
+        "hand": [
+          19.293714556898,
+          3.207585982069472,
+          0.20496507774988965
+        ],
+        "points": [
+          {
+            "name": "upper-ornament-horn",
+            "vertex": 18817,
+            "triangle": 28085,
+            "world": [
+              18.802345142230052,
+              2.8614776971501867,
+              0.807207614628301
+            ]
+          },
+          {
+            "name": "upper-ornament-bottom",
+            "vertex": 19287,
+            "triangle": 28739,
+            "world": [
+              19.120601749183304,
+              3.004234483742252,
+              0.4544327440225814
+            ]
+          },
+          {
+            "name": "lower-grip-end",
+            "vertex": 19351,
+            "triangle": 28834,
+            "world": [
+              19.24841629077073,
+              3.2376727984826026,
+              0.16345519521519114
+            ]
+          },
+          {
+            "name": "lower-grip-surface",
+            "vertex": 19362,
+            "triangle": 28848,
+            "world": [
+              19.26681242618009,
+              3.191268198666389,
+              0.18148910802006046
+            ]
+          }
+        ],
+        "upperLowerDistance": 0.49610168042284575,
+        "crossingToHand": 0.06841213184851602
+      }
+    ],
+    "hold": [
+      {
+        "character": "mizu",
+        "hand": [
+          13.65302045670418,
+          3.427240782414711,
+          0.7836532159303424
+        ],
+        "points": [
+          {
+            "name": "upper-back-bow-end",
+            "vertex": 18219,
+            "triangle": 27690,
+            "world": [
+              13.80710328298135,
+              4.189917378846779,
+              0.3922039404677049
+            ]
+          },
+          {
+            "name": "lower-back-bow-end",
+            "vertex": 1563,
+            "triangle": 2607,
+            "world": [
+              12.771534172166408,
+              2.70147878445045,
+              0.8186719460085716
+            ]
+          },
+          {
+            "name": "bow-quiver-crossing-surface",
+            "vertex": 8991,
+            "triangle": 13602,
+            "world": [
+              12.867505825277185,
+              3.553311916504224,
+              0.3904732139214082
+            ]
+          },
+          {
+            "name": "upper-authored-string-surface",
+            "vertex": 16821,
+            "triangle": 25391,
+            "world": [
+              13.415275930813936,
+              3.9643789176102517,
+              0.3935826392335498
+            ]
+          }
+        ],
+        "upperLowerDistance": 1.8627205352152465,
+        "crossingToHand": 0.8874219295330996
+      },
+      {
+        "character": "storm",
+        "hand": [
+          19.74754724634544,
+          3.5372282123094836,
+          0.779611506752085
+        ],
+        "points": [
+          {
+            "name": "upper-ornament-horn",
+            "vertex": 18817,
+            "triangle": 28085,
+            "world": [
+              20.229119010926468,
+              3.3531064650723588,
+              1.617234325253482
+            ]
+          },
+          {
+            "name": "upper-ornament-bottom",
+            "vertex": 19287,
+            "triangle": 28739,
+            "world": [
+              19.96466815623473,
+              3.372028527786015,
+              1.1886541409885978
+            ]
+          },
+          {
+            "name": "lower-grip-end",
+            "vertex": 19351,
+            "triangle": 28834,
+            "world": [
+              19.75991787523636,
+              3.4941860612708817,
+              0.7155661779132629
+            ]
+          },
+          {
+            "name": "lower-grip-surface",
+            "vertex": 19362,
+            "triangle": 28848,
+            "world": [
+              19.775192855622368,
+              3.491954690276193,
+              0.7710639296971953
+            ]
+          }
+        ],
+        "upperLowerDistance": 0.5039576106668618,
+        "crossingToHand": 0.07815026149194605
+      }
+    ],
+    "hold10s": [
+      {
+        "character": "mizu",
+        "hand": [
+          13.679099741293332,
+          3.3726261540567095,
+          0.7800022265687174
+        ],
+        "points": [
+          {
+            "name": "upper-back-bow-end",
+            "vertex": 18219,
+            "triangle": 27690,
+            "world": [
+              13.915728470930551,
+              4.112521806025667,
+              0.3693408457082999
+            ]
+          },
+          {
+            "name": "lower-back-bow-end",
+            "vertex": 1563,
+            "triangle": 2607,
+            "world": [
+              12.683825545964565,
+              2.692073513853451,
+              0.7006298838801919
+            ]
+          },
+          {
+            "name": "bow-quiver-crossing-surface",
+            "vertex": 8991,
+            "triangle": 13602,
+            "world": [
+              12.912122122916612,
+              3.550487142700739,
+              0.37819148625066107
+            ]
+          },
+          {
+            "name": "upper-authored-string-surface",
+            "vertex": 16821,
+            "triangle": 25391,
+            "world": [
+              13.50145611608703,
+              3.9179481935909766,
+              0.37406462964745624
+            ]
+          }
+        ],
+        "upperLowerDistance": 1.9091910837020933,
+        "crossingToHand": 0.8839349916182755
+      },
+      {
+        "character": "storm",
+        "hand": [
+          19.77496354068757,
+          3.4803943421134815,
+          0.7756527004676873
+        ],
+        "points": [
+          {
+            "name": "upper-ornament-horn",
+            "vertex": 18817,
+            "triangle": 28085,
+            "world": [
+              20.230937082984564,
+              3.276698389365413,
+              1.621253942090574
+            ]
+          },
+          {
+            "name": "upper-ornament-bottom",
+            "vertex": 19287,
+            "triangle": 28739,
+            "world": [
+              19.97163137925336,
+              3.3073430489705395,
+              1.190479377030644
+            ]
+          },
+          {
+            "name": "lower-grip-end",
+            "vertex": 19351,
+            "triangle": 28834,
+            "world": [
+              19.782999881246262,
+              3.435336182264753,
+              0.7128598005889303
+            ]
+          },
+          {
+            "name": "lower-grip-surface",
+            "vertex": 19362,
+            "triangle": 28848,
+            "world": [
+              19.797709741872886,
+              3.4330361812788937,
+              0.7685061163653744
+            ]
+          }
+        ],
+        "upperLowerDistance": 0.5037313461086386,
+        "crossingToHand": 0.07770308110823192
+      }
+    ],
+    "inverted": [
+      {
+        "character": "mizu",
+        "hand": [
+          12.491644261397216,
+          3.7831707805699413,
+          0.8336289609804814
+        ],
+        "points": [
+          {
+            "name": "upper-back-bow-end",
+            "vertex": 18219,
+            "triangle": 27690,
+            "world": [
+              13.116719734780938,
+              4.276468915370765,
+              1.2963331779586538
+            ]
+          },
+          {
+            "name": "lower-back-bow-end",
+            "vertex": 1563,
+            "triangle": 2607,
+            "world": [
+              13.135187735894057,
+              2.7945374067621036,
+              0.1189447432562516
+            ]
+          },
+          {
+            "name": "bow-quiver-crossing-surface",
+            "vertex": 8991,
+            "triangle": 13602,
+            "world": [
+              13.250867129581165,
+              3.4648542040447197,
+              0.6188316457645692
+            ]
+          },
+          {
+            "name": "upper-authored-string-surface",
+            "vertex": 16821,
+            "triangle": 25391,
+            "world": [
+              13.202527989114936,
+              3.941641317547001,
+              1.0158908132588262
+            ]
+          }
+        ],
+        "upperLowerDistance": 1.8928036320345623,
+        "crossingToHand": 0.8508129601082505
+      },
+      {
+        "character": "storm",
+        "hand": [
+          18.36809267306856,
+          3.895302469840306,
+          0.8970372694708877
+        ],
+        "points": [
+          {
+            "name": "upper-ornament-horn",
+            "vertex": 18817,
+            "triangle": 28085,
+            "world": [
+              17.564248092981245,
+              4.3019373301732795,
+              0.5740438891315724
+            ]
+          },
+          {
+            "name": "upper-ornament-bottom",
+            "vertex": 19287,
+            "triangle": 28739,
+            "world": [
+              17.92597762909256,
+              4.031548054424871,
+              0.7205588566033642
+            ]
+          },
+          {
+            "name": "lower-grip-end",
+            "vertex": 19351,
+            "triangle": 28834,
+            "world": [
+              18.35521761533002,
+              3.8419905127249514,
+              0.949106806147413
+            ]
+          },
+          {
+            "name": "lower-grip-surface",
+            "vertex": 19362,
+            "triangle": 28848,
+            "world": [
+              18.319630870855235,
+              3.869601901272237,
+              0.9176061452749036
+            ]
+          }
+        ],
+        "upperLowerDistance": 0.47478969389437775,
+        "crossingToHand": 0.07562518451513461
+      }
+    ],
+    "crouch": [
+      {
+        "character": "mizu",
+        "hand": [
+          12.49000215824737,
+          3.284515016154308,
+          0.8249404261205888
+        ],
+        "points": [
+          {
+            "name": "upper-back-bow-end",
+            "vertex": 18219,
+            "triangle": 27690,
+            "world": [
+              13.109840146583505,
+              3.572076858698302,
+              1.2912862987370939
+            ]
+          },
+          {
+            "name": "lower-back-bow-end",
+            "vertex": 1563,
+            "triangle": 2607,
+            "world": [
+              13.133850431222204,
+              2.7103233064372243,
+              0.1190083701717603
+            ]
+          },
+          {
+            "name": "bow-quiver-crossing-surface",
+            "vertex": 8991,
+            "triangle": 13602,
+            "world": [
+              13.2514349741773,
+              3.099467093621451,
+              0.6206394392251804
+            ]
+          },
+          {
+            "name": "upper-authored-string-surface",
+            "vertex": 16821,
+            "triangle": 25391,
+            "world": [
+              13.198801058685946,
+              3.3770906223934776,
+              1.0141794004882745
+            ]
+          }
+        ],
+        "upperLowerDistance": 1.4551395879448974,
+        "crossingToHand": 0.8097910595055666
+      },
+      {
+        "character": "storm",
+        "hand": [
+          18.36599082768766,
+          3.34953713912417,
+          0.8891770427453495
+        ],
+        "points": [
+          {
+            "name": "upper-ornament-horn",
+            "vertex": 18817,
+            "triangle": 28085,
+            "world": [
+              17.565598067130107,
+              3.5844917033834562,
+              0.5551055908655664
+            ]
+          },
+          {
+            "name": "upper-ornament-bottom",
+            "vertex": 19287,
+            "triangle": 28739,
+            "world": [
+              17.92578912386133,
+              3.4280714218837427,
+              0.7071024657986161
+            ]
+          },
+          {
+            "name": "lower-grip-end",
+            "vertex": 19351,
+            "triangle": 28834,
+            "world": [
+              18.35256396133383,
+              3.3187377521561334,
+              0.9414051450248047
+            ]
+          },
+          {
+            "name": "lower-grip-surface",
+            "vertex": 19362,
+            "triangle": 28848,
+            "world": [
+              18.317315107569474,
+              3.334672024771261,
+              0.9093606517642738
+            ]
+          }
+        ],
+        "upperLowerDistance": 0.4210795076977939,
+        "crossingToHand": 0.06210199389233628
+      }
+    ],
+    "jump": [
+      {
+        "character": "mizu",
+        "hand": [
+          12.342035615958142,
+          3.893978509345443,
+          0.7658445244451202
+        ],
+        "points": [
+          {
+            "name": "upper-back-bow-end",
+            "vertex": 18219,
+            "triangle": 27690,
+            "world": [
+              12.780084813327008,
+              4.484274511514226,
+              1.2840020163929546
+            ]
+          },
+          {
+            "name": "lower-back-bow-end",
+            "vertex": 1563,
+            "triangle": 2607,
+            "world": [
+              13.044869868373839,
+              2.907480645038233,
+              0.20846502028442332
+            ]
+          },
+          {
+            "name": "bow-quiver-crossing-surface",
+            "vertex": 8991,
+            "triangle": 13602,
+            "world": [
+              13.179348872833287,
+              3.705463168828033,
+              0.6646542146960109
+            ]
+          },
+          {
+            "name": "upper-authored-string-surface",
+            "vertex": 16821,
+            "triangle": 25391,
+            "world": [
+              12.97479648994752,
+              4.1676046126496225,
+              1.0300680696117015
+            ]
+          }
+        ],
+        "upperLowerDistance": 1.9269587055073667,
+        "crossingToHand": 0.8642169881091083
+      },
+      {
+        "character": "storm",
+        "hand": [
+          18.209918457803848,
+          4.031171507768768,
+          0.8353382660321582
+        ],
+        "points": [
+          {
+            "name": "upper-ornament-horn",
+            "vertex": 18817,
+            "triangle": 28085,
+            "world": [
+              17.378863331035216,
+              4.291814288935107,
+              0.3932048104430752
+            ]
+          },
+          {
+            "name": "upper-ornament-bottom",
+            "vertex": 19287,
+            "triangle": 28739,
+            "world": [
+              17.772162781742544,
+              4.088819905138646,
+              0.5982732517722225
+            ]
+          },
+          {
+            "name": "lower-grip-end",
+            "vertex": 19351,
+            "triangle": 28834,
+            "world": [
+              18.202496954031176,
+              3.977806930290868,
+              0.8883864430097228
+            ]
+          },
+          {
+            "name": "lower-grip-surface",
+            "vertex": 19362,
+            "triangle": 28848,
+            "world": [
+              18.165800553138297,
+              3.998428686371419,
+              0.8512178442125197
+            ]
+          }
+        ],
+        "upperLowerDistance": 0.4877952884241064,
+        "crossingToHand": 0.07561062047282502
+      }
+    ]
+  },
+  "functionalStringApproved": false
+}

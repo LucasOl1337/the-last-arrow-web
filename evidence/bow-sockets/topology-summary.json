@@ -1,0 +1,229 @@
+{
+  "mizu": {
+    "source": "public/assets/models/mizu.glb",
+    "sha256": "50ea717daab340296cd5d8afb9f411aac21b6f92f36487538019187c0ad5daea",
+    "connectivity": "shared indexed or exact-position-welded vertices; not anatomical classification",
+    "meshes": [
+      {
+        "meshIndex": 0,
+        "meshName": "tripo_node_99956f04-9eb1-4d92-b8ff-a02935577b82",
+        "vertexCount": 18500,
+        "triangleCount": 28132,
+        "positionAttribute": {
+          "normalized": false,
+          "type": "Float32Array"
+        },
+        "components": [
+          {
+            "id": 0,
+            "triangleCount": 28132,
+            "vertexCount": 18500,
+            "bounds": {
+              "min": [
+                -0.12756346505565067,
+                -3.638956745684991e-08,
+                -0.3955076909845304
+              ],
+              "max": [
+                0.1275634559244941,
+                0.9816284276991091,
+                0.39550762407466644
+              ]
+            },
+            "uvBounds": {
+              "min": [
+                0,
+                0
+              ],
+              "max": [
+                1,
+                1
+              ]
+            },
+            "uvArea": 0.5544241070747375,
+            "boneWeights": {
+              "mixamorigHead": 0.17897530471648454,
+              "mixamorigLeftLeg": 0.07903041865394798,
+              "mixamorigRightUpLeg": 0.07761759406465284,
+              "mixamorigRightLeg": 0.0733032326444093,
+              "mixamorigLeftUpLeg": 0.06969496555378865,
+              "mixamorigSpine1": 0.06083412824589369,
+              "mixamorigRightArm": 0.0597471118177001,
+              "mixamorigRightShoulder": 0.054821621621621554,
+              "mixamorigHips": 0.05218187599364086,
+              "mixamorigLeftArm": 0.04214774774774799,
+              "mixamorigSpine": 0.040552623211446745,
+              "mixamorigLeftShoulder": 0.03076629570747179,
+              "mixamorigLeftForeArm": 0.030056385797562313,
+              "mixamorigRightForeArm": 0.02831436142024369,
+              "mixamorigSpine2": 0.026115739268680403,
+              "mixamorigLeftFoot": 0.019918812930577623,
+              "mixamorigRightFoot": 0.01920445151033386,
+              "mixamorigNeck": 0.016894329623741385,
+              "mixamorigLeftToeBase": 0.008611976682564923,
+              "mixamorigRightToeBase": 0.008225755166931638,
+              "mixamorigLeftHand": 0.0024356120826709076,
+              "mixamorigRightHand": 0.002275993640699524,
+              "mixamorigRightHandThumb1": 0.001594064652888183,
+              "mixamorigLeftHandThumb1": 0.0013674615792262851,
+              "mixamorigRightHandThumb3": 0.0013369369369369368,
+              "mixamorigLeftHandThumb3": 0.0011508214096449395,
+              "mixamorigRightHandIndex3": 0.0009871754107048227,
+              "mixamorigRightHandPinky1": 0.0009806041335453106,
+              "mixamorigRightHandIndex1": 0.0009379968203497618,
+              "mixamorigRightHandIndex2": 0.0008184419713831481,
+              "mixamorigLeftHandPinky1": 0.0008175940646528882,
+              "mixamorigRightHandRing3": 0.0007351351351351355,
+              "mixamorigLeftHandIndex1": 0.0007056703762586118,
+              "mixamorigRightHandThumb2": 0.0006893481717011131,
+              "mixamorigRightHandMiddle1": 0.0006647588765235823,
+              "mixamorigLeftHandThumb2": 0.0006575516693163754,
+              "mixamorigRightHandMiddle3": 0.0006478007419183891,
+              "mixamorigLeftHandPinky3": 0.0006314785373608904,
+              "mixamorigLeftHandIndex2": 0.0005837837837837838,
+              "mixamorigRightHandMiddle2": 0.0005721250662427132,
+              "mixamorigRightHandPinky3": 0.0005642819289878113,
+              "mixamorigRightHandPinky2": 0.0005064122946475888,
+              "mixamorigRightHandRing1": 0.00046634870164281915,
+              "mixamorigLeftHandRing2": 0.00029931107578166395,
+              "mixamorigRightHandRing2": 0.00029422363540010594,
+              "mixamorigLeftHandRing1": 0.0001153153153153153,
+              "mixamorigLeftHandMiddle1": 0.00010662427133015367
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "storm": {
+    "source": "public/assets/models/storm.glb",
+    "sha256": "e80a656100b91cfc024b9bf62c136b12cdfe06b6fb77af5bf06c7bac434b1f4f",
+    "connectivity": "shared indexed or exact-position-welded vertices; not anatomical classification",
+    "meshes": [
+      {
+        "meshIndex": 0,
+        "meshName": "tripo_node_c3539ae2-3081-4955-a42b-33878f231512",
+        "vertexCount": 19451,
+        "triangleCount": 28963,
+        "positionAttribute": {
+          "normalized": false,
+          "type": "Float32Array"
+        },
+        "components": [
+          {
+            "id": 0,
+            "triangleCount": 28357,
+            "vertexCount": 19016,
+            "bounds": {
+              "min": [
+                -0.15830997442808362,
+                -1.9695440740103397e-07,
+                -0.4005737003748723
+              ],
+              "max": [
+                0.1583099734792714,
+                0.9793700533659155,
+                0.40060430647836365
+              ]
+            },
+            "uvBounds": {
+              "min": [
+                0,
+                0
+              ],
+              "max": [
+                1,
+                1
+              ]
+            },
+            "uvArea": 0.5594452023506165,
+            "boneWeights": {
+              "mixamorigRightUpLeg": 0.23890779281843286,
+              "mixamorigLeftUpLeg": 0.16821273313700857,
+              "mixamorigHead": 0.08984487779125024,
+              "mixamorigSpine": 0.04972056555057861,
+              "mixamorigRightArm": 0.04886597045212699,
+              "mixamorigRightLeg": 0.044388007622064386,
+              "mixamorigLeftLeg": 0.04341277108234946,
+              "mixamorigLeftArm": 0.040311358030801735,
+              "mixamorigRightShoulder": 0.037260470027304114,
+              "mixamorigLeftShoulder": 0.03362452258985195,
+              "mixamorigHips": 0.030610548805133392,
+              "mixamorigLeftFoot": 0.02920492134590478,
+              "mixamorigRightFoot": 0.023035916091299805,
+              "mixamorigNeck": 0.021301154033342394,
+              "mixamorigSpine1": 0.02100089089064318,
+              "mixamorigLeftForeArm": 0.013259422405899654,
+              "mixamorigRightForeArm": 0.012697666361454113,
+              "mixamorigRightToeBase": 0.011577453867537757,
+              "mixamorigLeftToeBase": 0.008336220478936212,
+              "mixamorigRightHand": 0.004681300370379536,
+              "mixamorigLeftHandRing1": 0.004526425631253759,
+              "mixamorigSpine2": 0.004129030661486297,
+              "mixamorigLeftHand": 0.0032641243287386467,
+              "mixamorigRightHandPinky1": 0.0013482969965436745,
+              "mixamorigRightHandIndex1": 0.001328705651381293,
+              "mixamorigRightHandThumb1": 0.0010513334488191576,
+              "mixamorigLeftHandThumb3": 0.0009335791531589502,
+              "mixamorigRightHandThumb2": 0.000928011086639115,
+              "mixamorigLeftHandThumb2": 0.0008255174177369716,
+              "mixamorigLeftHandRing2": 0.000811494139094426,
+              "mixamorigLeftHandRing3": 0.0007914903445602052,
+              "mixamorigRightHandMiddle1": 0.0007844787052389317,
+              "mixamorigLeftHandPinky1": 0.0007758172684303003,
+              "mixamorigRightHandThumb3": 0.0007347785559322594,
+              "mixamorigRightHandMiddle3": 0.0006477517384741023,
+              "mixamorigLeftHandIndex3": 0.0006423898966401873,
+              "mixamorigLeftHandIndex1": 0.0006038258803731842,
+              "mixamorigRightHandRing1": 0.0005607249210159451,
+              "mixamorigRightHandIndex3": 0.0005551568544961106,
+              "mixamorigLeftHandThumb1": 0.000546289193001559,
+              "mixamorigRightHandPinky3": 0.0005446393955142006,
+              "mixamorigRightHandRing2": 0.0005302036674998142,
+              "mixamorigRightHandRing3": 0.0005227795788067014,
+              "mixamorigLeftHandPinky2": 0.00048504046128337744,
+              "mixamorigLeftHandIndex2": 0.0004547254324531663,
+              "mixamorigRightHandIndex2": 0.0003734729062007638,
+              "mixamorigRightHandMiddle2": 0.0003709982099697262,
+              "mixamorigLeftHandMiddle3": 0.00021076162901003892,
+              "mixamorigRightHandPinky2": 0.00018353997046862495,
+              "mixamorigLeftHandMiddle1": 0.00016951669182607837,
+              "mixamorigLeftHandMiddle2": 0.00010806173542197695
+            }
+          },
+          {
+            "id": 1,
+            "triangleCount": 606,
+            "vertexCount": 435,
+            "bounds": {
+              "min": [
+                0.007040507127659741,
+                0.8020626380442863,
+                -0.39776604147439176
+              ],
+              "max": [
+                0.06823730266381009,
+                0.9766841926373386,
+                -0.2923583605463453
+              ]
+            },
+            "uvBounds": {
+              "min": [
+                0.003173828125,
+                0.004150390625
+              ],
+              "max": [
+                0.999755859375,
+                0.997802734375
+              ]
+            },
+            "uvArea": 0.0033906400203704834,
+            "boneWeights": {
+              "mixamorigLeftHandMiddle3": 1.0000000000000067
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
