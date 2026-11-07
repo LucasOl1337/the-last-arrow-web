@@ -85,6 +85,7 @@ img.fighter-icon{width:34px;height:34px;object-fit:cover;border-radius:50%;borde
 .quality-notice{position:absolute;left:1%;bottom:4.5%;max-width:70%;padding:4px 7px;border-radius:3px;background:#081a20d9;color:#c5d3ca;font-size:11px;line-height:1.25}
 @media(max-height:600px){.quality-notice{font-size:10px;padding:3px 6px}.victory-panel{padding:18px 24px}.victory-logo{width:150px;margin:0 0 4px}.victory-portrait{width:100px;height:100px}.victory-panel h2{font-size:30px;margin-bottom:8px}.victory-panel .eyebrow{margin-bottom:6px}.victory-panel .stat{padding:5px 8px}.victory-panel p{margin:6px 0}.victory-panel>button{min-height:38px;padding:8px 12px}}
 .control-settings{margin:12px 0;border-top:1px solid #7c91795c;padding-top:12px}
+.score-card .skill-status{font-size:10px;color:#d7d2ac;white-space:nowrap;letter-spacing:0}.score-card .skill-status.active{color:#a9f0df}@media(max-width:600px){.score-card .skill-status{font-size:8px}}
 /* Bindings are a scan-friendly table, not a stack of cards. */
 @media(min-width:601px){.binding-table{display:grid;grid-template-columns:1fr 1fr;column-gap:22px}.binding-row{grid-template-columns:minmax(0,1fr) minmax(110px,44%);gap:8px}.binding-key{overflow-wrap:anywhere}}
 .controls-panel{width:min(900px,100%);padding:22px 30px}.controls-panel h2{font-size:32px}.controls-panel .eyebrow{margin-bottom:8px}

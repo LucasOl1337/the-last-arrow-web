@@ -3,6 +3,7 @@ import { CHARACTERS } from '../sim/world.ts';
 import type { Fighter, World } from '../sim/world.ts';
 import { delta, solid, WIDTH, HEIGHT } from '../sim/level.ts';
 import { loadCharacterKits, instantiate } from './characters.ts';
+import { activeKitsMissing } from './active-models.ts';
 import type { CharacterKits, ClipName, ModelKit } from './characters.ts';
 import { patchCharacterMaterial, addOutline } from './characterMaterial.ts';
 import type { CharacterUniforms } from './characterMaterial.ts';
@@ -91,7 +92,7 @@ export class FightersView {
   constructor(private scene: THREE.Group, onFallback: () => void = () => {}) {
     loadCharacterKits().then(kits => {
       this.kits = kits;
-      if (Object.values(kits).some(kit => !kit)) onFallback();
+      if (activeKitsMissing(kits)) onFallback();
       if (this.world) this.reset(this.world);
     }).catch(error => { this.loadError = error; onFallback(); console.warn('Personagens 3D indisponíveis; usando bonecos procedurais.', error); });
   }

@@ -4,6 +4,7 @@ import { CHARACTERS } from '../sim/world.ts';
 import { asset, portrait } from '../paths.ts';
 import { VISUAL_HEIGHT } from './fighters.ts';
 import { matchStatus } from '../ui/match-copy.ts';
+import { fighterName, skillStatus } from './skill-status.ts';
 import { layoutHint, readLayout } from '../ui/control-layouts.ts';
 
 /** Seconds the overhead quiver stays visible after the last ammo change. */
@@ -45,7 +46,7 @@ export class Hud {
     this.countdown.className = 'countdown'; this.countdown.setAttribute('aria-live', 'polite');
     this.roundCard.className = 'round-card'; this.roundCard.setAttribute('aria-live', 'polite'); this.roundCard.hidden = true;
     this.footer.className = 'arena-footer';
-    this.muteButton.type = 'button'; this.muteButton.className = 'mute-toggle'; this.muteButton.title = 'Som (M)';
+    this.muteButton.type = 'button'; this.muteButton.className = 'mute-toggle'; this.muteButton.title = 'Ligar ou desligar som';
     this.muteButton.addEventListener('click', () => this.setMuted(this.onMute?.() ?? false));
     this.setMuted(false);
     this.qualityNotice.className = 'quality-notice'; this.qualityNotice.hidden = true;
@@ -53,8 +54,8 @@ export class Hud {
     this.element.append(this.score, this.countdown, this.roundCard, this.footer, this.muteButton, this.qualityNotice);
   }
   setMuted(muted: boolean) {
-    this.muteButton.textContent = muted ? '🔇 M' : '🔊 M';
-    this.muteButton.setAttribute('aria-label', muted ? 'Ligar som (M)' : 'Desligar som (M)');
+    this.muteButton.textContent = muted ? '🔇 Som' : '🔊 Som';
+    this.muteButton.setAttribute('aria-label', muted ? 'Ligar som' : 'Desligar som');
     this.muteButton.setAttribute('aria-pressed', String(muted));
   }
   setLowQuality(low: boolean) {
@@ -67,7 +68,7 @@ export class Hud {
     this.feedbackRound = w.round;
     this.cards = w.fighters.map(f => {
       const c = CHARACTERS[f.character], card = document.createElement('div'); card.className = 'score-card'; card.style.setProperty('--fighter', c.color);
-      card.innerHTML = `<img class="fighter-icon" src="${portrait(c.id)}" alt=""><div><b>${c.name}</b><small>${f.human ? `P${f.id + 1}` : 'BOT'} <span class="ammo"></span></small></div><strong class="points">0</strong>`;
+      card.innerHTML = `<img class="fighter-icon" src="${portrait(c.id)}" alt=""><div><b>${fighterName(c.id,c.name)}</b><small>${f.human ? `P${f.id + 1}` : 'BOT'} <span class="ammo"></span></small><small class="skill-status"></small></div><strong class="points">0</strong>`;
       this.score.append(card); return card;
     });
     this.overheads = w.fighters.map(f => {
@@ -76,7 +77,7 @@ export class Hud {
       const name = document.createElement('div'); name.className = 'fighter-label';
       const direction = document.createElement('span'); direction.className = 'wrap-direction'; direction.hidden = true;
       direction.setAttribute('aria-hidden', 'true');
-      name.append(direction, document.createTextNode(f.human ? `P${f.id + 1}` : CHARACTERS[f.character].name));
+      name.append(direction, document.createTextNode(f.human ? `P${f.id + 1}` : fighterName(CHARACTERS[f.character].id,CHARACTERS[f.character].name)));
       const catchLabel = document.createElement('div'); catchLabel.className = 'catch-label'; catchLabel.hidden = true;
       catchLabel.textContent = 'PEGOU!';
       root.append(catchLabel, pips, name); this.element.append(root);
@@ -123,11 +124,11 @@ export class Hud {
     const c = winner ? CHARACTERS[winner.character] : null;
     this.roundCard.style.setProperty('--fighter', c?.color ?? '#e7c887');
     this.roundCard.innerHTML = `${c ? `<img class="round-portrait" src="${portrait(c.id)}" alt="">` : ''}<div class="round-title"></div><div class="round-dots"></div>`;
-    this.roundCard.querySelector('.round-title')!.textContent = c ? `${c.name} vence o round` : 'Empate';
+    this.roundCard.querySelector('.round-title')!.textContent = c ? `${fighterName(c.id,c.name)} vence o round` : 'Empate';
     const dots = this.roundCard.querySelector('.round-dots')!;
     w.fighters.forEach(f => {
       const row = document.createElement('div'); row.className = 'dot-row'; row.style.setProperty('--fighter', CHARACTERS[f.character].color);
-      const label = document.createElement('span'); label.textContent = CHARACTERS[f.character].name; row.append(label);
+      const label = document.createElement('span'); label.textContent = fighterName(CHARACTERS[f.character].id,CHARACTERS[f.character].name); row.append(label);
       for (let n = 0; n < WIN_SCORE; n++) {
         const dot = document.createElement('i');
         const lit = n < f.score, fresh = winner === f && n === f.score - 1;
@@ -148,8 +149,13 @@ export class Hud {
         this.cards[n].querySelector('.points')!.textContent = String(f.score);
         this.cards[n].querySelector('.ammo')!.textContent = '➶'.repeat(f.ammo) || 'sem flechas';
       });
-      this.footer.textContent = `${w.level.name}   /   ${matchStatus(w)}${matchMedia('(pointer: coarse)').matches ? '' : this.online ? '   /   Online · sem pausa   /   M som' : '   /   Esc pausa   /   M som'}`;
+      this.footer.textContent = `${w.level.name}   /   ${matchStatus(w)}${matchMedia('(pointer: coarse)').matches ? '' : this.online ? '   /   Online · sem pausa' : '   /   Esc pausa'}`;
     }
+    w.fighters.forEach((f,n)=>{
+      const status=skillStatus(f), element=this.cards[n].querySelector<HTMLElement>('.skill-status')!;
+      if(element.textContent!==status.text)element.textContent=status.text;
+      element.classList.toggle('active',status.active);
+    });
     this.renderCountdown(w, now);
     this.renderRoundCard(w);
     this.countdown.hidden = this.roundCard.hidden === false || paused;
