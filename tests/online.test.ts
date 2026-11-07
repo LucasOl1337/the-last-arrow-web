@@ -25,7 +25,7 @@ test('two remote players share authoritative world, full rooms reject, disconnec
    await Promise.all([a.wait('start'),b.wait('start')]);
    c.send({type:'join',room:joined.room});assert.match((await c.wait('error')).message,/cheia/);
    const first=await a.wait('state');assert.equal(first.world.fighters.length,2);
-   assert.equal(first.world.options.map,'totem');assert.equal(first.world.options.mode,'headhunter');assert.deepEqual(first.world.options.characters.slice(0,2),['akane','kaze']);
+   assert.equal(first.world.options.map,'totem');assert.equal(first.world.options.mode,'headhunter');assert.deepEqual(first.world.options.characters.slice(0,2),['stormdragon','mizu']);
    const r=app.rooms.get(joined.room)!;
    await new Promise(r=>setTimeout(r,60));assert.equal(r.world.tick,0,'wait until both assets are ready');
    a.send({type:'ready'});b.send({type:'ready'});r.world.phase='playing';r.world.fighters.forEach(f=>f.invulnerable=10);

@@ -2,7 +2,7 @@ import { createServer } from 'node:http';
 import { randomBytes } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { WebSocketServer, WebSocket } from 'ws';
-import { createWorld, step, DT, CHARACTERS } from '../src/sim/world.ts';
+import { createWorld, step, DT, normalizeCharacters } from '../src/sim/world.ts';
 import type { World, MatchOptions, SimEvent } from '../src/sim/world.ts';
 import { emptyIntent } from '../src/sim/input.ts';
 import { parseIntent } from '../src/net/protocol.ts';
@@ -42,7 +42,7 @@ export function createOnlineServer() {
         if(code && (!room || room.peers.length>=2)) {room=undefined;send(ws,{type:'error',message:'Sala não encontrada ou já está cheia.'});return;}
         if(!room) {
           if(rooms.size>=40) {send(ws,{type:'error',message:'Servidor cheio. Tente de novo mais tarde.'});return;}
-          const characters=CHARACTERS.map((c,i)=>Array.isArray(m.characters)&&CHARACTERS.some(valid=>valid.id===m.characters[i])?m.characters[i]:c.id);
+          const characters = normalizeCharacters(Array.isArray(m.characters) ? m.characters : []);
           const opts: MatchOptions = {humans:2,bots:0,map:typeof m.map==='string'?m.map:'moss',mode:m.mode==='headhunter'?'headhunter':'versus',characters,seed:randomBytes(4).readUInt32LE()};
           room={code:randomBytes(4).toString('hex').toUpperCase(),peers:[],world:createWorld(opts),events:[],ready:new Set(),loaded:new Set(),lastActive:now}; rooms.set(room.code,room);
         }

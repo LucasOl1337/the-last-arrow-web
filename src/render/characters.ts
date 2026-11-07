@@ -62,18 +62,19 @@ function buildKit(model: THREE.Object3D, sources: THREE.AnimationClip[]): ModelK
   };
 }
 let pending: Promise<CharacterKits> | null = null;
-/** Loads the four characters independently; a broken file only affects its own character. */
+/** Load only the active roster; archived assets remain on disk, not in every match. */
 export function loadCharacterKits(): Promise<CharacterKits> {
   pending ??= (async () => {
     const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
     const load = (file: string) => loader.loadAsync(asset(`models/${file}`));
-    const names = Object.keys(SOURCES) as (keyof CharacterKits)[];
+    const names: (keyof CharacterKits)[] = ['mizu', 'storm'];
     const results = await Promise.allSettled(names.map(async name => {
       const src = SOURCES[name];
       const [model, ...anims] = await Promise.all([src.model, ...src.anims].map(load));
       return buildKit(model.scene, anims.flatMap(a => a.animations));
     }));
-    const kits = {} as CharacterKits;
+    // Keep legacy fallback keys for older renderer consumers without loading retired models.
+    const kits: CharacterKits = { mizu: null, storm: null, kaze: null, akane: null };
     results.forEach((r, i) => {
       kits[names[i]] = r.status === 'fulfilled' ? r.value : null;
       if (r.status === 'rejected') console.warn(`Modelo ${names[i]} indisponível`, r.reason);

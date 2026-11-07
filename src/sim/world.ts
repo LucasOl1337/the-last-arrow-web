@@ -17,9 +17,16 @@ export const RESPAWN_SECONDS = 1.5;
 export const CHARACTERS = [
   { id: 'mizu', name: 'Mizu', color: '#6497e0', cloth: '#20375d', accent: '#d7b977' },
   { id: 'stormdragon', name: 'Stormdragon', color: '#71e4f3', cloth: '#35465c', accent: '#a7f8ff' },
-  { id: 'kaze', name: 'Kaze', color: '#97cf8b', cloth: '#345944', accent: '#e3d19e' },
-  { id: 'akane', name: 'Akane', color: '#f38d87', cloth: '#8c3644', accent: '#f4cb99' },
 ] as const;
+/** Old saved menus/clients may still send the retired IDs; keep rooms playable. */
+export function normalizeCharacters(ids: readonly unknown[] = [], slots = 4): string[] {
+  return Array.from({ length: slots }, (_, index) => {
+    const id = ids[index];
+    if (id === 'mizu' || id === 'kaze') return 'mizu';
+    if (id === 'stormdragon' || id === 'akane') return 'stormdragon';
+    return CHARACTERS[index % CHARACTERS.length].id;
+  });
+}
 export type Difficulty = 'easy' | 'normal' | 'hard';
 export type ArrowKind = 'normal' | 'bolt' | 'bomb';
 export interface Chest { id: number; x: number; y: number; reward: ArrowKind[] }
@@ -78,7 +85,7 @@ export function createWorld(opts: MatchOptions = {}): World {
     humans, bots, map: LEVELS.find(l => l.id === opts.map)?.id ?? 'moss',
     mode: opts.mode === 'headhunter' ? 'headhunter' : 'versus',
     difficulty: ['easy', 'normal', 'hard'].includes(opts.difficulty ?? '') ? opts.difficulty! : 'normal',
-    characters: opts.characters ?? ['mizu', 'stormdragon', 'kaze', 'akane'], seed: (opts.seed ?? 1) >>> 0,
+    characters: normalizeCharacters(opts.characters), seed: (opts.seed ?? 1) >>> 0,
   };
   const w: World = {
     level: LEVELS.find(l => l.id === options.map)!, options, fighters: [], arrows: [], events: [],
