@@ -6,6 +6,7 @@ import { VISUAL_HEIGHT } from './fighters.ts';
 import { matchStatus } from '../ui/match-copy.ts';
 import { fighterName, skillStatus } from './skill-status.ts';
 import { layoutHint, readLayout } from '../ui/control-layouts.ts';
+import { cameraDirection } from './camera-indicator.ts';
 
 /** Seconds the overhead quiver stays visible after the last ammo change. */
 const AMMO_VISIBLE = 1.5;
@@ -15,11 +16,6 @@ const WIN_SCORE = 5;
 
 interface Overhead { root: HTMLElement; name: HTMLElement; pips: HTMLElement; quiver: string; changedAt: number;
   catchLabel: HTMLElement; catchUntil: number; direction: HTMLElement }
-
-/** Direction of the clipped body, not of its already-clamped overhead label. */
-export function wrapDirection(x: number, y: number): string {
-  return `${y < VISUAL_HEIGHT - 0.55 ? '↑' : y > 18 - 0.55 ? '↓' : ''}${x < 0.5 ? '←' : x > 31.5 ? '→' : ''}`;
-}
 
 export class Hud {
   readonly element = document.createElement('div');
@@ -167,7 +163,15 @@ export class Hud {
       const o = this.overheads[n]; o.root.hidden = !f.alive;
       if (!f.alive) { o.catchUntil = 0; return; }
       o.catchLabel.hidden = now >= o.catchUntil;
-      const direction = wrapDirection(f.x, f.y);
+      // Use the actual camera and visual silhouette: near-camera clipping can happen far from a map seam.
+      const height = f.crouching ? VISUAL_HEIGHT * .58 : VISUAL_HEIGHT;
+      const feet = 18 - f.y - (f.crouching ? .30 : .55);
+      this.projected.set(f.x - .6, feet + height, .6).project(camera);
+      const left = (this.projected.x + 1) / 2, top = (1 - this.projected.y) / 2;
+      this.projected.set(f.x + .6, feet, .6).project(camera);
+      const direction = cameraDirection({ left, top, right: (this.projected.x + 1) / 2, bottom: (1 - this.projected.y) / 2 });
+      o.root.classList.toggle('offscreen', !!direction);
+      o.root.dataset.direction = direction;
       if (o.direction.textContent !== direction) o.direction.textContent = direction;
       o.direction.hidden = !direction;
       const quiver = this.quiverOf(f), sig = quiver.join(',');
@@ -192,6 +196,8 @@ export class Hud {
       return { x: r.left - area.left, y: r.top - area.top, width: r.width, height: r.height };
     };
     const blocked = [rect(this.score), rect(this.footer), rect(this.muteButton)];
+    const cameraButton = this.element.parentElement?.querySelector<HTMLElement>('.camera-toggle');
+    if (cameraButton) blocked.push(rect(cameraButton));
     if (!this.qualityNotice.hidden) blocked.push(rect(this.qualityNotice));
     const measured = anchors.map(a => ({ ...a, width: a.overhead.root.offsetWidth, height: a.overhead.root.offsetHeight }));
     for (const a of measured) {

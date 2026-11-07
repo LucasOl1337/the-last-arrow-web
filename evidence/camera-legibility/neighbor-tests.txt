@@ -1,0 +1,19 @@
+✔ mouse aim is continuous and independent from strafing (1.516378ms)
+✔ crouch preserves feet, reduces body and restores height on release (0.238581ms)
+✔ low ceiling blocks standing until the fighter leaves the gap (0.260621ms)
+✔ arrow at standing head passes over crouched fighter (0.549843ms)
+✔ network validates optional pointer axes and crouch, legacy still accepted (0.755274ms)
+✔ opening menu cancels drawn arrow without spending ammo (0.199371ms)
+✔ ergonomic presets are alternatives without jump/skill conflicts (0.192641ms)
+✔ input cannot inject speed, coordinates or malformed axes (0.772684ms)
+✔ two remote players share authoritative world, full rooms reject, disconnect closes room (394.32249ms)
+✔ two active models with archived null keys do not report fallback; missing active still does (0.714013ms)
+✔ HUD derives ready/active/cooldown and spent ward from actual fighter state (0.641373ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 513.315078

@@ -1,0 +1,27 @@
+{
+  "revision": "02b128f",
+  "near": {
+    "height": 15.156249999999998,
+    "width": 26.94444444444444,
+    "x": 13.47222222222222,
+    "y": 7.578124999999999
+  },
+  "case": {
+    "p1": {
+      "x": 2,
+      "y": 15.45
+    },
+    "rival": {
+      "x": 30,
+      "y": 15.45
+    }
+  },
+  "physicalBorderDirection": "",
+  "portrait": {
+    "width": 360,
+    "height": 800,
+    "gameHeight": 202.5,
+    "boxFraction": 0.253125
+  },
+  "hypothesis": "Camera edge direction missing despite rival outside frame; unchanged fixed distance, larger explicit marker"
+}
