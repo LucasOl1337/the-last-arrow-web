@@ -3,6 +3,7 @@ import type { World, Fighter } from './world.ts';
 import type { Intent } from './input.ts';
 import { solid, wrap, WIDTH, HEIGHT } from './level.ts';
 import { HALF_W, HALF_H, CROUCH_HALF_H, bodyHalfHeight } from './body.ts';
+import { activateSkill, tickSkill } from './skills.ts';
 export { HALF_W, HALF_H } from './body.ts';
 export const GRAVITY = 32, JUMP_SPEED = 16.5, RUN_SPEED = 7.8;
 function approach(a: number, b: number, amount: number) { return a < b ? Math.min(a + amount, b) : Math.max(a - amount, b); }
@@ -19,6 +20,7 @@ export function moveFighter(w: World, f: Fighter, i: Intent): void {
   if(wantCrouch && !f.crouching) {f.crouching=true;f.y+=oldHeight-CROUCH_HALF_H;f.prevY=f.y;}
   else if(!wantCrouch && f.crouching) {const standingY=f.y+CROUCH_HALF_H-HALF_H;if(!collides(w,f.x,standingY,HALF_H)){f.crouching=false;f.y=standingY;f.prevY=f.y;}}
   const halfHeight=bodyHalfHeight(f);
+  tickSkill(f);
   f.dashCooldown = Math.max(0, f.dashCooldown - DT);
   f.invulnerable = Math.max(0, f.invulnerable - DT);
   f.wallLock = Math.max(0, f.wallLock - DT);
@@ -34,7 +36,8 @@ export function moveFighter(w: World, f: Fighter, i: Intent): void {
   if (i.dash && f.dashCooldown <= 0) {
     const dx = mx || (my ? 0 : f.facing), dy = my, length = Math.hypot(dx, dy);
     f.vx = dx / length * 21; f.vy = dy / length * 21;
-    f.dashTime = 0.15; f.invulnerable = Math.max(f.invulnerable, 0.15); f.dashCooldown = 0.6;
+    f.dashTime = 0.15; f.invulnerable = Math.max(f.invulnerable, 0.15);
+    activateSkill(w, f);
     w.events.push({ type: 'dash', x: f.x, y: f.y, actor: f.id });
   }
   if (f.dashTime > 0) f.dashTime = Math.max(0, f.dashTime - DT);

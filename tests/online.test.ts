@@ -33,6 +33,16 @@ test('two remote players share authoritative world, full rooms reject, disconnec
    await new Promise(r=>setTimeout(r,180));assert.ok(r.world.fighters[1].x<x);assert.equal(r.world.fighters[1].aimX,.6);assert.equal(r.world.fighters[1].aimY,-.8);
    a.messages.length=b.messages.length=0;
    const [sa,sb]=await Promise.all([a.wait('state'),b.wait('state')]);assert.deepEqual(sa.world,sb.world);
+   r.world.level={...r.world.level,rows:Array(18).fill('.'.repeat(32))};
+   r.world.fighters.forEach((f,id)=>Object.assign(f,{x:8+id*10,y:8,vx:0,vy:0,dashCooldown:0}));
+   a.messages.length=b.messages.length=0;
+   a.send({type:'input',input:{...emptyIntent(),dash:true,moveX:1}});
+   b.send({type:'input',input:{...emptyIntent(),dash:true,moveX:-1}});
+   let skills=await a.wait('state');
+   for(let n=0;n<5&&!skills.world.fighters.every((f:any)=>f.skill);n++)skills=await a.wait('state');
+   assert.deepEqual(skills.world.fighters.map((f:any)=>f.skill?.kind),['storm-gust','water-guard']);
+   assert.ok(skills.world.fighters[0].dashCooldown>2);assert.ok(skills.world.fighters[1].dashCooldown>1.5);
+   assert.ok(skills.world.fighters[1].skill.time>0);assert.equal(skills.world.fighters[1].skill.charges,1);
    r.world.phase='matchover';r.world.fighters[0].score=5;
    a.send({type:'rematch'});await new Promise(r=>setTimeout(r,40));assert.equal(r.world.phase,'matchover','one vote cannot reset opponent');
    b.send({type:'rematch'});await a.wait('start');await b.wait('start');assert.equal(r.world.phase,'countdown');assert.equal(r.world.fighters[0].score,0);assert.equal(r.loaded.size,0);

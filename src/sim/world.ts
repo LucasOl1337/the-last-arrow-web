@@ -8,6 +8,8 @@ import { stepRules, checkStomps } from './rules.ts';
 import { think, createBrain } from './bot.ts';
 import type { Brain } from './bot.ts';
 import { stepChests, CHEST_INTERVAL } from './treasure.ts';
+import { stepSkills } from './skills.ts';
+import type { SkillKind, SkillState } from './skills.ts';
 
 export const DT = 1 / 120;
 export const COUNTDOWN_SECONDS = 1.2;
@@ -46,6 +48,8 @@ export interface Fighter {
   /** FIFO quiver. Optional for older consumers; ammo remains its numeric mirror. */
   inventory?: ArrowKind[];
   crouching?: boolean;
+  /** Optional for older snapshots; authoritative active ability state. */
+  skill?: SkillState;
 }
 export interface Arrow {
   id: number; owner: number; x: number; y: number; vx: number; vy: number;
@@ -57,9 +61,9 @@ export interface Arrow {
   lastFreeX?: number; lastFreeY?: number;
 }
 export interface SimEvent {
-  type: 'jump' | 'dash' | 'shoot' | 'impact' | 'catch' | 'pickup' | 'kill' | 'round' | 'victory' | 'chest-spawn' | 'chest-open' | 'explosion';
+  type: 'jump' | 'dash' | 'shoot' | 'impact' | 'catch' | 'pickup' | 'kill' | 'round' | 'victory' | 'chest-spawn' | 'chest-open' | 'explosion' | 'skill';
   x: number; y: number; actor: number; target?: number;
-  kind?: ArrowKind; radius?: number; chestId?: number; reward?: ArrowKind[];
+  kind?: ArrowKind; radius?: number; chestId?: number; reward?: ArrowKind[]; skill?: SkillKind;
   cause?: 'arrow' | 'bolt' | 'bomb' | 'stomp';
 }
 export interface World {
@@ -110,7 +114,7 @@ function placeFighter(f: Fighter, spawn: { x: number; y: number }): void {
     ammo: 3, grounded: false, wall: 0, coyote: 0, jumpBuffer: 0, dashTime: 0, dashCooldown: 0,
     invulnerable: SPAWN_PROTECTION, wallLock: 0, charging: false, charge: 0, shotCooldown: 0,
     aimX: f.facing, aimY: 0, intent: emptyIntent(), brain: createBrain(), respawnAt: null,
-    inventory: ['normal', 'normal', 'normal'], crouching: false,
+    inventory: ['normal', 'normal', 'normal'], crouching: false, skill: undefined,
   });
 }
 /** Maximise distance to the nearest living enemy using toroidal, not screen, distance. */
@@ -155,6 +159,7 @@ export function step(w: World, intents?: readonly Intent[]): void {
     moveFighter(w, f, intent);
     updateBow(w, f, intent);
   }
+  stepSkills(w);
   stepArrows(w);
   checkStomps(w);
   stepChests(w);
@@ -166,7 +171,7 @@ export function snapshot(w: World) {
     mode: w.options.mode, matchTime: w.matchTime,
     chests: (w.chests ?? []).map(c => ({ ...c, reward: [...c.reward] })), chestTimer: w.chestTimer,
     map: w.level.id, seed: w.options.seed,
-    fighters: w.fighters.map(f => ({ id: f.id, name: CHARACTERS[f.character].name, human: f.human, x: f.x, y: f.y, vx: f.vx, vy: f.vy, alive: f.alive, respawnAt: f.respawnAt, ammo: f.ammo, score: f.score, kills: f.kills, grounded: f.grounded, invulnerable: f.invulnerable, inventory: f.inventory ? [...f.inventory] : undefined })),
+    fighters: w.fighters.map(f => ({ id: f.id, name: CHARACTERS[f.character].name, human: f.human, x: f.x, y: f.y, vx: f.vx, vy: f.vy, alive: f.alive, respawnAt: f.respawnAt, ammo: f.ammo, score: f.score, kills: f.kills, grounded: f.grounded, invulnerable: f.invulnerable, dashCooldown: f.dashCooldown, skill: f.skill ? { ...f.skill } : undefined, inventory: f.inventory ? [...f.inventory] : undefined })),
     arrows: w.arrows.map(a => ({ ...a, hitTargets: a.hitTargets ? [...a.hitTargets] : undefined })),
     events: w.events.map(e => ({ ...e, reward: e.reward ? [...e.reward] : undefined })),
   };

@@ -5,6 +5,7 @@ import type { Intent } from './input.ts';
 import { delta, wrap, solid, platformAt, nextPlatform, WIDTH, HEIGHT } from './level.ts';
 import { ARROW_GRAVITY, ARROW_SPEED, BOLT_GRAVITY, BOMB_RADIUS } from './arrows.ts';
 import { moveFighter } from './physics.ts';
+import { STORM_GUST_RADIUS } from './skills.ts';
 export interface Brain {
   intent: Intent; reaction: number; target: number; aimError: number; shootTimer: number;
   hold: number; jumpHold: number; stuck: number; lastX: number; lastY: number;
@@ -38,7 +39,7 @@ function clearShot(w: World, f: Fighter, dx: number, dy: number, time: number): 
 }
 /** Predict only observed motion, with the same gravity, wall collision and wrap as gameplay. */
 export function predictShot(w: World, f: Fighter, target: Fighter): { aimX: number; aimY: number; time: number } | null {
-  const ghost = { ...target }, sandbox = { ...w, events: [] };
+  const ghost = { ...target, skill: target.skill ? { ...target.skill } : undefined }, sandbox = { ...w, events: [] };
   const motion = { ...emptyIntent(), moveX: Math.abs(target.vx) < 0.01 ? 0 : Math.sign(target.vx), jumpHeld: target.vy < 0 };
   const kind = f.inventory?.[0] ?? 'normal', gravity = kind === 'bolt' ? BOLT_GRAVITY : ARROW_GRAVITY;
   const rays = Array.from({ length: 8 }, (_, index) => {
@@ -206,6 +207,12 @@ export function think(w: World, f: Fighter): Intent {
   if (!target) return i;
   // Hard bots take a clear drop onto a target rather than stopping to draw their bow.
   const tx = delta(f.x, target.x, WIDTH), ty = delta(f.y, target.y, HEIGHT);
+  // Storm spends its pulse to peel a nearby attacker, not as another aimed shot.
+  // Mizu retains the observed-projectile dodge above, leaving a ward in that lane.
+  if (f.character === 1 && f.dashCooldown <= 0 && !f.charging && !i.dash &&
+      Math.hypot(tx, ty) < STORM_GUST_RADIUS && clearShot(w, f, tx / (Math.hypot(tx, ty) || 1), ty / (Math.hypot(tx, ty) || 1), Math.hypot(tx, ty) / ARROW_SPEED)) {
+    i.dash = true; i.moveX = -Math.sign(tx) || f.facing; i.moveY = 0;
+  }
   if (w.options.difficulty === 'hard' && !i.dash && !f.grounded && f.vy >= 0 && ty > 0.6 && ty < 3.5 && Math.abs(tx) < 1.1) {
     let clearDrop = true;
     for (let y = 0.55; y < ty; y += 0.25) if (solid(w.level, f.x, f.y + y)) clearDrop = false;

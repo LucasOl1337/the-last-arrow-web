@@ -4,6 +4,7 @@ import type { Intent } from './input.ts';
 import { solid, wrap, delta, WIDTH, HEIGHT } from './level.ts';
 import { kill } from './rules.ts';
 import { bodyHalfHeight } from './body.ts';
+import { interceptWithGuard } from './skills.ts';
 import { giveArrows, takeArrow, MAX_AMMO } from './inventory.ts';
 export { MAX_AMMO } from './inventory.ts';
 export const ARROW_SPEED = 23, ARROW_GRAVITY = 4.5, BOLT_GRAVITY = 0.1, BOMB_RADIUS = 1.6;
@@ -52,6 +53,7 @@ export function stepArrows(w: World): void {
         const oldX = a.x, oldY = a.y;
         if (kind === 'bolt' && !solid(w.level, oldX, oldY)) { a.lastFreeX = oldX; a.lastFreeY = oldY; }
         a.x = wrap(a.x + a.vx * DT / steps, WIDTH); a.y = wrap(a.y + a.vy * DT / steps, HEIGHT);
+        if (interceptWithGuard(w, a)) { remove = true; break; }
         if (kind !== 'bolt' && solid(w.level, a.x, a.y)) {
           a.x = oldX; a.y = oldY; a.vx = a.vy = 0; a.stuck = true;
           w.events.push({ type: 'impact', x: a.x, y: a.y, actor: a.owner, kind });

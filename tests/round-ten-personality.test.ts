@@ -13,16 +13,19 @@ function route(character: string, chest = false) {
   if(chest)w.chests=[{id:1,x:6.5,y:4.45,reward:['bolt']}];
   think(w,f);return {w,f};
 }
-test('Storm chooses the approach platform, Kaze the higher flank, from the same Musgo encounter',()=>{
-  const storm=route('stormdragon'),kaze=route('kaze');
-  const stormPlatform=storm.w.level.platforms[storm.f.brain.patrol],kazePlatform=kaze.w.level.platforms[kaze.f.brain.patrol];
+test('Storm keeps its approach route; retired Kaze uses Mizu navigation instead of a removed personality',()=>{
+  const storm=route('stormdragon'),mizu=route('mizu'),legacy=route('kaze');
+  const stormPlatform=storm.w.level.platforms[storm.f.brain.patrol];
   assert.equal(stormPlatform.left,18);assert.equal(stormPlatform.y,8);
-  assert.ok(kazePlatform.y<stormPlatform.y);assert.notEqual(storm.f.brain.patrol,kaze.f.brain.patrol);
+  assert.equal(legacy.f.character,mizu.f.character);
+  assert.equal(legacy.f.brain.patrol,mizu.f.brain.patrol);
+  assert.equal(legacy.f.brain.waypointX,mizu.f.brain.waypointX);
 });
-test('Akane detours to a distant chest; armed Storm keeps pressuring the opponent',()=>{
-  const storm=route('stormdragon',true),akane=route('akane',true);
+test('retired Akane uses Storm pressure, not the removed supply-hunter behavior',()=>{
+  const storm=route('stormdragon',true),legacy=route('akane',true);
   assert.notEqual(storm.f.brain.waypointX,6.5);
-  assert.equal(akane.f.brain.waypointX,6.5);
+  assert.equal(legacy.f.character,storm.f.character);
+  assert.equal(legacy.f.brain.waypointX,storm.f.brain.waypointX);
 });
 test('an empty quiver overrides personality so Storm still seeks that chest',()=>{
   const {w,f}=route('stormdragon',true);f.ammo=0;f.inventory=[];f.brain.navigation=0;

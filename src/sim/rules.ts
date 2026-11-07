@@ -5,7 +5,7 @@ import { quiver } from './inventory.ts';
 import { bodyHalfHeight } from './body.ts';
 export function kill(w: World, victim: Fighter, killer: number, cause: World['events'][number]['cause'] = 'arrow'): void {
   if (!victim.alive || victim.invulnerable > 0) return;
-  victim.alive = false; victim.charging = false;
+  victim.alive = false; victim.charging = false; victim.charge = 0; victim.skill = undefined;
   victim.respawnAt = w.options.mode === 'headhunter' ? w.matchTime + RESPAWN_SECONDS : null;
   if (killer !== victim.id && w.fighters[killer]) {
     w.fighters[killer].kills++;
