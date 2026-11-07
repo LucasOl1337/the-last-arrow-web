@@ -7,6 +7,10 @@ rooms=$(ssh sennin-kvm "if systemctl is-active --quiet the-last-arrow; then curl
 if [ "$rooms" != 0 ]; then echo "Há $rooms sala(s) ativa(s); publicação adiada sem derrubar jogadores." >&2; exit 2; fi
 TLA_BASE=/ npm run build
 node --input-type=module -e "import {execFileSync} from 'node:child_process';import{writeFileSync}from'node:fs';writeFileSync('dist/version.json',JSON.stringify({revision:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()}))"
+# Agent shells can use umask 077; tar preserves it, leaving nginx unable to read
+# the new release. Only the public build is made world-readable, never secrets.
+find dist -type d -exec chmod 755 {} +
+find dist -type f -exec chmod 644 {} +
 release="$(TZ=America/Sao_Paulo date +%Y%m%d-%H%M%S)-$(git rev-parse --short HEAD)"
 ssh sennin-kvm "mkdir -p /opt/the-last-arrow/releases/$release; id the-last-arrow >/dev/null 2>&1 || useradd --system --no-create-home --shell /usr/sbin/nologin the-last-arrow"
 tar -czf - dist server src/sim src/net/protocol.ts package.json package-lock.json | ssh sennin-kvm "tar -xzf - -C /opt/the-last-arrow/releases/$release"
