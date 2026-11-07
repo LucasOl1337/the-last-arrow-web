@@ -3,7 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
-const root=process.argv[2],bench='arrow-mizu-neighbors',mission='mizu-neighbors-1107';
+const root=process.argv[2],bench=process.env.BOW_BENCH||'arrow-mizu-neighbors',mission=process.env.BOW_MISSION||'mizu-neighbors-1107';
 const cli=(...args)=>JSON.parse(execFileSync('agent-bench',args,{encoding:'utf8'}));
 assert.ok(cli('fila').vagas.some(v=>v.bench===bench));assert.equal(cli('status',bench).control_mode,'agente');assert.equal(cli('browser-status',bench).lives_in,bench);
 const {tab}=JSON.parse(await readFile(`${root}/tab.json`,'utf8')),cdp=JSON.parse(await readFile(`${root}/cdp.json`,'utf8'));

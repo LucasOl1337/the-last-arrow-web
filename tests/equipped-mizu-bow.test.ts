@@ -8,7 +8,7 @@ import { MIZU_EQUIPPED } from '../src/render/equipped-mizu-bow.ts';
 test('authored Mizu bow: grip/tips/string/nock across eight aims and exact rig neighbors', async () => {
   const { THREE, fighters, world, scene, kits, frames } = await rigRuntime();
   const views = (fighters as any).views, v = views[0], bow = v.equippedBow;
-  assert.ok(bow); assert.equal(views[1].equippedBow,null);
+  assert.ok(bow); assert.ok(views[1].equippedBow); assert.notEqual(views[1].equippedBow,bow);
   const original: any[]=[]; kits.mizu!.template.traverse((o:any)=>{if(o.isSkinnedMesh)original.push(o);});
   const current: any[]=[]; v.rig.model.traverse((o:any)=>{if(o.isSkinnedMesh&&o.material.userData.uniforms)current.push(o);});
   assert.equal(current[0].geometry,original[0].geometry);assert.equal(current[0].material.map,original[0].material.map);

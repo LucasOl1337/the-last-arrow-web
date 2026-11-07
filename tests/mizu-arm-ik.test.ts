@@ -6,7 +6,7 @@ const edited = new Set(['LeftShoulder','LeftArm','LeftForeArm','LeftHand','Right
 test('arm IK preserves links, torso and simulation; all fixed neighbors clear body and head', async()=>{
   const {THREE,scene,world,fighters,frames}=await rigRuntime();
   const views=(fighters as any).views,v=views[0],f=world.fighters[0],ik=v.rig.armIK;
-  assert.ok(ik);assert.equal(views[1].rig.armIK,undefined);
+  assert.ok(ik);assert.ok(views[1].rig.armIK);assert.notEqual(views[1].rig.armIK,ik);
   let mesh:any;v.rig.model.traverse((o:any)=>{if(o.isSkinnedMesh&&o.material.userData.uniforms)mesh=o;});
   const links=v.rig.bones.filter((b:any)=>edited.has(b.name)).map((b:any)=>({bone:b,position:b.position.toArray(),scale:b.scale.toArray()}));
   const check=(state:string)=>{

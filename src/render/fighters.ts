@@ -12,8 +12,8 @@ import { blob, softDot } from './textures.ts';
 import { themeForLevel } from './themes.ts';
 import { clipWindow, runTimeScale } from './animation.ts';
 import { disposeSkeletons } from './disposal.ts';
-import { EquippedMizuBow } from './equipped-mizu-bow.ts';
-import { MizuArmIK } from './mizu-arm-ik.ts';
+import { EquippedBow, MIZU_BOW, STORM_BOW } from './equipped-bow.ts';
+import { BowArmIK } from './bow-arm-ik.ts';
 import { aimGuide } from './aim-guide.ts';
 import { skillVisual } from './skill-visual.ts';
 import type { SkillVisualState } from './skill-visual.ts';
@@ -55,14 +55,14 @@ interface Rig {
   model: THREE.Object3D; mixer: THREE.AnimationMixer; actions: Record<State, THREE.AnimationAction>;
   uniforms: CharacterUniforms[]; outlines: THREE.Material[]; spine1?: THREE.Object3D; spine2?: THREE.Object3D; bowHand?: THREE.Object3D;
   ghosts: { model: THREE.Object3D; bones: THREE.Object3D[]; material: THREE.MeshBasicMaterial; life: number }[];
-  bones: THREE.Object3D[]; runSpeed: number; armIK?: MizuArmIK;
+  bones: THREE.Object3D[]; runSpeed: number; armIK?: BowArmIK;
   bowForearm?: THREE.Object3D; palmIndex?: THREE.Object3D; palmPinky?: THREE.Object3D;
   aimLegs: Record<'idle' | 'run' | 'jump' | 'fall', THREE.AnimationAction>;
   pitchBase: Map<THREE.Object3D, THREE.Quaternion>;
 }
 interface View {
   root: THREE.Group; pivot: THREE.Group; character: number; rig: Rig | null; puppet: ProceduralPuppet | null;
-  equippedBow: EquippedMizuBow | null;
+  equippedBow: EquippedBow | null;
   state: State; stateTime: number; yaw: number; aim: number; deathAt: number; ghostClock: number;
   wasGrounded: boolean; lastVy: number; releaseTime: number; landingTime: number;
   shadow: THREE.Mesh; halo: THREE.Mesh; backdrop: THREE.Sprite; aimDots: THREE.Mesh[]; aimPoint: THREE.Mesh; skillRing: THREE.Mesh; aimFade: number; nock: THREE.Group;
@@ -200,7 +200,7 @@ export class FightersView {
       return { model: ghost, bones: gb, material, life: 0 };
     });
     return { model, mixer, actions, uniforms, ghosts, bones, outlines, aimLegs, pitchBase: new Map(), runSpeed: kit.runSpeed,
-      armIK: character === 0 ? new MizuArmIK(model) : undefined,
+      armIK: character === 0 || character === 1 ? new BowArmIK(model,{bodyClearance:character===1,ornamentVertex:character===1?18817:undefined}) : undefined,
       spine1: model.getObjectByName('mixamorigSpine1'), spine2: model.getObjectByName('mixamorigSpine2'), bowHand: model.getObjectByName('mixamorigLeftHand'),
       bowForearm: model.getObjectByName('mixamorigLeftForeArm'), palmIndex: model.getObjectByName('mixamorigLeftHandIndex1'), palmPinky: model.getObjectByName('mixamorigLeftHandPinky1') };
   }
@@ -238,7 +238,7 @@ export class FightersView {
     const skillRing = new THREE.Mesh(skillGeometry, new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false }));
     skillRing.visible = false; skillRing.renderOrder = 2; this.scene.add(skillRing);
     const nock = nockedArrow(color); nock.visible = false; this.scene.add(nock);
-    const equippedBow = f.character === 0 && rig?.bowHand && rig.bowForearm && rig.palmIndex && rig.palmPinky ? new EquippedMizuBow() : null;
+    const equippedBow = (f.character === 0 || f.character === 1) && rig?.bowHand && rig.bowForearm && rig.palmIndex && rig.palmPinky ? new EquippedBow(f.character === 0 ? MIZU_BOW : STORM_BOW) : null;
     if (equippedBow) this.scene.add(equippedBow.root);
     const view: View = { root, pivot, character: f.character, rig, puppet, equippedBow, state: 'idle', stateTime: 0, yaw: f.facing > 0 ? -0.35 : -Math.PI + 0.35,
       aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, landingTime: 0, shadow, halo, backdrop, aimDots, aimPoint, skillRing, aimFade: 0, nock };

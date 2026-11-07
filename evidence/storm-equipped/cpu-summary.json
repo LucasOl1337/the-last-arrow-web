@@ -1,0 +1,26 @@
+{
+  "time_brasilia": "2026-11-07T19:35:23.908368-03:00",
+  "base": "0040b99b2cd50b1609257f3963c65e3584c3a394",
+  "tests_pass": 26,
+  "tests_fail": 0,
+  "states": 23,
+  "string_hits": 0,
+  "max_grip_error": 0,
+  "max_contact_error": 5.250496506320479e-09,
+  "unreachable": [],
+  "physics_equal": {
+    "expectedSpawn": true,
+    "spawned": true,
+    "renderedProjectiles": true,
+    "projectileNextStep": true
+  },
+  "mizu_pose_equal": true,
+  "original_gate_sha256": {
+    "tests/mizu-string-clearance.test.ts": "4f6e732f0f9da051e5e7425d53d286c658ca9025c01fe59a4764bf784cd69acd",
+    "tests/mizu-clearance-neighbors.test.ts": "b8d6dfbd54d42fb008abc135c398ffc11a47f4cdd1c399b52edf0fea278dd507"
+  },
+  "gpu_accepted": true,
+  "local_accepted": true,
+  "public_accepted": false,
+  "gpu_renderer": "NVIDIA RTX4070TiSUPER"
+}
