@@ -7,14 +7,16 @@ import { bodyHalfHeight } from './body.ts';
 import { giveArrows, takeArrow, MAX_AMMO } from './inventory.ts';
 export { MAX_AMMO } from './inventory.ts';
 export const ARROW_SPEED = 23, ARROW_GRAVITY = 4.5, BOLT_GRAVITY = 0.1, BOMB_RADIUS = 1.6;
+/** Full-draw state is bounded even when a pointer/button stays held indefinitely. */
+export const FULL_DRAW_SECONDS = 0.35;
 export function updateBow(w: World, f: Fighter, i: Intent): void {
   f.shotCooldown = Math.max(0, f.shotCooldown - DT);
   if(i.cancelShot){f.charging=false;f.charge=0;return;}
   if ((i.shoot || i.shootHeld) && !f.charging && f.shotCooldown <= 0 && f.ammo > 0) { f.charging = true; f.charge = 0; }
   if (!f.charging) return;
-  f.charge += DT;
+  f.charge = Math.min(FULL_DRAW_SECONDS, f.charge + DT);
   if (i.shootHeld) return;
-  f.charging = false;
+  f.charging = false; f.charge = 0;
   const kind = takeArrow(f);
   if (!kind) return;
   f.shotCooldown = 0.2;
