@@ -53,5 +53,5 @@ try {
   await page.screenshot({path:`${out}/neighbors-wide.png`});
   assert.deepEqual(report.errors,[]);
 }catch(e){report.failure=e.stack;throw e;}
-finally{if(page&&!page.isClosed())await page.close();report.ownTabsAtEnd=0;await writeFile(`${out}/neighbors-report.json`,JSON.stringify(report,null,2));await appendFile(`${out}/web-events.ndjson`,JSON.stringify({pid:process.pid,mission:'camera-continua',tab:process.env.TLA_TAB,action:'close-neighbors'})+'\n');await browser.close();}
+finally{if(page&&!page.isClosed()&&!process.env.TLA_KEEP_TAB)await page.close();report.ownTabsAtEnd=page&&!page.isClosed()?1:0;await writeFile(`${out}/neighbors-report.json`,JSON.stringify(report,null,2));await appendFile(`${out}/web-events.ndjson`,JSON.stringify({pid:process.pid,mission:'camera-continua',tab:process.env.TLA_TAB,action:report.ownTabsAtEnd?'retain-next-proof':'close-neighbors'})+'\n');await browser.close();}
 console.log('wrap X/Y, death/respawn, fixed distance, pointer round trip and HUD overlap: passed');

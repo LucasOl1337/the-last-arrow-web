@@ -1,0 +1,491 @@
+{
+  "mode": "before",
+  "cases": [
+    {
+      "width": 1366,
+      "height": 768,
+      "close": true,
+      "metrics": {
+        "arenaBox": {
+          "width": 1365.328125,
+          "height": 767.984375
+        },
+        "arenaProjectedFraction": 0.9994878091714393,
+        "camera": [
+          13.468933105468748,
+          7.578124999999999,
+          28.281947526107896
+        ],
+        "bodies": [
+          {
+            "id": 0,
+            "head": {
+              "x": 88.76924480803103,
+              "y": 548.5218737799481
+            },
+            "feet": {
+              "x": 88.76924480803103,
+              "y": 672.7684805282277
+            },
+            "heightPx": 124.24660674827953,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 27.484375,
+              "height": 31.375,
+              "fontPx": 13.66,
+              "inside": true
+            }
+          },
+          {
+            "id": 1,
+            "head": {
+              "x": 1538.6909369526886,
+              "y": 548.5218737799481
+            },
+            "feet": {
+              "x": 1538.6909369526886,
+              "y": 672.7684805282277
+            },
+            "heightPx": 124.24660674827953,
+            "fullyVisible": false,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 116.96875,
+              "height": 31.375,
+              "fontPx": 13.66,
+              "inside": true
+            }
+          }
+        ],
+        "located": 1
+      },
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 0,
+          "principal_fracao": 0.999,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 768,
+          "largura": 1366,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      }
+    },
+    {
+      "width": 1366,
+      "height": 768,
+      "close": false,
+      "metrics": {
+        "arenaBox": {
+          "width": 1365.328125,
+          "height": 767.984375
+        },
+        "arenaProjectedFraction": 0.8899013746853796,
+        "camera": [
+          16,
+          9,
+          36.20089283341811
+        ],
+        "bodies": [
+          {
+            "id": 0,
+            "head": {
+              "x": 118.96111849351979,
+              "y": 569.1605892240655
+            },
+            "feet": {
+              "x": 118.96111849351979,
+              "y": 665.7701901235779
+            },
+            "heightPx": 96.60960089951243,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 27.484375,
+              "height": 31.375,
+              "fontPx": 13.66,
+              "inside": true
+            }
+          },
+          {
+            "id": 1,
+            "head": {
+              "x": 1246.3670065064803,
+              "y": 569.1605892240655
+            },
+            "feet": {
+              "x": 1246.3670065064803,
+              "y": 665.7701901235779
+            },
+            "heightPx": 96.60960089951243,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 116.96875,
+              "height": 31.375,
+              "fontPx": 13.66,
+              "inside": true
+            }
+          }
+        ],
+        "located": 2
+      },
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 0,
+          "principal_fracao": 0.999,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 768,
+          "largura": 1366,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      }
+    },
+    {
+      "width": 900,
+      "height": 1000,
+      "close": true,
+      "metrics": {
+        "arenaBox": {
+          "width": 900,
+          "height": 506.25
+        },
+        "arenaProjectedFraction": 0.50625,
+        "camera": [
+          13.478878458498022,
+          7.578124999999999,
+          28.281947526107896
+        ],
+        "bodies": [
+          {
+            "id": 0,
+            "head": {
+              "x": 58.46473435813937,
+              "y": 361.58183374642056
+            },
+            "feet": {
+              "x": 58.46473435813937,
+              "y": 443.48433946643155
+            },
+            "heightPx": 81.90250572001099,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 24.46875,
+              "height": 28.1875,
+              "fontPx": 11,
+              "inside": true
+            }
+          },
+          {
+            "id": 1,
+            "head": {
+              "x": 1013.5221014701675,
+              "y": 361.58183374642056
+            },
+            "feet": {
+              "x": 1013.5221014701675,
+              "y": 443.48433946643155
+            },
+            "heightPx": 81.90250572001099,
+            "fullyVisible": false,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 96.546875,
+              "height": 28.1875,
+              "fontPx": 11,
+              "inside": true
+            }
+          }
+        ],
+        "located": 1
+      },
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 247,
+          "principal_fracao": 0.506,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 1000,
+          "largura": 900,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      }
+    },
+    {
+      "width": 900,
+      "height": 1000,
+      "close": false,
+      "metrics": {
+        "arenaBox": {
+          "width": 900,
+          "height": 506.25
+        },
+        "arenaProjectedFraction": 0.45041085779588047,
+        "camera": [
+          16,
+          9,
+          36.20089283341811
+        ],
+        "bodies": [
+          {
+            "id": 0,
+            "head": {
+              "x": 78.69122349649254,
+              "y": 375.18673253564975
+            },
+            "feet": {
+              "x": 78.69122349649254,
+              "y": 438.8711147281627
+            },
+            "heightPx": 63.68438219251294,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 24.46875,
+              "height": 28.1875,
+              "fontPx": 11,
+              "inside": true
+            }
+          },
+          {
+            "id": 1,
+            "head": {
+              "x": 821.3087765035075,
+              "y": 375.18673253564975
+            },
+            "feet": {
+              "x": 821.3087765035075,
+              "y": 438.8711147281627
+            },
+            "heightPx": 63.68438219251294,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 96.546875,
+              "height": 28.1875,
+              "fontPx": 11,
+              "inside": true
+            }
+          }
+        ],
+        "located": 2
+      },
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 247,
+          "principal_fracao": 0.506,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 1000,
+          "largura": 900,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [],
+        "passou": true
+      }
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "close": true,
+      "metrics": {
+        "arenaBox": {
+          "width": 360,
+          "height": 202.5
+        },
+        "arenaProjectedFraction": 0.253125,
+        "camera": [
+          13.439039408866995,
+          7.578124999999999,
+          28.281947526107896
+        ],
+        "bodies": [
+          {
+            "id": 0,
+            "head": {
+              "x": 23.466785106929823,
+              "y": 144.63273349856823
+            },
+            "feet": {
+              "x": 23.466785106929823,
+              "y": 177.39373578657262
+            },
+            "heightPx": 32.76100228800439,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 24.46875,
+              "height": 28.1875,
+              "fontPx": 11,
+              "inside": true
+            }
+          },
+          {
+            "id": 1,
+            "head": {
+              "x": 406.6222110431782,
+              "y": 144.63273349856823
+            },
+            "feet": {
+              "x": 406.6222110431782,
+              "y": 177.39373578657262
+            },
+            "heightPx": 32.76100228800439,
+            "fullyVisible": false,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 96.546875,
+              "height": 28.1875,
+              "fontPx": 11,
+              "inside": true
+            }
+          }
+        ],
+        "located": 1
+      },
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 299,
+          "principal_fracao": 0.253,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 800,
+          "largura": 360,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [
+          "b. objeto principal ocupa 25% da janela (mínimo 40%)"
+        ],
+        "passou": false
+      }
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "close": false,
+      "metrics": {
+        "arenaBox": {
+          "width": 360,
+          "height": 202.5
+        },
+        "arenaProjectedFraction": 0.22587303392431757,
+        "camera": [
+          16,
+          9,
+          36.20089283341811
+        ],
+        "bodies": [
+          {
+            "id": 0,
+            "head": {
+              "x": 31.036202311833993,
+              "y": 150.0746930142599
+            },
+            "feet": {
+              "x": 31.036202311833993,
+              "y": 175.54844589126506
+            },
+            "heightPx": 25.473752877005154,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 24.46875,
+              "height": 28.1875,
+              "fontPx": 11,
+              "inside": true
+            }
+          },
+          {
+            "id": 1,
+            "head": {
+              "x": 328.96379768816604,
+              "y": 150.0746930142599
+            },
+            "feet": {
+              "x": 328.96379768816604,
+              "y": 175.54844589126506
+            },
+            "heightPx": 25.473752877005154,
+            "fullyVisible": true,
+            "marker": {
+              "text": "",
+              "visible": false,
+              "width": 96.546875,
+              "height": 28.1875,
+              "fontPx": 11,
+              "inside": true
+            }
+          }
+        ],
+        "located": 2
+      },
+      "gate": {
+        "medidas": {
+          "principal_achado": true,
+          "principal_topo": 299,
+          "principal_fracao": 0.253,
+          "editores": 0,
+          "editor_altura": null,
+          "salvar_visiveis": 0,
+          "inputs_vazios_em_branco": [],
+          "ajudas_longas": [],
+          "rolagem_horizontal": false,
+          "altura_pagina": 800,
+          "largura": 360,
+          "rolagens_ate_principal": 0
+        },
+        "falhas": [
+          "b. objeto principal ocupa 25% da janela (mínimo 40%)"
+        ],
+        "passou": false
+      }
+    }
+  ],
+  "errors": [],
+  "ownTabsAtEnd": 1
+}

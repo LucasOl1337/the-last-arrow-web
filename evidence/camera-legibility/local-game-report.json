@@ -1,0 +1,35 @@
+{
+  "base": "http://127.0.0.1:5190/the-last-arrow-web/",
+  "tests": [
+    "all five presets retained; B camera rebind persists across reload; C no longer toggles; near/wide indicator parity",
+    "production mouse input retains right/up world direction after camera toggles",
+    "real online match: two fighters, loaded models, authoritative peer snapshots and rebound near/wide toggle"
+  ],
+  "errors": [],
+  "ownTabsAtEnd": 1,
+  "presets": 5,
+  "aim": {
+    "x": 0.9049160944570183,
+    "y": -0.4255900163216439
+  },
+  "online": {
+    "state": {
+      "room": "14978154",
+      "player": 0
+    },
+    "models": true,
+    "labels": [
+      {
+        "hidden": false,
+        "direction": "",
+        "text": "PEGOU!P1"
+      },
+      {
+        "hidden": false,
+        "direction": "",
+        "text": "PEGOU!P2"
+      }
+    ],
+    "peerSnapshots": 33
+  }
+}
