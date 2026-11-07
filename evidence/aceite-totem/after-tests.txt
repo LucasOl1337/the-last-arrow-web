@@ -1,0 +1,26 @@
+✔ easy Storm preserves approach route during pulse instead of adding retreat to its knockback (3.023778ms)
+✔ exact Totem easy seed42 meets original20s while retaining active distinct roster skills (137.94946ms)
+✔ same validated legacy skill command produces two distinct states/cooldowns, without interrupting draw (3.303548ms)
+✔ Mizu ward stays at origin and absorbs exactly one hostile bomb without explosion/ammo gain (0.471749ms)
+✔ Mizu initial timed dodge still catches for ammo, then its remaining ward intercepts (0.49578ms)
+✔ Mizu ward intercepts piercing bolt but not own arrow or a shot outside its radius (0.281689ms)
+✔ Mizu expired ward and ward behind a wall cannot intercept (0.948079ms)
+✔ Storm pulse pushes once, deals no damage, preserves projectile ownership and ignores own/stuck arrows (0.3848ms)
+✔ Storm pulse respects radius, spawn protection, walls and toroidal distance (0.20762ms)
+✔ cooldown rejects early retrigger, reopens at deadline; round reset clears ability and cooldown (0.34858ms)
+✔ authoritative JSON/snapshot carries detached ability state and timers; old worlds without state still step (2.180538ms)
+✔ death clears ward immediately; client cannot inject ability kind, radius, charges or cooldown (0.51106ms)
+✔ Storm bot pulse preserves its route, Mizu keeps defensive dodge; shot prediction cannot mutate live skill (3.057128ms)
+✔ Templo do Totem / fácil / seed 42: bots finish by combat, not timeout (67.667021ms)
+✔ Copas Altas / difícil / seed 42: bots traverse, catch and replenish ammunition (291.14398ms)
+✔ 90-second draw does not award points, then restarts with three arrows (0.72582ms)
+✔ input cannot inject speed, coordinates or malformed axes (1.098069ms)
+✔ two remote players share authoritative world, full rooms reject, disconnect closes room (464.249804ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 825.142881

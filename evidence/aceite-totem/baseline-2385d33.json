@@ -1,0 +1,1308 @@
+{
+  "revision": "2385d33",
+  "seconds": 24.416666666666668,
+  "tick": 2930,
+  "round": 2,
+  "events": [
+    {
+      "t": 2.7,
+      "type": "skill",
+      "skill": "storm-gust",
+      "x": 17.18250000000002,
+      "y": 8.52944444444445,
+      "actor": 3,
+      "radius": 2.4,
+      "positions": [
+        {
+          "id": 0,
+          "x": 7.1,
+          "y": 5.8,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.7,
+          "target": 2
+        },
+        {
+          "id": 1,
+          "x": 18.8,
+          "y": 15.45,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 2.75,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 14.88,
+          "y": 8.5,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 2.57,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 17.36,
+          "y": 8.53,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 2.55,
+          "target": 2
+        }
+      ]
+    },
+    {
+      "t": 5.525,
+      "type": "shoot",
+      "x": 3.3741666666666674,
+      "y": 6.514722222222218,
+      "actor": 0,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 3.37,
+          "y": 6.51,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 2.14,
+          "target": 3
+        },
+        {
+          "id": 1,
+          "x": 18.04,
+          "y": 9.66,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": -0.07,
+          "target": 2
+        },
+        {
+          "id": 2,
+          "x": 10.18,
+          "y": 9.56,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.71,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 9.65,
+          "y": 6.57,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 2.04,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": 5.708,
+      "type": "shoot",
+      "x": 8.752576147541284,
+      "y": 10.272222222222226,
+      "actor": 2,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 3.9,
+          "y": 4.65,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.95,
+          "target": 3
+        },
+        {
+          "id": 1,
+          "x": 16.61,
+          "y": 8.46,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": -0.26,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 8.75,
+          "y": 10.27,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.53,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 10.87,
+          "y": 4.89,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.85,
+          "target": 2
+        }
+      ]
+    },
+    {
+      "t": 5.742,
+      "type": "shoot",
+      "x": 10.906388888888934,
+      "y": 4.695000000000004,
+      "actor": 3,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 4.24,
+          "y": 4.19,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.92,
+          "target": 3
+        },
+        {
+          "id": 1,
+          "x": 16.35,
+          "y": 8.36,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": -0.29,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 8.53,
+          "y": 10.52,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.49,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 10.91,
+          "y": 4.7,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.82,
+          "target": 2
+        }
+      ]
+    },
+    {
+      "t": 6.05,
+      "type": "skill",
+      "skill": "storm-gust",
+      "x": 9.189166666666743,
+      "y": 4.585000000000015,
+      "actor": 3,
+      "radius": 2.4,
+      "positions": [
+        {
+          "id": 0,
+          "x": 6.84,
+          "y": 4.58,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.61,
+          "target": 3
+        },
+        {
+          "id": 1,
+          "x": 13.95,
+          "y": 9.11,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 2.02,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 7.01,
+          "y": 14.46,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.19,
+          "target": 1
+        },
+        {
+          "id": 3,
+          "x": 9.36,
+          "y": 4.59,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.51,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": 7.675,
+      "type": "shoot",
+      "x": 0.6557011475414214,
+      "y": 5.449999999999999,
+      "actor": 2,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 0.39,
+          "y": 1.36,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.9,
+          "target": 2
+        },
+        {
+          "id": 1,
+          "x": 9.2,
+          "y": 9.66,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 0.4,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 0.66,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.48,
+          "target": 0
+        },
+        {
+          "id": 3,
+          "x": 10.95,
+          "y": 7.45,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": -0.11,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 8.1,
+      "type": "shoot",
+      "x": 0.5517371466480228,
+      "y": 5.449999999999999,
+      "actor": 0,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 0.55,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": 1.48,
+          "target": 2
+        },
+        {
+          "id": 1,
+          "x": 9.1,
+          "y": 7.45,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 2.11,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 2.75,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.05,
+          "target": 0
+        },
+        {
+          "id": 3,
+          "x": 7.64,
+          "y": 6.25,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.82,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 8.142,
+      "type": "shoot",
+      "x": 7.312083333333447,
+      "y": 6.7306666666666715,
+      "actor": 3,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 0.45,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.44,
+          "target": 2
+        },
+        {
+          "id": 1,
+          "x": 8.68,
+          "y": 6.87,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 2.07,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 3.08,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.01,
+          "target": 0
+        },
+        {
+          "id": 3,
+          "x": 7.31,
+          "y": 6.73,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": 1.78,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 8.508,
+      "type": "shoot",
+      "x": 5.635833333333352,
+      "y": 4.193888888888907,
+      "actor": 1,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 29.65,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.07,
+          "target": 2
+        },
+        {
+          "id": 1,
+          "x": 5.64,
+          "y": 4.19,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.7,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 5.91,
+          "y": 4.16,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 0.65,
+          "target": 0
+        },
+        {
+          "id": 3,
+          "x": 8.26,
+          "y": 8.45,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": 1.41,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 8.625,
+      "type": "skill",
+      "skill": "storm-gust",
+      "x": 5.119444444444461,
+      "y": 4.397500000000022,
+      "actor": 1,
+      "radius": 2.4,
+      "positions": [
+        {
+          "id": 0,
+          "x": 28.74,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 0.95,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 4.94,
+          "y": 4.4,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.59,
+          "target": 2
+        },
+        {
+          "id": 2,
+          "x": 5.69,
+          "y": 5.11,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 0.53,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 9.41,
+          "y": 6.87,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": 1.29,
+          "target": 2
+        }
+      ]
+    },
+    {
+      "t": 8.8,
+      "type": "kill",
+      "x": 6.072053504134885,
+      "y": 8.319147047975243,
+      "actor": 2,
+      "target": 2,
+      "cause": "arrow",
+      "positions": [
+        {
+          "id": 0,
+          "x": 27.01,
+          "y": 3.56,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 0.78,
+          "target": 2
+        },
+        {
+          "id": 1,
+          "x": 1.29,
+          "y": 4.41,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.41,
+          "target": 2
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 10.78,
+          "y": 5.43,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": 1.12,
+          "target": 2
+        }
+      ]
+    },
+    {
+      "t": 10.017,
+      "type": "shoot",
+      "x": 31.101251035536933,
+      "y": 5.449999999999999,
+      "actor": 0,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 31.1,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": 1.85,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 25.49,
+          "y": 8.31,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 0.2,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 6.96,
+          "y": 3.65,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": -0.1,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": 10.692,
+      "type": "shoot",
+      "x": 3.464166666666884,
+      "y": 5.816666666666663,
+      "actor": 3,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 4.37,
+          "y": 1.3,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.17,
+          "target": 3
+        },
+        {
+          "id": 1,
+          "x": 29.66,
+          "y": 4.74,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 2.23,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 3.46,
+          "y": 5.82,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.48,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": 11.008,
+      "type": "skill",
+      "skill": "storm-gust",
+      "x": 1.7925000000000324,
+      "y": 4.264722222222229,
+      "actor": 3,
+      "radius": 2.4,
+      "positions": [
+        {
+          "id": 0,
+          "x": 5.83,
+          "y": 1.45,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 0.86,
+          "target": 3
+        },
+        {
+          "id": 1,
+          "x": 0.13,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.92,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 1.97,
+          "y": 4.26,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.16,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 12,
+      "type": "skill",
+      "skill": "storm-gust",
+      "x": 3.515651001920631,
+      "y": 1.32500000000001,
+      "actor": 1,
+      "radius": 2.4,
+      "positions": [
+        {
+          "id": 0,
+          "x": 4.75,
+          "y": 17.39,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 2.31,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 3.34,
+          "y": 1.33,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 0.93,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 9.59,
+          "y": 7.08,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 0.17,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": 13.867,
+      "type": "shoot",
+      "x": 0.482499999999888,
+      "y": 5.314722222222223,
+      "actor": 1,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 0.2,
+          "y": 5.18,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 0.44,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 0.48,
+          "y": 5.31,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.79,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 15.28,
+          "y": 5.56,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": -1.69,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": 14.55,
+      "type": "skill",
+      "skill": "storm-gust",
+      "x": 1.2336111111109602,
+      "y": 4.795833333333327,
+      "actor": 1,
+      "radius": 2.4,
+      "positions": [
+        {
+          "id": 0,
+          "x": 2.63,
+          "y": 2.97,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.67,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 1.06,
+          "y": 4.8,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.1,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 12.37,
+          "y": 12.18,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": -2.38,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": 15.575,
+      "type": "shoot",
+      "x": 4.374166666667087,
+      "y": 1.346666666666657,
+      "actor": 3,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 30.52,
+          "y": 11.08,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 0.65,
+          "target": 3
+        },
+        {
+          "id": 1,
+          "x": 28.68,
+          "y": 5.74,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 0.08,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 4.37,
+          "y": 1.35,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.81,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": 16.092,
+      "type": "shoot",
+      "x": 28.77027777777778,
+      "y": 5.449999999999999,
+      "actor": 1,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 28.77,
+          "y": 8.41,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 0.13,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 28.77,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": 2.17,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 3.42,
+          "y": 5.46,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 1.29,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 16.992,
+      "type": "shoot",
+      "x": 25.07408503046554,
+      "y": 12.112222222222229,
+      "actor": 0,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 25.07,
+          "y": 12.11,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 2.26,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 29.41,
+          "y": 11.62,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": 1.27,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 4.77,
+          "y": 4.27,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 0.39,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 17.917,
+      "type": "skill",
+      "skill": "storm-gust",
+      "x": 28.68,
+      "y": 6.143333333333352,
+      "actor": 1,
+      "radius": 2.4,
+      "positions": [
+        {
+          "id": 0,
+          "x": 30.48,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 1.33,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 28.5,
+          "y": 6.14,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": 0.35,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 3.54,
+          "y": 8.17,
+          "alive": true,
+          "ammo": 3,
+          "shootTimer": 2.2,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": 18.092,
+      "type": "shoot",
+      "x": 2.174166666666821,
+      "y": 11.446666666666651,
+      "actor": 3,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 31.28,
+          "y": 5.45,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 1.16,
+          "target": 3
+        },
+        {
+          "id": 1,
+          "x": 24.85,
+          "y": 6.16,
+          "alive": true,
+          "ammo": 1,
+          "shootTimer": 0.17,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 2.17,
+          "y": 11.45,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 2.03,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": 19.042,
+      "type": "shoot",
+      "x": 26.369374999999906,
+      "y": 3.6722222222222207,
+      "actor": 1,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 30.93,
+          "y": 3.55,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 0.21,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 26.37,
+          "y": 3.67,
+          "alive": true,
+          "ammo": 0,
+          "shootTimer": 1.55,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 27.99,
+          "y": 7.63,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 1.08,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 19.183,
+      "type": "skill",
+      "skill": "storm-gust",
+      "x": 28.64388888888889,
+      "y": 6.016666666666687,
+      "actor": 3,
+      "radius": 2.4,
+      "positions": [
+        {
+          "id": 0,
+          "x": 29.83,
+          "y": 2.16,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 0.07,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 26.92,
+          "y": 4.39,
+          "alive": true,
+          "ammo": 0,
+          "shootTimer": 1.41,
+          "target": 3
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 28.68,
+          "y": 6.02,
+          "alive": true,
+          "ammo": 2,
+          "shootTimer": 0.93,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 19.508,
+      "type": "kill",
+      "x": 26.933611111111198,
+      "y": 3.642500000000023,
+      "actor": 0,
+      "target": 3,
+      "cause": "stomp",
+      "positions": [
+        {
+          "id": 0,
+          "x": 27.32,
+          "y": 2.68,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 2.32,
+          "target": 3
+        },
+        {
+          "id": 1,
+          "x": 24.71,
+          "y": 6.93,
+          "alive": true,
+          "ammo": 0,
+          "shootTimer": 1.08,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 26.93,
+          "y": 3.64,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.61,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 20.658,
+      "type": "skill",
+      "skill": "storm-gust",
+      "x": 24.94374816177438,
+      "y": 8.45,
+      "actor": 1,
+      "radius": 2.4,
+      "positions": [
+        {
+          "id": 0,
+          "x": 25.43,
+          "y": 1.45,
+          "alive": true,
+          "ammo": 4,
+          "shootTimer": 1.17,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 25.12,
+          "y": 8.45,
+          "alive": true,
+          "ammo": 0,
+          "shootTimer": -0.07,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 26.93,
+          "y": 3.64,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.61,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 22.608,
+      "type": "shoot",
+      "x": 28.47597222222224,
+      "y": 12.45,
+      "actor": 0,
+      "kind": "normal",
+      "positions": [
+        {
+          "id": 0,
+          "x": 28.48,
+          "y": 12.45,
+          "alive": true,
+          "ammo": 5,
+          "shootTimer": 1.59,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 28.52,
+          "y": 12.45,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": -2.02,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 26.93,
+          "y": 3.64,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.61,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": 22.608,
+      "type": "kill",
+      "x": 28.518053717329998,
+      "y": 12.45,
+      "actor": 0,
+      "target": 1,
+      "cause": "arrow",
+      "positions": [
+        {
+          "id": 0,
+          "x": 28.48,
+          "y": 12.45,
+          "alive": true,
+          "ammo": 5,
+          "shootTimer": 1.59,
+          "target": 1
+        },
+        {
+          "id": 1,
+          "x": 28.52,
+          "y": 12.45,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": -2.02,
+          "target": 0
+        },
+        {
+          "id": 2,
+          "x": 6.07,
+          "y": 8.32,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.35,
+          "target": 3
+        },
+        {
+          "id": 3,
+          "x": 26.93,
+          "y": 3.64,
+          "alive": false,
+          "ammo": 0,
+          "shootTimer": 0.61,
+          "target": 1
+        }
+      ]
+    }
+  ]
+}

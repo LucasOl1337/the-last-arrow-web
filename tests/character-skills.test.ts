@@ -107,7 +107,7 @@ test('death clears ward immediately; client cannot inject ability kind, radius, 
 test('Storm bot uses close-range pulse, Mizu keeps defensive dodge; shot prediction cannot mutate live skill', () => {
   const w = arena(), [target, bot] = w.fighters; bot.human = false;
   Object.assign(bot.brain, { ready: true, target: 0, reaction: 1, shootTimer: 1, navigation: 1, planTime: 1 });
-  const i = { ...think(w, bot) }; assert.equal(i.dash, true); assert.equal(i.moveX, 1, 'peel away from attacker');
+  const i = { ...think(w, bot) }; assert.equal(i.dash, true); assert.equal(i.moveX, 1, 'hard bot retains tactical peel');
   moveFighter(w, bot, i); assert.equal(bot.skill?.kind, 'storm-gust');
   bot.character = 0; bot.dashCooldown = 0; assert.equal(think(w, bot).dash, false, 'no generic offensive pulse for Mizu');
   activateSkill(w, target); const time = target.skill!.time; predictShot(w, bot, target); assert.equal(target.skill!.time, time);

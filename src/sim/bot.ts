@@ -207,11 +207,12 @@ export function think(w: World, f: Fighter): Intent {
   if (!target) return i;
   // Hard bots take a clear drop onto a target rather than stopping to draw their bow.
   const tx = delta(f.x, target.x, WIDTH), ty = delta(f.y, target.y, HEIGHT);
-  // Storm spends its pulse to peel a nearby attacker, not as another aimed shot.
+  // Easy bots keep their route: the pulse already separates the attacker, and
+  // retreating too abandons their slow next shot. Hard bots retain tactical peel.
   // Mizu retains the observed-projectile dodge above, leaving a ward in that lane.
   if (f.character === 1 && f.dashCooldown <= 0 && !f.charging && !i.dash &&
       Math.hypot(tx, ty) < STORM_GUST_RADIUS && clearShot(w, f, tx / (Math.hypot(tx, ty) || 1), ty / (Math.hypot(tx, ty) || 1), Math.hypot(tx, ty) / ARROW_SPEED)) {
-    i.dash = true; i.moveX = -Math.sign(tx) || f.facing; i.moveY = 0;
+    i.dash = true; if(w.options.difficulty!=='easy')i.moveX = -Math.sign(tx) || f.facing; i.moveY = 0;
   }
   if (w.options.difficulty === 'hard' && !i.dash && !f.grounded && f.vy >= 0 && ty > 0.6 && ty < 3.5 && Math.abs(tx) < 1.1) {
     let clearDrop = true;

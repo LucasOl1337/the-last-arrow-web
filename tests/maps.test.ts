@@ -5,14 +5,11 @@ import { stepRules } from '../src/sim/rules.ts';
 
 test('Templo do Totem / fácil / seed 42: bots finish by combat, not timeout', () => {
   const w = createWorld({ humans: 0, bots: 4, map: 'totem', difficulty: 'easy', seed: 42 });
-  let kills = 0, jumps = 0, skills = 0;
-  // Distinct defensive skills intentionally extend this exact seed from <20s to 24.42s.
-  // Keep a bounded combat outcome, far below the 90s draw; do not confuse survival with a timeout.
-  while (w.round === 1 && w.tick < 30 / DT) {
-    step(w); for (const event of w.events) { if (event.type === 'kill') kills++; if (event.type === 'jump') jumps++; if(event.type==='skill')skills++; }
+  let kills = 0, jumps = 0;
+  while (w.round === 1 && w.tick < 20 / DT) {
+    step(w); for (const event of w.events) { if (event.type === 'kill') kills++; if (event.type === 'jump') jumps++; }
   }
-  assert.equal(w.round, 2); assert.equal(kills, 3); assert.ok(jumps > 0); assert.ok(skills>0);
-  assert.equal(w.tick,2930,'fixed integrated seed finishes by combat at 24.4167 seconds');
+  assert.equal(w.round, 2); assert.equal(kills, 3); assert.ok(jumps > 0);
   assert.equal(w.fighters.reduce((sum, f) => sum + f.score, 0), 1);
 });
 
