@@ -28,14 +28,15 @@ try {
  });
  await page.setViewportSize({width:1366,height:768});await page.goto('https://arrow.symbiose.si/');
  report.version=await page.evaluate(()=>fetch('/version.json',{cache:'no-store'}).then(r=>r.json()));assert.equal(report.version.revision,expected);
- await page.evaluate(()=>window.__tla.startMatch({humans:1,bots:1,map:'totem',seed:42,characters:['storm','mizu']}));
- await page.waitForFunction(()=>window.__tla.diagnostics().models&&window.__tla.world.phase==='playing');
+ await page.evaluate(()=>window.__tla.startMatch({humans:1,bots:1,map:'totem',seed:42,characters:['stormdragon','mizu']}));
+ await page.waitForFunction(()=>window.__tla.diagnostics().models&&window.__tla.world.phase==='playing'&&!document.querySelector('.countdown').textContent.trim());
  await page.evaluate(()=>window.__tla.world.fighters.forEach(f=>{f.invulnerable=100;}));
  const canvas = await page.locator('#game canvas').boundingBox();
  await page.mouse.move(canvas.x+canvas.width*.7,canvas.y+canvas.height*.45);await page.mouse.down();
- await page.waitForFunction(()=>window.__tla.visuals()[0]?.nock);
+ await page.waitForFunction(()=>window.__tla.visuals()[0]?.nock && Math.abs(window.__tla.visuals()[0].animationTime-.18)<1e-6);
  await page.evaluate(()=>window.__tla.setTimeScale(0));
  report.offline=await page.evaluate(()=>({models:window.__tla.diagnostics().models,characters:window.__tla.world.fighters.map(f=>f.character),uploads:window.__stormUploads,visuals:window.__tla.visuals()}));
+ assert.deepEqual(report.offline.characters,[1,0]);
  assert.ok(report.offline.uploads.length>0,'actual corrected skinIndex buffer must reach GPU');
  await page.screenshot({path:`${out}/public-hold.png`,timeout:90000});
  for(const [width,height] of [[900,1000],[360,800]]){await page.setViewportSize({width,height});await page.screenshot({path:`${out}/public-${width}x${height}.png`,timeout:90000});}
@@ -51,6 +52,7 @@ try {
  let timer;try{await Promise.race([playing,new Promise((_,j)=>{timer=setTimeout(()=>j(new Error('online playing timeout')),30000);})]);}finally{clearTimeout(timer);}
  await page.waitForFunction(()=>!document.querySelector('#game').hidden&&window.__tla.diagnostics().models&&window.__tla.world.phase==='playing'&&window.__tla.state().online);
  report.online=await page.evaluate(()=>({online:window.__tla.state().online,models:window.__tla.diagnostics().models,characters:window.__tla.world.fighters.map(f=>f.character),uploads:window.__stormUploads}));
+ await page.waitForFunction(()=>!document.querySelector('.countdown').textContent.trim());
  await page.screenshot({path:`${out}/public-online.png`,timeout:90000});assert.ok(report.received>0);assert.deepEqual(report.errors,[]);
 }catch(e){report.failure=e.stack;throw e;}
 finally{

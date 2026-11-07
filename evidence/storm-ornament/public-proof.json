@@ -1,0 +1,153 @@
+{
+  "errors": [],
+  "received": 67,
+  "version": {
+    "revision": "540d34f5a04b0c4d86afe4aaba727582afcb228d"
+  },
+  "offline": {
+    "models": true,
+    "characters": [
+      1,
+      0
+    ],
+    "uploads": [
+      {
+        "count": 77804,
+        "upperJoint": 17,
+        "lowerJoint": 17,
+        "otherJoint": 30
+      }
+    ],
+    "visuals": [
+      {
+        "state": "shoot",
+        "yaw": -0.35,
+        "feet": [
+          2,
+          5,
+          0.55
+        ],
+        "headHeight": 1.8892843152869787,
+        "animationTime": 0.18000000000000002,
+        "animationSpeed": 0,
+        "strideSpeed": 6.2898150386425815,
+        "landingTime": 0,
+        "weights": {
+          "idle": 0,
+          "run": 1,
+          "jump": 1,
+          "fall": 0,
+          "land": 0,
+          "shoot": 1,
+          "victory": 1,
+          "death": 1
+        },
+        "toes": [
+          0.04139356089695223,
+          0.046522833376249295
+        ],
+        "bowDirection": [
+          0.5252960772871753,
+          -0.1548840037447281,
+          0.21209030952188812
+        ],
+        "bowHand": [
+          2.754758927782879,
+          6.612859500680226,
+          0.7768929381736058
+        ],
+        "releaseTime": 0,
+        "nockTail": [
+          2.494954499209956,
+          6.569893195994562,
+          0.7768929381736058
+        ],
+        "nockTip": [
+          3.2151718391779327,
+          6.689002319110517,
+          0.7768929381736058
+        ],
+        "nock": [
+          2.682408327420799,
+          6.60089420064118,
+          0.7768929381736058
+        ]
+      },
+      {
+        "state": "jump",
+        "yaw": -0.35000000000000003,
+        "feet": [
+          4.137666666666647,
+          9.6402811111111,
+          0.55
+        ],
+        "headHeight": 2.0152502639485768,
+        "animationTime": 0.06680000000000018,
+        "animationSpeed": 1,
+        "strideSpeed": 5.634545201878161,
+        "landingTime": 0,
+        "weights": {
+          "idle": 0,
+          "run": 0,
+          "jump": 0.5566662549972534,
+          "fall": 0.4433337450027466,
+          "land": 1,
+          "shoot": 1,
+          "victory": 1,
+          "death": 1
+        },
+        "toes": [
+          0.210170565596151,
+          0.21227305559338916
+        ],
+        "bowDirection": [
+          0.1596305794576569,
+          -0.3970604465101939,
+          -0.2600930770982118
+        ],
+        "bowHand": [
+          4.4001330136144325,
+          11.06060219378207,
+          0.14229051773695128
+        ],
+        "releaseTime": 0,
+        "nockTail": null,
+        "nockTip": null,
+        "nock": null
+      }
+    ]
+  },
+  "online": {
+    "online": {
+      "room": "F476D047",
+      "player": 0
+    },
+    "models": true,
+    "characters": [
+      0,
+      1
+    ],
+    "uploads": [
+      {
+        "count": 77804,
+        "upperJoint": 17,
+        "lowerJoint": 17,
+        "otherJoint": 30
+      },
+      {
+        "count": 77804,
+        "upperJoint": 17,
+        "lowerJoint": 17,
+        "otherJoint": 30
+      }
+    ]
+  },
+  "finish": {
+    "closed": [
+      "A30AAA78F20584FB7B7EB9C8FF3FDBA9"
+    ],
+    "kept": [],
+    "complete": true,
+    "elapsed_ms": 54
+  }
+}
