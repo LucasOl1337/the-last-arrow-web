@@ -12,6 +12,8 @@ import { themeForLevel } from './themes.ts';
 import { clipWindow, runTimeScale } from './animation.ts';
 import { disposeSkeletons } from './disposal.ts';
 import { aimGuide } from './aim-guide.ts';
+import { skillVisual } from './skill-visual.ts';
+import type { SkillVisualState } from './skill-visual.ts';
 
 /** Visual height of a fighter in tiles (hitbox is 0.64×1.10; feet stay on the hitbox base, the body grows up). */
 export const VISUAL_HEIGHT = 2.4;
@@ -58,12 +60,13 @@ interface View {
   root: THREE.Group; pivot: THREE.Group; character: number; rig: Rig | null; puppet: ProceduralPuppet | null;
   state: State; stateTime: number; yaw: number; aim: number; deathAt: number; ghostClock: number;
   wasGrounded: boolean; lastVy: number; releaseTime: number; landingTime: number;
-  shadow: THREE.Mesh; halo: THREE.Mesh; backdrop: THREE.Sprite; aimDots: THREE.Mesh[]; aimPoint: THREE.Mesh; aimFade: number; nock: THREE.Group;
+  shadow: THREE.Mesh; halo: THREE.Mesh; backdrop: THREE.Sprite; aimDots: THREE.Mesh[]; aimPoint: THREE.Mesh; skillRing: THREE.Mesh; aimFade: number; nock: THREE.Group;
 }
 
 const tmpV = new THREE.Vector3(), tmpQ = new THREE.Quaternion(), tmpQ2 = new THREE.Quaternion(), tmpQ3 = new THREE.Quaternion(), axis = new THREE.Vector3();
 const dotGeometry = new THREE.PlaneGeometry(1, 1);
 const haloGeometry = new THREE.RingGeometry(0.62, 0.7, 32);
+const skillGeometry = new THREE.RingGeometry(.96, 1, 48);
 const shadowGeometry = new THREE.PlaneGeometry(1, 1); shadowGeometry.rotateX(-Math.PI / 2);
 
 function nockedArrow(color: THREE.ColorRepresentation) {
@@ -121,7 +124,7 @@ export class FightersView {
     this.views = w.fighters.map(f => this.build(f));
   }
   private dispose(v: View) {
-    this.scene.remove(v.root, v.shadow, v.nock, v.aimPoint, ...v.aimDots);
+    this.scene.remove(v.root, v.shadow, v.nock, v.aimPoint, v.skillRing, ...v.aimDots);
     v.puppet?.dispose();
     if (v.rig) {
       v.rig.mixer.stopAllAction(); v.rig.mixer.uncacheRoot(v.rig.model);
@@ -130,7 +133,7 @@ export class FightersView {
       v.rig.model.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) (m.material as THREE.Material).dispose(); });
       for (const g of v.rig.ghosts) { this.scene.remove(g.model); disposeSkeletons(g.model); g.material.dispose(); }
     }
-    for (const mesh of [v.shadow, v.halo, v.backdrop, v.aimPoint, ...v.aimDots]) (mesh.material as THREE.Material).dispose();
+    for (const mesh of [v.shadow, v.halo, v.backdrop, v.aimPoint, v.skillRing, ...v.aimDots]) (mesh.material as THREE.Material).dispose();
     v.nock.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) { m.geometry.dispose(); (m.material as THREE.Material).dispose(); } });
   }
   private buildRig(kit: ModelKit, character: number, pivot: THREE.Group, tinted: boolean): Rig {
@@ -209,9 +212,12 @@ export class FightersView {
     });
     const aimPoint = new THREE.Mesh(haloGeometry, new THREE.MeshBasicMaterial({ color: 0xf5edcf, transparent: true, opacity: 0, depthWrite: false, toneMapped: false }));
     aimPoint.scale.setScalar(.28); aimPoint.visible = false; aimPoint.renderOrder = 4; this.scene.add(aimPoint);
+    // Non-additive, thin ring at the origin, never emissive over the character's art.
+    const skillRing = new THREE.Mesh(skillGeometry, new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false }));
+    skillRing.visible = false; skillRing.renderOrder = 2; this.scene.add(skillRing);
     const nock = nockedArrow(color); nock.visible = false; this.scene.add(nock);
     const view: View = { root, pivot, character: f.character, rig, puppet, state: 'idle', stateTime: 0, yaw: f.facing > 0 ? -0.35 : -Math.PI + 0.35,
-      aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, landingTime: 0, shadow, halo, backdrop, aimDots, aimPoint, aimFade: 0, nock };
+      aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, landingTime: 0, shadow, halo, backdrop, aimDots, aimPoint, skillRing, aimFade: 0, nock };
     if (rig) this.play(view, 'idle', 0);
     return view;
   }
@@ -279,6 +285,14 @@ export class FightersView {
       // Spawn/dash protection halo.
       v.halo.visible = f.alive && f.invulnerable > 0;
       if (v.halo.visible) { (v.halo.material as THREE.MeshBasicMaterial).opacity = 0.35 + Math.sin(time * 18) * 0.2; v.halo.rotation.z = time * 2; }
+      const skill = skillVisual((f as Fighter & { skill?: SkillVisualState }).skill, f.alive);
+      v.skillRing.visible = !!skill;
+      if (skill) {
+        v.skillRing.position.set(skill.x, skill.y, .4);
+        v.skillRing.scale.setScalar(skill.radius); v.skillRing.rotation.z = skill.rotation;
+        const material = v.skillRing.material as THREE.MeshBasicMaterial;
+        material.color.set(skill.color); material.opacity = skill.opacity;
+      }
       this.updateAim(v, f, w, x, y, feet, dt);
       this.updateShadow(v, w, x, y+bodyHalfHeight(f)-HALF_H, visible ? (f.alive ? 1 : Math.max(0, 1 - dying * 1.4)) : 0);
     });
