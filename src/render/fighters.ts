@@ -9,9 +9,9 @@ import type { CharacterUniforms } from './characterMaterial.ts';
 import { ProceduralPuppet } from './puppet.ts';
 import { blob, softDot } from './textures.ts';
 import { themeForLevel } from './themes.ts';
-import { ARROW_SPEED, ARROW_GRAVITY, BOLT_GRAVITY } from '../sim/arrows.ts';
 import { clipWindow, runTimeScale } from './animation.ts';
 import { disposeSkeletons } from './disposal.ts';
+import { aimGuide } from './aim-guide.ts';
 
 /** Visual height of a fighter in tiles (hitbox is 0.64×1.10; feet stay on the hitbox base, the body grows up). */
 export const VISUAL_HEIGHT = 2.4;
@@ -51,12 +51,14 @@ interface Rig {
   uniforms: CharacterUniforms[]; outlines: THREE.Material[]; spine1?: THREE.Object3D; spine2?: THREE.Object3D; bowHand?: THREE.Object3D;
   ghosts: { model: THREE.Object3D; bones: THREE.Object3D[]; material: THREE.MeshBasicMaterial; life: number }[];
   bones: THREE.Object3D[]; runSpeed: number;
+  aimLegs: Record<'idle' | 'run' | 'jump' | 'fall', THREE.AnimationAction>;
+  pitchBase: Map<THREE.Object3D, THREE.Quaternion>;
 }
 interface View {
   root: THREE.Group; pivot: THREE.Group; character: number; rig: Rig | null; puppet: ProceduralPuppet | null;
   state: State; stateTime: number; yaw: number; aim: number; deathAt: number; ghostClock: number;
   wasGrounded: boolean; lastVy: number; releaseTime: number; landingTime: number;
-  shadow: THREE.Mesh; halo: THREE.Mesh; backdrop: THREE.Sprite; aimDots: THREE.Mesh[]; aimFade: number; nock: THREE.Group;
+  shadow: THREE.Mesh; halo: THREE.Mesh; backdrop: THREE.Sprite; aimDots: THREE.Mesh[]; aimPoint: THREE.Mesh; aimFade: number; nock: THREE.Group;
 }
 
 const tmpV = new THREE.Vector3(), tmpQ = new THREE.Quaternion(), tmpQ2 = new THREE.Quaternion(), tmpQ3 = new THREE.Quaternion(), axis = new THREE.Vector3();
@@ -119,7 +121,7 @@ export class FightersView {
     this.views = w.fighters.map(f => this.build(f));
   }
   private dispose(v: View) {
-    this.scene.remove(v.root, v.shadow, v.nock, ...v.aimDots);
+    this.scene.remove(v.root, v.shadow, v.nock, v.aimPoint, ...v.aimDots);
     v.puppet?.dispose();
     if (v.rig) {
       v.rig.mixer.stopAllAction(); v.rig.mixer.uncacheRoot(v.rig.model);
@@ -128,7 +130,7 @@ export class FightersView {
       v.rig.model.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) (m.material as THREE.Material).dispose(); });
       for (const g of v.rig.ghosts) { this.scene.remove(g.model); disposeSkeletons(g.model); g.material.dispose(); }
     }
-    for (const mesh of [v.shadow, v.halo, v.backdrop, ...v.aimDots]) (mesh.material as THREE.Material).dispose();
+    for (const mesh of [v.shadow, v.halo, v.backdrop, v.aimPoint, ...v.aimDots]) (mesh.material as THREE.Material).dispose();
     v.nock.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) { m.geometry.dispose(); (m.material as THREE.Material).dispose(); } });
   }
   private buildRig(kit: ModelKit, character: number, pivot: THREE.Group, tinted: boolean): Rig {
@@ -152,10 +154,19 @@ export class FightersView {
     const actions = Object.fromEntries((Object.keys(WINDOWS) as State[]).map(name => {
       const win = WINDOWS[name];
       const clip = clipWindow(kit.clips[win.clip], name, win.start, name === 'shoot' ? 0.65 : win.end);
+      // A drawn bow owns the upper body only. Feet still follow idle/run/airborne locomotion.
+      if (name === 'shoot') clip.tracks = clip.tracks.filter(t => !/mixamorig(Hips|LeftUpLeg|RightUpLeg|LeftLeg|RightLeg|LeftFoot|RightFoot|LeftToe|RightToe)/.test(t.name));
       const action = mixer.clipAction(clip);
       if (win.mode === 'hold') { action.setLoop(THREE.LoopOnce, 1); action.clampWhenFinished = true; }
       return [name, action];
     })) as Record<State, THREE.AnimationAction>;
+    const aimLegs = Object.fromEntries((['idle', 'run', 'jump', 'fall'] as const).map(name => {
+      const win = WINDOWS[name], clip = clipWindow(kit.clips[win.clip], `aim-legs-${name}`, win.start, win.end);
+      clip.tracks = clip.tracks.filter(t => /mixamorig(Hips|LeftUpLeg|RightUpLeg|LeftLeg|RightLeg|LeftFoot|RightFoot|LeftToe|RightToe)/.test(t.name));
+      const action = mixer.clipAction(clip);
+      if (win.mode === 'hold') { action.setLoop(THREE.LoopOnce, 1); action.clampWhenFinished = true; }
+      return [name, action];
+    })) as Rig['aimLegs'];
     const bones: THREE.Object3D[] = []; model.traverse(o => { if ((o as THREE.Bone).isBone) bones.push(o); });
     const ghosts = Array.from({ length: GHOSTS }, () => {
       const ghost = instantiate(kit); ghost.scale.copy(model.scale);
@@ -165,7 +176,7 @@ export class FightersView {
       const gb: THREE.Object3D[] = []; ghost.traverse(o => { if ((o as THREE.Bone).isBone) gb.push(o); });
       return { model: ghost, bones: gb, material, life: 0 };
     });
-    return { model, mixer, actions, uniforms, ghosts, bones, outlines, runSpeed: kit.runSpeed,
+    return { model, mixer, actions, uniforms, ghosts, bones, outlines, aimLegs, pitchBase: new Map(), runSpeed: kit.runSpeed,
       spine1: model.getObjectByName('mixamorigSpine1'), spine2: model.getObjectByName('mixamorigSpine2'), bowHand: model.getObjectByName('mixamorigLeftHand') };
   }
   private build(f: Fighter): View {
@@ -196,9 +207,11 @@ export class FightersView {
       const dot = new THREE.Mesh(dotGeometry, new THREE.MeshBasicMaterial({ color, map: softDot(), transparent: true, opacity: 0, depthWrite: false, toneMapped: false }));
       dot.renderOrder = 3; dot.visible = false; this.scene.add(dot); return dot;
     });
+    const aimPoint = new THREE.Mesh(haloGeometry, new THREE.MeshBasicMaterial({ color: 0xf5edcf, transparent: true, opacity: 0, depthWrite: false, toneMapped: false }));
+    aimPoint.scale.setScalar(.28); aimPoint.visible = false; aimPoint.renderOrder = 4; this.scene.add(aimPoint);
     const nock = nockedArrow(color); nock.visible = false; this.scene.add(nock);
     const view: View = { root, pivot, character: f.character, rig, puppet, state: 'idle', stateTime: 0, yaw: f.facing > 0 ? -0.35 : -Math.PI + 0.35,
-      aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, landingTime: 0, shadow, halo, backdrop, aimDots, aimFade: 0, nock };
+      aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, landingTime: 0, shadow, halo, backdrop, aimDots, aimPoint, aimFade: 0, nock };
     if (rig) this.play(view, 'idle', 0);
     return view;
   }
@@ -266,7 +279,7 @@ export class FightersView {
       // Spawn/dash protection halo.
       v.halo.visible = f.alive && f.invulnerable > 0;
       if (v.halo.visible) { (v.halo.material as THREE.MeshBasicMaterial).opacity = 0.35 + Math.sin(time * 18) * 0.2; v.halo.rotation.z = time * 2; }
-      this.updateAim(v, f, x, feet, time);
+      this.updateAim(v, f, w, x, y, feet, dt);
       this.updateShadow(v, w, x, y+bodyHalfHeight(f)-HALF_H, visible ? (f.alive ? 1 : Math.max(0, 1 - dying * 1.4)) : 0);
     });
   }
@@ -287,7 +300,20 @@ export class FightersView {
       speed = 0;
     }
     action.setEffectiveTimeScale(speed);
+    // Undo last frame's procedural pitch even when a paused/untracked spine is not rewritten by the mixer.
+    for (const [bone, rotation] of rig.pitchBase) bone.quaternion.copy(rotation);
+    const legsState = !f.grounded ? (f.vy < 0 ? 'jump' : 'fall') : Math.abs(f.vx) > .6 ? 'run' : 'idle';
+    for (const [name, legs] of Object.entries(rig.aimLegs)) {
+      if (v.state !== 'shoot' || name !== legsState) { legs.stop(); continue; }
+      if (!legs.isScheduled()) legs.reset().play();
+      legs.setEffectiveWeight(1);
+      legs.setEffectiveTimeScale(name === 'run' ? runTimeScale(f.vx, rig.runSpeed, rig.model.scale.x) : 1);
+    }
     rig.mixer.update(dt);
+    for (const bone of [rig.spine1, rig.spine2]) if (bone) {
+      const rotation = rig.pitchBase.get(bone) ?? new THREE.Quaternion();
+      bone.quaternion.normalize(); rotation.copy(bone.quaternion); rig.pitchBase.set(bone, rotation);
+    }
     // Aim offset: pitch the spine around the facing plane normal so the bow follows 8-way aim.
     const aimTarget = f.alive && (f.charging || v.releaseTime > 0) ? Math.atan2(-f.aimY, Math.abs(f.aimX)) : 0;
     v.aim += (THREE.MathUtils.clamp(aimTarget, -1.1, 1.1) - v.aim) * Math.min(1, dt * 18);
@@ -301,7 +327,7 @@ export class FightersView {
         bone.parent.getWorldQuaternion(tmpQ2);
         // local' = P^-1 · R · P · local, with R a world-space pitch about the facing-plane normal.
         tmpQ3.setFromAxisAngle(axis, v.aim * 0.5).multiply(tmpQ2);
-        bone.quaternion.premultiply(tmpQ2.invert().multiply(tmpQ3));
+        bone.quaternion.premultiply(tmpQ2.invert().multiply(tmpQ3)).normalize();
       }
     }
     // Death: dissolve to the character colour + fake ragdoll topple.
@@ -330,12 +356,12 @@ export class FightersView {
       if (g.life <= 0) g.model.visible = false;
     }
   }
-  private updateAim(v: View, f: Fighter, x: number, feet: number, time: number) {
+  private updateAim(v: View, f: Fighter, w: World, x: number, y: number, feet: number, dt: number) {
     const charging = f.alive && f.charging;
     v.nock.visible = charging;
-    v.aimFade = charging ? Math.min(1, v.aimFade + 0.25) : Math.max(0, v.aimFade - 0.2);
-    if (v.aimFade <= 0) { for (const d of v.aimDots) d.visible = false; return; }
-    if (!charging) { for (const d of v.aimDots) (d.material as THREE.MeshBasicMaterial).opacity *= 0.7; return; }
+    v.aimFade = charging ? Math.min(1, v.aimFade + dt * 18) : Math.max(0, v.aimFade - dt * 14);
+    v.aimPoint.visible = charging;
+    if (!charging) { for (const d of v.aimDots) d.visible = false; return; }
     const angle = Math.atan2(-f.aimY, f.aimX), pull = Math.min(1, f.charge / 0.35);
     // Nock on the bow hand; the arc starts at the arrow tip and follows the arrow's real speed and gravity.
     if (v.rig?.bowHand) v.rig.bowHand.getWorldPosition(tmpV);
@@ -343,17 +369,18 @@ export class FightersView {
     const dx = f.aimX, dy = -f.aimY;
     v.nock.position.set(tmpV.x - dx * 0.14 * pull, tmpV.y - dy * 0.14 * pull, 0.78);
     v.nock.rotation.set(0, 0, angle);
-    const tipX = v.nock.position.x + dx * 0.5, tipY = v.nock.position.y + dy * 0.5;
-    const gravity = (f.inventory?.[0] === 'bolt' ? BOLT_GRAVITY : ARROW_GRAVITY);
-    const spacing = 0.026 + pull * 0.012; // seconds of flight between dots: the arc stretches as the string is drawn
+    // Start at the simulated projectile origin, not the decorative (taller) bow hand.
+    const guide = aimGuide(w.level, x, y, f.aimX, f.aimY, f.inventory?.[0] === 'bolt');
     v.aimDots.forEach((dot, k) => {
-      const t = spacing * (k + 1);
-      dot.visible = true;
-      dot.position.set(tipX + dx * ARROW_SPEED * t, tipY + dy * ARROW_SPEED * t - 0.5 * gravity * t * t, 0.8);
-      const size = (0.2 - k * 0.022) * (1 + Math.sin(time * 14 - k) * 0.08);
-      dot.scale.set(size, size, 1);
-      (dot.material as THREE.MeshBasicMaterial).opacity = (0.95 - k * 0.14) * (0.55 + pull * 0.45);
+      const point = guide.points[k]; dot.visible = !!point;
+      if (!point) return;
+      dot.position.set(point.x, HEIGHT - point.y, .8);
+      const size = .13 - k * .01; dot.scale.set(size, size, 1);
+      (dot.material as THREE.MeshBasicMaterial).opacity = .9 * v.aimFade;
     });
+    v.aimPoint.position.set(guide.end.x, HEIGHT - guide.end.y, .82);
+    (v.aimPoint.material as THREE.MeshBasicMaterial).color.set(guide.blocked ? 0xffc27a : 0xf5edcf);
+    (v.aimPoint.material as THREE.MeshBasicMaterial).opacity = .95 * v.aimFade;
   }
   private updateShadow(v: View, w: World, x: number, y: number, strength: number) {
     // Project down to the first solid tile under the feet (wrap-aware, up to 8 tiles).
