@@ -63,12 +63,54 @@ test('a hard bot cancels a pending bomb release beside the Totem column instead 
   const w = createWorld({ humans: 1, bots: 3, map: 'totem', difficulty: 'hard' });
   w.phase = 'playing';
   const f = w.fighters[1], target = w.fighters[0];
-  Object.assign(f, { x: 9.5, y: 7.5, invulnerable: 0, grounded: false, ammo: 1, inventory: ['bomb'], charging: true, aimX: 1, aimY: 0 });
-  Object.assign(target, { x: 13, y: 7.5, invulnerable: 0 });
+  Object.assign(f, { x: 9.5, y: 8.5, invulnerable: 0, grounded: false, ammo: 1, inventory: ['bomb'], charging: true, aimX: 1, aimY: 0 });
+  Object.assign(target, { x: 13, y: 8.5, invulnerable: 0 });
+  assert.equal(solid(w.level, f.x, f.y), false); assert.equal(solid(w.level, target.x, target.y), false);
+  assert.equal(solid(w.level, 10.1, 8.5), true, 'pending release must face the current nearby Totem pillar');
   w.fighters[2].alive = w.fighters[3].alive = false;
   Object.assign(f.brain, { ready: true, target: 0, hold: 0, shootTimer: 1, reaction: .08 });
-  const intent = think(w, f); updateBow(w, f, intent);
+  const intent = think(w, f);
+  assert.equal(f.charging, false, 'think cancels before updateBow can interpret a release');
+  updateBow(w, f, intent);
   assert.equal(f.charging, false); assert.equal(w.arrows.length, 0); assert.equal(f.ammo, 1);
+  assert.deepEqual(f.inventory, ['bomb']); assert.equal(f.brain.hold, 0);
+  assert.equal(w.events.some(e => e.type === 'shoot' || e.type === 'explosion'), false);
+});
+
+test('a hard bot releases a pending bomb safely through the opened Totem lane instead of wasting the opportunity', () => {
+  const w = createWorld({ humans: 1, bots: 3, map: 'totem', difficulty: 'hard' });
+  w.phase = 'playing';
+  const f = w.fighters[1], target = w.fighters[0];
+  Object.assign(f, { x: 9.5, y: 7.5, invulnerable: 0, grounded: false, ammo: 1, inventory: ['bomb'], charging: true, aimX: 1, aimY: 0 });
+  Object.assign(target, { x: 13, y: 7.5, invulnerable: 0 });
+  assert.equal(w.level.rows[7], '.'.repeat(32), 'shot lane must stay clear in this safe-shot fixture');
+  w.fighters[2].alive = w.fighters[3].alive = false;
+  Object.assign(f.brain, { ready: true, target: 0, hold: 0, shootTimer: 1, reaction: .08 });
+  const intent = think(w, f);
+  assert.equal(f.charging, true); assert.equal(intent.shootHeld, false);
+  updateBow(w, f, intent);
+  assert.equal(w.arrows.length, 1); assert.equal(w.arrows[0].kind, 'bomb');
+  assert.equal(f.charging, false); assert.equal(f.ammo, 0); assert.deepEqual(f.inventory, []);
+  for (let tick = 0; tick < 24; tick++) stepArrows(w);
+  assert.equal(f.alive, true); assert.equal(target.alive, false);
+  assert.equal(w.events.filter(e => e.type === 'explosion').length, 1);
+  assert.equal(w.events.filter(e => e.type === 'shoot').length, 1);
+  assert.equal(w.events.find(e => e.type === 'kill')?.cause, 'bomb');
+});
+
+test('forcing the cancelled Totem pillar release would kill the shooter with its nearby explosion', () => {
+  const w = createWorld({ humans: 1, bots: 3, map: 'totem', difficulty: 'hard' });
+  const f = w.fighters[1], target = w.fighters[0];
+  Object.assign(f, { x: 9.5, y: 8.5, invulnerable: 0, ammo: 1, inventory: ['bomb'], charging: true, aimX: 1, aimY: 0 });
+  Object.assign(target, { x: 13, y: 8.5, invulnerable: 0 });
+  w.fighters[2].alive = w.fighters[3].alive = false;
+  assert.equal(solid(w.level, 10.1, 8.5), true);
+  updateBow(w, f, emptyIntent());
+  for (let tick = 0; tick < 24; tick++) stepArrows(w);
+  assert.equal(f.alive, false); assert.equal(target.alive, true);
+  assert.equal(w.events.filter(e => e.type === 'explosion').length, 1);
+  const death = w.events.find(e => e.type === 'kill');
+  assert.equal(death?.cause, 'bomb'); assert.equal(death?.actor, f.id); assert.equal(death?.target, f.id);
 });
 
 test('a stomp across the vertical wrap carries its cause for the result statistics', () => {
