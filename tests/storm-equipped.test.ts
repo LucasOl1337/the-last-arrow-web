@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { writeFile } from 'node:fs/promises';
 import { rigRuntime } from './helpers/arco-rig-runtime.ts';
+import { stringHook, hookHolds } from './helpers/string-hook.ts';
 
 const armNames=new Set(['LeftShoulder','LeftArm','LeftForeArm','LeftHand','RightShoulder','RightArm','RightForeArm','RightHand'].map(n=>'mixamorig'+n));
 // Grip/hook finger curl is part of the same arm-only overlay (hands and fingers).
@@ -27,7 +28,7 @@ test('Storm equipped: exact 23 states, both strings, contact, links, paused pose
    });
   });
   let contact=Infinity;for(const id of right)contact=Math.min(contact,mesh.localToWorld(mesh.getVertexPosition(id,new THREE.Vector3())).distanceTo(nock));
-  const row={name,segments,contact,charging:f.charging,gripError:point(bow.grip).distanceTo(ik.gripWorld),wristToGrip:point(bow.grip).distanceTo(hand),nockTailError:f.charging?nock.distanceTo(v.nock.localToWorld(new THREE.Vector3(-.19,0,0))):null,metrics:{...ik.metrics},hand:hand.toArray(),nock:nock.toArray()};rows.push(row);
+  const row={name,segments,contact,charging:f.charging,gripError:point(bow.grip).distanceTo(ik.gripWorld),wristToGrip:point(bow.grip).distanceTo(hand),nockTailError:f.charging?nock.distanceTo(v.nock.localToWorld(new THREE.Vector3(-.19,0,0))):null,metrics:{...ik.metrics},hand:hand.toArray(),nock:nock.toArray(),hook:stringHook(THREE,mesh,nock,point(bow.upperTip),point(bow.lowerTip))};rows.push(row);
   assert.ok(row.gripError<=1e-8);assert.ok(row.wristToGrip<.2);if(f.charging){assert.ok(row.nockTailError!<1e-8);assert.ok(Math.abs(v.nock.localToWorld(new THREE.Vector3(.54,0,0)).distanceTo(nock)-.73)<1e-8);}
   assert.ok(nock.clone().sub(hand).dot(aim)<0);
   bow.strings.forEach((s:any,i:number)=>{assert.ok(s.localToWorld(new THREE.Vector3(0,-.5,0)).distanceTo(point([bow.upperTip,bow.lowerTip][i]))<1e-8);assert.ok(s.localToWorld(new THREE.Vector3(0,.5,0)).distanceTo(nock)<1e-8);assert.equal(s.material.emissive.getHex(),0);});
@@ -46,5 +47,6 @@ test('Storm equipped: exact 23 states, both strings, contact, links, paused pose
  if(process.env.STORM_EQUIPPED_REPORT)await writeFile(process.env.STORM_EQUIPPED_REPORT,JSON.stringify(rows,null,2)+'\n');
  assert.deepEqual(rows.filter(r=>r.segments.flat().length).map(r=>({state:r.name,hits:r.segments.flat()})),[],'string crosses actual Storm skin');
  assert.deepEqual(rows.filter(r=>r.metrics.unreachable||Math.abs(r.metrics.handDepth-r.metrics.targetDepth)>1e-6).map(r=>r.name),[],'support target unreachable');
- assert.deepEqual(rows.filter(r=>r.charging&&Math.abs(r.contact-.005)>=1e-5).map(r=>({state:r.name,contact:r.contact})),[],'draw hand must contact nock');
+ assert.deepEqual(rows.filter(r=>r.charging&&!hookHolds(r.hook)).map(r=>({state:r.name,hook:r.hook})),[],'three-under hook pad must contact the drawn string at the nock, index below the arrow');
+ assert.deepEqual(rows.filter(r=>r.contact<.005-1e-5).map(r=>({state:r.name,contact:r.contact})),[],'draw hand penetrates the nock');
 });

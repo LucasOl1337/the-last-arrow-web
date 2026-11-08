@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { rigRuntime } from './helpers/arco-rig-runtime.ts';
+import { stringHook, hookHolds } from './helpers/string-hook.ts';
 
 const edited = new Set(['LeftShoulder','LeftArm','LeftForeArm','LeftHand','RightShoulder','RightArm','RightForeArm','RightHand',
   // Grip/hook finger curl: same arm-only overlay, restored before the mixer.
@@ -30,9 +31,14 @@ test('arm IK preserves links, torso and simulation; all fixed neighbors clear bo
       let right=0;for(let k=0;k<4;k++)if(mesh.skeleton.bones[mesh.geometry.getAttribute('skinIndex').getComponent(i,k)].name.startsWith('mixamorigRightHand'))right+=mesh.geometry.getAttribute('skinWeight').getComponent(i,k);
       if(right>.5)contact=Math.min(contact,mesh.localToWorld(mesh.getVertexPosition(i,new THREE.Vector3())).distanceTo(nock));
     }
-    // Nocked: fingertip tangent to the nock. After release the string rings
+    // Nocked: three-under hook, a finger pad tangent to the drawn lower string
+    // at the nock, index below the arrow. After release the string rings
     // forward of brace and the hand does not follow it: it may only not touch.
-    if(f.charging)assert.ok(Math.abs(contact-.005)<1e-5,`${state}: draw hand not tangent to nock (${contact})`);
+    if(f.charging){
+      const h=stringHook(THREE,mesh,nock,point(v.equippedBow.upperTip),point(v.equippedBow.lowerTip));
+      assert.ok(hookHolds(h),`${state}: three-under hook off the string or index off the arrow (${JSON.stringify(h)})`);
+      assert.ok(contact>=.005-1e-5,`${state}: draw hand penetrates the nock (${contact})`);
+    }
     else assert.ok(contact>=.005-1e-5,`${state}: draw hand penetrates the string at the nock (${contact})`);
     const frozen=JSON.stringify(world),outside=v.rig.bones.filter((b:any)=>!edited.has(b.name)).map((b:any)=>[b,b.quaternion.toArray()]);
     ik.restore();ik.apply(f.aimX,f.aimY,v.equippedBow.pull(f.charging,f.charge,v.releaseTime));

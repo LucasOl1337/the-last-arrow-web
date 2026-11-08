@@ -5,6 +5,8 @@ import { bowSpan } from './equipped-bow.ts';
  * No translations/scales, torso edits or accumulated quaternion multiplication. */
 /** Draw arm may extend a little further than the support arm's .97. */
 const DRAW_REACH=.995;
+/** Rendered arrow shaft radius (fighters.ts CylinderGeometry .014). */
+const ARROW_RADIUS=.014;
 export interface BowArmProfile { bodyClearance?: boolean; ornamentVertex?: number }
 export class BowArmIK {
   private bones: THREE.Object3D[];
@@ -16,6 +18,9 @@ export class BowArmIK {
   private rightPinky: THREE.Object3D;
   private rightFinger: THREE.Object3D;
   private rightSkin: number[] = [];
+  /** Draw-hand hook surface (index/middle/ring middle+distal phalanges) and index chain. */
+  private rightHook: number[] = [];
+  private rightIndexSkin: number[] = [];
   private index: THREE.Object3D;
   private pinky: THREE.Object3D;
   private clavicle: THREE.Object3D;
@@ -68,6 +73,9 @@ export class BowArmIK {
       if(profile.bodyClearance && body>.5)bodyVertices.add(i);
       if(forearm>.5)this.sleeveVertices.push(i);
       if(right>.5)this.rightSkin.push(i);
+      let dominant='',best=0;for(let k=0;k<4;k++){const weight=w.getComponent(i,k);if(weight>best){best=weight;dominant=this.mesh.skeleton.bones[j.getComponent(i,k)].name;}}
+      if(/^mixamorigRightHand(Index|Middle|Ring)[23]$/.test(dominant))this.rightHook.push(i);
+      if(/^mixamorigRightHandIndex[123]$/.test(dominant))this.rightIndexSkin.push(i);
     }
     const index=this.mesh.geometry.index!;
     for(let t=0;t<index.count;t+=3){const ids=[index.getX(t),index.getX(t+1),index.getX(t+2)];if(ids.every(i=>bodyVertices.has(i))){this.bodyTriangles.push(ids);for(const i of ids)if(!this.bodyPoints.has(i))this.bodyPoints.set(i,new THREE.Vector3());}}
@@ -260,8 +268,8 @@ export class BowArmIK {
     const toward=parent.worldToLocal(nock.clone()).sub(c.position).normalize();
     c.quaternion.premultiply(new THREE.Quaternion().setFromUnitVectors(original,toward)).normalize();
     this.model.updateWorldMatrix(true,true);
-    // Mediterranean hook: index above the arrow, knuckle row along the string,
-    // back of the hand to the camera, fingers curled around behind the string.
+    // Three-under hook: index, middle and ring hook the string below the
+    // arrow, knuckle row along the string.
     const handLength=this.point(this.fingers.Right.middle[0]).distanceTo(this.point(hand));
     const target=nock.clone().addScaledVector(aim,-handLength);target.z+=.04;
     // Draw elbow is pulled back along the arrow line (with a little depth),
@@ -270,15 +278,38 @@ export class BowArmIK {
     this.solve(target,this.right,elbowPole,DRAW_REACH);
     this.orientHand('Right',aim,span);
     this.curl('Right',[.35,1.45,1.05],[.5,.5,.3]);
-    // One geometric contact correction from actual skinned surface: the hand
-    // stays entirely on the camera side of the string plane; its deepest
-    // fingertip touches the nock .005 in front of it. No hits, no offset fudge.
+    // The thumb does not draw: it lies along the radial edge of the hand, in
+    // the metacarpal plane (index proximal direction minus its palm-normal
+    // part; rotation of the thumb root only), so the hooking finger pads are
+    // the hand's deepest surface instead of a thumb tip standing on the nock.
+    const thumb=this.fingers.Right.thumb,index=this.fingers.Right.chains[0],rowEnds=this.fingers.Right.chains;
+    const palmNormal=this.point(this.fingers.Right.middle[0]).sub(this.point(hand)).cross(this.point(rowEnds[0][0]).sub(this.point(rowEnds[3][0]))).normalize();
+    const to=this.point(index[1]).sub(this.point(index[0]));to.addScaledVector(palmNormal,-to.dot(palmNormal)).normalize();
+    const from=this.point(thumb[1]).sub(this.point(thumb[0])).normalize();
+    const tq=thumb[0].parent!.getWorldQuaternion(new THREE.Quaternion());
+    thumb[0].quaternion.premultiply(tq.clone().invert().multiply(new THREE.Quaternion().setFromUnitVectors(from,to)).multiply(tq)).normalize();
+    this.model.updateWorldMatrix(true,true);
+    // Drawn lower string, nock -> lower tip, from the authored bow (tips at
+    // -brace, +-.64 along the span; nock at -brace - draw*pull).
+    const lowerString=aim.clone().multiplyScalar(.14*Math.max(0,pull)).addScaledVector(span,-.64);
+    // One geometric contact correction from actual skinned surface. The hook
+    // closes on the palm side, so the string lies where the fingers curl:
+    // the hand stays entirely on the other side of the string plane (camera
+    // side when the back of the hand faces the camera, behind the string when
+    // the palm does); the leading hook pad lies on the drawn lower string,
+    // .005 off it, and the top of the index sits under the arrow shaft
+    // (radius .014) with the same .005.
+    const side=Math.sign(this.point(rowEnds[1][2]).z-this.point(rowEnds[1][0]).z)||-1;
     let root:THREE.Object3D=this.model;while(root.parent)root=root.parent;
     for(let pass=0;pass<2;pass++){
       root.updateMatrixWorld(true);this.mesh.skeleton.update();
-      const p=new THREE.Vector3(),nearest=new THREE.Vector3();let back=Infinity;
-      for(const i of this.rightSkin){this.mesh.localToWorld(this.mesh.getVertexPosition(i,p));if(p.z<back){back=p.z;nearest.copy(p);}}
-      const goal=this.point(hand).add(nock.clone().add(new THREE.Vector3(0,0,.005)).sub(nearest));
+      const p=new THREE.Vector3(),pad=new THREE.Vector3();let lead=-Infinity,padLead=-Infinity,top=-Infinity;
+      for(const i of this.rightSkin)lead=Math.max(lead,side*this.mesh.localToWorld(this.mesh.getVertexPosition(i,p)).z);
+      for(const i of this.rightHook){this.mesh.localToWorld(this.mesh.getVertexPosition(i,p));if(side*p.z>padLead){padLead=side*p.z;pad.copy(p);}}
+      for(const i of this.rightIndexSkin)top=Math.max(top,this.mesh.localToWorld(this.mesh.getVertexPosition(i,p)).sub(nock).dot(span));
+      const rel=pad.clone().sub(nock),down=-ARROW_RADIUS-.005-top,s=rel.dot(span)+down;
+      const along=s*lowerString.dot(aim)/lowerString.dot(span);
+      const goal=this.point(hand).addScaledVector(span,down).addScaledVector(aim,along-rel.dot(aim)).add(new THREE.Vector3(0,0,nock.z-side*(.005+lead)));
       // Out of reach: slide back along the arrow line (follow-through), never
       // sink through the string plane toward the shoulder. Closed-form root.
       const sp=upper.parent!,o=upper.position,l=(o.distanceTo(sp.worldToLocal(this.point(lower)))+sp.worldToLocal(this.point(lower)).distanceTo(sp.worldToLocal(this.point(hand))))*DRAW_REACH;
