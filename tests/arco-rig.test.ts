@@ -5,6 +5,7 @@ import { measureRig } from '../scripts/measure-arco-rig.ts';
 import { DT } from '../src/sim/world.ts';
 import { HEIGHT } from '../src/sim/level.ts';
 import { ARROW_GRAVITY } from '../src/sim/arrows.ts';
+import { SHOT_PLANE } from '../src/sim/bow-socket.ts';
 
 const close = (a: number, b: number, tolerance = 1e-8) => assert.ok(Math.abs(a - b) < tolerance, `${a} != ${b}`);
 
@@ -48,7 +49,8 @@ test('actual Mizu/Storm rig: idle, draw, 10s hold, diagonal, turn, crouch, jump,
     close(a.x, r.expectedSpawn[character][0]); close(a.y, r.expectedSpawn[character][1]);
     close(r.renderedProjectiles[character].origin[0], a.x, 2e-6);
     close(r.renderedProjectiles[character].origin[1], HEIGHT - a.y, 2e-6);
-    close(r.renderedProjectiles[character].origin[2], .8, 1e-6);
+    // Flight depth is the shared arena shot plane (bow-socket contract), not the old .8.
+    close(r.renderedProjectiles[character].origin[2], SHOT_PLANE, 1e-6);
     assert.equal(next.stuck, false);
     close(next.x, a.x + a.vx * DT);
     close(next.y, a.y + (a.vy + ARROW_GRAVITY * DT) * DT);

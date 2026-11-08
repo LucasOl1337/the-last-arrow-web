@@ -11,7 +11,7 @@ test('both Mizu string segments clear the head in all eight aims and pose neighb
   let mesh:any;v.rig.model.traverse((o:any)=>{if(o.isSkinnedMesh&&o.material.userData.uniforms)mesh=o;});
   const sample=(name:string)=>{
     scene.updateMatrixWorld(true);mesh.skeleton.update();mesh.computeBoundingBox();mesh.computeBoundingSphere();
-    const bow=v.equippedBow,point=(o:any)=>o.getWorldPosition(new THREE.Vector3()),nock=point(bow.nock),hand=point(v.rig.bowHand);
+    const bow=v.equippedBow,point=(o:any)=>o.getWorldPosition(new THREE.Vector3()),nock=point(bow.nock),hand=v.rig.armIK.gripWorld.clone();
     const aim=new THREE.Vector3(f.aimX,-f.aimY,0).normalize();
     assert.ok(point(bow.grip).distanceTo(hand)<=.03,`${name}: grip outside hand`);
     assert.ok(nock.clone().sub(hand).dot(aim)<0,`${name}: nock not behind grip`);

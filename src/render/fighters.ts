@@ -14,12 +14,16 @@ import { clipWindow, runTimeScale } from './animation.ts';
 import { disposeSkeletons } from './disposal.ts';
 import { EquippedBow, MIZU_BOW, STORM_BOW } from './equipped-bow.ts';
 import { BowArmIK } from './bow-arm-ik.ts';
+import { bowSocket, aimPitch, PITCH_LIMIT, REACH, REACH_IDLE, SHOT_PLANE, CARRY_PLANE } from '../sim/bow-socket.ts';
 import { aimGuide } from './aim-guide.ts';
 import { skillVisual } from './skill-visual.ts';
 import type { SkillVisualState } from './skill-visual.ts';
 
 /** Visual height of a fighter in tiles (hitbox is 0.64×1.10; feet stay on the hitbox base, the body grows up). */
 export const VISUAL_HEIGHT = 2.4;
+/** Relaxed carry: grip drop below the nocked socket and bow tilt (rad, sim
+ * y-down: + leans the upper limb forward). Render-only, no arrow contract. */
+const CARRY_DROP = .32, CARRY_TILT = .45;
 const VISUAL_WIDTH = 1.18;
 import { HALF_H, bodyHalfHeight } from '../sim/body.ts';
 const FADE = 0.12;
@@ -63,13 +67,12 @@ interface Rig {
 interface View {
   root: THREE.Group; pivot: THREE.Group; character: number; rig: Rig | null; puppet: ProceduralPuppet | null;
   equippedBow: EquippedBow | null;
-  state: State; stateTime: number; yaw: number; aim: number; deathAt: number; ghostClock: number;
+  state: State; stateTime: number; yaw: number; aim: number; reach: number; bowAim: { x: number; y: number }; relax: number; deathAt: number; ghostClock: number;
   wasGrounded: boolean; lastVy: number; releaseTime: number; landingTime: number;
   shadow: THREE.Mesh; halo: THREE.Mesh; backdrop: THREE.Sprite; aimDots: THREE.Mesh[]; aimPoint: THREE.Mesh; skillRing: THREE.Mesh; aimFade: number; nock: THREE.Group;
 }
 
 const tmpV = new THREE.Vector3(), tmpQ = new THREE.Quaternion(), tmpQ2 = new THREE.Quaternion(), tmpQ3 = new THREE.Quaternion(), axis = new THREE.Vector3();
-const bowForearmWorld = new THREE.Vector3(), palmWidthWorld = new THREE.Vector3(), palmIndexWorld = new THREE.Vector3();
 const dotGeometry = new THREE.PlaneGeometry(1, 1);
 const haloGeometry = new THREE.RingGeometry(0.62, 0.7, 32);
 const skillGeometry = new THREE.RingGeometry(.96, 1, 48);
@@ -240,7 +243,7 @@ export class FightersView {
     const nock = nockedArrow(color); nock.visible = false; this.scene.add(nock);
     const equippedBow = (f.character === 0 || f.character === 1) && rig?.bowHand && rig.bowForearm && rig.palmIndex && rig.palmPinky ? new EquippedBow(f.character === 0 ? MIZU_BOW : STORM_BOW) : null;
     if (equippedBow) this.scene.add(equippedBow.root);
-    const view: View = { root, pivot, character: f.character, rig, puppet, equippedBow, state: 'idle', stateTime: 0, yaw: f.facing > 0 ? -0.35 : -Math.PI + 0.35,
+    const view: View = { root, pivot, character: f.character, rig, puppet, equippedBow, state: 'idle', stateTime: 0, reach: REACH_IDLE, bowAim: { x: Math.sign(f.facing) || 1, y: 0 }, relax: 1, yaw: f.facing > 0 ? -0.35 : -Math.PI + 0.35,
       aim: 0, deathAt: -1, ghostClock: 0, wasGrounded: true, lastVy: 0, releaseTime: 0, landingTime: 0, shadow, halo, backdrop, aimDots, aimPoint, skillRing, aimFade: 0, nock };
     if (rig) this.play(view, 'idle', 0);
     return view;
@@ -360,8 +363,8 @@ export class FightersView {
       bone.quaternion.normalize(); rotation.copy(bone.quaternion); rig.pitchBase.set(bone, rotation);
     }
     // Aim offset: pitch the spine around the facing plane normal so the bow follows 8-way aim.
-    const aimTarget = f.alive && (f.charging || v.releaseTime > 0) ? Math.atan2(-f.aimY, Math.abs(f.aimX)) : 0;
-    v.aim += (THREE.MathUtils.clamp(aimTarget, -1.1, 1.1) - v.aim) * Math.min(1, dt * 18);
+    const aimTarget = f.alive && (f.charging || v.releaseTime > 0) ? aimPitch(f.aimX, f.aimY) : 0;
+    v.aim += (THREE.MathUtils.clamp(aimTarget, -PITCH_LIMIT, PITCH_LIMIT) - v.aim) * Math.min(1, dt * 18);
     if (Math.abs(v.aim) > 0.001) {
       v.pivot.updateWorldMatrix(true, false);
       // Pitch in the arena's XY plane, independent of the model's three-quarter yaw.
@@ -375,7 +378,25 @@ export class FightersView {
         bone.quaternion.premultiply(tmpQ2.invert().multiply(tmpQ3)).normalize();
       }
     }
-    if (f.alive) rig.armIK?.apply(f.aimX,f.aimY,v.equippedBow?.pull(f.charging,f.charge,v.releaseTime) ?? 0);
+    // Visual carry eases between relaxed and nocked reach (no pop on release).
+    const nocked = f.charging || v.releaseTime > 0;
+    v.reach += ((nocked ? REACH : REACH_IDLE) - v.reach) * Math.min(1, dt * 14);
+    // Relaxed carry (no arrow nocked): bow lowered to the waist and tilted with
+    // the upper limb forward, out of the face; eases with the same reach blend.
+    const relax = v.relax = f.charging ? 0 : THREE.MathUtils.clamp((REACH - v.reach) / (REACH - REACH_IDLE), 0, 1);
+    {
+      const side = Math.sign(f.aimX) || Math.sign(f.facing) || 1, length = Math.hypot(f.aimX, f.aimY) || 1;
+      const x = THREE.MathUtils.lerp(f.aimX / length, side * Math.cos(CARRY_TILT), relax), y = THREE.MathUtils.lerp(f.aimY / length, Math.sin(CARRY_TILT), relax);
+      const n = Math.hypot(x, y) || 1; v.bowAim.x = x / n; v.bowAim.y = y / n;
+      if (f.charging) { v.bowAim.x = f.aimX; v.bowAim.y = f.aimY; }
+    }
+    if (f.alive) {
+      // Same socket contract as the SIM, with the torso pitch actually rendered.
+      const socket=bowSocket({...f,aimX:v.bowAim.x,aimY:v.bowAim.y,x:v.root.position.x,y:HEIGHT-v.root.position.y-bodyHalfHeight(f)},.35,v.aim,Math.cos(v.yaw)/Math.cos(.35),f.charging?REACH:v.reach);
+      // Only a nocked arrow makes the socket a contract; otherwise the arm may
+      // fall short of it rather than stretch (idle/locomotion/after release).
+      rig.armIK?.apply(v.bowAim.x,v.bowAim.y,v.equippedBow?.pull(f.charging,f.charge,v.releaseTime) ?? 0,new THREE.Vector3(socket.grip.x,HEIGHT-socket.grip.y-CARRY_DROP*relax,f.charging?socket.grip.z:CARRY_PLANE+(SHOT_PLANE-CARRY_PLANE)*(v.reach-REACH_IDLE)/(REACH-REACH_IDLE)),f.facing,f.charging);
+    }
     // Death: dissolve to the character colour + fake ragdoll topple.
     const dissolve = f.alive ? 0 : THREE.MathUtils.clamp((dying - 0.18) / 0.6, 0, 1);
     v.root.rotation.z = f.alive ? 0 : -Math.min(dying * 2.2, 0.9) * (f.facing > 0 ? 1 : -1);
@@ -404,13 +425,12 @@ export class FightersView {
   }
   private updateAim(v: View, f: Fighter, w: World, x: number, y: number, feet: number, dt: number) {
     const charging = f.alive && f.charging;
-    if (v.equippedBow && v.rig?.bowHand) {
-      v.rig.bowHand.getWorldPosition(tmpV);
-      v.rig.bowForearm!.getWorldPosition(bowForearmWorld);
-      v.rig.palmPinky!.getWorldPosition(palmWidthWorld);
-      v.rig.palmIndex!.getWorldPosition(palmIndexWorld);
-      palmWidthWorld.sub(tmpV); palmIndexWorld.sub(tmpV); palmWidthWorld.crossVectors(palmIndexWorld,palmWidthWorld);
-      v.equippedBow.update(tmpV, f.aimX, f.aimY, charging, f.charge, v.releaseTime, f.alive, bowForearmWorld, palmWidthWorld);
+    if (v.equippedBow && v.rig?.armIK) {
+      // The riser sits in the measured closed fist, not on the wrist joint.
+      v.equippedBow.update(v.rig.armIK.gripWorld, v.bowAim.x, v.bowAim.y, charging, f.charge, v.releaseTime, f.alive, f.facing);
+      // Storm carry: the preserved dragon is the upper limb's crest, seated on it.
+      const crest = v.rig.armIK.ornamentTip(tmpV);
+      if (crest) v.equippedBow.seat(crest, f.alive && !charging ? v.relax : 0);
     }
     v.nock.visible = charging;
     v.aimFade = charging ? Math.min(1, v.aimFade + dt * 18) : Math.max(0, v.aimFade - dt * 14);
@@ -420,7 +440,8 @@ export class FightersView {
     // The shaft passes through the animated hand in all three axes. A fixed
     // arena Z detached it from the baked bow, especially during a direction turn.
     // Keep the arrow in the simulation's aim plane; don't inherit wrist roll.
-    if (v.rig?.bowHand) v.rig.bowHand.getWorldPosition(tmpV);
+    if (v.rig?.armIK) tmpV.copy(v.rig.armIK.gripWorld);
+    else if (v.rig?.bowHand) v.rig.bowHand.getWorldPosition(tmpV);
     else tmpV.set(x + Math.sign(f.aimX || f.facing) * 0.35, feet + VISUAL_HEIGHT * 0.5, 0.78);
     const dx = f.aimX, dy = -f.aimY;
     v.nock.position.set(tmpV.x - dx * 0.14 * pull, tmpV.y - dy * 0.14 * pull, tmpV.z);

@@ -1,7 +1,10 @@
 import * as THREE from 'three';
+import { bowSpan } from './equipped-bow.ts';
 
 /** Arm-only overlay. Restore before the mixer and solve after authored spine aim.
  * No translations/scales, torso edits or accumulated quaternion multiplication. */
+/** Draw arm may extend a little further than the support arm's .97. */
+const DRAW_REACH=.995;
 export interface BowArmProfile { bodyClearance?: boolean; ornamentVertex?: number }
 export class BowArmIK {
   private bones: THREE.Object3D[];
@@ -21,7 +24,10 @@ export class BowArmIK {
   private bodyTriangles: number[][] = [];
   private bodyPoints = new Map<number, THREE.Vector3>();
   private sleeveVertices: number[] = [];
-  readonly metrics = { headFront: 0, targetDepth: 0, handDepth: 0, unreachable: false };
+  readonly metrics = { headFront: 0, targetDepth: 0, handDepth: 0, unreachable: false, drawUnreachable: false };
+  /** Measured centre of the closed bow fist: the riser runs through it. */
+  readonly gripWorld = new THREE.Vector3();
+  private fingers: Record<'Left'|'Right',{chains:THREE.Object3D[][];thumb:THREE.Object3D[];middle:THREE.Object3D[];palmSign:number}>;
   constructor(private model: THREE.Object3D, private profile: BowArmProfile = {}) {
     const get=(name:string)=>model.getObjectByName('mixamorig'+name)!;
     this.left={upper:get('LeftArm'),lower:get('LeftForeArm'),hand:get('LeftHand')};
@@ -30,6 +36,20 @@ export class BowArmIK {
     this.rightClavicle=get('RightShoulder');this.rightIndex=get('RightHandIndex1');this.rightPinky=get('RightHandPinky1');this.rightFinger=get('RightHandIndex3');
     this.clavicle=get('LeftShoulder');
     this.bones=[this.clavicle,this.left.upper,this.left.lower,this.left.hand,this.rightClavicle,this.right.upper,this.right.lower,this.right.hand];
+    // Finger chains are part of the same restore-before-mixer overlay, so the
+    // grip/hook curl is re-authored from the sampled clip every frame, never
+    // accumulated. Palm side is measured from each asset's own rest bend.
+    model.updateWorldMatrix(true,true);
+    const side=(s:'Left'|'Right')=>{
+      const chain=(f:string)=>[1,2,3].map(i=>get(`${s}Hand${f}${i}`));
+      const chains=['Index','Middle','Ring','Pinky'].map(chain),hand=this.point(get(s+'Hand'));
+      const axis=this.point(get(s+'HandMiddle1')).sub(hand).normalize(),across=this.point(get(s+'HandIndex1')).sub(this.point(get(s+'HandPinky1'))).normalize();
+      const bend=new THREE.Vector3();for(const f of ['Index','Middle','Ring','Pinky']){const a=this.point(get(`${s}Hand${f}1`));bend.add(this.point(get(`${s}Hand${f}4`)).sub(a).normalize().sub(this.point(get(`${s}Hand${f}2`)).sub(a).normalize()));}
+      const palmSign=bend.dot(axis.clone().cross(across))>=0?1:-1;
+      return {chains,thumb:chain('Thumb'),middle:[...chain('Middle'),get(s+'HandMiddle4')],palmSign};
+    };
+    this.fingers={Left:side('Left'),Right:side('Right')};
+    for(const s of ['Left','Right'] as const)this.bones.push(...this.fingers[s].chains.flat(),...this.fingers[s].thumb);
     let mesh:THREE.SkinnedMesh|undefined;
     model.traverse(o=>{if((o as THREE.SkinnedMesh).isSkinnedMesh && !!((o as THREE.Mesh).material as THREE.Material).userData.uniforms)mesh??=o as THREE.SkinnedMesh;});
     this.mesh=mesh!;
@@ -56,16 +76,16 @@ export class BowArmIK {
   private point(bone:THREE.Object3D){return bone.getWorldPosition(new THREE.Vector3());}
   /** Solve in shoulder-parent space: crouch/nonuniform render scale is outside
    * the link-length metric, so no stretching is needed to reach a world target. */
-  private solve(targetWorld:THREE.Vector3,chain=this.left) {
+  private solve(targetWorld:THREE.Vector3,chain=this.left,poleWorld=new THREE.Vector3(0,0,-1),maxFraction=.97) {
     const {upper,lower,hand}=chain,parent=upper.parent!;
     this.model.updateWorldMatrix(true,true);
     const origin=upper.position.clone(),elbow=parent.worldToLocal(this.point(lower)),wrist=parent.worldToLocal(this.point(hand));
     const l1=origin.distanceTo(elbow),l2=elbow.distanceTo(wrist);
-    const goal=parent.worldToLocal(targetWorld.clone()),direction=goal.sub(origin),distance=THREE.MathUtils.clamp(direction.length(),Math.abs(l1-l2)+1e-5,(l1+l2)*.97);
+    const goal=parent.worldToLocal(targetWorld.clone()),direction=goal.sub(origin),distance=THREE.MathUtils.clamp(direction.length(),Math.abs(l1-l2)+1e-5,(l1+l2)*maxFraction);
     direction.normalize();
     // Elbow hinge stays behind the weapon plane, away from the string. The
     // authored elbow can swing into that plane when the clavicle protracts.
-    const behind=parent.worldToLocal(this.point(upper).add(new THREE.Vector3(0,0,-1))).sub(origin);
+    const behind=parent.worldToLocal(this.point(upper).add(poleWorld)).sub(origin);
     const pole=behind.addScaledVector(direction,-behind.dot(direction));
     if(pole.lengthSq()<1e-12)pole.set(0,-1,0).addScaledVector(direction,direction.y);
     pole.normalize();
@@ -79,7 +99,38 @@ export class BowArmIK {
     lower.quaternion.premultiply(swing.setFromUnitVectors(currentLower,desiredLower)).normalize();
     this.model.updateWorldMatrix(true,true);
   }
-  apply(aimX:number,aimY:number,pull:number) {
+  /** Rotate the wrist so hand axis (wrist→middle knuckle) follows `axis` and
+   * the knuckle row (pinky→index) follows `across`. Two measured swings. */
+  private orientHand(s:'Left'|'Right',axis:THREE.Vector3,across:THREE.Vector3){
+    const hand=s==='Left'?this.left.hand:this.right.hand,hp=hand.parent!,o=hand.position;
+    const get=(n:string)=>this.model.getObjectByName('mixamorig'+s+'Hand'+n)!;
+    const local=(w:THREE.Vector3)=>hp.worldToLocal(this.point(hand).add(w)).sub(o).normalize();
+    const current=hp.worldToLocal(this.point(get('Middle1'))).sub(o).normalize();
+    hand.quaternion.premultiply(new THREE.Quaternion().setFromUnitVectors(current,local(axis))).normalize();this.model.updateWorldMatrix(true,true);
+    const a=local(axis),row=hp.worldToLocal(this.point(get('Index1'))).sub(hp.worldToLocal(this.point(get('Pinky1'))));
+    row.addScaledVector(a,-row.dot(a)).normalize();const want=local(across);want.addScaledVector(a,-want.dot(a)).normalize();
+    hand.quaternion.premultiply(new THREE.Quaternion().setFromAxisAngle(a,Math.atan2(a.dot(row.clone().cross(want)),row.dot(want)))).normalize();
+    this.model.updateWorldMatrix(true,true);
+  }
+  /** Flex every phalanx toward the palm about the hand's own knuckle axis. */
+  private curl(s:'Left'|'Right',angles:readonly number[],thumb:readonly number[]){
+    const set=this.fingers[s],hand=s==='Left'?this.left.hand:this.right.hand;
+    const q=new THREE.Quaternion(),pq=new THREE.Quaternion(),flex=new THREE.Vector3(),palm=new THREE.Vector3();
+    const frame=()=>{const h=this.point(hand),axis=this.point(set.chains[1][0]).sub(h).normalize(),across=this.point(set.chains[0][0]).sub(this.point(set.chains[3][0])).normalize();
+      palm.copy(axis).cross(across).multiplyScalar(set.palmSign).normalize();flex.copy(axis).cross(palm).normalize();};
+    const bend=(bone:THREE.Object3D,axis:THREE.Vector3,angle:number)=>{
+      bone.parent!.getWorldQuaternion(pq);q.setFromAxisAngle(axis,angle);
+      bone.quaternion.premultiply(pq.clone().invert().multiply(q).multiply(pq)).normalize();bone.updateWorldMatrix(false,true);
+    };
+    frame();
+    for(const chain of set.chains)chain.forEach((bone,i)=>bend(bone,flex,angles[i]));
+    // Thumb closes across the palm toward the middle finger's root.
+    const t=set.thumb,dir=this.point(t[1]).sub(this.point(t[0])).normalize(),thumbFlex=dir.clone().cross(palm).normalize();
+    t.forEach((bone,i)=>bend(bone,thumbFlex,thumb[i]));
+    return palm.clone();
+  }
+  apply(aimX:number,aimY:number,pull:number,socket?:THREE.Vector3,facing=1,strict=true) {
+    const up=bowSpan(aimX,aimY,facing);
     for(const bone of this.bones){const q=this.sampled.get(bone)??new THREE.Quaternion();q.copy(bone.quaternion);this.sampled.set(bone,q);}
     this.model.updateWorldMatrix(true,true);
     const {upper,lower,hand}=this.left;
@@ -114,7 +165,7 @@ export class BowArmIK {
       // vertex is below the weapon, so a whole-body max would exceed reach.
       // Use the actual bow's projected bounding rectangle, conservatively
       // including all vertices of every body triangle overlapping that area.
-      const span=new THREE.Vector3(-aim.y,aim.x,0),tips=[target.clone().addScaledVector(aim,.19).addScaledVector(span,.64),target.clone().addScaledVector(aim,.19).addScaledVector(span,-.64),target.clone().addScaledVector(aim,-.19-.14*pull)];
+      const span=up,tips=[target.clone().addScaledVector(aim,-.19).addScaledVector(span,.64),target.clone().addScaledVector(aim,-.19).addScaledVector(span,-.64),target.clone().addScaledVector(aim,-.19-.14*pull)];
       const minX=Math.min(...tips.map(p=>p.x))-.03,maxX=Math.max(...tips.map(p=>p.x))+.03,minY=Math.min(...tips.map(p=>p.y))-.03,maxY=Math.max(...tips.map(p=>p.y))+.03;
       for(const [i,p] of this.bodyPoints)this.mesh.localToWorld(this.mesh.getVertexPosition(i,p));
       for(const ids of this.bodyTriangles){
@@ -126,6 +177,14 @@ export class BowArmIK {
       const disc=a.dot(d)**2-d.lengthSq()*(a.lengthSq()-reach*reach);
       this.metrics.unreachable=disc<0;this.metrics.targetDepth=depth;
       target.copy(shoulder).addScaledVector(aim,disc>=0?Math.max(0,(-a.dot(d)+Math.sqrt(disc))/d.lengthSq()):0);target.z=depth;
+    }
+    let pushed=false;
+    if(socket){
+      // Never put the bow plane behind the actual posed face (mid-turn the
+      // chibi head faces the camera and its front passes the shot plane).
+      socket=socket.clone();pushed=front+.03>socket.z;socket.z=Math.max(socket.z,front+.03);
+      target.copy(socket);this.metrics.targetDepth=target.z;
+      this.metrics.unreachable=space.worldToLocal(target.clone()).distanceTo(o)>reach+1e-6;
     }
     this.solve(target);this.metrics.handDepth=this.point(hand).z;
     // Forearm pronation: the hanging sleeve's measured radial centroid points
@@ -142,73 +201,103 @@ export class BowArmIK {
     const roll=Math.atan2(forearmAxis.dot(radial.clone().cross(back)),radial.dot(back));
     lower.quaternion.premultiply(new THREE.Quaternion().setFromAxisAngle(forearmAxis,roll)).normalize();
     this.model.updateWorldMatrix(true,true);
-    // The palm normal sets the bow's limb span. Stabilize wrist around the same
-    // aim reference on turn1, rather than borrowing a delayed torso/palm yaw.
-    const palm=this.point(this.index).sub(this.point(hand)).cross(this.point(this.pinky).sub(this.point(hand))).normalize();
-    const span=new THREE.Vector3(-aim.y,aim.x,0);
-    const handParent=hand.parent!,normalToParent=new THREE.Matrix3().setFromMatrix4(handParent.matrixWorld).transpose();
-    // Storm's preserved dragon is the wrist-mounted crown of the authored bow.
-    // Orient its measured surface axis upright rather than letting the Mizu
-    // palm convention leave it hanging below/sideways as a second weapon.
-    let currentNormal=palm.applyMatrix3(normalToParent).normalize();
+    // Bow hand closes around the riser: knuckle row runs along the upper limb
+    // chord (index toward the upper tip), wrist→knuckles follows the shot.
+    // The Storm ornament is weighted to this hand and was authored along the
+    // same row, so it now continues the upper limb instead of a second weapon.
+    const span=up;
+    const chord=span.clone().multiplyScalar(.64).addScaledVector(aim,-.19).normalize();
+    this.orientHand('Left',aim,chord);
     if(this.profile.ornamentVertex!==undefined){
+      // Storm: the preserved dragon was authored along the hand's own +Z, 42°
+      // from its knuckle row. Twist about the shot axis until the measured
+      // hand→ornament-tip vector lies on the upper-limb chord (bow plane), so
+      // the dragon becomes the upper limb's crest; knuckles end up diagonal.
       root.updateMatrixWorld(true);this.mesh.skeleton.update();
-      const ornament=this.mesh.localToWorld(this.mesh.getVertexPosition(this.profile.ornamentVertex,new THREE.Vector3()));
-      currentNormal=handParent.worldToLocal(ornament).sub(hand.position).normalize();
+      const tip=this.mesh.localToWorld(this.mesh.getVertexPosition(this.profile.ornamentVertex,new THREE.Vector3()));
+      const hp=hand.parent!,o=hand.position,a=hp.worldToLocal(this.point(hand).add(aim)).sub(o).normalize();
+      const from=hp.worldToLocal(tip).sub(o);from.addScaledVector(a,-from.dot(a)).normalize();
+      const to=hp.worldToLocal(this.point(hand).add(chord)).sub(o);to.addScaledVector(a,-to.dot(a)).normalize();
+      hand.quaternion.premultiply(new THREE.Quaternion().setFromAxisAngle(a,Math.atan2(a.dot(from.clone().cross(to)),from.dot(to)))).normalize();
+      this.model.updateWorldMatrix(true,true);
     }
-    const desired=this.profile.ornamentVertex===undefined?span.applyMatrix3(normalToParent).normalize():handParent.worldToLocal(this.point(hand).add(span.clone().multiplyScalar(.64).addScaledVector(aim,.19).normalize())).sub(hand.position).normalize();
-    hand.quaternion.premultiply(new THREE.Quaternion().setFromUnitVectors(currentNormal,desired)).normalize();
-    this.model.updateWorldMatrix(true,true);
-    // Resolve the remaining wrist twist from the knuckle row: fingers reach
-    // forward of the grip, never backward into the brace/string at release.
-    const knuckles=this.point(this.index).add(this.point(this.pinky)).multiplyScalar(.5);
-    const finger=handParent.worldToLocal(knuckles).sub(hand.position);finger.addScaledVector(desired,-finger.dot(desired)).normalize();
-    const forwardFinger=handParent.worldToLocal(this.point(hand).add(aim)).sub(hand.position);forwardFinger.addScaledVector(desired,-forwardFinger.dot(desired)).normalize();
-    const twist=Math.atan2(desired.dot(finger.clone().cross(forwardFinger)),finger.dot(forwardFinger));
-    hand.quaternion.premultiply(new THREE.Quaternion().setFromAxisAngle(desired,twist)).normalize();
-    this.model.updateWorldMatrix(true,true);
-    this.drawArm(aim,pull);
+    this.curl('Left',[1.25,1.35,.9],[.35,.45,.35]);
+    this.fist(this.gripWorld);
+    if(socket){
+      // One rigid correction: the measured fist centre, not the wrist joint,
+      // sits on the shared socket. Wrist attitude is kept in world space.
+      const attitude=upper.quaternion.clone().multiply(lower.quaternion).multiply(hand.quaternion);
+      const wristGoal=this.point(hand).add(socket.clone().sub(this.gripWorld));
+      const local=space.worldToLocal(wristGoal.clone()).sub(o);
+      if((pushed||!strict)&&local.length()>reach){
+        // Face clearance moved the plane, or no arrow is nocked: slide back
+        // along the aim onto the reach sphere (closed-form root), keeping the
+        // plane depth in front of the face. Radial pull only if even that fails.
+        const d=space.worldToLocal(wristGoal.clone().sub(aim)).sub(o).sub(local),pd=local.dot(d),dd=d.lengthSq(),disc=pd*pd-dd*(local.lengthSq()-reach*reach);
+        if(disc>=0)wristGoal.copy(space.localToWorld(o.clone().add(local).addScaledVector(d,Math.max(0,(-pd-Math.sqrt(disc))/dd))));
+        else if(!strict)wristGoal.copy(space.localToWorld(o.clone().addScaledVector(local.normalize(),reach)));
+      }
+      this.metrics.unreachable=space.worldToLocal(wristGoal.clone()).distanceTo(o)>reach+1e-6;
+      if(!strict)this.metrics.targetDepth=wristGoal.z+this.gripWorld.z-this.point(hand).z;
+      this.solve(wristGoal);
+      hand.quaternion.copy(upper.quaternion.clone().multiply(lower.quaternion).invert().multiply(attitude)).normalize();
+      this.model.updateWorldMatrix(true,true);this.fist(this.gripWorld);
+    }
+    this.metrics.handDepth=this.gripWorld.z;
+    this.drawArm(aim,pull,up,strict);
   }
-  private drawArm(aim:THREE.Vector3,pull:number) {
+  /** World position of the preserved hand-borne ornament tip (Storm), or null. */
+  ornamentTip(out:THREE.Vector3){return this.profile.ornamentVertex===undefined?null:this.mesh.localToWorld(this.mesh.getVertexPosition(this.profile.ornamentVertex,out));}
+  /** Fist centre = centroid of the curled middle finger chain (ring of bones). */
+  private fist(out:THREE.Vector3){out.set(0,0,0);for(const b of this.fingers.Left.middle)out.add(this.point(b));return out.multiplyScalar(1/this.fingers.Left.middle.length);}
+  private drawArm(aim:THREE.Vector3,pull:number,span:THREE.Vector3,nocked:boolean) {
     const {upper,lower,hand}=this.right,c=this.rightClavicle,parent=c.parent!;
+    // The hand never follows the released string forward of brace height.
+    const nock=this.gripWorld.clone().addScaledVector(aim,-.19-.14*Math.max(0,pull));
+    // Scapula protracts toward the work: clavicle points at the nock, not a
+    // fixed axis (rotation only; its link length is the asset's).
     const original=parent.worldToLocal(this.point(upper)).sub(c.position).normalize();
-    const toward=parent.worldToLocal(this.point(c).add(new THREE.Vector3(0,0,1))).sub(c.position).normalize();
+    const toward=parent.worldToLocal(nock.clone()).sub(c.position).normalize();
     c.quaternion.premultiply(new THREE.Quaternion().setFromUnitVectors(original,toward)).normalize();
     this.model.updateWorldMatrix(true,true);
-    const nock=this.point(this.left.hand).addScaledVector(aim,-.19-.14*pull);
-    const fingerLength=this.point(this.rightFinger).distanceTo(this.point(hand));
-    const target=nock.clone().addScaledVector(aim,-fingerLength);
-    this.solve(target,this.right);
-    // Wrist orientation: finger aim points at the nock, palm faces camera. The
-    // subsequent depth fit uses actual skinned hand surface, not a fake offset.
-    const hp=hand.parent!,handOrigin=hand.position.clone();
-    const palm=this.point(this.rightIndex).sub(this.point(hand)).cross(this.point(this.rightPinky).sub(this.point(hand))).normalize();
-    const transpose=new THREE.Matrix3().setFromMatrix4(hp.matrixWorld).transpose();
-    const current=palm.applyMatrix3(transpose).normalize(),desired=new THREE.Vector3(0,0,1).applyMatrix3(transpose).normalize();
-    hand.quaternion.premultiply(new THREE.Quaternion().setFromUnitVectors(current,desired)).normalize();this.model.updateWorldMatrix(true,true);
-    const fingers=hp.worldToLocal(this.point(this.rightFinger)).sub(handOrigin);fingers.addScaledVector(desired,-fingers.dot(desired)).normalize();
-    const forward=hp.worldToLocal(this.point(hand).add(aim)).sub(handOrigin);forward.addScaledVector(desired,-forward.dot(desired)).normalize();
-    const angle=Math.atan2(desired.dot(fingers.clone().cross(forward)),fingers.dot(forward));
-    hand.quaternion.premultiply(new THREE.Quaternion().setFromAxisAngle(desired,angle)).normalize();
-    let root:THREE.Object3D=this.model;while(root.parent)root=root.parent;root.updateMatrixWorld(true);this.mesh.skeleton.update();
-    const wrist=this.point(hand),p=new THREE.Vector3();let radius=0;
-    for(const i of this.rightSkin)radius=Math.max(radius,this.mesh.localToWorld(this.mesh.getVertexPosition(i,p)).z-wrist.z);
-    // One geometric correction, not a search: put the actual front hand surface
-    // tangent behind the string's .005 radius. Preserve wrist's world attitude.
-    const worldQ=upper.quaternion.clone().multiply(lower.quaternion).multiply(hand.quaternion).normalize();
-    target.z=nock.z-radius-.005;this.solve(target,this.right);
-    hand.quaternion.copy(upper.quaternion.clone().multiply(lower.quaternion).invert().multiply(worldQ)).normalize();
-    this.model.updateWorldMatrix(true,true);
-    // Contact solve from actual nearest hand surface, not the wrist origin.
-    // Skin support point is placed tangent to the .005 string at the nock.
-    root.updateMatrixWorld(true);this.mesh.skeleton.update();
-    let nearest=new THREE.Vector3(),front=-Infinity;
-    for(const i of this.rightSkin){this.mesh.localToWorld(this.mesh.getVertexPosition(i,p));if(p.z>front){front=p.z;nearest.copy(p);}}
-    const contact=nock.clone().add(new THREE.Vector3(0,0,-.005));
-    const correction=contact.sub(nearest),goal=this.point(hand).add(correction);
-    const attitude=upper.quaternion.clone().multiply(lower.quaternion).multiply(hand.quaternion).normalize();
-    this.solve(goal,this.right);
-    hand.quaternion.copy(upper.quaternion.clone().multiply(lower.quaternion).invert().multiply(attitude)).normalize();
-    this.model.updateWorldMatrix(true,true);
+    // Mediterranean hook: index above the arrow, knuckle row along the string,
+    // back of the hand to the camera, fingers curled around behind the string.
+    const handLength=this.point(this.fingers.Right.middle[0]).distanceTo(this.point(hand));
+    const target=nock.clone().addScaledVector(aim,-handLength);target.z+=.04;
+    // Draw elbow is pulled back along the arrow line (with a little depth),
+    // so the forearm crosses the string plane behind the nock, not through it.
+    const elbowPole=aim.clone().multiplyScalar(-1).add(new THREE.Vector3(0,0,.3)).normalize();
+    this.solve(target,this.right,elbowPole,DRAW_REACH);
+    this.orientHand('Right',aim,span);
+    this.curl('Right',[.35,1.45,1.05],[.5,.5,.3]);
+    // One geometric contact correction from actual skinned surface: the hand
+    // stays entirely on the camera side of the string plane; its deepest
+    // fingertip touches the nock .005 in front of it. No hits, no offset fudge.
+    let root:THREE.Object3D=this.model;while(root.parent)root=root.parent;
+    for(let pass=0;pass<2;pass++){
+      root.updateMatrixWorld(true);this.mesh.skeleton.update();
+      const p=new THREE.Vector3(),nearest=new THREE.Vector3();let back=Infinity;
+      for(const i of this.rightSkin){this.mesh.localToWorld(this.mesh.getVertexPosition(i,p));if(p.z<back){back=p.z;nearest.copy(p);}}
+      const goal=this.point(hand).add(nock.clone().add(new THREE.Vector3(0,0,.005)).sub(nearest));
+      // Out of reach: slide back along the arrow line (follow-through), never
+      // sink through the string plane toward the shoulder. Closed-form root.
+      const sp=upper.parent!,o=upper.position,l=(o.distanceTo(sp.worldToLocal(this.point(lower)))+sp.worldToLocal(this.point(lower)).distanceTo(sp.worldToLocal(this.point(hand))))*DRAW_REACH;
+      const local=sp.worldToLocal(goal.clone()).sub(o);
+      this.metrics.drawUnreachable=local.length()>l+1e-6
+      if(this.metrics.drawUnreachable){
+        const d=sp.worldToLocal(goal.clone().sub(aim)).sub(o).sub(local),pd=local.dot(d),dd=d.lengthSq(),disc=pd*pd-dd*(local.lengthSq()-l*l);
+        if(disc>=0)goal.copy(sp.localToWorld(o.clone().add(local).addScaledVector(d,Math.max(0,(-pd-Math.sqrt(disc))/dd))));
+      }
+      const attitude=upper.quaternion.clone().multiply(lower.quaternion).multiply(hand.quaternion).normalize();
+      this.solve(goal,this.right,elbowPole,DRAW_REACH);
+      hand.quaternion.copy(upper.quaternion.clone().multiply(lower.quaternion).invert().multiply(attitude)).normalize();
+      this.model.updateWorldMatrix(true,true);
+      if(this.metrics.drawUnreachable&&!nocked){
+        // No arrow and the string is out of reach (release follow-through):
+        // hand the right arm back to the authored clip instead of crossing it.
+        for(const b of [c,upper,lower,hand,...this.fingers.Right.chains.flat(),...this.fingers.Right.thumb])b.quaternion.copy(this.sampled.get(b)!);
+        this.model.updateWorldMatrix(true,true);return;
+      }
+    }
   }
 }

@@ -4,6 +4,8 @@ import { writeFile } from 'node:fs/promises';
 import { rigRuntime } from './helpers/arco-rig-runtime.ts';
 
 const armNames=new Set(['LeftShoulder','LeftArm','LeftForeArm','LeftHand','RightShoulder','RightArm','RightForeArm','RightHand'].map(n=>'mixamorig'+n));
+// Grip/hook finger curl is part of the same arm-only overlay (hands and fingers).
+const armBone=(name:string)=>armNames.has(name)||/^mixamorig(Left|Right)Hand(Index|Middle|Ring|Pinky|Thumb)[123]$/.test(name);
 test('Storm equipped: exact 23 states, both strings, contact, links, paused pose and preserved ornament',async()=>{
  const {THREE,world,fighters,scene,frames}=await rigRuntime(),v=(fighters as any).views[1],f=world.fighters[1],bow=v.equippedBow,ik=v.rig.armIK;
  assert.ok(bow&&ik);assert.equal(bow.root.name,'storm-authored-equipped-bow');
@@ -25,13 +27,13 @@ test('Storm equipped: exact 23 states, both strings, contact, links, paused pose
    });
   });
   let contact=Infinity;for(const id of right)contact=Math.min(contact,mesh.localToWorld(mesh.getVertexPosition(id,new THREE.Vector3())).distanceTo(nock));
-  const row={name,segments,contact,charging:f.charging,gripError:point(bow.grip).distanceTo(hand),nockTailError:f.charging?nock.distanceTo(v.nock.localToWorld(new THREE.Vector3(-.19,0,0))):null,metrics:{...ik.metrics},hand:hand.toArray(),nock:nock.toArray()};rows.push(row);
-  assert.ok(row.gripError<=.03);if(f.charging){assert.ok(row.nockTailError!<1e-8);assert.ok(Math.abs(v.nock.localToWorld(new THREE.Vector3(.54,0,0)).distanceTo(nock)-.73)<1e-8);}
+  const row={name,segments,contact,charging:f.charging,gripError:point(bow.grip).distanceTo(ik.gripWorld),wristToGrip:point(bow.grip).distanceTo(hand),nockTailError:f.charging?nock.distanceTo(v.nock.localToWorld(new THREE.Vector3(-.19,0,0))):null,metrics:{...ik.metrics},hand:hand.toArray(),nock:nock.toArray()};rows.push(row);
+  assert.ok(row.gripError<=1e-8);assert.ok(row.wristToGrip<.2);if(f.charging){assert.ok(row.nockTailError!<1e-8);assert.ok(Math.abs(v.nock.localToWorld(new THREE.Vector3(.54,0,0)).distanceTo(nock)-.73)<1e-8);}
   assert.ok(nock.clone().sub(hand).dot(aim)<0);
   bow.strings.forEach((s:any,i:number)=>{assert.ok(s.localToWorld(new THREE.Vector3(0,-.5,0)).distanceTo(point([bow.upperTip,bow.lowerTip][i]))<1e-8);assert.ok(s.localToWorld(new THREE.Vector3(0,.5,0)).distanceTo(nock)<1e-8);assert.equal(s.material.emissive.getHex(),0);});
   const frozen=JSON.stringify(world),transforms=v.rig.bones.map((b:any)=>[b,b.position.toArray(),b.scale.toArray(),b.quaternion.toArray()]);
   ik.restore();ik.apply(f.aimX,f.aimY,bow.pull(f.charging,f.charge,v.releaseTime));
-  for(const [b,p,s,q]of transforms){assert.deepEqual(b.position.toArray(),p);assert.deepEqual(b.scale.toArray(),s);if(!armNames.has(b.name))assert.deepEqual(b.quaternion.toArray(),q);assert.ok(Math.abs(b.quaternion.length()-1)<1e-6);}
+  for(const [b,p,s,q]of transforms){assert.deepEqual(b.position.toArray(),p);assert.deepEqual(b.scale.toArray(),s);if(!armBone(b.name))assert.deepEqual(b.quaternion.toArray(),q);assert.ok(Math.abs(b.quaternion.length()-1)<1e-6);}
   assert.equal(JSON.stringify(world),frozen);
   assert.equal(j.getX(18817),17);assert.equal(j.getX(19287),17);
  };

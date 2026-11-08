@@ -2,11 +2,12 @@ import * as THREE from 'three';
 import type { ArrowKind, World } from '../sim/world.ts';
 import { HEIGHT } from '../sim/level.ts';
 import { softDot } from './textures.ts';
+import { SHOT_PLANE } from '../sim/bow-socket.ts';
 
-const MAX = 64, TRAIL = 10, Z = 0.8;
+const MAX = 64, TRAIL = 10, Z = SHOT_PLANE;
 const COLORS: Record<ArrowKind, number> = { normal: 0xffd9a0, bolt: 0x6ff3ff, bomb: 0xff5a3c };
 
-/** Shaft + head + three fletchings, merged into one geometry pointing +X, tip at x=0.36. */
+/** Shaft + head + three fletchings, merged into one geometry pointing +X, tip at x=.475. */
 function arrowGeometry() {
   const parts: THREE.BufferGeometry[] = [];
   const shaft = new THREE.CylinderGeometry(0.018, 0.018, 0.66, 6); shaft.rotateZ(-Math.PI / 2); parts.push(shaft);

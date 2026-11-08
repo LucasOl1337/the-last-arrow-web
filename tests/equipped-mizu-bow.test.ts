@@ -19,8 +19,13 @@ test('authored Mizu bow: grip/tips/string/nock across eight aims and exact rig n
     const point=(o:any)=>o.getWorldPosition(new THREE.Vector3());
     const upper=point(bow.upperTip),lower=point(bow.lowerTip),nock=point(bow.nock),grip=point(bow.grip);
     const aim=new THREE.Vector3(f.aimX,-f.aimY,0).normalize();
-    assert.ok(grip.distanceTo(hand)<1e-8);
-    assert.ok(Math.abs(upper.clone().sub(lower).normalize().dot(aim))<1e-8);
+    // Riser sits in the measured closed fist (grip pose), not on the wrist joint.
+    assert.ok(grip.distanceTo(v.rig.armIK.gripWorld)<1e-8);assert.ok(grip.distanceTo(hand)<.2);
+    // Nocked: bow exactly across the sim aim. Relaxed carry (no arrow) tilts the
+    // bow on purpose; then it is exactly across the displayed carry aim instead.
+    const across=f.charging?aim:new THREE.Vector3(v.bowAim.x,-v.bowAim.y,0).normalize();
+    if(f.charging)assert.ok(Math.abs(v.bowAim.x-f.aimX)+Math.abs(v.bowAim.y-f.aimY)<1e-12);
+    assert.ok(Math.abs(upper.clone().sub(lower).normalize().dot(across))<1e-8);
     assert.ok(Math.abs(upper.distanceTo(lower)-1.28)<1e-8);
     const tips=[upper,lower];
     bow.strings.forEach((s:any,i:number)=>{

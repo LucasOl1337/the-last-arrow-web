@@ -10,7 +10,8 @@ export async function measureRig() {
   const internals = fighters as any;
   const sample = () => internals.views.map((v: any) => {
     v.root.updateWorldMatrix(true, true);
-    const hand = v.rig.bowHand.getWorldPosition(new THREE.Vector3());
+    // The riser/arrow pass through the measured closed fist, not the wrist joint.
+    const hand = v.rig.armIK ? v.rig.armIK.gripWorld.clone() : v.rig.bowHand.getWorldPosition(new THREE.Vector3());
     const tail = v.nock.localToWorld(new THREE.Vector3(-.19, 0, 0));
     const tip = v.nock.localToWorld(new THREE.Vector3(.54, 0, 0));
     const direction = tip.clone().sub(tail).normalize();

@@ -2,7 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { rigRuntime } from './helpers/arco-rig-runtime.ts';
 
-const edited = new Set(['LeftShoulder','LeftArm','LeftForeArm','LeftHand','RightShoulder','RightArm','RightForeArm','RightHand'].map(n=>'mixamorig'+n));
+const edited = new Set(['LeftShoulder','LeftArm','LeftForeArm','LeftHand','RightShoulder','RightArm','RightForeArm','RightHand',
+  // Grip/hook finger curl: same arm-only overlay, restored before the mixer.
+  ...['Left','Right'].flatMap(s=>['Index','Middle','Ring','Pinky','Thumb'].flatMap(f=>[1,2,3].map(i=>`${s}Hand${f}${i}`)))].map(n=>'mixamorig'+n));
 test('arm IK preserves links, torso and simulation; all fixed neighbors clear body and head', async()=>{
   const {THREE,scene,world,fighters,frames}=await rigRuntime();
   const views=(fighters as any).views,v=views[0],f=world.fighters[0],ik=v.rig.armIK;
@@ -28,7 +30,10 @@ test('arm IK preserves links, torso and simulation; all fixed neighbors clear bo
       let right=0;for(let k=0;k<4;k++)if(mesh.skeleton.bones[mesh.geometry.getAttribute('skinIndex').getComponent(i,k)].name.startsWith('mixamorigRightHand'))right+=mesh.geometry.getAttribute('skinWeight').getComponent(i,k);
       if(right>.5)contact=Math.min(contact,mesh.localToWorld(mesh.getVertexPosition(i,new THREE.Vector3())).distanceTo(nock));
     }
-    assert.ok(Math.abs(contact-.005)<1e-5,`${state}: draw hand not tangent to nock (${contact})`);
+    // Nocked: fingertip tangent to the nock. After release the string rings
+    // forward of brace and the hand does not follow it: it may only not touch.
+    if(f.charging)assert.ok(Math.abs(contact-.005)<1e-5,`${state}: draw hand not tangent to nock (${contact})`);
+    else assert.ok(contact>=.005-1e-5,`${state}: draw hand penetrates the string at the nock (${contact})`);
     const frozen=JSON.stringify(world),outside=v.rig.bones.filter((b:any)=>!edited.has(b.name)).map((b:any)=>[b,b.quaternion.toArray()]);
     ik.restore();ik.apply(f.aimX,f.aimY,v.equippedBow.pull(f.charging,f.charge,v.releaseTime));
     for(const [bone,q] of outside)assert.deepEqual(bone.quaternion.toArray(),q,`${state}: edited ${bone.name}`);
