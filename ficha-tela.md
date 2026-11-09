@@ -204,3 +204,24 @@ Galeria consultada nesta rodada: objeto visível sem rolar, uma ação principal
 **Exceção de produto:** pausa, vitória e erro são diálogos curtos de decisão, não objetos editáveis. Não precisam ocupar 40% da janela; a medida b fica registrada como exceção, não como sucesso artificial. Nenhum outro limite é relaxado. O menu principal e a arena passam sem essa exceção.
 
 **Limite visual restante:** os bonecos e blocos são a arte provisória pedida, não o acabamento final. A floresta tem detalhe que compete com os projéteis; fundo recebeu véu escuro e flechas recebem emissividade/rastro. A frente de arte pode simplificar ainda mais o contraste sem mudar a simulação.
+
+
+# Limpeza de combate — feedback recuperado09/11
+
+1. Quem usa: jogadores de Last Arrow no PC, teclado/mouse ou controle, durante combate rápido.
+2. Tarefas: localizar seu arqueiro; ler adversários/projéteis; decidir movimento e disparo.
+3. Objeto principal: arena e silhuetas/texturas reais de Mizu e Stormy Dragon, não placas de nome.
+4. Ao mesmo tempo: personagem, plataformas, flechas e placar existente; indicador de borda só se personagem fora de tela.
+5. Dados medidos: print do Lucas mostra dois personagens com duas placas, contornos e círculos sobrepostos; partida suporta2–4 personagens e o HUD atual duplica nomes acima deles e no placar.
+6. Estado: proposta local sobre0e51e1a; remover nomes sobre corpos visíveis, halo de proteção e rim/outline permanentes. Manter placar, avisos fora de tela e sinais temporários das habilidades. Sem alteração física/combate, sem deploy autorizado por este participante.
+
+Galeria consultada: preservar formato reconhecido e reduzir densidade. Storybook real existente Arena/Visual legivel será usado como primeiro consumidor. Comparação TowerFall já entregue por missão própria: não repetir notas/referências.
+
+Aceite: corpos visíveis sem fighter-label, halo ou inverted-hull/rim luminoso; offscreen continua com direção identificável; HUD e habilidades sem regressão. Estados: repouso, proteção de spawn, habilidades, borda e morto. Viewports1366×768,900×1000,360×800; gates/layout no canvas, nenhum formulário/editor, teclas e foco preservados. Bloqueio de publicação: precisa do @Lucas. Arquivos de entrega do despachante são exceção explícita pedida; não alterar cron/marcadores/registro global nesta retomada.
+
+## Crítica da prévia09/11
+- Antes: círculos e hull azul/ciano chamavam o olho antes de roupas e rosto; duas placas duplicavam o placar.
+- Depois: textura/silhueta ficam livres, sem pretender que isso resolve todo o contraste do cenário. Não há nova aprovação do Lucas.
+- Ajuste após inspeção: proteção não ficou invisível semanticamente; movida para a linha de status existente do placar, sem um widget novo. Avisos fora de tela preservados (a partida local mostrou dois na borda), logo não alegar remoção de todo texto da arena.
+- Mizu ainda é escura contra áreas sombreadas, e o placar de quatro jogadores continua grande: não ampliar este corte para cenário/câmera/HUD inteiro. Pips de munição temporários e habilidades reais permanecem, não são os halos permanentes rejeitados.
+- Gate adaptado para CDP da bancada, pois checa_tela.py padrão abre browser não registrado. Canvas100% nas stories em1366×768/900×1000/360×800, sem overflow horizontal. Testes de offscreen/morto/habilidade ativos passaram; SIM serializada idêntica antes/depois. App local1366×768 confirmou personagens carregados e zero nomes em corpos visíveis. Storybook build/check e app build passaram.

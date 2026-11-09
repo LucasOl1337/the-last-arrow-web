@@ -11,7 +11,7 @@ export interface CharacterUniforms {
 
 export function patchCharacterMaterial(material: THREE.MeshStandardMaterial, rim: THREE.ColorRepresentation, tint?: THREE.ColorRepresentation): CharacterUniforms {
   const u: CharacterUniforms = {
-    uRim: { value: new THREE.Color(rim) }, uRimStrength: { value: 0.24 },
+    uRim: { value: new THREE.Color(rim) }, uRimStrength: { value: 0 },
     uTint: { value: new THREE.Color(tint ?? 0xffffff) }, uTintAmount: { value: tint === undefined ? 0 : 1 },
     uFlash: { value: 0 }, uDissolve: { value: 0 }, uEdge: { value: new THREE.Color(rim) }, uSelf: { value: 0.12 },
   };

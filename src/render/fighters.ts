@@ -5,7 +5,7 @@ import { delta, solid, WIDTH, HEIGHT } from '../sim/level.ts';
 import { loadCharacterKits, instantiate } from './characters.ts';
 import { activeKitsMissing } from './active-models.ts';
 import type { CharacterKits, ClipName, ModelKit } from './characters.ts';
-import { patchCharacterMaterial, addOutline } from './characterMaterial.ts';
+import { patchCharacterMaterial } from './characterMaterial.ts';
 import type { CharacterUniforms } from './characterMaterial.ts';
 import { ProceduralPuppet } from './puppet.ts';
 import { blob, softDot } from './textures.ts';
@@ -36,8 +36,7 @@ const LOOKS: { kit: keyof CharacterKits; fallback: keyof CharacterKits; tint: nu
   { kit: 'kaze', fallback: 'mizu', tint: 0x4f9a52, rim: 0x55ff6a },
   { kit: 'akane', fallback: 'storm', tint: 0xc4413f, rim: 0xff3b30 },
 ];
-const RIM_STRENGTH = 0.24;
-/** Small albedo lift only; the silhouette outline already separates fighters from scenery. */
+/** Preserve texture lighting without a coloured contour around the body. */
 const SELF_LIGHT: Record<string, number> = { moss: 0.12, totem: 0.16, canopy: 0.14 };
 const AIM_DOTS = 5;
 /** Clip windows (seconds). `hold` stops at `end`; `loop` wraps inside the window. */
@@ -166,14 +165,12 @@ export class FightersView {
     model.scale.set(scale * VISUAL_WIDTH, scale, scale * VISUAL_WIDTH);
     model.position.y = -kit.floor * scale;
     const uniforms: CharacterUniforms[] = [];
-    const skinned: THREE.SkinnedMesh[] = [];
     model.traverse(o => { const m = o as THREE.SkinnedMesh; if (m.isMesh) {
       const u = patchCharacterMaterial(m.material as THREE.MeshStandardMaterial, look.rim, tinted ? look.tint : undefined);
-      u.uSelf.value = this.selfLight; uniforms.push(u); if (m.isSkinnedMesh) skinned.push(m);
+      u.uSelf.value = this.selfLight; uniforms.push(u);
     } });
-    // Constant CSS-pixel silhouette, independent of model units and viewport size.
-    const outlineColor = new THREE.Color(CHARACTERS[character].color);
-    const outlines = skinned.map(m => addOutline(m, outlineColor, 2.25).material);
+    // The baked silhouette is the character; no extra coloured hull.
+    const outlines: THREE.Material[] = [];
     pivot.add(model);
     const mixer = new THREE.AnimationMixer(model);
     // A separate action for each state is essential: crossfading jump → fall must not seek jump in place.
@@ -315,9 +312,8 @@ export class FightersView {
         v.root.scale.setScalar(f.alive ? 1 : Math.max(0.05, 1 - dying * 1.6));
         v.root.rotation.z = f.alive ? 0 : -dying * face * 3;
       }
-      // Spawn/dash protection halo.
-      v.halo.visible = f.alive && f.invulnerable > 0;
-      if (v.halo.visible) { (v.halo.material as THREE.MeshBasicMaterial).opacity = 0.35 + Math.sin(time * 18) * 0.2; v.halo.rotation.z = time * 2; }
+      // Protection remains authoritative, but no rotating circle covers the art.
+      v.halo.visible = false;
       const skill = skillVisual((f as Fighter & { skill?: SkillVisualState }).skill, f.alive);
       v.skillRing.visible = !!skill;
       if (skill) {
@@ -401,8 +397,7 @@ export class FightersView {
     const dissolve = f.alive ? 0 : THREE.MathUtils.clamp((dying - 0.18) / 0.6, 0, 1);
     v.root.rotation.z = f.alive ? 0 : -Math.min(dying * 2.2, 0.9) * (f.facing > 0 ? 1 : -1);
     const flash = f.alive ? 0 : Math.max(0, 1 - dying * 9);
-    const protect = f.alive && f.invulnerable > 0 ? 0.08 + Math.sin(performance.now() * 0.02) * 0.04 : 0;
-    for (const u of rig.uniforms) { u.uDissolve.value = dissolve; u.uFlash.value = flash; u.uRimStrength.value = RIM_STRENGTH + protect; }
+    for (const u of rig.uniforms) { u.uDissolve.value = dissolve; u.uFlash.value = flash; u.uRimStrength.value = 0; }
     for (const m of rig.outlines) m.visible = f.alive;
     // Dash afterimages: snapshot the pose into a pooled ghost every 30 ms while dashing.
     v.ghostClock -= dt;

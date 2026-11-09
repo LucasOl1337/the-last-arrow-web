@@ -149,7 +149,8 @@ export class Hud {
     }
     w.fighters.forEach((f,n)=>{
       const status=skillStatus(f), element=this.cards[n].querySelector<HTMLElement>('.skill-status')!;
-      if(element.textContent!==status.text)element.textContent=status.text;
+      const text = f.alive && f.invulnerable > 0 ? 'Proteção' : status.text;
+      if(element.textContent!==text)element.textContent=text;
       element.classList.toggle('active',status.active);
     });
     this.renderCountdown(w, now);
@@ -170,6 +171,8 @@ export class Hud {
       const left = (this.projected.x + 1) / 2, top = (1 - this.projected.y) / 2;
       this.projected.set(f.x + .6, feet, .6).project(camera);
       const direction = cameraDirection({ left, top, right: (this.projected.x + 1) / 2, bottom: (1 - this.projected.y) / 2 });
+      // Names stay in the scoreboard; only a clipped body needs a locator.
+      o.name.hidden = !direction;
       o.root.classList.toggle('offscreen', !!direction);
       o.root.dataset.direction = direction;
       if (o.direction.textContent !== direction) o.direction.textContent = direction;
