@@ -225,3 +225,15 @@ Aceite: corpos visíveis sem fighter-label, halo ou inverted-hull/rim luminoso; 
 - Ajuste após inspeção: proteção não ficou invisível semanticamente; movida para a linha de status existente do placar, sem um widget novo. Avisos fora de tela preservados (a partida local mostrou dois na borda), logo não alegar remoção de todo texto da arena.
 - Mizu ainda é escura contra áreas sombreadas, e o placar de quatro jogadores continua grande: não ampliar este corte para cenário/câmera/HUD inteiro. Pips de munição temporários e habilidades reais permanecem, não são os halos permanentes rejeitados.
 - Gate adaptado para CDP da bancada, pois checa_tela.py padrão abre browser não registrado. Canvas100% nas stories em1366×768/900×1000/360×800, sem overflow horizontal. Testes de offscreen/morto/habilidade ativos passaram; SIM serializada idêntica antes/depois. App local1366×768 confirmou personagens carregados e zero nomes em corpos visíveis. Storybook build/check e app build passaram.
+
+# Corte12/11: indicador compacto de borda
+1. Quem usa: jogadores PC em combate, câmera próxima e até4personagens.
+2. Tarefas: localizar o próprio personagem; localizar rival fora da tela; comparar a identidade com o placar.
+3. Objeto principal: personagens/plataformas/flechas, sem nicks flutuantes.
+4. Ao mesmo tempo: direção do personagem fora da tela e posição numerada correspondente no placar.
+5. Dado observado: print público1cd90d6mostra duas placas de borda com nomes longos, inclusive Stormy Dragon (13caracteres), após remover placas sobre corpos visíveis; podem coexistir4.
+6. Estado: corpos visíveis continuam sem placas; somente bordas ganham seta+slot1–4 com acessibilidade descritiva. Placar passa a identificar BOT2/BOT3/BOT4 para correspondência. Não alteraSIM/câmera/bindings/arcos/efeitos, mantém borda visível/clamp e morto oculto. Base8489661.
+
+Galeria consultada: reduzir densidade e preservar forma conhecida. Story realArena/Visual legivel antes da integração. Aceite: indicador não contém nome do personagem, número corresponde ao placar; direção permanece, visualização normal não mostra nomes; 1366×768/900×1000/360×800 semoverflow. O tamanho da story é testeisolado doHUD, não valida arena portraitinteira. GateCDP adaptado na bancada real pois scriptpadrãoabre browser fora bancada. Sem formulários/editor/Salvar nesta superfície.
+
+Crítica: antes placaStormyDragon142,84px; depois seta+número46,86px, mantendo fonte≥12px e contraste. Redução67,2%na largura DESTEaviso,não pontuação global de arte. Ajuste feito após leitura: placar precisa identificarBOT2para ligar número ao adversário, implementado na mesmaHUDreal, sem criar painel novo. Nome completo fica só no aria-label (acessibilidade), não texto visual sobre arena. MesmoSIMserializado antes/depois. Estados esquina/direções são protegidos por teste existente; retorno à tela ocultaaviso e morto oculta overhead. Viewports3passed, storynãoequivalepr ov aarena portraitinteira; nenhumteclado/foco alterado. AprovaçãoestéticaLucas ainda não inferida.

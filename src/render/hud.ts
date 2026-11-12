@@ -64,7 +64,7 @@ export class Hud {
     this.feedbackRound = w.round;
     this.cards = w.fighters.map(f => {
       const c = CHARACTERS[f.character], card = document.createElement('div'); card.className = 'score-card'; card.style.setProperty('--fighter', c.color);
-      card.innerHTML = `<img class="fighter-icon" src="${portrait(c.id)}" alt=""><div><b>${fighterName(c.id,c.name)}</b><small>${f.human ? `P${f.id + 1}` : 'BOT'} <span class="ammo"></span></small><small class="skill-status"></small></div><strong class="points">0</strong>`;
+      card.innerHTML = `<img class="fighter-icon" src="${portrait(c.id)}" alt=""><div><b>${fighterName(c.id,c.name)}</b><small>${f.human ? `P${f.id + 1}` : `BOT ${f.id + 1}`} <span class="ammo"></span></small><small class="skill-status"></small></div><strong class="points">0</strong>`;
       this.score.append(card); return card;
     });
     this.overheads = w.fighters.map(f => {
@@ -73,7 +73,8 @@ export class Hud {
       const name = document.createElement('div'); name.className = 'fighter-label';
       const direction = document.createElement('span'); direction.className = 'wrap-direction'; direction.hidden = true;
       direction.setAttribute('aria-hidden', 'true');
-      name.append(direction, document.createTextNode(f.human ? `P${f.id + 1}` : fighterName(CHARACTERS[f.character].id,CHARACTERS[f.character].name)));
+      name.append(direction, document.createTextNode(String(f.id + 1)));
+      name.setAttribute('aria-label', `Jogador ${f.id + 1} · ${fighterName(CHARACTERS[f.character].id, CHARACTERS[f.character].name)} fora da tela`);
       const catchLabel = document.createElement('div'); catchLabel.className = 'catch-label'; catchLabel.hidden = true;
       catchLabel.textContent = 'PEGOU!';
       root.append(catchLabel, pips, name); this.element.append(root);
