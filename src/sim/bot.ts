@@ -150,8 +150,11 @@ export function think(w: World, f: Fighter): Intent {
     if (from.id === to.id || Math.hypot(goalDX, goalDY) < 4) { b.waypointX = goalX; b.waypointY = goalY; }
     else {
       const next = nextPlatform(w.level, from.id, to.id);
+      // A high platform linked from the bottom is reached by falling through Y wrap,
+      // not by attempting a jump taller than the entire jump envelope.
+      const nextY = next.y + (from.y - next.y > 12 ? HEIGHT : 0);
       // Descend via an actual edge, not by pressing down into a solid tile.
-      if (next.y > from.y && f.grounded) {
+      if (nextY > from.y && f.grounded) {
         // Edge platforms can be one continuous ledge through the wrap seam.
         // Choose its nearest physical exit; aiming toward the platform below flips
         // direction at the seam and makes unarmed bots oscillate without descending.
@@ -160,8 +163,8 @@ export function think(w: World, f: Fighter): Intent {
         for (let n = 0; n < WIDTH && solid(w.level, right + 0.01, from.y); n++) right++;
         left = wrap(left - 0.7, WIDTH); right = wrap(right + 0.7, WIDTH);
         b.waypointX = Math.abs(delta(f.x, left, WIDTH)) < Math.abs(delta(f.x, right, WIDTH)) ? left : right;
-        b.waypointY = next.y - 0.55;
-      } else { b.waypointX = (next.left + next.right) / 2; b.waypointY = next.y - 0.55; }
+        b.waypointY = nextY - 0.55;
+      } else { b.waypointX = (next.left + next.right) / 2; b.waypointY = nextY - 0.55; }
     }
   }
   const dx = delta(f.x, b.waypointX, WIDTH), dy = b.waypointY - f.y;
