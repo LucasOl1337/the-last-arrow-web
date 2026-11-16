@@ -6,7 +6,8 @@ export interface Level { id: string; theme?: LevelTheme; name: string; rows: rea
 
 const maps = [
   {
-    // Two offset galleries face across an open court; the crown is cover, not a ceiling.
+    // Longer middle galleries and court give four fighters room to duel without
+    // closing the outer drop lanes or turning the wrap into a continuous runway.
     id: 'moss', name: 'Ruínas do Musgo', spawns: [
       { x: 6.5, y: 4.44 }, { x: 25.5, y: 4.44 }, { x: 22.5, y: 7.44 }, { x: 9.5, y: 7.44 },
     ], rows: [
@@ -18,12 +19,12 @@ const maps = [
       '..#####..................#####..',
       '................................',
       '................................',
-      '......####............####......',
+      '....########........########....',
       '................................',
       '###..........................###',
       '................................',
       '................................',
-      '............########............',
+      '..........############..........',
       '................................',
       '................................',
       '....#####..............#####....',

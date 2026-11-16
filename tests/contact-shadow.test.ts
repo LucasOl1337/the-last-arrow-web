@@ -30,7 +30,7 @@ test('crouch uses the same feet; death fades out; empty column has no shadow',()
   assert.deepEqual(contactShadow(moss,4.5,standingFeet),contactShadow(moss,4.5,crouchingFeet));
   assert.equal(contactShadow(moss,4.5,5,0),null);
   assert.equal(contactShadow(moss,4.5,5,.5)!.opacity,.375);
-  assert.equal(contactShadow(moss,10.5,5),null);
+  assert.equal(contactShadow(moss,16,5),null);
 });
 test('horizontal interpolated wrap is canonical; buried tile is not a top',()=>{
   const s=contactShadow(moss,WIDTH+.1,10)!;
@@ -38,4 +38,10 @@ test('horizontal interpolated wrap is canonical; buried tile is not a top',()=>{
   const rows=Array.from({length:HEIGHT},()=>'.'.repeat(WIDTH));
   rows[4]=rows[5]='####'+'.'.repeat(WIDTH-4);
   assert.equal(contactShadow({...moss,rows},2,5),null);
+});
+test('negative interpolated seam coordinates can receive on the last row',()=>{
+  const rows=Array.from({length:HEIGHT},()=>'.'.repeat(WIDTH));
+  rows[HEIGHT-1]='####'+'.'.repeat(WIDTH-4);
+  const s=contactShadow({...moss,rows},2,-1)!;
+  assert.ok(s);assert.equal(s.y,1.02);assert.equal(s.opacity,.75);
 });

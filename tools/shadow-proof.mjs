@@ -30,21 +30,29 @@ try {
     ['ground',4.5,4.45,false,true], ['edge',6.9,4.45,false,true],
     ['air',6.9,2.45,false,true], ['wrap',16,17,false,true],
     ['crouch',4.5,4.681,true,true], ['wall',6.9,5.2,false,true],
-    ['dead',4.5,4.45,false,false], ['no-terrain',10.5,4.45,false,true],
+    ['dead',4.5,4.45,false,false], ['no-terrain',16,4.45,false,true],
   ]) {
     await page.evaluate(({x,y,crouching,alive})=>{
       const p=window.__visualBench; p.frozen=true;p.time=1;
-      Object.assign(p.world.fighters[0],{x,prevX:x,y,prevY:y,crouching,alive});
-      const f=p.world.fighters[1]; f.alive=false;
-      p.fighters.update(p.world,1,1,0);
+      p.world.fighters=p.world.fighters.slice(0,1);
+      Object.assign(p.world.fighters[0],{x,prevX:x,y,prevY:y,crouching,alive,grounded:y<5,vy:y<5?-3:3});
+      p.fighters.reset(p.world);
+      for(let i=0;i<30;i++)p.fighters.update(p.world,1,1,1/60);
       p.arena.draw(1,0);
     },{x,y,crouching,alive});
     await page.waitForTimeout(80);
+    if (name === 'dead') await page.evaluate(() => { const p=window.__visualBench;p.time=2;p.fighters.update(p.world,1,2,0);p.arena.draw(2,0); });
     const state = await page.evaluate(()=>{
       const p=window.__visualBench, s=p.fighters.views[0].shadow;
-      return {fighter:{x:p.world.fighters[0].x,y:p.world.fighters[0].y},visible:s.visible,position:s.position.toArray(),scale:s.scale.toArray(),opacity:s.material.opacity};
+      return {fighter:{x:p.world.fighters[0].x,y:p.world.fighters[0].y},visible:s.visible,position:s.position.toArray(),scale:s.scale.toArray(),opacity:s.material.opacity,uv:Array.from(s.geometry.attributes.uv.array)};
     });
     report.cases.push({name,...state});
+    if(process.env.TLA_ASSERT_SHADOW==='1'){
+      if(['wall','dead','no-terrain'].includes(name))assert.equal(state.visible,false,name);
+      else assert.equal(state.visible,true,name);
+      if(name==='wrap')assert.equal(state.position[1],15.02);
+      if(name==='edge')assert.ok(state.position[0]+state.scale[0]/2<=7.000001);
+    }
     await page.screenshot({path:`${out}/${name}.png`});
     if(name==='edge') {
       // Diagnostic lens only: same world/pose, zoom on the platform contact.

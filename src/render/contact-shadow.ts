@@ -4,14 +4,14 @@ import type { Level } from '../sim/level.ts';
 /** Render-only receiver, in scene coordinates. Never mutates physics or the level. */
 export function contactShadow(level: Level, x: number, feet: number, strength = 1) {
   x = wrap(x, WIDTH);
-  let ground = -1;
+  let ground: number | null = null;
   for (let d = 0; d < 8; d++) {
     const row = Math.floor(feet + .02) + d;
     if (solid(level, x, row)) { ground = row; break; }
   }
   // A wrapped solid lookup is not a receiving face. Reject penetration and
   // buried tiles rather than projecting upward through a wall.
-  if (ground < 0 || strength <= 0 || ground < feet - .02 || solid(level, x, ground - 1)) return null;
+  if (ground === null || strength <= 0 || ground < feet - .02 || solid(level, x, ground - 1)) return null;
   const k = Math.max(0, 1 - Math.max(0, ground - feet) / 6);
   if (k === 0) return null;
   const width = 1.1 * (.5 + .5 * k), depth = .7 * (.5 + .5 * k);
