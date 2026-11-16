@@ -5,7 +5,7 @@ import { createWorld } from '../sim/world.ts';
 import { Hud } from './hud.ts';
 
 // The production renderer and simulation data, held still for like-for-like art reviews.
-const meta = { title: 'Arena/Visual legivel', render: (args: { map?: string; aim?: boolean; close?: boolean; skills?: boolean; protection?: boolean; hud?: boolean; edge?: boolean }) => {
+const meta = { title: 'Arena/Visual legivel', render: (args: { map?: string; aim?: boolean; close?: boolean; skills?: boolean; protection?: boolean; hud?: boolean; edge?: boolean; shadows?: boolean }) => {
   const host = document.createElement('main');
   host.style.cssText = 'position:relative;width:100vw;height:100vh;overflow:hidden';
   const canvas = document.createElement('canvas'); canvas.style.cssText = 'width:100%;height:100%;display:block'; host.append(canvas);
@@ -13,6 +13,11 @@ const meta = { title: 'Arena/Visual legivel', render: (args: { map?: string; aim
   const world = createWorld({ humans: 2, bots: 0, map: args.map ?? 'totem', seed: 3 }); world.phase = 'playing';
   world.fighters.forEach((f, i) => Object.assign(f, { character: i, x: 13 + i * 6, prevX: 13 + i * 6, y: 15.45, prevY: 15.45,
     grounded: true, invulnerable: 0, charging: args.aim ?? false, charge: .5, aimX: i ? -1 : 1, aimY: 0, facing: i ? -1 : 1 }));
+  if (args.shadows) {
+    // Real moss platform edge and vertical seam; keep positions identical before/after.
+    Object.assign(world.fighters[0], { x: 6.9, prevX: 6.9, y: 4.45, prevY: 4.45 });
+    Object.assign(world.fighters[1], { x: 16, prevX: 16, y: 17, prevY: 17, grounded: false, vy: 3 });
+  }
   if (args.edge) { world.fighters[1].human = false; world.fighters[1].x = world.fighters[1].prevX = 30; }
   if (args.protection) world.fighters.forEach(f => { f.invulnerable = 1; });
   const hud = args.hud ? new Hud() : null;
@@ -39,6 +44,7 @@ type Story = StoryObj;
 export const TexturaTotem: Story = { args: { map: 'totem' } };
 export const TexturaMoss: Story = { args: { map: 'moss' } };
 export const TexturaCanopy: Story = { args: { map: 'canopy' } };
+export const SombrasBordaEWrap: Story = { args: { map: 'moss', shadows: true, close: false } };
 export const Mira: Story = { args: { aim: true } };
 export const Habilidades: Story = { args: { skills: true } };
 export const ProtecaoComHud: Story = { args: { map: 'moss', protection: true, hud: true } };

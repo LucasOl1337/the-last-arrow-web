@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { CHARACTERS } from '../sim/world.ts';
 import type { Fighter, World } from '../sim/world.ts';
-import { delta, solid, WIDTH, HEIGHT } from '../sim/level.ts';
+import { delta, WIDTH, HEIGHT } from '../sim/level.ts';
 import { loadCharacterKits, instantiate } from './characters.ts';
 import { activeKitsMissing } from './active-models.ts';
 import type { CharacterKits, ClipName, ModelKit } from './characters.ts';
@@ -25,7 +25,8 @@ export const VISUAL_HEIGHT = 2.4;
  * y-down: + leans the upper limb forward). Render-only, no arrow contract. */
 const CARRY_DROP = .32, CARRY_TILT = .45;
 const VISUAL_WIDTH = 1.18;
-import { HALF_H, bodyHalfHeight } from '../sim/body.ts';
+import { bodyHalfHeight } from '../sim/body.ts';
+import { contactShadow } from './contact-shadow.ts';
 const FADE = 0.12;
 const GHOSTS = 3;
 /** Each character has its own GLB; tint only applies when falling back to a sibling model. */
@@ -75,7 +76,6 @@ const tmpV = new THREE.Vector3(), tmpQ = new THREE.Quaternion(), tmpQ2 = new THR
 const dotGeometry = new THREE.PlaneGeometry(1, 1);
 const haloGeometry = new THREE.RingGeometry(0.62, 0.7, 32);
 const skillGeometry = new THREE.RingGeometry(.96, 1, 48);
-const shadowGeometry = new THREE.PlaneGeometry(1, 1); shadowGeometry.rotateX(-Math.PI / 2);
 
 function nockedArrow(color: THREE.ColorRepresentation) {
   const g = new THREE.Group();
@@ -146,6 +146,7 @@ export class FightersView {
   }
   private dispose(v: View) {
     this.scene.remove(v.root, v.shadow, v.nock, v.aimPoint, v.skillRing, ...v.aimDots);
+    v.shadow.geometry.dispose();
     v.equippedBow?.dispose();
     v.puppet?.dispose();
     if (v.rig) {
@@ -219,6 +220,7 @@ export class FightersView {
       puppet.root.scale.multiplyScalar(VISUAL_HEIGHT / height);
       pivot.add(puppet.root);
     }
+    const shadowGeometry = new THREE.PlaneGeometry(1, 1); shadowGeometry.rotateX(-Math.PI / 2);
     const shadow = new THREE.Mesh(shadowGeometry, new THREE.MeshBasicMaterial({ map: blob(), transparent: true, depthWrite: false, opacity: 0.8 }));
     shadow.renderOrder = 1; this.scene.add(shadow);
     const halo = new THREE.Mesh(haloGeometry, new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.7, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }));
@@ -323,7 +325,7 @@ export class FightersView {
         material.color.set(skill.color); material.opacity = skill.opacity;
       }
       this.updateAim(v, f, w, x, y, feet, dt);
-      this.updateShadow(v, w, x, y+bodyHalfHeight(f)-HALF_H, visible ? (f.alive ? 1 : Math.max(0, 1 - dying * 1.4)) : 0);
+      this.updateShadow(v, w, x, y + bodyHalfHeight(f), visible ? (f.alive ? 1 : Math.max(0, 1 - dying * 1.4)) : 0);
     });
   }
   private animateRig(v: View, f: Fighter, w: World, dt: number, dying: number) {
@@ -454,16 +456,16 @@ export class FightersView {
     (v.aimPoint.material as THREE.MeshBasicMaterial).color.set(guide.blocked ? 0xffc27a : 0xf5edcf);
     (v.aimPoint.material as THREE.MeshBasicMaterial).opacity = .95 * v.aimFade;
   }
-  private updateShadow(v: View, w: World, x: number, y: number, strength: number) {
-    // Project down to the first solid tile under the feet (wrap-aware, up to 8 tiles).
-    let ground = -1;
-    for (let d = 0; d < 8; d++) { const ty = Math.floor(y + HALF_H + 0.02) + d; if (solid(w.level, x, ty)) { ground = ty; break; } }
-    if (ground < 0 || strength <= 0) { v.shadow.visible = false; return; }
-    const height = ground - (y + HALF_H);
-    const k = Math.max(0, 1 - height / 6);
-    v.shadow.visible = true;
-    v.shadow.position.set(x, HEIGHT - ground + 0.02, 0.45);
-    v.shadow.scale.set(1.1 * (0.5 + 0.5 * k), 1, 0.7 * (0.5 + 0.5 * k));
-    (v.shadow.material as THREE.MeshBasicMaterial).opacity = 0.75 * k * strength;
+  private updateShadow(v: View, w: World, x: number, feet: number, strength: number) {
+    const receiver = contactShadow(w.level, x, feet, strength);
+    v.shadow.visible = !!receiver;
+    if (!receiver) return;
+    const { left, right, u0, u1, depth, opacity } = receiver;
+    v.shadow.position.set((left + right) / 2, receiver.y, receiver.z);
+    v.shadow.scale.set(right - left, 1, depth);
+    // Crop the original blob at ledges; squeezing it would darken/shift contact.
+    const uv = v.shadow.geometry.attributes.uv;
+    uv.setX(0, u0); uv.setX(1, u1); uv.setX(2, u0); uv.setX(3, u1); uv.needsUpdate = true;
+    (v.shadow.material as THREE.MeshBasicMaterial).opacity = opacity;
   }
 }
